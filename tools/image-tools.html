@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Image Tools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+body{
+  background:#f4f6f9;
+}
+.tool-card{
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+.drop-zone{
+  border:2px dashed #0d6efd;
+  border-radius:12px;
+  padding:30px;
+  text-align:center;
+  cursor:pointer;
+  background:#f8fbff;
+}
+.drop-zone.drag{
+  background:#e7f1ff;
+}
+.preview{
+  max-height:260px;
+  border-radius:10px;
+  display:block;
+  margin:auto;
+}
+</style>
+</head>
+
+<body class="container py-4">
+
+<h1 class="text-center mb-2">Image Tools</h1>
+<p class="text-center text-muted mb-4">
+Resize, compress, convert and edit images instantly
+</p>
+
+<div class="tool-card">
+
+<div id="dropZone" class="drop-zone mb-3">
+  Click or Drag & Drop Image Here
+</div>
+<input type="file" id="fileInput" accept="image/*" hidden>
+
+<img id="preview" class="preview d-none mb-3">
+
+<div class="row g-2 mb-3">
+  <div class="col-md-3">
+    <input id="w" type="number" class="form-control" placeholder="Width (px)">
+  </div>
+  <div class="col-md-3">
+    <input id="h" type="number" class="form-control" placeholder="Height (px)">
+  </div>
+  <div class="col-md-3">
+    <select id="fmt" class="form-select">
+      <option value="image/png">PNG</option>
+      <option value="image/jpeg">JPG</option>
+      <option value="image/webp">WEBP</option>
+    </select>
+  </div>
+  <div class="col-md-3">
+    <label class="form-label">Quality</label>
+    <input id="q" type="range" min="0.1" max="1" step="0.1" value="0.9" class="form-range">
+  </div>
+</div>
+
+<div class="d-flex flex-wrap gap-2 mb-3">
+  <button class="btn btn-secondary" onclick="rotate(90)">Rotate 90°</button>
+  <button class="btn btn-secondary" onclick="rotate(180)">Rotate 180°</button>
+  <button class="btn btn-secondary" onclick="flipX()">Flip X</button>
+  <button class="btn btn-secondary" onclick="flipY()">Flip Y</button>
+  <button class="btn btn-secondary" onclick="grayscale()">Grayscale</button>
+</div>
+
+<div class="d-flex gap-2">
+  <button class="btn btn-primary" onclick="exportImage()">Download Image</button>
+  <button class="btn btn-danger" onclick="resetAll()">Reset</button>
+</div>
+
+<p id="msg" class="mt-3 fw-bold text-success"></p>
+
+</div>
+
+<canvas id="cv" hidden></canvas>
+
+<hr class="my-5">
+<p class="text-center text-muted">
+© 2025 FreeToolsHub – Image Tools
+</p>
+
+<script>
+let img = new Image();
+let rotation = 0;
+let flipH = false;
+let flipV = false;
+let gray = false;
+
+const dz = document.getElementById("dropZone");
+const fi = document.getElementById("fileInput");
+const preview = document.getElementById("preview");
+
+dz.onclick = () => fi.click();
+dz.ondragover = e => { e.preventDefault(); dz.classList.add("drag"); };
+dz.ondragleave = () => dz.classList.remove("drag");
+dz.ondrop = e => {
+  e.preventDefault();
+  dz.classList.remove("drag");
+  loadImage(e.dataTransfer.files[0]);
+};
+fi.onchange = e => loadImage(e.target.files[0]);
+
+function loadImage(file){
+  const r = new FileReader();
+  r.onload = e => {
+    img.src = e.target.result;
+    img.onload = () => {
+      preview.src = img.src;
+      preview.classList.remove("d-none");
+      w.value = img.width;
+      h.value = img.height;
+      msg("Image loaded");
+    };
+  };
+  r.readAsDataURL(file);
+}
+
+function rotate(deg){
+  rotation = (rotation + deg) % 360;
+  msg("Rotation applied");
+}
+
+function flipX(){ flipH = !flipH; msg("Flip horizontal applied"); }
+function flipY(){ flipV = !flipV; msg("Flip vertical applied"); }
+function grayscale(){ gray = !gray; msg("Grayscale toggled"); }
+
+function exportImage(){
+  const canvas = cv;
+  const ctx = canvas.getContext("2d");
+
+  const width = parseInt(w.value) || img.width;
+  const height = parseInt(h.value) || img.height;
+
+  canvas.width = width;
+  canvas.height = height;
+
+  ctx.save();
+  ctx.translate(width/2, height/2);
+  ctx.rotate(rotation * Math.PI / 180);
+  ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
+  ctx.filter = gray ? "grayscale(100%)" : "none";
+  ctx.drawImage(img, -width/2, -height/2, width, height);
+  ctx.restore();
+
+  const a = document.createElement("a");
+  a.href = canvas.toDataURL(fmt.value, q.value);
+  a.download = "processed-image";
+  a.click();
+
+  msg("Image downloaded successfully");
+}
+
+function resetAll(){
+  rotation = 0; flipH = false; flipV = false; gray = false;
+  preview.classList.add("d-none");
+  fi.value = "";
+  msg("Reset complete");
+}
+
+function msg(t){
+  document.getElementById("msg").innerText = t;
+}
+</script>
+
+</body>
+</html>
