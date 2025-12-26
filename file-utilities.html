@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>File Utilities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+
+<h2 class="mb-4">File Utilities</h2>
+
+<input type="file" id="file" class="form-control mb-3">
+
+<input type="text" id="newName" class="form-control mb-3" placeholder="New file name (without extension)">
+
+<button class="btn btn-primary mb-3" onclick="renameFile()">Rename & Download</button>
+
+<p id="info" class="fw-bold"></p>
+
+<script>
+const fileInput = document.getElementById("file");
+fileInput.addEventListener("change",()=>{
+  const f = fileInput.files[0];
+  if(f){
+    info.innerText = `File Size: ${(f.size/1024).toFixed(2)} KB`;
+  }
+});
+
+function renameFile(){
+  const f = fileInput.files[0];
+  if(!f || !newName.value) return;
+  const ext = f.name.split('.').pop();
+  const blob = new Blob([f], {type:f.type});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = newName.value + "." + ext;
+  a.click();
+}
+</script>
+
+</body>
+</html>
