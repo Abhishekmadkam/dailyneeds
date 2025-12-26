@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Utilities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+
+<h2 class="mb-4">AI Utilities</h2>
+
+<textarea id="text" class="form-control mb-3" rows="6" placeholder="Enter text..."></textarea>
+
+<div class="mb-3">
+  <button class="btn btn-primary" onclick="rewrite()">Rewrite Text</button>
+  <button class="btn btn-success" onclick="idea()">Generate Idea</button>
+</div>
+
+<textarea id="result" class="form-control" rows="6" placeholder="Result..."></textarea>
+
+<script>
+function rewrite(){
+  result.value = text.value
+    .replace(/very/g,"extremely")
+    .replace(/good/g,"excellent")
+    .replace(/bad/g,"poor");
+}
+
+function idea(){
+  const ideas=[
+    "Build a productivity web app",
+    "Create a niche AI tool",
+    "Launch a free learning platform",
+    "Develop a personal finance tracker",
+    "Create a resume optimization tool"
+  ];
+  result.value = ideas[Math.floor(Math.random()*ideas.length)];
+}
+</script>
+
+</body>
+</html>
