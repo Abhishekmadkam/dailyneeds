@@ -23,6 +23,17 @@ textarea{resize:vertical;border-radius:16px;padding:18px;font-size:15px;}
 .btn{border-radius:14px;font-weight:500;}
 .output-msg{min-height:24px;}
 
+/* Ad placeholder (added only) */
+.ad-space{
+  background:#f8f9fa;
+  border:2px dashed #dee2e6;
+  border-radius:16px;
+  padding:24px;
+  text-align:center;
+  font-size:14px;
+  color:#6c757d;
+}
+
 .dark body{background:#020617;color:#e5e7eb;}
 .dark .tool-card,.dark .header,.dark textarea{background:#020617;color:#e5e7eb;}
 .dark .stat-box{background:#020617;border:1px solid #1e293b;}
@@ -46,6 +57,11 @@ textarea{resize:vertical;border-radius:16px;padding:18px;font-size:15px;}
   </div>
 </div>
 
+<!-- TOP AD SPACE -->
+<div class="ad-space mb-4">
+  Advertisement Space (Top Banner – AdSense Ready)
+</div>
+
 <div class="tool-card">
 
 <textarea id="text" class="form-control mb-4" rows="9" placeholder="Start typing or paste text..."></textarea>
@@ -55,6 +71,11 @@ textarea{resize:vertical;border-radius:16px;padding:18px;font-size:15px;}
   <div class="col-6 col-md-3"><div class="stat-box"><div class="stat">Characters</div><div class="stat-value" id="chars">0</div></div></div>
   <div class="col-6 col-md-3"><div class="stat-box"><div class="stat">Lines</div><div class="stat-value" id="lines">0</div></div></div>
   <div class="col-6 col-md-3"><div class="stat-box"><div class="stat">Sentences</div><div class="stat-value" id="sentences">0</div></div></div>
+</div>
+
+<!-- INLINE AD SPACE -->
+<div class="ad-space mb-4">
+  Advertisement Space (Inline / Responsive Ad)
 </div>
 
 <div class="row g-3 mb-4">
@@ -92,11 +113,17 @@ textarea{resize:vertical;border-radius:16px;padding:18px;font-size:15px;}
 
 </div>
 
+<!-- BOTTOM AD SPACE -->
+<div class="ad-space my-5">
+  Advertisement Space (Bottom Banner – AdSense Ready)
+</div>
+
 <hr class="my-5">
-<p class="text-center text-muted small">© 2025 FreeToolsHub – Pro+</p>
+<p class="text-center text-muted small">© 2025 FreeTools By teamorbits – Pro+</p>
 </div>
 
 <script>
+/* === YOUR ORIGINAL SCRIPT — UNCHANGED === */
 const textArea=document.getElementById('text');
 let history=[],index=-1;
 
