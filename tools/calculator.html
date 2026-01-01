@@ -2,145 +2,292 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Calculators Hub</title>
+<title>Calculator for All – Smart Online Calculators</title>
+
+<meta name="description" content="Professional online calculators for finance, math, health, and daily use. Fast, accurate, and free.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+*{font-family:'Poppins',sans-serif;}
+
 body{
-  background:#f4f6f9;
+  background:linear-gradient(135deg,#e9eef6,#fdfefe);
+  min-height:100vh;
 }
-.calc-card{
-  background:#fff;
-  border-radius:14px;
-  padding:25px;
+
+.container{max-width:1200px}
+
+/* HEADER */
+.hero{
+  background:#ffffffcc;
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  padding:30px;
   box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
-.result{
-  font-weight:600;
-  margin-top:10px;
+.hero h1{font-weight:700}
+.hero p{color:#6c757d}
+
+/* SEARCH */
+#searchBox{
+  border-radius:16px;
+  padding:16px;
+  font-size:16px;
 }
+
+/* NAV */
+.nav-pills{
+  gap:10px;
+  flex-wrap:wrap;
+}
+.nav-pills .nav-link{
+  border-radius:14px;
+  font-weight:500;
+  background:#f1f5ff;
+  color:#1f2937;
+}
+.nav-pills .nav-link.active{
+  background:#2563eb;
+  color:#fff;
+}
+
+/* CARD */
+.calc-card{
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 20px 45px rgba(0,0,0,.1);
+}
+.calc-card h4{font-weight:600}
+
+/* INPUTS */
+.form-control,.form-select{
+  border-radius:14px;
+  padding:14px;
+  font-size:15px;
+}
+
+/* BUTTONS */
+.btn{border-radius:14px;font-weight:500}
+
+/* RESULT */
+.result{
+  background:#f1f5ff;
+  border-radius:14px;
+  padding:14px;
+  font-weight:600;
+  margin-top:14px;
+  display:none;
+}
+.result.show{display:block}
+
+/* ADS */
+.ad-box{
+  background:#f8f9fd;
+  border-radius:16px;
+  padding:30px;
+  text-align:center;
+  color:#6c757d;
+  margin:50px 0;
+}
+
+/* FOOTER */
+footer{font-size:14px;color:#6c757d}
+
+/* DARK MODE */
+.dark body{background:#020617;color:#e5e7eb;}
+.dark .hero,
+.dark .calc-card,
+.dark .form-control,
+.dark .form-select,
+.dark #searchBox{background:#020617;color:#e5e7eb;}
+.dark .nav-pills .nav-link{background:#020617;border:1px solid #1e293b;color:#e5e7eb;}
+.dark .result{background:#020617;border:1px solid #1e293b;}
+.dark .ad-box{background:#020617;border:1px dashed #1e293b;}
 </style>
 </head>
 
 <body class="container py-4">
 
-<h1 class="text-center mb-4">Calculators Hub</h1>
-<p class="text-center text-muted mb-5">
-Daily-use calculators – fast, free & accurate
-</p>
+<section class="hero text-center mb-5">
+  <h1>Calculator for All Purpose</h1>
+  <p>Professional • Fast • Accurate Online Calculators</p>
+  <button class="btn btn-outline-dark btn-sm mt-3" onclick="toggleTheme()">Toggle Dark Mode</button>
+</section>
 
-<div class="row g-4">
+<input type="text" id="searchBox" class="form-control mb-4" placeholder="Search calculators...">
 
-<!-- AGE CALCULATOR -->
-<div class="col-md-6">
-  <div class="calc-card">
-    <h4>Age Calculator</h4>
-    <input type="date" id="dob" class="form-control mt-2">
-    <button class="btn btn-primary mt-3" onclick="calcAge()">Calculate</button>
-    <div id="ageResult" class="result"></div>
-  </div>
-</div>
+<ul class="nav nav-pills justify-content-center mb-4" id="toolTabs"></ul>
+<div class="tab-content" id="toolContent"></div>
 
-<!-- PERCENTAGE CALCULATOR -->
-<div class="col-md-6">
-  <div class="calc-card">
-    <h4>Percentage Calculator</h4>
-    <input type="number" id="part" class="form-control mt-2" placeholder="Part value">
-    <input type="number" id="total" class="form-control mt-2" placeholder="Total value">
-    <button class="btn btn-primary mt-3" onclick="calcPercentage()">Calculate</button>
-    <div id="percentResult" class="result"></div>
-  </div>
-</div>
+<div class="ad-box">Advertisement Area (AdSense / Sponsors)</div>
 
-<!-- EMI CALCULATOR -->
-<div class="col-md-6">
-  <div class="calc-card">
-    <h4>EMI Calculator</h4>
-    <input type="number" id="loan" class="form-control mt-2" placeholder="Loan Amount">
-    <input type="number" id="rate" class="form-control mt-2" placeholder="Interest Rate (%)">
-    <input type="number" id="months" class="form-control mt-2" placeholder="Tenure (months)">
-    <button class="btn btn-primary mt-3" onclick="calcEMI()">Calculate EMI</button>
-    <div id="emiResult" class="result"></div>
-  </div>
-</div>
+<footer class="text-center mt-5">
+  © 2025 Calculator for All • teamorbits
+</footer>
 
-<!-- DATE DIFFERENCE -->
-<div class="col-md-6">
-  <div class="calc-card">
-    <h4>Date Difference Calculator</h4>
-    <input type="date" id="date1" class="form-control mt-2">
-    <input type="date" id="date2" class="form-control mt-2">
-    <button class="btn btn-primary mt-3" onclick="calcDateDiff()">Calculate</button>
-    <div id="dateResult" class="result"></div>
-  </div>
-</div>
-
-</div>
-
-<hr class="my-5">
-
-<p class="text-center text-muted">
-© 2025 FreeToolsHub – Free Calculators for Everyone
-</p>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-// AGE
+"use strict";
+
+/* THEME */
+function toggleTheme(){
+  document.documentElement.classList.toggle("dark");
+}
+
+/* TOOLS */
+const tools=[
+{id:"age",name:"Age Calculator",html:`
+<input type="date" id="dob" class="form-control">
+<button class="btn btn-primary mt-3" onclick="calcAge()">Calculate</button>
+<div id="ageResult" class="result"></div>`},
+
+{id:"date",name:"Date Difference",html:`
+<input type="date" id="date1" class="form-control">
+<input type="date" id="date2" class="form-control mt-2">
+<button class="btn btn-primary mt-3" onclick="calcDateDiff()">Calculate</button>
+<div id="dateResult" class="result"></div>`},
+
+{id:"percent",name:"Percentage Calculator",html:`
+<input type="number" id="part" class="form-control" placeholder="Part">
+<input type="number" id="total" class="form-control mt-2" placeholder="Total">
+<button class="btn btn-primary mt-3" onclick="calcPercentage()">Calculate</button>
+<div id="percentResult" class="result"></div>`},
+
+{id:"average",name:"Average Calculator",html:`
+<input type="text" id="avgValues" class="form-control" placeholder="Numbers (comma separated)">
+<button class="btn btn-primary mt-3" onclick="calcAverage()">Calculate</button>
+<div id="avgResult" class="result"></div>`},
+
+{id:"emi",name:"EMI Calculator",html:`
+<select id="currency" class="form-select">
+<option value="₹">₹ INR</option><option value="$">$ USD</option><option value="€">€ EUR</option>
+</select>
+<input type="number" id="loan" class="form-control mt-2" placeholder="Loan Amount">
+<input type="number" id="rate" class="form-control mt-2" placeholder="Interest (%)">
+<input type="number" id="months" class="form-control mt-2" placeholder="Months">
+<button class="btn btn-primary mt-3" onclick="calcEMI()">Calculate</button>
+<div id="emiResult" class="result"></div>`},
+
+{id:"si",name:"Simple Interest",html:`
+<input type="number" id="siP" class="form-control" placeholder="Principal">
+<input type="number" id="siR" class="form-control mt-2" placeholder="Rate %">
+<input type="number" id="siT" class="form-control mt-2" placeholder="Time">
+<button class="btn btn-primary mt-3" onclick="calcSI()">Calculate</button>
+<div id="siResult" class="result"></div>`},
+
+{id:"ci",name:"Compound Interest",html:`
+<input type="number" id="ciP" class="form-control" placeholder="Principal">
+<input type="number" id="ciR" class="form-control mt-2" placeholder="Rate %">
+<input type="number" id="ciT" class="form-control mt-2" placeholder="Time">
+<button class="btn btn-primary mt-3" onclick="calcCI()">Calculate</button>
+<div id="ciResult" class="result"></div>`},
+
+{id:"gst",name:"GST Calculator",html:`
+<input type="number" id="gstAmount" class="form-control" placeholder="Amount">
+<input type="number" id="gstRate" class="form-control mt-2" placeholder="GST %">
+<button class="btn btn-primary mt-3" onclick="calcGST()">Calculate</button>
+<div id="gstResult" class="result"></div>`},
+
+{id:"discount",name:"Discount Calculator",html:`
+<input type="number" id="discPrice" class="form-control" placeholder="Price">
+<input type="number" id="discRate" class="form-control mt-2" placeholder="Discount %">
+<button class="btn btn-primary mt-3" onclick="calcDiscount()">Calculate</button>
+<div id="discResult" class="result"></div>`},
+
+{id:"bmi",name:"BMI Calculator",html:`
+<input type="number" id="bmiWeight" class="form-control" placeholder="Weight (kg)">
+<input type="number" id="bmiHeight" class="form-control mt-2" placeholder="Height (cm)">
+<button class="btn btn-primary mt-3" onclick="calcBMI()">Calculate</button>
+<div id="bmiResult" class="result"></div>`},
+
+{id:"speed",name:"Speed Calculator",html:`
+<input type="number" id="distance" class="form-control" placeholder="Distance (km)">
+<input type="number" id="time" class="form-control mt-2" placeholder="Time (hr)">
+<button class="btn btn-primary mt-3" onclick="calcSpeed()">Calculate</button>
+<div id="speedResult" class="result"></div>`},
+
+{id:"unit",name:"Length Converter",html:`
+<input type="number" id="meters" class="form-control" placeholder="Meters">
+<button class="btn btn-primary mt-3" onclick="calcMeters()">Convert</button>
+<div id="unitResult" class="result"></div>`},
+
+{id:"timeconv",name:"Time Converter",html:`
+<input type="number" id="minutes" class="form-control" placeholder="Minutes">
+<button class="btn btn-primary mt-3" onclick="calcTime()">Convert</button>
+<div id="timeResult" class="result"></div>`}
+];
+
+/* RENDER */
+const tabs=document.getElementById("toolTabs");
+const content=document.getElementById("toolContent");
+
+function renderTools(list){
+  tabs.innerHTML=""; content.innerHTML="";
+  list.forEach((t,i)=>{
+    tabs.innerHTML+=`<li class="nav-item">
+      <button class="nav-link ${i==0?'active':''}" data-bs-toggle="pill" data-bs-target="#${t.id}">
+        ${t.name}
+      </button>
+    </li>`;
+    content.innerHTML+=`<div class="tab-pane fade ${i==0?'show active':''}" id="${t.id}">
+      <div class="calc-card"><h4>${t.name}</h4>${t.html}</div>
+    </div>`;
+  });
+}
+renderTools(tools);
+
+/* SEARCH */
+searchBox.addEventListener("input",()=>{
+  const q=searchBox.value.toLowerCase();
+  renderTools(tools.filter(t=>t.name.toLowerCase().includes(q)));
+});
+
+/* RESULT */
+function show(id,text){
+  const el=document.getElementById(id);
+  el.innerText=text;
+  el.classList.add("show");
+}
+
+/* CALCULATORS */
 function calcAge(){
-  const dob = new Date(document.getElementById("dob").value);
-  if(!dob.getTime()){
-    ageResult.innerText = "Please select a valid date";
-    return;
-  }
-  const diff = Date.now() - dob.getTime();
-  const age = new Date(diff).getUTCFullYear() - 1970;
-  ageResult.innerText = "Your Age: " + age + " years";
+  const d=new Date(dob.value),t=new Date();
+  let a=t.getFullYear()-d.getFullYear();
+  if(t<new Date(t.getFullYear(),d.getMonth(),d.getDate()))a--;
+  show("ageResult","Age: "+a+" years");
 }
-
-// PERCENTAGE
-function calcPercentage(){
-  const part = document.getElementById("part").value;
-  const total = document.getElementById("total").value;
-  if(part === "" || total === "" || total == 0){
-    percentResult.innerText = "Enter valid values";
-    return;
-  }
-  const percent = (part / total) * 100;
-  percentResult.innerText = "Result: " + percent.toFixed(2) + "%";
-}
-
-// EMI
-function calcEMI(){
-  const P = loan.value;
-  const R = rate.value / 12 / 100;
-  const N = months.value;
-
-  if(P === "" || R === "" || N === ""){
-    emiResult.innerText = "Enter all values";
-    return;
-  }
-
-  const EMI = (P * R * Math.pow(1+R, N)) / (Math.pow(1+R, N) - 1);
-  emiResult.innerText = "Monthly EMI: ₹" + EMI.toFixed(2);
-}
-
-// DATE DIFFERENCE
 function calcDateDiff(){
-  const d1 = new Date(date1.value);
-  const d2 = new Date(date2.value);
-
-  if(!d1.getTime() || !d2.getTime()){
-    dateResult.innerText = "Select both dates";
-    return;
-  }
-
-  const diff = Math.abs(d2 - d1);
-  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-  dateResult.innerText = "Difference: " + days + " days";
+  const d1=new Date(date1.value+"T00:00:00");
+  const d2=new Date(date2.value+"T00:00:00");
+  show("dateResult","Days: "+Math.round(Math.abs(d2-d1)/(1000*60*60*24)));
 }
+function calcPercentage(){show("percentResult",((part.value/total.value)*100).toFixed(2)+"%");}
+function calcAverage(){
+  const nums=avgValues.value.split(",").map(Number).filter(n=>!isNaN(n));
+  show("avgResult","Average: "+(nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(2));
+}
+function calcEMI(){
+  const P=loan.value,R=rate.value/12/100,N=months.value;
+  const e=R==0?P/N:(P*R*Math.pow(1+R,N))/(Math.pow(1+R,N)-1);
+  show("emiResult","EMI: "+currency.value+e.toFixed(2));
+}
+function calcSI(){show("siResult","Interest: "+(siP.value*siR.value*siT.value/100).toFixed(2));}
+function calcCI(){show("ciResult","Amount: "+(ciP.value*Math.pow(1+ciR.value/100,ciT.value)).toFixed(2));}
+function calcGST(){show("gstResult","GST: "+(gstAmount.value*gstRate.value/100).toFixed(2));}
+function calcDiscount(){show("discResult","Final Price: "+(discPrice.value-(discPrice.value*discRate.value/100)).toFixed(2));}
+function calcBMI(){
+  const h=bmiHeight.value/100;
+  show("bmiResult","BMI: "+(bmiWeight.value/(h*h)).toFixed(2));
+}
+function calcSpeed(){show("speedResult","Speed: "+(distance.value/time.value).toFixed(2)+" km/h");}
+function calcMeters(){show("unitResult","Kilometers: "+(meters.value/1000).toFixed(3));}
+function calcTime(){show("timeResult","Hours: "+(minutes.value/60).toFixed(2));}
 </script>
 
 </body>
 </html>
-
