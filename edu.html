@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeVibe Labs · Master AI + Full Stack</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter & Playfair for classic touch -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #faf9f7;
+      color: #1e1e2a;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* classic / professional palette */
+    :root {
+      --primary-deep: #0b2b40;      /* deep teal-black */
+      --accent-burgundy: #8b3c3c;   /* classic rich accent */
+      --gold-subtle: #c6a15b;
+      --light-stone: #f0ede7;
+      --paper: #ffffff;
+      --text-dark: #23242a;
+      --text-soft: #4a4b57;
+    }
+
+    /* typography */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 2.7rem;
+      line-height: 1.2;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      color: var(--primary-deep);
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-deep);
+      border-left: 5px solid var(--accent-burgundy);
+      padding-left: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-subhead {
+      font-size: 1.1rem;
+      color: var(--text-soft);
+      max-width: 700px;
+    }
+
+    /* header / hero */
+    .hero {
+      background: linear-gradient(105deg, #ffffff 0%, #f6f3ef 100%);
+      border-bottom: 1px solid rgba(139, 60, 60, 0.15);
+      box-shadow: 0 8px 20px -10px rgba(0,0,0,0.05);
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      flex: 1 1 380px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent-burgundy);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .hero-highlight {
+      background: var(--primary-deep);
+      color: white;
+      padding: 0.6rem 1.8rem;
+      display: inline-block;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin: 1.8rem 0 1rem;
+      box-shadow: 0 8px 14px -8px rgba(0,0,0,0.2);
+    }
+
+    .hero-qr-block {
+      flex: 0 0 240px;
+      background: var(--paper);
+      padding: 1.8rem 1.2rem;
+      border-radius: 28px;
+      text-align: center;
+      box-shadow: 0 20px 30px -10px rgba(11, 43, 64, 0.15);
+      border: 1px solid rgba(198, 161, 91, 0.3);
+    }
+
+    .qr-placeholder {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.2rem;
+      background: repeating-linear-gradient(45deg, #d4cfc7 0px, #d4cfc7 4px, #e9e3d9 4px, #e9e3d9 10px);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed var(--accent-burgundy);
+      font-family: 'Playfair Display', serif;
+      color: #2b2b35;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.8);
+    }
+
+    .qr-placeholder span {
+      background: rgba(255,255,255,0.85);
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      border: 1px solid var(--gold-subtle);
+    }
+
+    .qr-caption {
+      font-weight: 500;
+      color: var(--primary-deep);
+      letter-spacing: 0.3px;
+    }
+
+    .qr-caption i {
+      color: var(--accent-burgundy);
+      margin-right: 4px;
+    }
+
+    /* cards grid */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      margin: 2.5rem 0 3rem;
+    }
+
+    .course-card {
+      background: var(--paper);
+      padding: 2rem 1.5rem;
+      border-radius: 32px;
+      box-shadow: 0 10px 25px -12px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      border: 1px solid #e9e1d7;
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold-subtle);
+      box-shadow: 0 28px 30px -18px rgba(139, 60, 60, 0.2);
+    }
+
+    .course-icon {
+      font-size: 2.4rem;
+      color: var(--accent-burgundy);
+      margin-bottom: 1.2rem;
+    }
+
+    .course-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .course-tag {
+      display: inline-block;
+      background: var(--primary-deep);
+      color: white;
+      font-size: 0.75rem;
+      padding: 0.2rem 1rem;
+      border-radius: 50px;
+      margin: 0.5rem 0 0.8rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-top: 1.2rem;
+    }
+
+    .features-list li {
+      margin-bottom: 0.55rem;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .features-list i {
+      color: var(--gold-subtle);
+      width: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* fee structure */
+    .fee-panel {
+      background: var(--primary-deep);
+      color: white;
+      border-radius: 40px;
+      padding: 2.5rem 2.5rem;
+      margin: 3.5rem 0 2.5rem;
+      box-shadow: 0 25px 35px -15px #0b2b4050;
+      background-image: radial-gradient(circle at 100% 0%, #234a5e 0%, #0b2b40 80%);
+    }
+
+    .fee-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .fee-item {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(4px);
+      padding: 1.3rem 2rem;
+      border-radius: 60px;
+      border: 1px solid rgba(198, 161, 91, 0.5);
+    }
+
+    .fee-amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.2;
+      color: #f0e1c6;
+    }
+
+    .fee-small {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .full-info {
+      max-width: 340px;
+    }
+
+    /* contact / address block */
+    .contact-classic {
+      background: var(--light-stone);
+      border-radius: 48px;
+      padding: 2.8rem 2.8rem;
+      margin-top: 3rem;
+      border: 1px solid #d8cfc0;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+    }
+
+    .contact-details {
+      flex: 2 1 300px;
+    }
+
+    .contact-details p {
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.1rem;
+    }
+
+    .contact-details i {
+      width: 32px;
+      color: var(--accent-burgundy);
+      font-size: 1.5rem;
+    }
+
+    .address-block {
+      background: white;
+      padding: 1.7rem 2rem;
+      border-radius: 28px;
+      font-style: normal;
+      border-left: 6px solid var(--gold-subtle);
+    }
+
+    .contact-email-form {
+      flex: 2 1 320px;
+      background: white;
+      padding: 2rem;
+      border-radius: 36px;
+      box-shadow: 0 12px 25px -18px black;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 1rem 1.3rem;
+      border: 1px solid #d4cbbc;
+      border-radius: 60px;
+      font-family: 'Inter', sans-serif;
+      background: #fefcf9;
+    }
+
+    textarea {
+      border-radius: 30px;
+      resize: vertical;
+    }
+
+    .btn {
+      background: var(--primary-deep);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.15s;
+      border: 1px solid var(--gold-subtle);
+    }
+
+    .btn:hover {
+      background: var(--accent-burgundy);
+    }
+
+    hr {
+      border: none;
+      border-top: 2px solid #ddd6cb;
+      margin: 1.2rem 0;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #5b5b68;
+    }
+
+    /* additional courses highlight */
+    .more-tag {
+      background: #e4dacd;
+      color: #23242a;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      display: inline-block;
+      margin-left: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .hero-qr-block { flex-basis: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <!-- left content -->
+      <div class="hero-content">
+        <span class="hero-badge"><i class="fas fa-bolt" style="margin-right: 5px;"></i> JOB READY IN 2 MONTHS</span>
+        <h1>MASTER AI + FULL STACK<br><span style="color: #8b3c3c;">WEB DEVELOPMENT</span></h1>
+        <p class="section-subhead" style="margin: 1.2rem 0 1.8rem;">Industry‑driven curriculum · Live practical training · Personal projects · Interview prep</p>
+        <div class="hero-highlight"><i class="fas fa-indian-rupee-sign" style="margin-right: 8px;"></i> COURSE FEE : ₹10,000 <span style="font-size: 0.8rem; opacity: 0.9; margin-left: 10px;">(incl. taxes)</span></div>
+        <!-- mini highlights -->
+        <div style="display: flex; flex-wrap: wrap; gap: 1.8rem; margin-top: 1.5rem;">
+          <div><i class="fas fa-check-circle" style="color: #8b3c3c;"></i> HTML5/CSS3/Bootstrap</div>
+          <div><i class="fas fa-check-circle" style="color: #8b3c3c;"></i> JavaScript (ES6+)</div>
+          <div><i class="fas fa-check-circle" style="color: #8b3c3c;"></i> PHP & MySQL</div>
+          <div><i class="fas fa-check-circle" style="color: #8b3c3c;"></i> AI + Python, Node.js</div>
+        </div>
+      </div>
+
+      <!-- QR space 200x200 with classic style -->
+      <div class="hero-qr-block">
+        <div class="qr-placeholder">
+          <span>SCAN ME</span>
+        </div>
+        <p class="qr-caption"><i class="fas fa-qrcode"></i> Scan to join courses</p>
+        <p style="font-size: 0.8rem; color: #4f4f5e;">instant access · group updates</p>
+        <div style="margin-top: 0.8rem; background: #f0eae2; border-radius: 40px; padding: 0.2rem 0.5rem; font-size: 0.7rem; color: #0b2b40;"><i class="fas fa-certificate"></i> certificate provided</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <!-- core master course & additional courses -->
+  <h2>Elite programmes <span class="more-tag"><i class="fas fa-rocket"></i> 6 more job‑ready tracks</span></h2>
+  <div class="course-grid">
+    <!-- main AI + full stack card (the one from poster) -->
+    <div class="course-card">
+      <div class="course-icon"><i class="fas fa-microchip"></i></div>
+      <h3>AI + Full Stack <br><span style="font-size: 0.9rem;">(flagship)</span></h3>
+      <div class="course-tag">2 months · ₹10,000</div>
+      <ul class="features-list">
+        <li><i class="fas fa-code"></i> HTML5, CSS3, Bootstrap</li>
+        <li><i class="fab fa-js"></i> JavaScript (core + advanced)</li>
+        <li><i class="fab fa-php"></i> PHP & MySQL</li>
+        <li><i class="fab fa-python"></i> AI + Python, Node.js</li>
+        <li><i class="fas fa-briefcase"></i> Personal projects + Interview prep</li>
+        <li><i class="fas fa-chalkboard-user"></i> Live practical training</li>
+      </ul>
+    </div>
+
+    <!-- additional job-oriented course 1: data science / ai -->
+    <div class="course-card">
+      <div class="course-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Data Science & AI</h3>
+      <div class="course-tag">3 months · ₹20000</div>
+      <ul class="features-list">
+        <li><i class="fab fa-python"></i> Python for data (Pandas, NumPy)</li>
+        <li><i class="fas fa-robot"></i> ML basics & NLP</li>
+        <li><i class="fas fa-database"></i> SQL + data visualization</li>
+        <li><i class="fas fa-project-diagram"></i> 2 capstone projects</li>
+      </ul>
+    </div>
+
+    <!-- additional course 2: cloud & devops -->
+    <div class="course-card">
+      <div class="course-icon"><i class="fas fa-cloud"></i></div>
+      <h3>Cloud & DevOps</h3>
+      <div class="course-tag">2.5 months · ₹15,000</div>
+      <ul class="features-list">
+        <li><i class="fab fa-aws"></i> AWS / Azure fundamentals</li>
+        <li><i class="fas fa-docker"></i> Docker, Kubernetes</li>
+        <li><i class="fas fa-code-branch"></i> CI/CD (Jenkins, GitHub)</li>
+        <li><i class="fas fa-terminal"></i> Linux & scripting</li>
+      </ul>
+    </div>
+
+    <!-- additional course 4: cybersecurity -->
+    <div class="course-card">
+      <div class="course-icon"><i class="fas fa-shield-halved"></i></div>
+      <h3>Cyber Security</h3>
+      <div class="course-tag">3 months · ₹15,000</div>
+      <ul class="features-list">
+        <li><i class="fas fa-network-wired"></i> Network security</li>
+        <li><i class="fas fa-bug"></i> Ethical hacking basics</li>
+        <li><i class="fas fa-lock"></i> Cryptography & IAM</li>
+        <li><i class="fas fa-file-invoice"></i> Incident response</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- second row: two more courses (UI/UX + mobile dev) -->
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 0.5rem;">
+    <div style="flex: 1 1 250px; background: #f5efe8; border-radius: 28px; padding: 1.8rem;">
+      <i class="fas fa-pencil-ruler" style="font-size: 2rem; color: #8b3c3c;"></i>
+      <h3 style="margin: 0.8rem 0;">UI/UX & product design</h3>
+      <div><span style="background: #0b2b40; color: white; padding: 0.2rem 1rem; border-radius: 30px;">2 months · ₹9,500</span></div>
+      <p style="margin-top: 0.8rem;">Figma, wireframing, prototyping, portfolio</p>
+    </div>
+    <div style="flex: 1 1 250px; background: #f5efe8; border-radius: 28px; padding: 1.8rem;">
+      <i class="fas fa-mobile-alt" style="font-size: 2rem; color: #8b3c3c;"></i>
+      <h3 style="margin: 0.8rem 0;">Mobile dev (Flutter)</h3>
+      <div><span style="background: #0b2b40; color: white; padding: 0.2rem 1rem; border-radius: 30px;">2.5 months · ₹12,000</span></div>
+      <p style="margin-top: 0.8rem;">Dart, iOS/Android apps, Firebase, 2 apps</p>
+    </div>
+    <!-- one more: java backend -->
+    <div style="flex: 1 1 200px; background: #f5efe8; border-radius: 28px; padding: 1.8rem;">
+      <i class="fab fa-java" style="font-size: 2rem; color: #8b3c3c;"></i>
+      <h3 style="margin: 0.8rem 0;">Java backend</h3>
+      <div><span style="background: #0b2b40; color: white; padding: 0.2rem 1rem; border-radius: 30px;">3 months · ₹13,500</span></div>
+      <p>Spring boot, microservices, Hibernate</p>
+    </div>
+  </div>
+
+  <!-- FEE STRUCTURE block (classical global) -->
+  <div class="fee-panel">
+    <div class="fee-grid">
+      <div class="full-info">
+        <h3 style="color: #f0e1c6; font-size: 2rem; font-family: 'Playfair Display';">Fee Structure</h3>
+        <p style="margin-top: 0.8rem;">Simple, transparent, one-time. All courses include certificate, live training & projects.</p>
+      </div>
+      <div class="fee-item">
+        <div class="fee-amount">₹10,000 <span style="font-size: 1rem;">– ₹15,500</span></div>
+        <div>per course (depending on track)</div>
+        <div class="fee-small">* Easy installments available</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.05); padding: 1.2rem 2rem; border-radius: 50px;">
+        <i class="fas fa-sack-rupee" style="color: #c6a15b;"></i> Special early bird: 10% off
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT + EMAIL (with abhishekmadkam01 + address from image) -->
+  <div class="contact-classic" id="contact">
+    <div class="contact-row">
+      <div class="contact-details">
+        <h3 style="font-family: 'Playfair Display'; font-size: 2rem;">Reach us</h3>
+        <!-- address exactly from image -->
+        <div class="address-block">
+          <i class="fas fa-map-pin" style="float: left; font-size: 2rem; margin-right: 18px;"></i>
+          <p style="font-weight: 600;">CodeVibe Labs<br>Care of Kute Commerce Academy<br>Arvi Naka, Na, Wardha</p>
+          <p style="margin-top: 0.5rem;"><i class="fas fa-phone-alt"></i> +91 76663 09253  (also WhatsApp)</p>
+          <p><i class="fas fa-envelope"></i> abhishekmadkam01@gmail.com</p>
+          <p><i class="fas fa-clock"></i> support: 10am – 7pm (Mon–Sat)</p>
+        </div>
+        <hr style="width: 80px; margin: 1.5rem 0;">
+        <p><i class="fas fa-globe"></i> www.codevibelabs.in (launching soon)</p>
+        <p><i class="fab fa-instagram"></i> @codevibe_labs</p>
+      </div>
+
+      <!-- message form to abhishekmadkam01@gmail.com (frontend only, but simulates) -->
+      <div class="contact-email-form">
+        <h4 style="font-size: 1.6rem; margin-bottom: 1.2rem;"><i class="far fa-paper-plane" style="color: #8b3c3c;"></i> Send a message</h4>
+        <form action="#" method="post" onsubmit="alert('Thank you! We’ll reply shortly to your email (abhishekmadkam01@gmail.com).'); return false;">
+          <div class="form-group">
+            <input type="text" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your email" required>
+          </div>
+          <div class="form-group">
+            <textarea rows="3" placeholder="I'm interested in ... ask us anything"></textarea>
+          </div>
+          <!-- hidden reference (just visual) -->
+          <p style="font-size: 0.8rem; margin: 0.5rem 0 1rem;"><i class="fas fa-lock"></i> messages go to abhishekmadkam01@gmail.com</p>
+          <button class="btn" type="submit"><i class="fas fa-envelope-open-text"></i> Send via email</button>
+        </form>
+        <!-- my contact: 7666309253 (display) -->
+        <div style="margin-top: 1.5rem; background: #eae2d8; border-radius: 40px; padding: 0.8rem 1.2rem; font-size: 0.95rem;">
+          <i class="fas fa-phone-alt"></i> <strong>+91 76663 09253</strong> (abhishek madkam) <br> <span style="font-size: 0.85rem;">also call or WhatsApp</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- certificate and final cta -->
+  <div style="text-align: center; margin: 3rem 0 2rem;">
+    <span style="background: #0b2b40; color: white; padding: 0.8rem 3rem; border-radius: 60px; font-weight: 600; letter-spacing: 1px;"><i class="fas fa-certificate"></i> CERTIFICATE PROVIDED FOR EVERY COURSE <i class="fas fa-certificate"></i></span>
+  </div>
+  <hr style="border-color: #cdc2b2;">
+  <div class="footer-note">
+    <p>© CodeVibe Labs — care of Kute Commerce Academy, Arvi Naka, Wardha. All rights reserved. <br> 
+    📍+91 76663 09253 | abhishekmadkam01@gmail.com</p>
+  </div>
+</div>
+
+
+</body>
+</html>
