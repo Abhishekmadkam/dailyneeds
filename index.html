@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="description" content="TeamOrbits delivers enterprise-grade IT services, software development, cloud solutions, and digital transformation. Future-ready technology partners." />
-  <meta name="theme-color" content="#0f2027" />
-  <title>TeamOrbits | Next-Gen IT Services & Digital Solutions</title>
+  <meta name="description" content="TeamOrbits delivers next-gen IT services, Web3 solutions, AI integration, and digital transformation with classical cyber aesthetic." />
+  <title>TeamOrbits | Web3 · IT Services · Cyber Innovation</title>
 
-  <!-- Bootstrap 5 + Icons + AOS -->
+  <!-- Bootstrap 5 + Icons + Swiper Slider -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <!-- Google Font: Inter + Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Google Font: Space Grotesk + Inter (classical cyber vibe) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -22,451 +21,438 @@
     }
     body {
       font-family: 'Inter', sans-serif;
-      background: #f8fafc;
-      color: #0f172a;
-      scroll-behavior: smooth;
+      background: #000000;
+      color: #e0e0e0;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
-    h1, h2, h3, h4, .fw-head {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-    }
-    /* gradient backgrounds */
-    .gradient-bg {
-      background: linear-gradient(105deg, #0a1c26 0%, #1e3a47 100%);
-    }
-    .hero-wave {
-      position: relative;
-      background: linear-gradient(125deg, #0b2b38 0%, #123e4b 100%);
-    }
-    .btn-gradient {
-      background: linear-gradient(90deg, #00c9db, #1f6e8c);
-      border: none;
-      color: white;
+    h1, h2, h3, h4, .cyber-text {
+      font-family: 'Space Grotesk', monospace;
       font-weight: 600;
-      padding: 12px 32px;
-      border-radius: 40px;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 18px rgba(0,201,219,0.2);
-    }
-    .btn-gradient:hover {
-      transform: translateY(-3px);
-      background: linear-gradient(90deg, #1f6e8c, #00c9db);
-      color: white;
-      box-shadow: 0 15px 25px -8px rgba(0,201,219,0.4);
-    }
-    .btn-outline-light-custom {
-      border: 2px solid rgba(255,255,255,0.7);
-      border-radius: 40px;
-      padding: 10px 28px;
-      font-weight: 500;
-      transition: 0.25s;
-    }
-    .btn-outline-light-custom:hover {
-      background: white;
-      color: #0f2027;
-      border-color: white;
-    }
-    .card-hover {
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      background: #ffffff;
-      border: none;
-      border-radius: 28px;
-      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05);
-    }
-    .card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 28px 35px -15px rgba(0, 0, 0, 0.12);
-    }
-    .icon-circle {
-      width: 70px;
-      height: 70px;
-      background: #eef9ff;
-      border-radius: 30px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      color: #1f6e8c;
-      margin-bottom: 1.5rem;
-      transition: 0.2s;
-    }
-    .navbar-trans {
-      backdrop-filter: blur(12px);
-      background: rgba(15, 32, 39, 0.9);
-      transition: 0.3s;
-    }
-    .nav-link {
-      font-weight: 500;
-      margin: 0 0.2rem;
-      position: relative;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: #00d4ff;
-      transition: 0.25s;
-    }
-    .nav-link:hover::after {
-      width: 100%;
-    }
-    .edu-badge {
-      background: #ffc107;
-      color: #0a1c26 !important;
-      padding: 6px 18px !important;
-      border-radius: 40px;
-      font-weight: 700;
-    }
-    .edu-badge:hover {
-      background: #ffe083;
-      transform: scale(1.02);
-    }
-    .section-title {
-      font-size: 2.4rem;
-      font-weight: 700;
       letter-spacing: -0.02em;
     }
-    .bg-soft-accent {
-      background: #eef2f8;
+    /* web3 classic dark theme with green/white accents */
+    .gradient-bg {
+      background: radial-gradient(circle at 20% 30%, #0a0f0d, #030605);
     }
-    .stats-number {
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: #1f6e8c;
+    .glass-panel {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 255, 100, 0.25);
+      border-radius: 2rem;
+      transition: all 0.25s;
     }
-    .footer-links a {
-      text-decoration: none;
-      color: #cbd5e1;
+    .neon-green {
+      color: #0f0;
+      text-shadow: 0 0 3px #0f0, 0 0 6px #0f0;
+    }
+    .btn-neon {
+      background: transparent;
+      border: 1.5px solid #0f0;
+      color: #0f0;
+      border-radius: 2rem;
+      padding: 10px 28px;
+      font-weight: 600;
+      transition: 0.2s;
+      box-shadow: 0 0 5px rgba(0,255,0,0.3);
+    }
+    .btn-neon:hover {
+      background: #0f0;
+      color: #000;
+      box-shadow: 0 0 18px #0f0;
+      border-color: #0f0;
+    }
+    .btn-solid-green {
+      background: #0f0;
+      color: #000;
+      border: none;
+      font-weight: 700;
+      border-radius: 2rem;
+      padding: 12px 32px;
       transition: 0.2s;
     }
-    .footer-links a:hover {
-      color: #ffc107;
-      margin-left: 4px;
+    .btn-solid-green:hover {
+      background: #9f0;
+      box-shadow: 0 0 20px #0f0;
+      color: black;
     }
-    .zentoolo-glow-card {
-      background: linear-gradient(135deg, #1F3B43, #0e2a33);
+    .card-cyber {
+      background: rgba(10, 15, 12, 0.8);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0, 255, 100, 0.3);
+      border-radius: 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card-cyber:hover {
+      transform: translateY(-7px);
+      border-color: #0f0;
+      box-shadow: 0 20px 30px -12px rgba(0,255,0,0.2);
+    }
+    .swiper-slide {
+      border-radius: 32px;
+      overflow: hidden;
+    }
+    .swiper-pagination-bullet-active {
+      background: #0f0 !important;
+    }
+    .swiper-button-next, .swiper-button-prev {
+      color: #0f0 !important;
+    }
+    nav {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 255, 100, 0.3);
+    }
+    .nav-link {
+      color: #ccc !important;
+      font-weight: 500;
+      margin: 0 5px;
+      transition: 0.2s;
+    }
+    .nav-link:hover {
+      color: #0f0 !important;
+      text-shadow: 0 0 4px #0f0;
+    }
+    .edu-badge {
+      background: #0f0;
+      color: #000 !important;
+      border-radius: 40px;
+      padding: 6px 18px !important;
+      font-weight: 700;
+    }
+    .stats-number {
+      font-size: 2.7rem;
+      font-weight: 800;
+      color: #0f0;
+      font-family: 'Space Grotesk';
+    }
+    footer {
+      border-top: 1px solid rgba(0,255,100,0.2);
+      background: #020504;
+    }
+    .team-img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #0f0;
+      box-shadow: 0 0 15px rgba(0,255,0,0.3);
+    }
+    .zentoolo-glow {
+      background: linear-gradient(145deg, #0b1a12, #031006);
+      border: 1px solid #0f0;
       border-radius: 2rem;
-      box-shadow: 0 25px 40px -12px rgba(0,0,0,0.35);
     }
-    @media (max-width: 768px) {
-      .section-title {
-        font-size: 1.9rem;
-      }
+    .bg-black-gradient {
+      background: radial-gradient(circle at 10% 20%, #0a140c, #010101);
+    }
+    .text-muted-light {
+      color: #b0c4b0 !important;
     }
   </style>
 </head>
 <body>
 
-<!-- Sticky Navigation with enhanced blur -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3 navbar-trans">
+<!-- Navigation (classical web3 style) -->
+<nav class="navbar navbar-expand-lg fixed-top py-3">
   <div class="container">
-    <a class="navbar-brand fw-bold fs-3" href="#">TeamOrbits <span style="font-size: 0.9rem; background: #00c9db30; padding: 4px 10px; border-radius: 40px;">Inc.</span></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <a class="navbar-brand fw-bold fs-2 cyber-text neon-green" href="#">TeamOrbits<span style="color:#fff;">™</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
-      <ul class="navbar-nav align-items-center gap-1">
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="navbar-nav align-items-center gap-2">
         <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="#solutions">Solutions</a></li>
+        <li class="nav-item"><a class="nav-link" href="#solutions">Ecosystem</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        <li class="nav-item ms-1"><a class="nav-link edu-badge" href="#"><i class="fas fa-graduation-cap me-1"></i>Edu with CodeVibe Labs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+        <li class="nav-item"><a class="nav-link edu-badge" href="#">📘 Edu with CodeVibe Labs</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- HERO SECTION with modern wave + animation -->
-<section id="home" class="hero-wave text-white pt-5 pb-5" style="margin-top: 76px;">
-  <div class="container py-5">
+<!-- HERO + SLIDER SECTION (modern 2D/3D slider) -->
+<section id="home" class="pt-5 mt-5" style="min-height: 90vh;">
+  <div class="container pt-4">
     <div class="row align-items-center g-5">
-      <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
-        <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill"><i class="fas fa-rocket me-1"></i> Trusted IT Partner</span>
-        <h1 class="display-4 fw-bold mb-4">Future-ready <span style="color: #ffd966;">digital solutions</span> that scale with your ambition.</h1>
-        <p class="lead mb-4 opacity-90">We engineer robust software, cloud ecosystems, and intelligent automation — empowering enterprises to lead in the AI era.</p>
-        <div class="d-flex flex-wrap gap-3">
-          <a href="#contact" class="btn btn-gradient px-5 py-3 fw-semibold">Start a project <i class="fas fa-arrow-right ms-2"></i></a>
-          <a href="#services" class="btn btn-outline-light-custom">Explore services</a>
+      <div class="col-lg-6" data-aos="fade-right">
+        <span class="badge bg-success bg-opacity-25 text-success mb-3 px-3 py-2 rounded-pill"><i class="fas fa-cube me-1"></i> WEB3 READY</span>
+        <h1 class="display-4 fw-bold cyber-text">Decentralized <span class="neon-green">IT infrastructure</span> for the new internet.</h1>
+        <p class="lead mt-3 opacity-75">TeamOrbits delivers high-performance software, blockchain integration, AI automation, and classical cyber-resilient solutions. Future-proof your business.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="#contact" class="btn-solid-green">Launch Project <i class="fas fa-arrow-right ms-2"></i></a>
+          <a href="#solutions" class="btn-neon">Explore zentoolo</a>
         </div>
         <div class="row mt-5 g-3">
-          <div class="col-4"><i class="fas fa-check-circle text-warning me-1"></i> 98% Client retention</div>
-          <div class="col-4"><i class="fas fa-code text-warning me-1"></i> 150+ Projects</div>
-          <div class="col-4"><i class="fas fa-globe text-warning me-1"></i> Global presence</div>
+          <div class="col-4"><i class="fas fa-database text-success me-1"></i> 99.9% SLA</div>
+          <div class="col-4"><i class="fas fa-globe text-success me-1"></i> 6+ Countries</div>
+          <div class="col-4"><i class="fas fa-code-branch text-success me-1"></i> 280+ Projects</div>
         </div>
       </div>
-      <div class="col-lg-6 text-center" data-aos="fade-left" data-aos-duration="800">
-        <img src="https://placehold.co/600x500/1e3a47/white?text=TeamOrbits+Innovation" class="img-fluid rounded-4 shadow-lg" alt="Digital Innovation">
+      <div class="col-lg-6" data-aos="fade-left">
+        <!-- Swiper Slider (3D-ish, modern, green/black) -->
+        <div class="swiper mySwiper rounded-4 shadow-lg" style="border: 1px solid #0f0; border-radius: 32px;">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://placehold.co/700x500/0a120c/0f0?text=AI+Automation" class="w-100 rounded-4" style="object-fit: cover;" alt="slide1"></div>
+            <div class="swiper-slide"><img src="https://placehold.co/700x500/0c140e/0f0?text=Web3+Solutions" class="w-100 rounded-4" alt="slide2"></div>
+            <div class="swiper-slide"><img src="https://placehold.co/700x500/081008/0f0?text=Cloud+Native" class="w-100 rounded-4" alt="slide3"></div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
       </div>
     </div>
   </div>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" style="position: relative; bottom: -1px;"><path fill="#f8fafc" fill-opacity="1" d="M0,64L80,80C160,96,320,128,480,122.7C640,117,800,75,960,69.3C1120,64,1280,96,1360,112L1440,128L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path></svg>
 </section>
 
-<!-- SERVICES - expanded with modern cards -->
-<section id="services" class="py-5 bg-white">
+<!-- SERVICES section (Classic Web3 cards) -->
+<section id="services" class="py-5 bg-black-gradient">
   <div class="container py-5">
     <div class="text-center mb-5" data-aos="fade-up">
-      <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill">core offerings</span>
-      <h2 class="section-title mt-3">Precision IT services <br> that empower growth</h2>
-      <p class="text-muted w-75 mx-auto">Full-cycle development, cloud migration, AI integration — we craft the digital backbone for tomorrow's leaders.</p>
+      <h2 class="cyber-text neon-green">⚡ core services</h2>
+      <p class="text-muted-light">Cutting-edge tools & engineering for the digital frontier</p>
     </div>
-    <div class="row g-5">
+    <div class="row g-4">
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="card-hover p-4 h-100">
-          <div class="icon-circle"><i class="fab fa-react"></i></div>
-          <h4 class="fw-bold">Web & App Development</h4>
-          <p class="text-secondary">React, Vue, Angular, Node.js — high-performance web apps and progressive PWAs that deliver flawless UX.</p>
-          <div class="mt-2"><span class="badge bg-light text-dark">eCommerce</span> <span class="badge bg-light text-dark">CRM/ERP</span></div>
+        <div class="card-cyber p-4 h-100">
+          <i class="fas fa-cubes fa-3x text-success mb-3"></i>
+          <h4>Web3 & Blockchain</h4>
+          <p class="text-light-emphasis">Smart contracts, dApps, crypto wallets, DeFi protocols — end-to-end blockchain development.</p>
+          <span class="badge bg-dark text-success">Ethereum · Solana</span>
         </div>
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="card-hover p-4 h-100">
-          <div class="icon-circle"><i class="fas fa-cloud-upload-alt"></i></div>
-          <h4 class="fw-bold">Cloud & DevOps</h4>
-          <p class="text-secondary">AWS, Azure, GCP — CI/CD pipelines, container orchestration (K8s), infrastructure as code, 99.9% uptime.</p>
+        <div class="card-cyber p-4 h-100">
+          <i class="fas fa-cloud-upload-alt fa-3x text-success mb-3"></i>
+          <h4>Cloud & Edge</h4>
+          <p class="text-light-emphasis">AWS, Azure, Kubernetes, edge computing solutions for low latency & high resilience.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-        <div class="card-hover p-4 h-100">
-          <div class="icon-circle"><i class="fas fa-robot"></i></div>
-          <h4 class="fw-bold">AI & Automation</h4>
-          <p class="text-secondary">Intelligent document processing, LLM integration, RPA solutions to cut operational costs by 40%.</p>
+        <div class="card-cyber p-4 h-100">
+          <i class="fas fa-robot fa-3x text-success mb-3"></i>
+          <h4>AI Agents</h4>
+          <p class="text-light-emphasis">Generative AI, LLM fine-tuning, autonomous agents for business automation & analytics.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-        <div class="card-hover p-4 h-100">
-          <div class="icon-circle"><i class="fas fa-shield-alt"></i></div>
-          <h4 class="fw-bold">Cybersecurity</h4>
-          <p class="text-secondary">Risk assessment, penetration testing, compliance (ISO 27001, GDPR), zero-trust architecture implementation.</p>
+        <div class="card-cyber p-4 h-100">
+          <i class="fas fa-shield-haltered fa-3x text-success mb-3"></i>
+          <h4>Cyber Resilience</h4>
+          <p class="text-light-emphasis">Zero-trust architecture, penetration tests, and quantum-safe encryption consulting.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
-        <div class="card-hover p-4 h-100">
-          <div class="icon-circle"><i class="fas fa-mobile-alt"></i></div>
-          <h4 class="fw-bold">Mobile Experiences</h4>
-          <p class="text-secondary">Flutter, Kotlin, Swift — native & cross-platform apps with beautiful UIs and offline sync capabilities.</p>
+        <div class="card-cyber p-4 h-100">
+          <i class="fas fa-mobile-alt fa-3x text-success mb-3"></i>
+          <h4>Mobile 3.0</h4>
+          <p class="text-light-emphasis">React Native, Flutter with integrated wallet & biometric authentication.</p>
         </div>
       </div>
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
-        <div class="card-hover p-4 h-100">
-          <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
-          <h4 class="fw-bold">Data Analytics</h4>
-          <p class="text-secondary">Power BI, Tableau, data warehousing, actionable dashboards that drive strategic decisions.</p>
+        <div class="card-cyber p-4 h-100">
+          <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+          <h4>Data Mesh</h4>
+          <p class="text-light-emphasis">Decentralized data architecture, real-time analytics dashboards, ML pipelines.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Solutions + Zentoolo Integrated (new block) -->
-<section id="solutions" class="py-5 bg-soft-accent">
+<!-- zentoolo ecosystem block + 3D style -->
+<section id="solutions" class="py-5">
   <div class="container">
-    <div class="row align-items-center g-5" data-aos="fade-up">
-      <div class="col-lg-6">
-        <span class="badge bg-dark text-warning px-3 py-2 mb-3">featured ecosystem</span>
-        <h2 class="fw-bold display-6">zentoolo.com — your daily digital toolkit</h2>
-        <p class="lead mt-3 text-secondary">From code formatters, image compressors, to AI text utilities — 60+ tools that boost productivity for developers and creators. Entirely free, no signup required.</p>
-        <ul class="list-unstyled mt-4">
-          <li><i class="fas fa-check-circle text-success me-2"></i>SEO tools, JSON validators, password generators</li>
-          <li><i class="fas fa-check-circle text-success me-2"></i>Real-time collaboration utilities</li>
-          <li><i class="fas fa-check-circle text-success me-2"></i>Designed for efficiency & instant results</li>
-        </ul>
-        <a href="https://zentoolo.com" target="_blank" class="btn btn-gradient mt-3 px-4">Launch zentoolo.com <i class="fas fa-external-link-alt ms-2"></i></a>
-      </div>
-      <div class="col-lg-6 text-center">
-        <div class="zentoolo-glow-card p-5 text-white">
-          <i class="fas fa-toolbox fa-4x mb-3" style="color:#ffc107;"></i>
-          <h3 class="fw-bold">All-in-one workspace</h3>
-          <p class="mt-2">Used by 5k+ daily users — 100% utility, zero clutter.</p>
-          <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
-            <span class="badge bg-light text-dark py-2 px-3"><i class="fas fa-chart-simple me-1"></i> Analytics</span>
-            <span class="badge bg-light text-dark py-2 px-3"><i class="fas fa-code me-1"></i> Developer tools</span>
-            <span class="badge bg-light text-dark py-2 px-3"><i class="fas fa-image me-1"></i> Media optimizer</span>
+    <div class="zentoolo-glow p-4 p-lg-5" data-aos="zoom-in">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <h2 class="cyber-text display-6 neon-green">zentoolo.com <span class="text-white">— your daily arsenal</span></h2>
+          <p class="mt-3 lead">Over 70+ utilities: code minifiers, image optimizers, crypto tools, AI text processors, unit converters. Zero login, fully free, Web3-ready toolkit ecosystem.</p>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <span class="badge bg-dark text-success p-2"><i class="fas fa-check-circle"></i> JSON tools</span>
+            <span class="badge bg-dark text-success p-2"><i class="fas fa-check-circle"></i> QR generator</span>
+            <span class="badge bg-dark text-success p-2"><i class="fas fa-check-circle"></i> Hash encryption</span>
           </div>
+          <a href="https://zentoolo.com" target="_blank" class="btn-neon mt-4 d-inline-block">Launch zentoolo <i class="fas fa-external-link-alt ms-2"></i></a>
+        </div>
+        <div class="col-lg-5 text-center">
+          <i class="fas fa-toolbox fa-5x text-success" style="text-shadow:0 0 12px #0f0;"></i>
+          <div class="mt-3 glass-panel p-3"><code class="text-success">>_ productivity matrix</code></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT + stats + team fusion -->
-<section id="about" class="py-5 bg-white">
+<!-- ABOUT + stats & philosophy -->
+<section id="about" class="py-5">
   <div class="container py-4">
     <div class="row g-5 align-items-center">
       <div class="col-lg-6" data-aos="fade-right">
-        <img src="https://placehold.co/700x500/1e2f3a/white?text=TeamOrbits+Culture" class="img-fluid rounded-4 shadow" alt="TeamOrbits office">
+        <div class="glass-panel p-4 text-center">
+          <img src="https://placehold.co/600x400/0a140c/0f0?text=Quantum+IT+Hub" class="img-fluid rounded-4" alt="about illustration">
+        </div>
       </div>
       <div class="col-lg-6" data-aos="fade-left">
-        <span class="badge bg-info bg-opacity-10 text-info px-3 py-2 rounded-pill">our story</span>
-        <h2 class="fw-bold mt-3 display-5">Architects of the digital frontier</h2>
-        <p class="text-muted mt-3">Founded in 2019, TeamOrbits has evolved into a global IT powerhouse, blending deep technical expertise with creative strategy. We partner with startups and Fortune 500 alike, delivering enterprise software, cloud migrations, and next-gen AI solutions.</p>
+        <span class="badge bg-success bg-opacity-25 text-success px-3 py-2 rounded-pill">◈ Our manifesto</span>
+        <h2 class="display-5 fw-bold cyber-text mt-3">Where code meets <span class="neon-green">the metaverse</span></h2>
+        <p class="text-muted-light mt-3">TeamOrbits fuses classical engineering with next-gen Web3 paradigms. Founded by industry veterans, we empower DAOs, enterprises, and creators to build sovereign digital infrastructure. Our green philosophy: sustainable, scalable, sovereign.</p>
         <div class="row mt-4 text-center">
-          <div class="col-4">
-            <div class="stats-number">4.9★</div>
-            <p class="text-muted">Client rating</p>
-          </div>
-          <div class="col-4">
-            <div class="stats-number">24/7</div>
-            <p class="text-muted">Support</p>
-          </div>
-          <div class="col-4">
-            <div class="stats-number">7+</div>
-            <p class="text-muted">Global offices</p>
-          </div>
+          <div class="col-4"><div class="stats-number">4.8★</div><p class="text-muted-light">Client Trust</p></div>
+          <div class="col-4"><div class="stats-number">24/7</div><p class="text-muted-light">On-chain Support</p></div>
+          <div class="col-4"><div class="stats-number">1.2k+</div><p class="text-muted-light">Devs Empowered</p></div>
         </div>
-        <a href="#contact" class="btn btn-outline-secondary rounded-pill mt-2 px-4">Meet the innovators →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXPANDED TEAM SECTION + client logos modern -->
-<section class="py-5 bg-light">
+<!-- TEAM SECTION (EXACTLY 2 MEMBERS - original images working with correct paths) -->
+<section id="team" class="py-5 bg-black-gradient">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
-      <h2 class="section-title">Visionary leadership</h2>
-      <p class="text-muted">Driving transformation with empathy & excellence</p>
+      <h2 class="cyber-text neon-green">⟡ leadership core ⟡</h2>
+      <p class="text-muted-light">The architects behind the orbit</p>
     </div>
-    <div class="row g-5 justify-content-center">
-      <div class="col-md-4 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-        <div class="card-hover p-4 text-center h-100">
-          <div class="mb-3">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle border border-3 border-light shadow" width="140" height="140" alt="CEO">
-          </div>
-          <h4 class="fw-bold">Abhishek Madkam</h4>
-          <p class="text-primary fw-medium">Chief Executive Officer</p>
-          <p class="text-secondary small">Ex-Google strategist, passionate about tech-led societal growth.</p>
-          <div class="social-icons mt-2"><i class="fab fa-linkedin me-2 text-secondary"></i> <i class="fab fa-twitter text-secondary"></i></div>
+    <div class="row justify-content-center g-5">
+      <!-- CEO Abhishek Madkam - original image path -->
+      <div class="col-md-6 col-lg-5" data-aos="flip-left" data-aos-delay="100">
+        <div class="card-cyber p-4 text-center h-100">
+          <img src="assest/ChatGPT Image Dec 26, 2025, 02_17_11 PM.png" 
+               alt="CEO Abhishek Madkam" class="team-img mb-3" 
+               onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/21.jpg';">
+          <h4 class="fw-bold mt-3">Abhishek Madkam</h4>
+          <p class="text-success fw-semibold">Chief Executive Officer</p>
+          <p class="text-muted-light small">Decentralized economy visionary, former lead architect at Web3 Foundation. Scaling TeamOrbits globally with green-tech philosophy.</p>
+          <div><i class="fab fa-linkedin text-success me-2"></i> <i class="fab fa-github text-success"></i></div>
         </div>
       </div>
-      <div class="col-md-4 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-        <div class="card-hover p-4 text-center h-100">
-          <div class="mb-3">
-            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle border border-3 border-light shadow" width="140" height="140" alt="CTO">
-          </div>
-          <h4 class="fw-bold">Aman Thool</h4>
-          <p class="text-primary fw-medium">Chief Technology Officer</p>
-          <p class="text-secondary small">Cloud-native specialist, authored 12+ patents in distributed systems.</p>
-        </div>
-      </div>
-      <div class="col-md-4 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-        <div class="card-hover p-4 text-center h-100">
-          <div class="mb-3">
-            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle border border-3 border-light shadow" width="140" height="140" alt="COO">
-          </div>
-          <h4 class="fw-bold">Neha Verma</h4>
-          <p class="text-primary fw-medium">Chief Operating Officer</p>
-          <p class="text-secondary small">Scaling operations & strategic alliances across APAC & EMEA.</p>
+      <!-- CTO Aman Thool - original image path -->
+      <div class="col-md-6 col-lg-5" data-aos="flip-left" data-aos-delay="200">
+        <div class="card-cyber p-4 text-center h-100">
+          <img src="assest/WhatsApp Image 2025-12-27 at 7.00.04 PM.jpeg" 
+               alt="CTO Aman Thool" class="team-img mb-3"
+               onerror="this.onerror=null; this.src='https://randomuser.me/api/portraits/men/32.jpg';">
+          <h4 class="fw-bold mt-3">Aman Thool</h4>
+          <p class="text-success fw-semibold">Chief Technology Officer</p>
+          <p class="text-muted-light small">Cloud-native & AI specialist, led infra for 3 unicorns. Pioneering zero-knowledge proofs and green compute at TeamOrbits.</p>
+          <div><i class="fab fa-twitter text-success me-2"></i> <i class="fab fa-dev text-success"></i></div>
         </div>
       </div>
     </div>
-    <!-- Trusted clients modern row -->
+    <!-- Trusted clients row (green/black accent) -->
     <div class="mt-5 pt-3 text-center">
-      <h5 class="text-muted mb-4">Trusted by industry leaders</h5>
-      <div class="row justify-content-center align-items-center g-4">
-        <div class="col-6 col-md-2"><div class="bg-white p-3 rounded-3 shadow-sm"><strong>YBT Academy</strong></div></div>
-        <div class="col-6 col-md-2"><div class="bg-white p-3 rounded-3 shadow-sm"><strong>DQR Dynamic QR</strong></div></div>
-        <div class="col-6 col-md-2"><div class="bg-white p-3 rounded-3 shadow-sm"><strong>CryptoPlaton</strong></div></div>
-        <div class="col-6 col-md-2"><div class="bg-white p-3 rounded-3 shadow-sm"><strong>NexaSoft</strong></div></div>
+      <h5 class="text-muted-light mb-4"><i class="fas fa-handshake text-success"></i> partners & clients</h5>
+      <div class="row justify-content-center g-3">
+        <div class="col-6 col-md-3"><div class="glass-panel p-2 text-center">YBT Academy</div></div>
+        <div class="col-6 col-md-3"><div class="glass-panel p-2 text-center">DQR Dynamic QR</div></div>
+        <div class="col-6 col-md-3"><div class="glass-panel p-2 text-center">CryptoPlaton</div></div>
+        <div class="col-6 col-md-3"><div class="glass-panel p-2 text-center">NexaMesh</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT form + business info enhanced -->
-<section id="contact" class="py-5 bg-white">
+<!-- CONTACT modern form + mail integration -->
+<section id="contact" class="py-5">
   <div class="container">
-    <div class="row justify-content-center" data-aos="fade-up">
-      <div class="col-lg-8 text-center mb-5">
-        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">get in touch</span>
-        <h2 class="section-title mt-2">Let’s build something extraordinary</h2>
-        <p class="text-muted">Whether you need a full-scale software overhaul or a dedicated tech team — we're ready.</p>
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-8">
+        <h2 class="cyber-text neon-green">▸ initiate contact</h2>
+        <p class="text-muted-light">Ready to shape the future? Our quantum-ready team awaits.</p>
       </div>
     </div>
-    <div class="row g-5">
-      <div class="col-md-6">
-        <div class="card-hover p-4 h-100">
-          <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
-          <h5>Email us directly</h5>
-          <p class="text-secondary">Our team responds within 24 hours</p>
-          <a href="mailto:teamorbitbussiness@gmail.com?subject=Inquiry%20from%20TeamOrbits" class="btn btn-outline-dark rounded-pill">teamorbitbussiness@gmail.com</a>
+    <div class="row g-5 align-items-start">
+      <div class="col-md-6" data-aos="fade-right">
+        <div class="glass-panel p-4 h-100">
+          <i class="fas fa-paper-plane fa-2x text-success mb-3"></i>
+          <h4>Direct message</h4>
+          <p class="text-muted-light">Response within 8 business hours.</p>
+          <a href="mailto:teamorbitbussiness@gmail.com?subject=Inquiry%20from%20TeamOrbits%20Web3%20Site" class="btn-neon w-100 text-center">teamorbitbussiness@gmail.com <i class="fas fa-envelope ms-2"></i></a>
+          <hr class="bg-success opacity-25">
+          <p class="small mt-3"><i class="fas fa-map-pin"></i> Virtual HQ: Decentraland · Singapore · Silicon Valley</p>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="card-hover p-4 h-100">
-          <i class="fas fa-headset fa-2x text-primary mb-3"></i>
-          <h5>Schedule a consultation</h5>
-          <p class="text-secondary">Let's discuss your vision over a discovery call.</p>
-          <a href="#" class="btn btn-outline-dark rounded-pill">Book a meeting <i class="fas fa-calendar-alt ms-1"></i></a>
+      <div class="col-md-6" data-aos="fade-left">
+        <div class="glass-panel p-4">
+          <h5><i class="fas fa-comment-dots text-success"></i> Instant consultation</h5>
+          <p class="text-muted-light">Book a zero-cost technical call with our solutions architect.</p>
+          <form id="demoForm" action="#" method="post">
+            <div class="mb-3">
+              <input type="text" class="form-control bg-black text-white border-success" placeholder="Full name" required>
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control bg-black text-white border-success" placeholder="Email address" required>
+            </div>
+            <div class="mb-3">
+              <textarea rows="3" class="form-control bg-black text-white border-success" placeholder="Project idea..."></textarea>
+            </div>
+            <button type="submit" class="btn-solid-green w-100">Submit →</button>
+          </form>
         </div>
       </div>
-    </div>
-    <div class="mt-5 bg-light p-4 rounded-4 text-center">
-      <h5 class="mb-2"><i class="fas fa-map-marker-alt me-2 text-danger"></i> Innovation Hub</h5>
-      <p class="text-muted mb-0">Silicon Valley | London | Singapore — remote-first, global reach</p>
     </div>
   </div>
 </section>
 
-<!-- FOOTER modern with sitemap and socials -->
-<footer class="gradient-bg text-white pt-5 pb-4">
+<!-- FOOTER cyber style -->
+<footer class="py-5 mt-4">
   <div class="container">
     <div class="row g-4">
       <div class="col-md-5">
-        <h3 class="fw-bold">TeamOrbits<span class="text-warning">.</span></h3>
-        <p class="opacity-75 mt-2">Engineering the future, one solution at a time. We build secure, scalable digital products that drive measurable impact.</p>
+        <h3 class="neon-green">TeamOrbits<span class="text-white">_</span></h3>
+        <p class="text-muted-light">Web3 infrastructure • AI security • Green software engineering</p>
         <div class="mt-3">
-          <a href="#" class="text-white me-3 fs-5"><i class="fab fa-linkedin"></i></a>
-          <a href="#" class="text-white me-3 fs-5"><i class="fab fa-github"></i></a>
-          <a href="#" class="text-white me-3 fs-5"><i class="fab fa-x-twitter"></i></a>
+          <i class="fab fa-discord text-success me-3 fs-4"></i>
+          <i class="fab fa-twitter text-success me-3 fs-4"></i>
+          <i class="fab fa-github text-success me-3 fs-4"></i>
         </div>
       </div>
-      <div class="col-md-3 footer-links">
-        <h5>Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="#home" class="text-white-50 text-decoration-none">Home</a></li>
-          <li class="mt-2"><a href="#services" class="text-white-50 text-decoration-none">Services</a></li>
-          <li class="mt-2"><a href="#solutions" class="text-white-50 text-decoration-none">Solutions</a></li>
-          <li class="mt-2"><a href="#contact" class="text-white-50 text-decoration-none">Careers</a></li>
+      <div class="col-md-3">
+        <h5>Ecosystem</h5>
+        <ul class="list-unstyled text-muted-light">
+          <li><a href="#" class="text-decoration-none text-muted-light">zentoolo.com</a></li>
+          <li><a href="#" class="text-decoration-none text-muted-light">CodeVibe Labs</a></li>
+          <li><a href="#" class="text-decoration-none text-muted-light">Developer Portal</a></li>
         </ul>
       </div>
-      <div class="col-md-4 footer-links">
-        <h5>Legal & Support</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-white-50">Privacy Policy</a></li>
-          <li class="mt-2"><a href="#" class="text-white-50">Terms of Service</a></li>
-          <li class="mt-2"><a href="mailto:teamorbitbussiness@gmail.com" class="text-white-50">Support Center</a></li>
+      <div class="col-md-4">
+        <h5>Legal</h5>
+        <ul class="list-unstyled text-muted-light">
+          <li>Privacy (Green Pledge)</li>
+          <li>Terms of Service</li>
+          <li><i class="fas fa-shield-alt text-success"></i>  Audit-ready</li>
         </ul>
       </div>
     </div>
-    <hr class="opacity-25 mt-4">
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <p class="mb-0 small opacity-75">© 2025 TeamOrbits — Global IT Services. All rights reserved.</p>
-      <p class="mb-0 small"><i class="fas fa-heart text-danger"></i> Innovation meets reliability</p>
+    <hr class="opacity-25">
+    <div class="text-center text-muted-light small">
+      © 2025 TeamOrbits — where classical meets quantum. All systems green.
     </div>
   </div>
 </footer>
 
-<!-- Scripts -->
+<!-- Required Scripts: Bootstrap, Swiper + AOS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 800, once: true, offset: 40 });
-  // sticky nav background refinement
-  window.addEventListener('scroll', function() {
-    const nav = document.querySelector('.navbar-trans');
-    if (window.scrollY > 30) {
-      nav.style.background = 'rgba(9, 22, 28, 0.95)';
-      nav.style.backdropFilter = 'blur(12px)';
-    } else {
-      nav.style.background = 'rgba(15, 32, 39, 0.85)';
-    }
+  // Initialize swiper slider with 3D effect & smoothness
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    autoplay: { delay: 3800, disableOnInteraction: false },
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+    effect: 'slide',
+    speed: 900,
+    spaceBetween: 0,
   });
+  AOS.init({ duration: 800, once: true, offset: 30 });
+  // little console style
+  console.log("TeamOrbits | Green Web3 interface ready — 2 members, original assets, slider, zentoolo ecosystem");
 </script>
 </body>
 </html>
