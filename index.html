@@ -6,10 +6,11 @@
   <meta name="description" content="TeamOrbits delivers next-gen IT services, Web3 solutions, AI integration, and digital transformation with clean, colorful modern design." />
   <title>TeamOrbits | IT Services · Digital Innovation · Web3 Solutions</title>
 
-  <!-- Bootstrap 5 + Icons + Swiper Slider -->
+  <!-- Bootstrap 5 + Icons + Swiper Slider + AOS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Google Fonts: Poppins + Inter for clean readability -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
@@ -41,11 +42,11 @@
       border: none;
       border-radius: 2rem;
       box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
     .glass-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 28px 45px -12px rgba(0, 0, 0, 0.15);
     }
     .btn-primary-custom {
       background: linear-gradient(105deg, #2563eb, #7c3aed);
@@ -54,7 +55,7 @@
       font-weight: 600;
       padding: 12px 32px;
       border-radius: 40px;
-      transition: 0.25s;
+      transition: 0.25s ease;
       box-shadow: 0 8px 18px rgba(37,99,235,0.2);
     }
     .btn-primary-custom:hover {
@@ -87,6 +88,10 @@
       font-size: 32px;
       color: #2563eb;
       margin-bottom: 1.5rem;
+      transition: transform 0.3s;
+    }
+    .glass-card:hover .service-icon {
+      transform: scale(1.05);
     }
     .badge-vibrant {
       background: #e0e7ff;
@@ -107,6 +112,7 @@
       backdrop-filter: blur(0px);
       box-shadow: 0 2px 15px rgba(0,0,0,0.03);
       border-bottom: 1px solid #eef2ff;
+      transition: all 0.3s;
     }
     .nav-link {
       color: #334155 !important;
@@ -116,16 +122,21 @@
     }
     .nav-link:hover {
       color: #2563eb !important;
+      transform: translateY(-1px);
     }
     .edu-highlight {
-      background: #f59e0b !important;
+      background: linear-gradient(135deg, #f59e0b, #d97706) !important;
       color: white !important;
       border-radius: 40px;
       padding: 6px 20px !important;
       font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(245,158,11,0.3);
     }
     .edu-highlight:hover {
-      background: #d97706 !important;
+      background: linear-gradient(135deg, #d97706, #b45309) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(245,158,11,0.4);
       color: white !important;
     }
     .team-img {
@@ -135,12 +146,16 @@
       border-radius: 50%;
       border: 4px solid white;
       box-shadow: 0 15px 30px -8px rgba(0,0,0,0.1);
-      transition: 0.2s;
+      transition: 0.3s;
+    }
+    .team-img:hover {
+      transform: scale(1.02);
     }
     .swiper-slide img {
       border-radius: 2rem;
       width: 100%;
       object-fit: cover;
+      transition: transform 0.5s;
     }
     .swiper-pagination-bullet-active {
       background: #2563eb !important;
@@ -151,6 +166,7 @@
       border-radius: 50%;
       width: 44px;
       height: 44px;
+      transition: 0.2s;
     }
     .footer-link {
       color: #475569;
@@ -165,6 +181,10 @@
       background: linear-gradient(125deg, #fef9e3, #ffffff);
       border-radius: 2rem;
       border: 1px solid #fde68a;
+      transition: 0.3s;
+    }
+    .zentoolo-card:hover {
+      transform: scale(1.01);
     }
     .text-accent {
       color: #ea580c;
@@ -172,15 +192,36 @@
     .bg-soft-warm {
       background: #fefce8;
     }
+    .contact-icon-pulse {
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0% { text-shadow: 0 0 0 rgba(37,99,235,0);}
+      70% { text-shadow: 0 0 8px rgba(37,99,235,0.5);}
+      100% { text-shadow: 0 0 0 rgba(37,99,235,0);}
+    }
     @media (max-width: 768px) {
       .stats-number { font-size: 2rem; }
       .team-img { width: 110px; height: 110px; }
+    }
+    .business-info-card {
+      background: #f1f5f9;
+      border-radius: 1rem;
+      border-left: 5px solid #f59e0b;
+    }
+    .floating {
+      animation: floatSoft 4s ease-in-out infinite;
+    }
+    @keyframes floatSoft {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
     }
   </style>
 </head>
 <body>
 
-<!-- Navigation - clean white with vibrant edu link -->
+<!-- Navigation - clean white with vibrant edu link (Button now redirects to https://www.teamorbits.com/edu.html) -->
 <nav class="navbar navbar-expand-lg fixed-top py-3">
   <div class="container">
     <a class="navbar-brand fw-bold fs-2 heading-font" href="#" style="color: #0f172a;">TeamOrbits<span style="color:#2563eb;">.</span></a>
@@ -194,7 +235,8 @@
         <li class="nav-item"><a class="nav-link" href="#solutions">Ecosystem</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-        <li class="nav-item"><a class="nav-link edu-highlight" href="#"><i class="fas fa-graduation-cap me-1"></i>Edu with CodeVibe Labs</a></li>
+        <!-- EDUBUTTON: on click redirect to https://www.teamorbits.com/edu.html -->
+        <li class="nav-item"><a class="nav-link edu-highlight" href="#" id="eduButtonNav"><i class="fas fa-graduation-cap me-1"></i>Edu with CodeVibe Labs</a></li>
       </ul>
     </div>
   </div>
@@ -204,7 +246,7 @@
 <section id="home" class="pt-5 mt-5" style="min-height: 90vh;">
   <div class="container pt-4">
     <div class="row align-items-center g-5">
-      <div class="col-lg-6" data-aos="fade-right">
+      <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
         <span class="badge-vibrant d-inline-block mb-3"><i class="fas fa-cube me-1"></i> Web3 · AI · Cloud</span>
         <h1 class="display-4 fw-bold heading-font mt-2">Future-ready <span style="color:#2563eb;">digital solutions</span> that drive business momentum.</h1>
         <p class="lead mt-3 text-secondary">TeamOrbits delivers high-performance software, blockchain integration, AI automation, and resilient IT architecture. Trusted by global innovators.</p>
@@ -217,9 +259,14 @@
           <div class="col-4"><i class="fas fa-globe text-primary me-1"></i> 6+ Countries</div>
           <div class="col-4"><i class="fas fa-code-branch text-primary me-1"></i> 280+ Projects</div>
         </div>
+        <!-- BUSINESS ADDRESS & PHONE (wardha maharastra, 442001, no 7666309253) displayed elegantly -->
+        <div class="business-info-card p-3 mt-4 d-inline-flex gap-3 flex-wrap">
+          <div><i class="fas fa-map-marker-alt text-warning me-2"></i> Wardha, Maharashtra - 442001</div>
+          <div><i class="fas fa-phone-alt text-success me-2"></i> +91 7666309253</div>
+        </div>
       </div>
-      <div class="col-lg-6" data-aos="fade-left">
-        <div class="swiper mySwiper rounded-4 shadow" style="border-radius: 32px; overflow: hidden;">
+      <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+        <div class="swiper mySwiper rounded-4 shadow floating" style="border-radius: 32px; overflow: hidden;">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><img src="https://placehold.co/700x500/eef2ff/2563eb?text=AI+Automation" class="w-100" alt="slide1"></div>
             <div class="swiper-slide"><img src="https://placehold.co/700x500/fef9c3/ea580c?text=Web3+Solutions" class="w-100" alt="slide2"></div>
@@ -292,7 +339,7 @@
 <!-- zentoolo ecosystem block (colorful, functional link) -->
 <section id="solutions" class="py-5">
   <div class="container">
-    <div class="zentoolo-card p-4 p-lg-5" data-aos="zoom-in">
+    <div class="zentoolo-card p-4 p-lg-5" data-aos="zoom-in" data-aos-duration="800">
       <div class="row align-items-center g-4">
         <div class="col-lg-7">
           <h2 class="heading-font display-6">🚀 <span class="text-accent">zentoolo.com</span> — your daily digital toolkit</h2>
@@ -305,7 +352,7 @@
           <a href="https://zentoolo.com" target="_blank" class="btn-primary-custom mt-4 d-inline-block">Launch zentoolo <i class="fas fa-external-link-alt ms-2"></i></a>
         </div>
         <div class="col-lg-5 text-center">
-          <i class="fas fa-toolbox fa-5x" style="color: #ea580c;"></i>
+          <i class="fas fa-toolbox fa-5x" style="color: #ea580c; animation: pulseGlow 2s infinite;"></i>
           <div class="mt-3 p-3 bg-light rounded-4"><code class="text-dark">>_ productivity suite</code></div>
         </div>
       </div>
@@ -317,12 +364,12 @@
 <section id="about" class="py-5 bg-white">
   <div class="container py-4">
     <div class="row g-5 align-items-center">
-      <div class="col-lg-6" data-aos="fade-right">
+      <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
         <div class="glass-card p-4 text-center">
           <img src="https://placehold.co/600x400/f8fafc/2563eb?text=TeamOrbits+Hub" class="img-fluid rounded-4" alt="about">
         </div>
       </div>
-      <div class="col-lg-6" data-aos="fade-left">
+      <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
         <span class="badge-vibrant">◈ Our manifesto</span>
         <h2 class="display-5 fw-bold heading-font mt-3">Where code meets <span style="color:#2563eb;">innovation</span></h2>
         <p class="text-secondary mt-3">TeamOrbits fuses classical engineering with next-gen paradigms. Founded by industry veterans, we empower enterprises, DAOs, and creators to build sovereign digital infrastructure. Sustainability, scalability, and security — core to our DNA.</p>
@@ -336,7 +383,7 @@
   </div>
 </section>
 
-<!-- TEAM SECTION (EXACTLY 2 MEMBERS - original images with correct fallback) -->
+<!-- TEAM SECTION (EXACTLY 2 MEMBERS - original images with fallback) -->
 <section id="team" class="py-5 gradient-bg-light">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
@@ -345,7 +392,7 @@
     </div>
     <div class="row justify-content-center g-5">
       <!-- CEO Abhishek Madkam - original image path -->
-      <div class="col-md-6 col-lg-5" data-aos="flip-left" data-aos-delay="100">
+      <div class="col-md-6 col-lg-5" data-aos="flip-left" data-aos-delay="100" data-aos-duration="800">
         <div class="glass-card p-4 text-center h-100">
           <img src="assest/ChatGPT Image Dec 26, 2025, 02_17_11 PM.png" 
                alt="CEO Abhishek Madkam" class="team-img mb-3" 
@@ -357,7 +404,7 @@
         </div>
       </div>
       <!-- CTO Aman Thool - original image path -->
-      <div class="col-md-6 col-lg-5" data-aos="flip-left" data-aos-delay="200">
+      <div class="col-md-6 col-lg-5" data-aos="flip-left" data-aos-delay="200" data-aos-duration="800">
         <div class="glass-card p-4 text-center h-100">
           <img src="assest/WhatsApp Image 2025-12-27 at 7.00.04 PM.jpeg" 
                alt="CTO Aman Thool" class="team-img mb-3"
@@ -370,7 +417,7 @@
       </div>
     </div>
     <!-- Trusted clients row (colorful) -->
-    <div class="mt-5 pt-3 text-center">
+    <div class="mt-5 pt-3 text-center" data-aos="fade-up">
       <h5 class="mb-4"><i class="fas fa-handshake text-primary"></i> partners & clients</h5>
       <div class="row justify-content-center g-3">
         <div class="col-6 col-md-3"><div class="glass-card p-2 text-center fw-semibold">YBT Academy</div></div>
@@ -382,27 +429,34 @@
   </div>
 </section>
 
-<!-- CONTACT modern form + MAILTO working, and functional submit alert -->
+<!-- CONTACT modern form + MAILTO working, business details visible also here -->
 <section id="contact" class="py-5 bg-white">
   <div class="container">
     <div class="row justify-content-center text-center mb-5">
-      <div class="col-lg-8">
+      <div class="col-lg-8" data-aos="fade-up">
         <h2 class="heading-font" style="font-size: 2.5rem;">▸ initiate contact</h2>
         <p class="text-muted">Ready to shape the future? Our team is just a message away.</p>
+        <!-- Business address and phone repeated here for clarity -->
+        <div class="d-flex justify-content-center gap-4 flex-wrap mt-2 small text-dark bg-light p-2 rounded-pill">
+          <span><i class="fas fa-map-pin text-warning"></i> Wardha, Maharashtra - 442001</span>
+          <span><i class="fas fa-phone-alt text-success"></i> +91 7666309253</span>
+          <span><i class="fas fa-envelope text-primary"></i> teamorbitbussiness@gmail.com</span>
+        </div>
       </div>
     </div>
     <div class="row g-5 align-items-start">
-      <div class="col-md-6" data-aos="fade-right">
+      <div class="col-md-6" data-aos="fade-right" data-aos-duration="800">
         <div class="glass-card p-4 h-100">
           <i class="fas fa-paper-plane fa-2x text-primary mb-3"></i>
           <h4>Direct message</h4>
           <p class="text-secondary">Response within 8 business hours.</p>
           <a href="mailto:teamorbitbussiness@gmail.com?subject=Inquiry%20from%20TeamOrbits%20Website" class="btn-primary-custom w-100 text-center">teamorbitbussiness@gmail.com <i class="fas fa-envelope ms-2"></i></a>
           <hr class="my-4">
-          <p class="small"><i class="fas fa-map-pin text-primary"></i> Virtual HQ: Singapore · London · Silicon Valley</p>
+          <p class="small"><i class="fas fa-map-pin text-primary"></i> Office: Wardha, Maharashtra 442001</p>
+          <p class="small"><i class="fas fa-phone-alt text-success"></i> Contact: +91 7666309253</p>
         </div>
       </div>
-      <div class="col-md-6" data-aos="fade-left">
+      <div class="col-md-6" data-aos="fade-left" data-aos-duration="800">
         <div class="glass-card p-4">
           <h5><i class="fas fa-comment-dots text-primary"></i> Instant consultation</h5>
           <p class="text-secondary">Book a zero-cost technical call with our solutions architect.</p>
@@ -437,12 +491,13 @@
           <a href="#" class="text-secondary me-3 fs-5"><i class="fab fa-twitter"></i></a>
           <a href="#" class="text-secondary me-3 fs-5"><i class="fab fa-github"></i></a>
         </div>
+        <div class="mt-3 small text-muted"><i class="fas fa-location-dot text-warning"></i> Wardha, Maharashtra - 442001 | 📞 +91 7666309253</div>
       </div>
       <div class="col-md-3">
         <h5>Ecosystem</h5>
         <ul class="list-unstyled">
           <li><a href="https://zentoolo.com" target="_blank" class="footer-link">zentoolo.com</a></li>
-          <li class="mt-2"><a href="#" class="footer-link">CodeVibe Labs</a></li>
+          <li class="mt-2"><a href="#" class="footer-link" id="footerEduLink">CodeVibe Labs</a></li>
           <li class="mt-2"><a href="#" class="footer-link">Developer Portal</a></li>
         </ul>
       </div>
@@ -462,12 +517,12 @@
   </div>
 </footer>
 
-<!-- Scripts: Bootstrap, Swiper, AOS, plus interactive form -->
+<!-- Scripts: Bootstrap, Swiper, AOS, plus interactive form and Edu Button redirection -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  // Swiper Slider init
+  // Initialize Swiper Slider with autoplay
   const swiper = new Swiper('.mySwiper', {
     loop: true,
     autoplay: { delay: 3800, disableOnInteraction: false },
@@ -475,32 +530,61 @@
     navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
     speed: 800,
   });
+  
+  // Initialize AOS animations
   AOS.init({ duration: 700, once: true, offset: 30 });
 
+  // EDU BUTTON FUNCTIONALITY: redirect to https://www.teamorbits.com/edu.html
+  function redirectToEduPage(event) {
+    event.preventDefault();
+    window.location.href = "https://www.teamorbits.com/edu.html";
+  }
+  
+  // Get all elements that should trigger the edu redirect
+  const eduNavBtn = document.getElementById('eduButtonNav');
+  const footerEduLink = document.getElementById('footerEduLink');
+  
+  if (eduNavBtn) eduNavBtn.addEventListener('click', redirectToEduPage);
+  if (footerEduLink) footerEduLink.addEventListener('click', redirectToEduPage);
+  
+  // Also capture any other future dynamic links with class 'edu-highlight' if needed
+  const anyEduBtn = document.querySelectorAll('.edu-highlight');
+  anyEduBtn.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = "https://www.teamorbits.com/edu.html";
+    });
+  });
+  
   // Contact form handling (simulate submission and show feedback + mailto fallback)
   const submitBtn = document.getElementById('submitBtn');
   const feedbackDiv = document.getElementById('formFeedback');
-  submitBtn.addEventListener('click', function(e) {
-    const name = document.getElementById('fullname').value.trim();
-    const email = document.getElementById('emailAddr').value.trim();
-    const msg = document.getElementById('messageText').value.trim();
-    if (!name || !email) {
-      feedbackDiv.innerHTML = '<span class="text-danger">⚠️ Please fill name and email.</span>';
-      setTimeout(() => feedbackDiv.innerHTML = '', 2500);
-      return;
-    }
-    // compose mailto for backup & show success
-    const subject = `Inquiry from ${name} - TeamOrbits`;
-    const body = `Name: ${name}%0AEmail: ${email}%0AMessage: ${msg}`;
-    const mailtoLink = `mailto:teamorbitbussiness@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    feedbackDiv.innerHTML = '✅ Request logged! Redirecting to email client...';
-    setTimeout(() => {
-      window.location.href = mailtoLink;
-      feedbackDiv.innerHTML = '✨ Message prepared! Thank you for reaching out.';
-    }, 900);
-    // reset after a while
-    setTimeout(() => { feedbackDiv.innerHTML = ''; document.getElementById('contactForm').reset(); }, 3000);
-  });
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function(e) {
+      const name = document.getElementById('fullname').value.trim();
+      const email = document.getElementById('emailAddr').value.trim();
+      const msg = document.getElementById('messageText').value.trim();
+      if (!name || !email) {
+        feedbackDiv.innerHTML = '<span class="text-danger">⚠️ Please fill name and email.</span>';
+        setTimeout(() => feedbackDiv.innerHTML = '', 2500);
+        return;
+      }
+      // compose mailto for backup & show success
+      const subject = `Inquiry from ${name} - TeamOrbits`;
+      const body = `Name: ${name}%0AEmail: ${email}%0AMessage: ${msg}`;
+      const mailtoLink = `mailto:teamorbitbussiness@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      feedbackDiv.innerHTML = '✅ Request logged! Redirecting to email client...';
+      setTimeout(() => {
+        window.location.href = mailtoLink;
+        feedbackDiv.innerHTML = '✨ Message prepared! Thank you for reaching out.';
+      }, 800);
+      setTimeout(() => { 
+        if(feedbackDiv) feedbackDiv.innerHTML = ''; 
+        const form = document.getElementById('contactForm');
+        if(form) form.reset();
+      }, 4000);
+    });
+  }
 </script>
 </body>
 </html>
