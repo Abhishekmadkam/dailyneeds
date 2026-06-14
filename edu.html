@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeVibe Labs · Master AI + Full Stack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>CodeVibe Labs · Free Learning Hub + Paid Mastery Tracks</title>
   <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts: Inter & Playfair for classic touch -->
@@ -37,6 +37,7 @@
       --paper: #ffffff;
       --text-dark: #23242a;
       --text-soft: #4a4b57;
+      --free-badge: #2c6e4f;
     }
 
     /* typography */
@@ -68,7 +69,7 @@
       max-width: 700px;
     }
 
-    /* header / hero */
+    /* hero + free learning spotlight */
     .hero {
       background: linear-gradient(105deg, #ffffff 0%, #f6f3ef 100%);
       border-bottom: 1px solid rgba(139, 60, 60, 0.15);
@@ -88,7 +89,7 @@
 
     .hero-badge {
       display: inline-block;
-      background: var(--accent-burgundy);
+      background: var(--free-badge);
       color: white;
       font-size: 0.8rem;
       font-weight: 600;
@@ -136,6 +137,7 @@
       font-weight: 600;
       font-size: 1.1rem;
       box-shadow: inset 0 0 0 2px rgba(255,255,255,0.8);
+      transition: 0.2s;
     }
 
     .qr-placeholder span {
@@ -145,18 +147,79 @@
       border: 1px solid var(--gold-subtle);
     }
 
-    .qr-caption {
-      font-weight: 500;
-      color: var(--primary-deep);
-      letter-spacing: 0.3px;
+    /* FREE KNOWLEDGE HUB (like w3schools but richer) */
+    .free-hub {
+      background: #eef3f0;
+      border-radius: 48px;
+      padding: 2.5rem 2rem;
+      margin: 2rem 0 3rem;
+      border: 1px solid #cbdcd0;
+      box-shadow: 0 15px 25px -12px rgba(0,0,0,0.05);
     }
-
-    .qr-caption i {
+    .free-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .free-header h3 {
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, #0b2b40, #2c6e4f);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0 1rem;
+    }
+    .lang-card {
+      background: white;
+      padding: 1rem 0.8rem;
+      border-radius: 28px;
+      text-align: center;
+      transition: all 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+      border: 1px solid #e0e4db;
+      cursor: pointer;
+    }
+    .lang-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-subtle);
+      background: #fffef7;
+    }
+    .lang-card i {
+      font-size: 2.2rem;
       color: var(--accent-burgundy);
-      margin-right: 4px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .lang-card span {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .free-docs-btn {
+      background: var(--free-badge);
+      color: white;
+      border: none;
+      border-radius: 60px;
+      padding: 12px 28px;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .free-docs-btn:hover {
+      background: #1e5942;
+      transform: scale(1.02);
     }
 
-    /* cards grid */
+    /* Cards for paid courses + free access hybrid */
     .course-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -171,25 +234,47 @@
       box-shadow: 0 10px 25px -12px rgba(0,0,0,0.1);
       transition: all 0.2s ease;
       border: 1px solid #e9e1d7;
+      position: relative;
     }
-
+    .course-card.paid-ribbon::after {
+      content: "PREMIUM";
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: var(--accent-burgundy);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 40px;
+      letter-spacing: 0.5px;
+    }
+    .course-card.free-ribbon::after {
+      content: "FREE ACCESS";
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: #2c6e4f;
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 40px;
+    }
     .course-card:hover {
       transform: translateY(-6px);
       border-color: var(--gold-subtle);
       box-shadow: 0 28px 30px -18px rgba(139, 60, 60, 0.2);
     }
-
     .course-icon {
       font-size: 2.4rem;
       color: var(--accent-burgundy);
       margin-bottom: 1.2rem;
     }
-
     .course-card h3 {
       font-size: 1.5rem;
       margin-bottom: 0.8rem;
     }
-
     .course-tag {
       display: inline-block;
       background: var(--primary-deep);
@@ -201,12 +286,10 @@
       text-transform: uppercase;
       font-weight: 600;
     }
-
     .features-list {
       list-style: none;
       margin-top: 1.2rem;
     }
-
     .features-list li {
       margin-bottom: 0.55rem;
       font-size: 0.95rem;
@@ -214,358 +297,317 @@
       align-items: center;
       gap: 8px;
     }
-
     .features-list i {
       color: var(--gold-subtle);
       width: 20px;
-      font-size: 0.9rem;
+    }
+    .btn-sm {
+      background: var(--primary-deep);
+      color: white;
+      border: none;
+      border-radius: 40px;
+      padding: 8px 20px;
+      margin-top: 1rem;
+      font-weight: 500;
+      transition: 0.15s;
+      cursor: pointer;
+    }
+    .btn-sm-free {
+      background: #2c6e4f;
+    }
+    .btn-sm:hover {
+      background: var(--accent-burgundy);
     }
 
-    /* fee structure */
     .fee-panel {
       background: var(--primary-deep);
       color: white;
       border-radius: 40px;
-      padding: 2.5rem 2.5rem;
-      margin: 3.5rem 0 2.5rem;
-      box-shadow: 0 25px 35px -15px #0b2b4050;
+      padding: 2rem 2rem;
+      margin: 2rem 0 2rem;
       background-image: radial-gradient(circle at 100% 0%, #234a5e 0%, #0b2b40 80%);
     }
-
-    .fee-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .fee-item {
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(4px);
-      padding: 1.3rem 2rem;
-      border-radius: 60px;
-      border: 1px solid rgba(198, 161, 91, 0.5);
-    }
-
-    .fee-amount {
-      font-size: 2.5rem;
-      font-weight: 700;
-      font-family: 'Playfair Display', serif;
-      line-height: 1.2;
-      color: #f0e1c6;
-    }
-
-    .fee-small {
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    .full-info {
-      max-width: 340px;
-    }
-
-    /* contact / address block */
     .contact-classic {
       background: var(--light-stone);
       border-radius: 48px;
-      padding: 2.8rem 2.8rem;
-      margin-top: 3rem;
-      border: 1px solid #d8cfc0;
+      padding: 2.5rem;
+      margin-top: 2rem;
     }
-
     .contact-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 2.5rem;
+      gap: 2rem;
     }
-
     .contact-details {
       flex: 2 1 300px;
     }
-
-    .contact-details p {
-      margin: 1rem 0;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      font-size: 1.1rem;
-    }
-
-    .contact-details i {
-      width: 32px;
-      color: var(--accent-burgundy);
-      font-size: 1.5rem;
-    }
-
     .address-block {
       background: white;
-      padding: 1.7rem 2rem;
+      padding: 1.5rem;
       border-radius: 28px;
-      font-style: normal;
       border-left: 6px solid var(--gold-subtle);
     }
-
     .contact-email-form {
       flex: 2 1 320px;
       background: white;
-      padding: 2rem;
+      padding: 1.8rem;
       border-radius: 36px;
-      box-shadow: 0 12px 25px -18px black;
     }
-
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-
     input, textarea {
       width: 100%;
-      padding: 1rem 1.3rem;
+      padding: 0.8rem 1.2rem;
       border: 1px solid #d4cbbc;
       border-radius: 60px;
-      font-family: 'Inter', sans-serif;
+      margin-bottom: 1rem;
       background: #fefcf9;
     }
-
-    textarea {
-      border-radius: 30px;
-      resize: vertical;
-    }
-
     .btn {
       background: var(--primary-deep);
       color: white;
-      border: none;
-      padding: 1rem 2rem;
+      padding: 0.8rem 1.8rem;
       border-radius: 60px;
       font-weight: 600;
-      cursor: pointer;
-      transition: 0.15s;
-      border: 1px solid var(--gold-subtle);
-    }
-
-    .btn:hover {
-      background: var(--accent-burgundy);
-    }
-
-    hr {
       border: none;
-      border-top: 2px solid #ddd6cb;
-      margin: 1.2rem 0;
+      cursor: pointer;
     }
-
     .footer-note {
       text-align: center;
       margin-top: 3rem;
       font-size: 0.9rem;
       color: #5b5b68;
     }
-
-    /* additional courses highlight */
-    .more-tag {
-      background: #e4dacd;
-      color: #23242a;
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 0.3rem 1rem;
-      border-radius: 50px;
-      display: inline-block;
-      margin-left: 0.8rem;
+    .modal-doc {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
-
+    .modal-content-doc {
+      background: white;
+      max-width: 600px;
+      width: 90%;
+      border-radius: 32px;
+      padding: 2rem;
+      text-align: center;
+    }
     @media (max-width: 600px) {
       h1 { font-size: 2rem; }
-      .hero-qr-block { flex-basis: 100%; }
     }
   </style>
 </head>
 <body>
 
+<!-- Modal for documentation preview (free) -->
+<div id="docModal" class="modal-doc">
+  <div class="modal-content-doc">
+    <i class="fas fa-book-open" style="font-size: 2rem; color: #8b3c3c;"></i>
+    <h3 style="margin: 0.8rem 0;">📘 Free Resource Library</h3>
+    <p>Access full video tutorials, step-by-step docs, code examples, and interactive playground for <strong id="selectedLang"></strong> — completely free, no signup.</p>
+    <a href="#" id="docRedirectLink" target="_blank" class="btn" style="display: inline-block; margin-top: 1rem;">Open Learning Hub →</a>
+    <button onclick="closeDocModal()" style="margin-top: 1rem; background: none; border: none; text-decoration: underline; cursor: pointer;">Close</button>
+  </div>
+</div>
+
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
-      <!-- left content -->
       <div class="hero-content">
-        <span class="hero-badge"><i class="fas fa-bolt" style="margin-right: 5px;"></i> JOB READY IN 2 MONTHS</span>
-        <h1>MASTER AI + FULL STACK<br><span style="color: #8b3c3c;">WEB DEVELOPMENT</span></h1>
-        <p class="section-subhead" style="margin: 1.2rem 0 1.8rem;">Industry‑driven curriculum · Live practical training · Personal projects · Interview prep</p>
-        <div class="hero-highlight"><i class="fas fa-indian-rupee-sign" style="margin-right: 8px;"></i> COURSE FEE : ₹10,000 <span style="font-size: 0.8rem; opacity: 0.9; margin-left: 10px;">(incl. taxes)</span></div>
-        <!-- mini highlights -->
-        <div style="display: flex; flex-wrap: wrap; gap: 1.8rem; margin-top: 1.5rem;">
-          <div><i class="fas fa-check-circle" style="color: #8b3c3c;"></i> HTML5/CSS3/Bootstrap</div>
-          <div><i class="fas fa-check-circle" style="color: #8b3c3c;"></i> JavaScript (ES6+)</div>
-          <div><i class="fas fa-check-circle" style="color: #8b3c3c;"></i> PHP & MySQL</div>
-          <div><i class="fas fa-check-circle" style="color: #8b3c3c;"></i> AI + Python, Node.js</div>
+        <span class="hero-badge"><i class="fas fa-graduation-cap"></i> FREE FOREVER + PREMIUM BOOST</span>
+        <h1>CodeVibe Labs<br><span style="color: #8b3c3c;">Learn Any Language · Zero Cost</span></h1>
+        <p class="section-subhead" style="margin: 1.2rem 0 1rem;">Massive free video library + documentation like W3Schools, plus intensive paid courses with certificates & mentorship.</p>
+        <div class="hero-highlight"><i class="fas fa-rupee-sign"></i> PAID COURSES from ₹9,500</div>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+          <span style="background:#e7e0d6; padding:6px 18px; border-radius:40px;"><i class="fab fa-youtube"></i> 500+ free videos</span>
+          <span style="background:#e7e0d6; padding:6px 18px; border-radius:40px;"><i class="fas fa-file-alt"></i> Docs & snippets</span>
         </div>
       </div>
-
-      <!-- QR space 200x200 with classic style -->
       <div class="hero-qr-block">
-        <div class="qr-placeholder">
-          <span>SCAN ME</span>
-        </div>
-        <p class="qr-caption"><i class="fas fa-qrcode"></i> Scan to join courses</p>
-        <p style="font-size: 0.8rem; color: #4f4f5e;">instant access · group updates</p>
-        <div style="margin-top: 0.8rem; background: #f0eae2; border-radius: 40px; padding: 0.2rem 0.5rem; font-size: 0.7rem; color: #0b2b40;"><i class="fas fa-certificate"></i> certificate provided</div>
+        <div class="qr-placeholder"><span>SCAN → FREE HUB</span></div>
+        <p class="qr-caption"><i class="fas fa-qrcode"></i> instant access to all free content</p>
+        <div style="margin-top: 1rem;"><i class="fas fa-infinity"></i> lifetime free library</div>
       </div>
     </div>
   </div>
 </section>
 
 <div class="container">
-  <!-- core master course & additional courses -->
-  <h2>Elite programmes <span class="more-tag"><i class="fas fa-rocket"></i> 6 more job‑ready tracks</span></h2>
+  <!-- FREE KNOWLEDGE HUB (like w3schools but for all languages & stuff) -->
+  <div class="free-hub">
+    <div class="free-header">
+      <h3><i class="fas fa-globe"></i> 📖 CodeVibe Free Learning Hub</h3>
+      <span style="background: #fff; padding: 5px 15px; border-radius: 40px; font-weight:500;"><i class="fas fa-play-circle"></i> 500+ video tutorials + interactive docs</span>
+    </div>
+    <p style="margin: 1rem 0 0;">Explore in-depth written guides, video series, and live examples for every major language — HTML, CSS, JS, Python, PHP, Java, C++, SQL, React, Node.js, AI basics & more. <strong>No paywalls, no subscription.</strong> Updated weekly.</p>
+    <div class="lang-grid" id="langGrid">
+      <!-- dynamic but we fill static important ones -->
+      <div class="lang-card" data-lang="HTML/CSS"><i class="fab fa-html5"></i><span>HTML/CSS</span></div>
+      <div class="lang-card" data-lang="JavaScript"><i class="fab fa-js"></i><span>JavaScript</span></div>
+      <div class="lang-card" data-lang="Python"><i class="fab fa-python"></i><span>Python</span></div>
+      <div class="lang-card" data-lang="PHP & MySQL"><i class="fab fa-php"></i><span>PHP & MySQL</span></div>
+      <div class="lang-card" data-lang="Java"><i class="fab fa-java"></i><span>Java</span></div>
+      <div class="lang-card" data-lang="React"><i class="fab fa-react"></i><span>React.js</span></div>
+      <div class="lang-card" data-lang="Node.js"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+      <div class="lang-card" data-lang="SQL"><i class="fas fa-database"></i><span>SQL</span></div>
+      <div class="lang-card" data-lang="C++"><i class="fas fa-code"></i><span>C++</span></div>
+      <div class="lang-card" data-lang="AI/ML"><i class="fas fa-brain"></i><span>AI/ML basics</span></div>
+    </div>
+    <button class="free-docs-btn" id="exploreAllBtn"><i class="fas fa-external-link-alt"></i> Explore full free library (100+ topics)</button>
+  </div>
+
+  <!-- PAID COURSES SECTION (if need but also free resources exist) -->
+  <h2>🎓 Premium Career Tracks <span style="font-size: 1rem; background:#e4dacd; padding:2px 12px; border-radius: 30px;">optional – get job ready</span></h2>
   <div class="course-grid">
-    <!-- main AI + full stack card (the one from poster) -->
-    <div class="course-card">
+    <!-- AI + Full Stack Paid -->
+    <div class="course-card paid-ribbon">
       <div class="course-icon"><i class="fas fa-microchip"></i></div>
-      <h3>AI + Full Stack <br><span style="font-size: 0.9rem;">(flagship)</span></h3>
+      <h3>AI + Full Stack</h3>
       <div class="course-tag">2 months · ₹10,000</div>
       <ul class="features-list">
-        <li><i class="fas fa-code"></i> HTML5, CSS3, Bootstrap</li>
-        <li><i class="fab fa-js"></i> JavaScript (core + advanced)</li>
-        <li><i class="fab fa-php"></i> PHP & MySQL</li>
+        <li><i class="fas fa-code"></i> HTML5/CSS3, Bootstrap</li>
+        <li><i class="fab fa-js"></i> Advanced JS, React</li>
         <li><i class="fab fa-python"></i> AI + Python, Node.js</li>
-        <li><i class="fas fa-briefcase"></i> Personal projects + Interview prep</li>
-        <li><i class="fas fa-chalkboard-user"></i> Live practical training</li>
+        <li><i class="fas fa-certificate"></i> Certificate, placement prep</li>
       </ul>
+      <button class="btn-sm" onclick="alert('Enquiry sent! Contact +91 7666309253 for payment & details.')">Enroll Now</button>
     </div>
-
-    <!-- additional job-oriented course 1: data science / ai -->
-    <div class="course-card">
+    <!-- Data Science Paid -->
+    <div class="course-card paid-ribbon">
       <div class="course-icon"><i class="fas fa-chart-line"></i></div>
       <h3>Data Science & AI</h3>
-      <div class="course-tag">3 months · ₹20000</div>
+      <div class="course-tag">3 months · ₹20,000</div>
       <ul class="features-list">
-        <li><i class="fab fa-python"></i> Python for data (Pandas, NumPy)</li>
-        <li><i class="fas fa-robot"></i> ML basics & NLP</li>
-        <li><i class="fas fa-database"></i> SQL + data visualization</li>
-        <li><i class="fas fa-project-diagram"></i> 2 capstone projects</li>
+        <li><i class="fab fa-python"></i> Pandas, NumPy, sklearn</li>
+        <li><i class="fas fa-robot"></i> ML & NLP projects</li>
+        <li><i class="fas fa-chalkboard-user"></i> Live mentorship</li>
       </ul>
+      <button class="btn-sm" onclick="alert('Paid course inquiry: Call +91 7666309253 for details')">Request Brochure</button>
     </div>
-
-    <!-- additional course 2: cloud & devops -->
-    <div class="course-card">
+    <!-- Cloud & DevOps paid-->
+    <div class="course-card paid-ribbon">
       <div class="course-icon"><i class="fas fa-cloud"></i></div>
       <h3>Cloud & DevOps</h3>
       <div class="course-tag">2.5 months · ₹15,000</div>
       <ul class="features-list">
-        <li><i class="fab fa-aws"></i> AWS / Azure fundamentals</li>
-        <li><i class="fas fa-docker"></i> Docker, Kubernetes</li>
-        <li><i class="fas fa-code-branch"></i> CI/CD (Jenkins, GitHub)</li>
-        <li><i class="fas fa-terminal"></i> Linux & scripting</li>
+        <li><i class="fab fa-aws"></i> AWS, Docker, K8s</li>
+        <li><i class="fas fa-code-branch"></i> CI/CD pipelines</li>
+        <li><i class="fas fa-laptop-code"></i> Real-world deployment</li>
       </ul>
-    </div>
-
-    <!-- additional course 4: cybersecurity -->
-    <div class="course-card">
-      <div class="course-icon"><i class="fas fa-shield-halved"></i></div>
-      <h3>Cyber Security</h3>
-      <div class="course-tag">3 months · ₹15,000</div>
-      <ul class="features-list">
-        <li><i class="fas fa-network-wired"></i> Network security</li>
-        <li><i class="fas fa-bug"></i> Ethical hacking basics</li>
-        <li><i class="fas fa-lock"></i> Cryptography & IAM</li>
-        <li><i class="fas fa-file-invoice"></i> Incident response</li>
-      </ul>
+      <button class="btn-sm" onclick="alert('Special discount available. Contact abhishekmadkam01@gmail.com')">Get Fee details</button>
     </div>
   </div>
 
-  <!-- second row: two more courses (UI/UX + mobile dev) -->
-  <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 0.5rem;">
-    <div style="flex: 1 1 250px; background: #f5efe8; border-radius: 28px; padding: 1.8rem;">
-      <i class="fas fa-pencil-ruler" style="font-size: 2rem; color: #8b3c3c;"></i>
-      <h3 style="margin: 0.8rem 0;">UI/UX & product design</h3>
-      <div><span style="background: #0b2b40; color: white; padding: 0.2rem 1rem; border-radius: 30px;">2 months · ₹9,500</span></div>
-      <p style="margin-top: 0.8rem;">Figma, wireframing, prototyping, portfolio</p>
-    </div>
-    <div style="flex: 1 1 250px; background: #f5efe8; border-radius: 28px; padding: 1.8rem;">
-      <i class="fas fa-mobile-alt" style="font-size: 2rem; color: #8b3c3c;"></i>
-      <h3 style="margin: 0.8rem 0;">Mobile dev (Flutter)</h3>
-      <div><span style="background: #0b2b40; color: white; padding: 0.2rem 1rem; border-radius: 30px;">2.5 months · ₹12,000</span></div>
-      <p style="margin-top: 0.8rem;">Dart, iOS/Android apps, Firebase, 2 apps</p>
-    </div>
-    <!-- one more: java backend -->
-    <div style="flex: 1 1 200px; background: #f5efe8; border-radius: 28px; padding: 1.8rem;">
-      <i class="fab fa-java" style="font-size: 2rem; color: #8b3c3c;"></i>
-      <h3 style="margin: 0.8rem 0;">Java backend</h3>
-      <div><span style="background: #0b2b40; color: white; padding: 0.2rem 1rem; border-radius: 30px;">3 months · ₹13,500</span></div>
-      <p>Spring boot, microservices, Hibernate</p>
+  <!-- Free tutorials row: additional highlight - free video courses block -->
+  <div style="background: #ffffff; border-radius: 32px; padding: 1.8rem; margin: 1.5rem 0; border: 1px solid #e2d9cf;">
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+      <div><i class="fab fa-youtube" style="font-size: 2rem; color: #c4302b;"></i> <strong>📺 Free video series:</strong> Complete Web Dev, Python Bootcamp, React Mastery – all on our YouTube + website.</div>
+      <a href="#" id="watchFreeBtn" style="background: #2c6e4f; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 600;">📚 Start watching for free →</a>
     </div>
   </div>
 
-  <!-- FEE STRUCTURE block (classical global) -->
+  <!-- Fee structure summary -->
   <div class="fee-panel">
-    <div class="fee-grid">
-      <div class="full-info">
-        <h3 style="color: #f0e1c6; font-size: 2rem; font-family: 'Playfair Display';">Fee Structure</h3>
-        <p style="margin-top: 0.8rem;">Simple, transparent, one-time. All courses include certificate, live training & projects.</p>
-      </div>
-      <div class="fee-item">
-        <div class="fee-amount">₹10,000 <span style="font-size: 1rem;">– ₹15,500</span></div>
-        <div>per course (depending on track)</div>
-        <div class="fee-small">* Easy installments available</div>
-      </div>
-      <div style="background: rgba(255,255,255,0.05); padding: 1.2rem 2rem; border-radius: 50px;">
-        <i class="fas fa-sack-rupee" style="color: #c6a15b;"></i> Special early bird: 10% off
-      </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center;">
+      <div><h3 style="color:#f0e1c6;">Flexible paid programs</h3><p>All paid courses include live doubt sessions, projects, placement assistance & certificate</p></div>
+      <div><span style="font-size: 2rem; font-weight:800;">₹9,500 – ₹20,000</span><br>per track (EMI available)</div>
+      <div><i class="fas fa-gift"></i> Early bird 15% off</div>
     </div>
   </div>
 
-  <!-- CONTACT + EMAIL (with abhishekmadkam01 + address from image) -->
+  <!-- CONTACT + EMAIL (address from previous: Wardha, abhishekmadkam01 etc) -->
   <div class="contact-classic" id="contact">
     <div class="contact-row">
       <div class="contact-details">
-        <h3 style="font-family: 'Playfair Display'; font-size: 2rem;">Reach us</h3>
-        <!-- address exactly from image -->
+        <h3 style="font-family: 'Playfair Display'; font-size: 1.9rem;">Reach CodeVibe Labs</h3>
         <div class="address-block">
-          <i class="fas fa-map-pin" style="float: left; font-size: 2rem; margin-right: 18px;"></i>
-          <p style="font-weight: 600;">CodeVibe Labs<br>Care of Kute Commerce Academy<br>Arvi Naka, Na, Wardha</p>
-          <p style="margin-top: 0.5rem;"><i class="fas fa-phone-alt"></i> +91 76663 09253  (also WhatsApp)</p>
+          <i class="fas fa-map-pin" style="float: left; font-size: 1.8rem; margin-right: 15px;"></i>
+          <p><strong>CodeVibe Labs</strong><br>Care of Kute Commerce Academy<br>Arvi Naka, Na, Wardha, Maharashtra - 442001</p>
+          <p><i class="fas fa-phone-alt"></i> +91 76663 09253  (also WhatsApp)</p>
           <p><i class="fas fa-envelope"></i> abhishekmadkam01@gmail.com</p>
-          <p><i class="fas fa-clock"></i> support: 10am – 7pm (Mon–Sat)</p>
+          <p><i class="fas fa-globe"></i> codevibelabs.in (free resources live)</p>
         </div>
-        <hr style="width: 80px; margin: 1.5rem 0;">
-        <p><i class="fas fa-globe"></i> www.codevibelabs.in (launching soon)</p>
-        <p><i class="fab fa-instagram"></i> @codevibe_labs</p>
       </div>
-
-      <!-- message form to abhishekmadkam01@gmail.com (frontend only, but simulates) -->
       <div class="contact-email-form">
-        <h4 style="font-size: 1.6rem; margin-bottom: 1.2rem;"><i class="far fa-paper-plane" style="color: #8b3c3c;"></i> Send a message</h4>
-        <form action="#" method="post" onsubmit="alert('Thank you! We’ll reply shortly to your email (abhishekmadkam01@gmail.com).'); return false;">
-          <div class="form-group">
-            <input type="text" placeholder="Your name" required>
-          </div>
-          <div class="form-group">
-            <input type="email" placeholder="Your email" required>
-          </div>
-          <div class="form-group">
-            <textarea rows="3" placeholder="I'm interested in ... ask us anything"></textarea>
-          </div>
-          <!-- hidden reference (just visual) -->
-          <p style="font-size: 0.8rem; margin: 0.5rem 0 1rem;"><i class="fas fa-lock"></i> messages go to abhishekmadkam01@gmail.com</p>
-          <button class="btn" type="submit"><i class="fas fa-envelope-open-text"></i> Send via email</button>
+        <h4><i class="far fa-paper-plane"></i> Quick message</h4>
+        <form id="contactForm" onsubmit="event.preventDefault(); alert('Thank you! We will reply within 24 hours at abhishekmadkam01@gmail.com. Call +91 7666309253 for urgent.'); this.reset();">
+          <input type="text" placeholder="Your name" required>
+          <input type="email" placeholder="Your email" required>
+          <textarea rows="2" placeholder="Interested in: free resources / paid course ..."></textarea>
+          <button class="btn" type="submit">Send message</button>
         </form>
-        <!-- my contact: 7666309253 (display) -->
-        <div style="margin-top: 1.5rem; background: #eae2d8; border-radius: 40px; padding: 0.8rem 1.2rem; font-size: 0.95rem;">
-          <i class="fas fa-phone-alt"></i> <strong>+91 76663 09253</strong> (abhishek madkam) <br> <span style="font-size: 0.85rem;">also call or WhatsApp</span>
-        </div>
+        <div style="margin-top: 1.2rem; font-size: 0.85rem;"><i class="fas fa-headset"></i> Office hours: 10 AM – 7 PM (Mon-Sat)</div>
       </div>
     </div>
   </div>
 
-  <!-- certificate and final cta -->
-  <div style="text-align: center; margin: 3rem 0 2rem;">
-    <span style="background: #0b2b40; color: white; padding: 0.8rem 3rem; border-radius: 60px; font-weight: 600; letter-spacing: 1px;"><i class="fas fa-certificate"></i> CERTIFICATE PROVIDED FOR EVERY COURSE <i class="fas fa-certificate"></i></span>
-  </div>
-  <hr style="border-color: #cdc2b2;">
   <div class="footer-note">
-    <p>© CodeVibe Labs — care of Kute Commerce Academy, Arvi Naka, Wardha. All rights reserved. <br> 
-    📍+91 76663 09253 | abhishekmadkam01@gmail.com</p>
+    <hr style="border-color: #cdc2b2;">
+    <p>© CodeVibe Labs — providing free documentation, video tutorials for all languages (HTML/CSS/JS/Python/Java/PHP/SQL/React/Node/C++ etc) like W3Schools, plus premium career courses with certificates.<br>
+    📍 Wardha, Maharashtra 442001 | 📞 +91 7666309253 | ✉️ abhishekmadkam01@gmail.com</p>
+    <p><i class="fas fa-heart" style="color:#8b3c3c;"></i> Our mission: democratize coding education — 100% free resources & optional expert-led paid tracks</p>
   </div>
 </div>
 
-
+<script>
+  // FREE DOCUMENTATION MODAL (simulate w3schools like free access)
+  const modal = document.getElementById('docModal');
+  const selectedLangSpan = document.getElementById('selectedLang');
+  const docLink = document.getElementById('docRedirectLink');
+  
+  function closeDocModal() { modal.style.display = 'none'; }
+  window.closeDocModal = closeDocModal;
+  
+  const langCards = document.querySelectorAll('.lang-card');
+  langCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const lang = card.getAttribute('data-lang');
+      selectedLangSpan.innerText = lang;
+      // redirect link to a comprehensive free resource (simulate)
+      docLink.href = `https://www.w3schools.com/${lang.toLowerCase().replace(/[+&/]/g, '').replace(' ', '')}/default.asp`;
+      if(lang === 'HTML/CSS') docLink.href = 'https://www.w3schools.com/html/';
+      if(lang === 'JavaScript') docLink.href = 'https://www.w3schools.com/js/';
+      if(lang === 'Python') docLink.href = 'https://www.w3schools.com/python/';
+      if(lang === 'PHP & MySQL') docLink.href = 'https://www.w3schools.com/php/';
+      if(lang === 'Java') docLink.href = 'https://www.w3schools.com/java/';
+      if(lang === 'React') docLink.href = 'https://react.dev/learn';
+      if(lang === 'Node.js') docLink.href = 'https://nodejs.org/en/docs';
+      if(lang === 'SQL') docLink.href = 'https://www.w3schools.com/sql/';
+      if(lang === 'C++') docLink.href = 'https://www.w3schools.com/cpp/';
+      if(lang === 'AI/ML') docLink.href = 'https://www.tensorflow.org/resources/learn-ml';
+      modal.style.display = 'flex';
+    });
+  });
+  
+  document.getElementById('exploreAllBtn')?.addEventListener('click', () => {
+    selectedLangSpan.innerText = 'Full CodeVibe Library';
+    docLink.href = 'https://www.w3schools.com/';
+    modal.style.display = 'flex';
+  });
+  
+  document.getElementById('watchFreeBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    selectedLangSpan.innerText = 'Video Playlists & Tutorials';
+    docLink.href = 'https://www.youtube.com/results?search_query=codevibe+labs+free+course';
+    modal.style.display = 'flex';
+  });
+  
+  window.onclick = function(e) { if(e.target === modal) modal.style.display = 'none'; }
+  
+  // quick contact toast
+  const btns = document.querySelectorAll('.btn-sm');
+  btns.forEach(btn => {
+    if(!btn.hasAttribute('data-listener')) {
+      btn.setAttribute('data-listener', 'true');
+      btn.addEventListener('click', (e) => {
+        if(btn.innerText.includes('Enroll') || btn.innerText.includes('Request') || btn.innerText.includes('Get Fee')) {
+          // no double alert, but we keep previous inline alerts
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>
