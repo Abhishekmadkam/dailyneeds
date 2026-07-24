@@ -1,0 +1,2238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes" />
+    <title>C Language · CodeVibeLabs — Complete Course</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #0b0e14;
+            --color-white: #ffffff;
+            --color-off-white: #f8fafc;
+            --color-gray-50: #f1f4f9;
+            --color-gray-100: #eaeef3;
+            --color-gray-200: #dce2ea;
+            --color-gray-300: #d0d5dd;
+            --color-gray-400: #b0b8c5;
+            --color-gray-500: #8f9bb0;
+            --color-gray-600: #6b7280;
+            --color-gray-700: #4a4f5e;
+            --color-gray-800: #2d3548;
+            --color-gray-900: #1a212f;
+            --color-accent: #2d7d46;
+            --color-accent-light: #3a9d5a;
+            --color-accent-dark: #1e5a32;
+            --color-code-bg: #0f141e;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 48px -12px rgba(0, 0, 0, 0.10);
+            --shadow-xl: 0 30px 60px -16px rgba(0, 0, 0, 0.14);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --sidebar-width: 280px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: var(--color-off-white);
+            color: var(--color-black);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--color-black);
+            color: var(--color-gray-300);
+            overflow-y: auto;
+            padding: 1.2rem 0 2rem;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: var(--color-gray-900);
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 10px;
+        }
+
+        .sidebar-brand {
+            padding: 0 1.2rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 0.8rem;
+        }
+
+        .sidebar-brand .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-white);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .sidebar-brand .logo i {
+            color: var(--color-accent-light);
+            font-size: 1.4rem;
+        }
+
+        .sidebar-brand .sub {
+            font-size: 0.65rem;
+            color: var(--color-gray-500);
+            margin-top: 0.2rem;
+            padding-left: 2.2rem;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 0 0.6rem;
+        }
+
+        .sidebar-nav .nav-section {
+            margin-bottom: 0.4rem;
+        }
+
+        .sidebar-nav .nav-section-title {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--color-gray-500);
+            padding: 0.6rem 0.6rem 0.3rem;
+            font-weight: 700;
+        }
+
+        .sidebar-nav .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-size: 0.78rem;
+            color: var(--color-gray-400);
+            text-decoration: none;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar-nav .nav-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-white);
+        }
+
+        .sidebar-nav .nav-item.active {
+            background: rgba(45, 125, 70, 0.2);
+            color: var(--color-accent-light);
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .sidebar-nav .nav-item i {
+            font-size: 0.7rem;
+            width: 1.2rem;
+            color: var(--color-gray-500);
+        }
+
+        .sidebar-nav .nav-item.active i {
+            color: var(--color-accent-light);
+        }
+
+        .sidebar-footer {
+            padding: 0.8rem 1.2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.6rem;
+            color: var(--color-gray-500);
+        }
+
+        .sidebar-footer .powered {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .sidebar-footer .powered i {
+            color: var(--color-accent-light);
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 0.8rem;
+            left: 0.8rem;
+            z-index: 1001;
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 1.5rem 2rem 3rem;
+            min-height: 100vh;
+            max-width: calc(100% - var(--sidebar-width));
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+
+        .topic-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--color-black);
+        }
+
+        .topic-header .topic-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--color-gray-600);
+        }
+
+        .topic-header .topic-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .topic-body {
+            max-width: 1000px;
+        }
+
+        .topic-body .description {
+            font-size: 1.05rem;
+            color: var(--color-gray-700);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .topic-body .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 1.5rem 0 0.8rem;
+            color: var(--color-black);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .topic-body .section-title i {
+            color: var(--color-accent);
+            font-size: 1.1rem;
+        }
+
+        .topic-body .code-block {
+            background: var(--color-code-bg);
+            border-radius: var(--radius-sm);
+            padding: 1.2rem 1.5rem;
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.9;
+            overflow-x: auto;
+            margin: 0.8rem 0;
+            border: 1px solid var(--color-gray-800);
+        }
+
+        .code-block .comment {
+            color: #6a9955;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .func {
+            color: #dcdcaa;
+        }
+        .code-block .var {
+            color: #9cdcfe;
+        }
+        .code-block .num {
+            color: #b5cea8;
+        }
+        .code-block .preprocessor {
+            color: #c586c0;
+        }
+
+        .topic-body .output-block {
+            background: var(--color-gray-900);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1.2rem;
+            color: #b0b8c5;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            margin: 0.5rem 0 1rem;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .topic-body .example-box {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .example-box .ex-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--color-black);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example-box .ex-title i {
+            color: var(--color-accent);
+        }
+
+        .example-box .ex-desc {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-body .practice-box {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px dashed var(--color-accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .practice-box h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .practice-box h3 i {
+            color: var(--color-accent);
+        }
+
+        .practice-box .challenge-desc {
+            color: var(--color-gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .practice-box .btn-practice {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-right: 0.5rem;
+        }
+
+        .practice-box .btn-practice:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+
+        .practice-box .btn-hint {
+            background: var(--color-gray-200);
+            color: var(--color-gray-700);
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .practice-box .btn-hint:hover {
+            background: var(--color-gray-300);
+        }
+
+        .topic-body .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-gray-200);
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .topic-body .nav-links .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--color-gray-600);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .topic-body .nav-links .nav-link:hover {
+            color: var(--color-black);
+            background: var(--color-gray-50);
+        }
+
+        .topic-body .nav-links .nav-link i {
+            font-size: 0.8rem;
+        }
+
+        .game-box {
+            background: linear-gradient(135deg, var(--color-black), var(--color-gray-900));
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-box::before {
+            content: '🎮';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 5rem;
+            opacity: 0.1;
+        }
+
+        .game-box .game-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .game-box .game-title i {
+            color: var(--color-accent-light);
+        }
+
+        .game-box .game-desc {
+            color: var(--color-gray-400);
+            font-size: 0.9rem;
+            margin: 0.3rem 0 0.8rem;
+        }
+
+        .game-box .btn-game {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border: none;
+            padding: 0.4rem 1.8rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .game-box .btn-game:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+
+        .game-box .game-score {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: var(--color-gray-500);
+        }
+
+        .game-box .game-score span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .game-box .game-score .score-num {
+            color: var(--color-white);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* ----- COMPILER STYLES ----- */
+        .compiler-section {
+            background: #1a1a2e;
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #2d2d44;
+            box-shadow: var(--shadow-md);
+        }
+
+        .compiler-section .compiler-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #c0c0d0;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .compiler-section .compiler-header i {
+            color: var(--color-accent-light);
+        }
+
+        .compiler-section textarea {
+            width: 100%;
+            background: #0d0d1a;
+            color: #e0e0f0;
+            border: 1px solid #2d2d44;
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            resize: vertical;
+            min-height: 160px;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .compiler-section textarea:focus {
+            border-color: var(--color-accent);
+        }
+
+        .compiler-section .compiler-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 0.8rem 0;
+        }
+
+        .compiler-section .btn-run {
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            padding: 0.4rem 1.8rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .compiler-section .btn-run:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+
+        .compiler-section .btn-clear {
+            background: #3d3d5c;
+            color: #ccc;
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .compiler-section .btn-clear:hover {
+            background: #4d4d6c;
+        }
+
+        .compiler-section .output-console {
+            background: #0d0d1a;
+            color: #b0b8c5;
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1.2rem;
+            margin-top: 0.8rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            min-height: 50px;
+            border: 1px solid #2d2d44;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            z-index: 9999;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+            max-width: 90%;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .sidebar-toggle {
+                display: block;
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 1.2rem 1.2rem 2rem;
+                padding-top: 4rem;
+            }
+            .topic-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .topic-body .code-block {
+                font-size: 0.7rem;
+                padding: 0.8rem 1rem;
+            }
+            .topic-header h1 {
+                font-size: 1.3rem;
+            }
+            .topic-body .description {
+                font-size: 0.9rem;
+            }
+            .practice-box {
+                padding: 1rem;
+            }
+            .practice-box .btn-practice,
+            .practice-box .btn-hint {
+                font-size: 0.7rem;
+                padding: 0.3rem 1rem;
+            }
+            .game-box {
+                padding: 1rem 1.2rem;
+            }
+            .game-box .game-title {
+                font-size: 1rem;
+            }
+            .example-box {
+                padding: 0.8rem 1rem;
+            }
+            .compiler-section {
+                padding: 0.8rem 1rem;
+            }
+            .compiler-section textarea {
+                font-size: 0.75rem;
+                min-height: 120px;
+            }
+        }
+
+        ::selection {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-gray-50);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-gray-300);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>C · Course</span>
+            </div>
+            <div class="sub">Complete C Programming Syllabus</div>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+        <div class="sidebar-footer">
+            <div class="powered">
+                <i class="fas fa-bolt"></i> powered by <strong style="color:var(--color-white);">teamorbits</strong>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+        <div style="padding:2rem;text-align:center;color:var(--color-gray-600);">
+            <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--color-accent);"></i>
+            <p style="margin-top:1rem;">Loading course content...</p>
+        </div>
+    </main>
+
+    <div id="toast"></div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- COMPLETE SYLLABUS DATA (all topics) -----
+            const syllabusData = {
+                'C Basics': [
+                    { id: 'c-home', label: 'C HOME' },
+                    { id: 'c-intro', label: 'C Intro' },
+                    { id: 'c-get-started', label: 'C Get Started' },
+                    { id: 'c-syntax', label: 'C Syntax' },
+                    { id: 'c-output', label: 'C Output' },
+                    { id: 'c-comments', label: 'C Comments' },
+                    { id: 'c-variables', label: 'C Variables' },
+                    { id: 'c-data-types', label: 'C Data Types' },
+                    { id: 'c-type-conversion', label: 'C Type Conversion' },
+                    { id: 'c-constants', label: 'C Constants' },
+                    { id: 'c-operators', label: 'C Operators' },
+                    { id: 'c-booleans', label: 'C Booleans' },
+                    { id: 'c-if-else', label: 'C If...Else' },
+                    { id: 'c-switch', label: 'C Switch' },
+                ],
+                'Loops & Arrays': [
+                    { id: 'c-while', label: 'While Loop' },
+                    { id: 'c-for', label: 'For Loop' },
+                    { id: 'c-break-continue', label: 'Break/Continue' },
+                    { id: 'c-arrays', label: 'Arrays' },
+                    { id: 'c-strings', label: 'Strings' },
+                    { id: 'c-user-input', label: 'User Input' },
+                    { id: 'c-memory-address', label: 'Memory Address' },
+                    { id: 'c-pointers', label: 'Pointers' },
+                ],
+                'Functions': [
+                    { id: 'c-functions', label: 'C Functions' },
+                    { id: 'c-function-params', label: 'Function Parameters' },
+                    { id: 'c-scope', label: 'Scope' },
+                    { id: 'c-function-declaration', label: 'Function Declaration' },
+                    { id: 'c-function-challenge', label: 'Functions Challenge' },
+                    { id: 'c-math-functions', label: 'Math Functions' },
+                    { id: 'c-inline-functions', label: 'Inline Functions' },
+                    { id: 'c-recursion', label: 'Recursion' },
+                    { id: 'c-function-pointers', label: 'Function Pointers' },
+                ],
+                'Files': [
+                    { id: 'c-create-files', label: 'Create Files' },
+                    { id: 'c-write-files', label: 'Write To Files' },
+                    { id: 'c-read-files', label: 'Read Files' },
+                ],
+                'Structures': [
+                    { id: 'c-structures', label: 'C Structures' },
+                    { id: 'c-structs-challenge', label: 'Structs Challenge' },
+                    { id: 'c-nested-structures', label: 'Nested Structures' },
+                    { id: 'c-structs-pointers', label: 'Structs & Pointers' },
+                    { id: 'c-unions', label: 'Unions' },
+                    { id: 'c-typedef', label: 'typedef' },
+                    { id: 'c-struct-padding', label: 'Struct Padding' },
+                ],
+                'Enums': [{ id: 'c-enums', label: 'C Enums' }],
+                'Memory': [{ id: 'c-memory-management', label: 'Memory Management' }],
+                'Errors': [
+                    { id: 'c-errors', label: 'C Errors' },
+                    { id: 'c-error-challenge', label: 'Error Challenge' },
+                    { id: 'c-debugging', label: 'Debugging' },
+                    { id: 'c-null', label: 'NULL' },
+                    { id: 'c-error-handling', label: 'Error Handling' },
+                    { id: 'c-input-validation', label: 'Input Validation' },
+                ],
+                'More': [
+                    { id: 'c-date', label: 'Date' },
+                    { id: 'c-random', label: 'Random Numbers' },
+                    { id: 'c-macros', label: 'Macros' },
+                    { id: 'c-organize-code', label: 'Organize Code' },
+                    { id: 'c-storage-classes', label: 'Storage Classes' },
+                    { id: 'c-bitwise', label: 'Bitwise Operators' },
+                    { id: 'c-fixed-width', label: 'Fixed-width Integers' },
+                ],
+                'Projects': [{ id: 'c-projects', label: 'C Projects' }],
+                'Reference': [
+                    { id: 'c-reference', label: 'C Reference' },
+                    { id: 'c-keywords', label: 'Keywords' },
+                    { id: 'c-stdio', label: '<stdio.h>' },
+                    { id: 'c-stdlib', label: '<stdlib.h>' },
+                    { id: 'c-stringh', label: '<string.h>' },
+                    { id: 'c-mathh', label: '<math.h>' },
+                    { id: 'c-ctypeh', label: '<ctype.h>' },
+                    { id: 'c-timeh', label: '<time.h>' },
+                ],
+                'Examples & Practice': [
+                    { id: 'c-examples', label: 'C Examples' },
+                    { id: 'c-real-life', label: 'Real-Life Examples' },
+                    { id: 'c-exercises', label: 'Exercises' },
+                    { id: 'c-quiz', label: 'Quiz' },
+                    { id: 'c-code-challenges', label: 'Code Challenges' },
+                    { id: 'c-practice-problems', label: 'Practice Problems' },
+                    { id: 'c-compiler', label: 'Compiler' },
+                    { id: 'c-syllabus', label: 'Syllabus' },
+                    { id: 'c-study-plan', label: 'Study Plan' },
+                    { id: 'c-interview', label: 'Interview Q&A' },
+                ]
+            };
+
+            // ----- SIMPLIFIED TOPIC CONTENT (only essential topics with valid content) -----
+            const topicContent = {
+                'c-home': {
+                    title: '🏠 C HOME',
+                    description: 'Welcome to the complete C programming course! C is a powerful, general-purpose language used for system programming, embedded systems, operating systems, and game development. This course will take you from absolute beginner to confident C programmer with clear explanations, multiple examples, and interactive practice sessions.',
+                    sections: [{
+                        title: '📖 What is C?',
+                        content: 'C was developed by Dennis Ritchie in 1972 at Bell Labs. It is one of the most influential programming languages ever created. C gives you low-level memory access, high performance, and is the foundation for many modern languages like C++, Java, Python, and JavaScript.'
+                    }, {
+                        title: '🎯 Why Learn C?',
+                        content: 'Understand how computers work at a fundamental level. Write high-performance code for systems and embedded devices. Build a strong foundation for other programming languages. Develop operating systems, compilers, databases, and more.'
+                    }],
+                    code: '#include <stdio.h>\n\nint main() {\n    printf("Welcome to C Programming! 🚀\\n");\n    return 0;\n}',
+                    output: 'Welcome to C Programming! 🚀',
+                    examples: [{
+                        title: 'Example 1: Hello World',
+                        desc: 'The classic first program.',
+                        code: '#include <stdio.h>\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}'
+                    }],
+                    practice: {
+                        challenge: 'Write a program that prints "I love C programming!"',
+                        hint: 'Use printf() to print the message.'
+                    }
+                },
+                'c-intro': {
+                    title: '📚 C Intro',
+                    description: 'C is a compiled, procedural, general-purpose programming language. It was designed to be efficient and close to hardware, making it ideal for system programming.',
+                    sections: [{
+                        title: '🔑 Key Features of C',
+                        content: 'Compiled Language: Source code is converted to machine code. Procedural: Follows a step-by-step approach. Low-level: Direct memory access with pointers. Portable: Code runs on different platforms with minimal changes.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    printf("Hello!\\n");\n    return 0;\n}',
+                    output: 'Hello!',
+                    practice: {
+                        challenge: 'Write a program that prints "Learning C is fun!"',
+                        hint: 'Use printf() for output.'
+                    }
+                },
+                'c-get-started': {
+                    title: '⚡ C Get Started',
+                    description: 'To start coding in C, you need a compiler and a text editor. The most common compiler is GCC (GNU Compiler Collection).',
+                    sections: [{
+                        title: '🛠️ Setting Up Your Environment',
+                        content: 'Windows: Install MinGW or use WSL with GCC. macOS: Install Xcode Command Line Tools. Linux: GCC comes pre-installed. Text Editors: VS Code, Sublime Text, or any IDE.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    printf("Hello, C Programmer!\\n");\n    return 0;\n}',
+                    output: 'Hello, C Programmer!',
+                    practice: {
+                        challenge: 'Write and compile your first C program.',
+                        hint: 'Use gcc filename.c -o output'
+                    }
+                },
+                'c-syntax': {
+                    title: '📝 C Syntax',
+                    description: 'C syntax defines the rules for writing C programs. C is case-sensitive and uses semicolons to end statements.',
+                    sections: [{
+                        title: '🔍 Basic Syntax Rules',
+                        content: 'Statements end with semicolon. Case-sensitive. Blocks use curly braces. Comments: // single-line or /* multi-line */.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    printf("C syntax is clean!\\n");\n    return 0;\n}',
+                    output: 'C syntax is clean!',
+                    practice: {
+                        challenge: 'Write a program with proper syntax that prints "Hello World".',
+                        hint: 'Include stdio.h and use printf().'
+                    }
+                },
+                'c-output': {
+                    title: '🖨️ C Output',
+                    description: 'The printf() function is used to print output to the console. It can print strings, numbers, and formatted data.',
+                    sections: [{
+                        title: '📤 Using printf()',
+                        content: 'Syntax: printf("format string", variables); Format specifiers: %d for integer, %f for float, %c for character, %s for string.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int age = 25;\n    printf("Age: %d\\n", age);\n    return 0;\n}',
+                    output: 'Age: 25',
+                    examples: [{
+                        title: 'Example: Formatted Output',
+                        desc: 'Print with formatting.',
+                        code: '#include <stdio.h>\nint main() {\n    float pi = 3.14159;\n    printf("Pi: %.2f\\n", pi);\n    return 0;\n}'
+                    }],
+                    practice: {
+                        challenge: 'Print your name and age using printf().',
+                        hint: 'Use %s for string and %d for integer.'
+                    }
+                },
+                'c-comments': {
+                    title: '💬 C Comments',
+                    description: 'Comments are text in your code that the compiler ignores. They help explain your code to other developers.',
+                    sections: [{
+                        title: '📝 Types of Comments',
+                        content: 'Single-line comments: // comment. Multi-line comments: /* comment */.'
+                    }],
+                    code: '#include <stdio.h>\n// This is a comment\nint main() {\n    /* Multi-line\n       comment */\n    return 0;\n}',
+                    practice: {
+                        challenge: 'Add comments to explain a simple program.',
+                        hint: 'Use // for single-line comments.'
+                    }
+                },
+                'c-variables': {
+                    title: '📦 C Variables',
+                    description: 'Variables are containers for storing data. In C, you must declare a variable before using it.',
+                    sections: [{
+                        title: '🔑 Variable Declaration',
+                        content: 'Syntax: type variableName = value; Example: int age = 25;'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int x = 10;\n    float y = 3.14;\n    printf("%d, %.2f\\n", x, y);\n    return 0;\n}',
+                    output: '10, 3.14',
+                    examples: [{
+                        title: 'Example: Multiple Variables',
+                        desc: 'Declare and use multiple variables.',
+                        code: '#include <stdio.h>\nint main() {\n    int a = 5, b = 10;\n    printf("%d + %d = %d\\n", a, b, a+b);\n    return 0;\n}'
+                    }],
+                    practice: {
+                        challenge: 'Declare variables for your age and height, then print them.',
+                        hint: 'int age; float height;'
+                    }
+                },
+                'c-data-types': {
+                    title: '📊 C Data Types',
+                    description: 'Data types specify the type of data a variable can hold. C provides several built-in data types.',
+                    sections: [{
+                        title: '📋 Integer Data Types',
+                        content: 'char - 1 byte, short - 2 bytes, int - 4 bytes, long - 4 or 8 bytes, long long - 8 bytes.'
+                    }, {
+                        title: '🔢 Floating-Point Types',
+                        content: 'float - 4 bytes, double - 8 bytes.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    printf("int size: %lu\\n", sizeof(int));\n    printf("float size: %lu\\n", sizeof(float));\n    return 0;\n}',
+                    output: 'int size: 4\nfloat size: 4',
+                    practice: {
+                        challenge: 'Check the size of char and double on your system.',
+                        hint: 'Use sizeof() operator.'
+                    }
+                },
+                'c-type-conversion': {
+                    title: '🔄 C Type Conversion',
+                    description: 'Type conversion is converting data from one type to another. C supports both implicit and explicit conversion.',
+                    sections: [{
+                        title: '⚡ Implicit Conversion',
+                        content: 'The compiler automatically converts types when necessary. int + float = float.'
+                    }, {
+                        title: '🔧 Explicit Conversion (Casting)',
+                        content: 'Syntax: (target_type) value. Example: (float) intVar.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int a = 10, b = 3;\n    float result = (float)a / b;\n    printf("%.2f\\n", result);\n    return 0;\n}',
+                    output: '3.33',
+                    practice: {
+                        challenge: 'Convert int to float and divide.',
+                        hint: 'Use (float) for casting.'
+                    }
+                },
+                'c-constants': {
+                    title: '🔒 C Constants',
+                    description: 'Constants are fixed values that cannot be changed during program execution.',
+                    sections: [{
+                        title: '📌 Types of Constants',
+                        content: 'const keyword: const int MAX = 100; #define preprocessor: #define PI 3.14159'
+                    }],
+                    code: '#include <stdio.h>\n#define PI 3.14159\nint main() {\n    const int DAYS = 7;\n    printf("PI: %.5f\\n", PI);\n    printf("Days: %d\\n", DAYS);\n    return 0;\n}',
+                    output: 'PI: 3.14159\nDays: 7',
+                    practice: {
+                        challenge: 'Define constants for tax rate and discount.',
+                        hint: 'Use const or #define.'
+                    }
+                },
+                'c-operators': {
+                    title: '🧮 C Operators',
+                    description: 'Operators perform operations on variables and values. C provides arithmetic, comparison, logical, and bitwise operators.',
+                    sections: [{
+                        title: '📊 Types of Operators',
+                        content: 'Arithmetic: + - * / %. Relational: == != > < >= <=. Logical: && || !. Assignment: = += -= *= /=.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int a = 10, b = 3;\n    printf("%d + %d = %d\\n", a, b, a+b);\n    printf("%d %% %d = %d\\n", a, b, a%b);\n    return 0;\n}',
+                    output: '10 + 3 = 13\n10 % 3 = 1',
+                    examples: [{
+                        title: 'Example: Relational Operators',
+                        desc: 'Compare values.',
+                        code: '#include <stdio.h>\nint main() {\n    int a = 5, b = 10;\n    printf("a > b: %d\\n", a > b);\n    return 0;\n}'
+                    }],
+                    practice: {
+                        challenge: 'Calculate sum, difference, and product of two numbers.',
+                        hint: 'Use arithmetic operators.'
+                    }
+                },
+                'c-booleans': {
+                    title: '✅ C Booleans',
+                    description: 'C uses integers for booleans: 0 = false, any non-zero = true. C99 introduced <stdbool.h>.',
+                    sections: [{
+                        title: '📌 Boolean Values in C',
+                        content: '0 = false, 1 = true. Include <stdbool.h> for bool type.'
+                    }],
+                    code: '#include <stdio.h>\n#include <stdbool.h>\nint main() {\n    bool isReady = true;\n    printf("%d\\n", isReady);\n    return 0;\n}',
+                    output: '1',
+                    practice: {
+                        challenge: 'Check if a number is even using boolean.',
+                        hint: 'bool isEven = (num % 2 == 0);'
+                    }
+                },
+                'c-if-else': {
+                    title: '🔄 C If...Else',
+                    description: 'Conditional statements allow your program to make decisions based on conditions.',
+                    sections: [{
+                        title: '📋 If Statement Syntax',
+                        content: 'if(condition) { code } else if(condition) { code } else { code }'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int score = 85;\n    if(score >= 90) printf("A\\n");\n    else if(score >= 80) printf("B\\n");\n    else printf("C\\n");\n    return 0;\n}',
+                    output: 'B',
+                    examples: [{
+                        title: 'Example: Even or Odd',
+                        desc: 'Check if number is even or odd.',
+                        code: '#include <stdio.h>\nint main() {\n    int num = 5;\n    if(num % 2 == 0) printf("Even\\n");\n    else printf("Odd\\n");\n    return 0;\n}'
+                    }],
+                    practice: {
+                        challenge: 'Check if a number is positive, negative, or zero.',
+                        hint: 'Use if-else if-else statements.'
+                    }
+                },
+                'c-switch': {
+                    title: '🔀 C Switch',
+                    description: 'The switch statement is a multi-way branching statement for checking a variable against many constant values.',
+                    sections: [{
+                        title: '📋 Switch Syntax',
+                        content: 'switch(expression) { case value: code; break; default: code; }'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int day = 3;\n    switch(day) {\n        case 1: printf("Mon"); break;\n        case 2: printf("Tue"); break;\n        case 3: printf("Wed"); break;\n        default: printf("Invalid");\n    }\n    return 0;\n}',
+                    output: 'Wed',
+                    practice: {
+                        challenge: 'Create a menu system using switch.',
+                        hint: 'Use switch for menu options.'
+                    }
+                },
+                'c-while': {
+                    title: '🔄 While Loop',
+                    description: 'The while loop repeats code while a condition is true.',
+                    sections: [{
+                        title: '📋 While Loop Syntax',
+                        content: 'while(condition) { code }'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int i = 1;\n    while(i <= 5) {\n        printf("%d ", i);\n        i++;\n    }\n    return 0;\n}',
+                    output: '1 2 3 4 5',
+                    practice: {
+                        challenge: 'Print numbers from 10 down to 1 using while.',
+                        hint: 'Initialize i=10 and decrement.'
+                    }
+                },
+                'c-for': {
+                    title: '🔄 For Loop',
+                    description: 'The for loop is ideal when you know how many times to iterate.',
+                    sections: [{
+                        title: '📋 For Loop Syntax',
+                        content: 'for(initialization; condition; increment) { code }'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    for(int i = 0; i < 5; i++) {\n        printf("%d ", i);\n    }\n    return 0;\n}',
+                    output: '0 1 2 3 4',
+                    examples: [{
+                        title: 'Example: Multiplication Table',
+                        desc: 'Generate multiplication table.',
+                        code: '#include <stdio.h>\nint main() {\n    for(int i=1; i<=5; i++) {\n        for(int j=1; j<=5; j++) {\n            printf("%3d ", i*j);\n        }\n        printf("\\n");\n    }\n    return 0;\n}'
+                    }],
+                    practice: {
+                        challenge: 'Print even numbers from 0 to 10 using for loop.',
+                        hint: 'Use for loop with step 2.'
+                    }
+                },
+                'c-break-continue': {
+                    title: '⏭️ Break & Continue',
+                    description: 'Break exits the loop. Continue skips current iteration.',
+                    sections: [{
+                        title: '📋 Break Statement',
+                        content: 'Exits the loop immediately. Used for early termination.'
+                    }, {
+                        title: '📋 Continue Statement',
+                        content: 'Skips remaining code in current iteration.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    for(int i=1; i<=10; i++) {\n        if(i==5) break;\n        if(i%2==0) continue;\n        printf("%d ", i);\n    }\n    return 0;\n}',
+                    output: '1 3',
+                    practice: {
+                        challenge: 'Print odd numbers from 1 to 10 using continue.',
+                        hint: 'Use continue for even numbers.'
+                    }
+                },
+                'c-arrays': {
+                    title: '📊 Arrays',
+                    description: 'Arrays store multiple values of the same type in contiguous memory.',
+                    sections: [{
+                        title: '📋 Array Declaration',
+                        content: 'type arrayName[size]; Example: int numbers[5];'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int arr[5] = {1,2,3,4,5};\n    for(int i=0; i<5; i++) {\n        printf("%d ", arr[i]);\n    }\n    return 0;\n}',
+                    output: '1 2 3 4 5',
+                    examples: [{
+                        title: 'Example: Find Max',
+                        desc: 'Find maximum element in array.',
+                        code: '#include <stdio.h>\nint main() {\n    int arr[5] = {3,7,1,9,4};\n    int max = arr[0];\n    for(int i=1; i<5; i++) {\n        if(arr[i] > max) max = arr[i];\n    }\n    printf("Max: %d\\n", max);\n    return 0;\n}'
+                    }],
+                    practice: {
+                        challenge: 'Find sum of all elements in an array.',
+                        hint: 'Use loop to add elements.'
+                    }
+                },
+                'c-strings': {
+                    title: '📝 Strings',
+                    description: 'Strings are character arrays ending with null terminator.',
+                    sections: [{
+                        title: '📋 String Basics',
+                        content: 'char name[20] = "John"; Use string.h functions: strlen, strcpy, strcat.'
+                    }],
+                    code: '#include <stdio.h>\n#include <string.h>\nint main() {\n    char name[] = "Alice";\n    printf("Length: %lu\\n", strlen(name));\n    return 0;\n}',
+                    output: 'Length: 5',
+                    practice: {
+                        challenge: 'Concatenate two strings using strcat.',
+                        hint: '#include <string.h>'
+                    }
+                },
+                'c-user-input': {
+                    title: '⌨️ User Input',
+                    description: 'C provides scanf() for formatted input and fgets() for reading strings.',
+                    sections: [{
+                        title: '📋 scanf() Function',
+                        content: 'scanf("format", &variable); Use & for non-array variables.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int age;\n    printf("Enter age: ");\n    scanf("%d", &age);\n    printf("Age: %d\\n", age);\n    return 0;\n}',
+                    output: 'Enter age: 25\nAge: 25',
+                    practice: {
+                        challenge: 'Read two numbers and print their sum.',
+                        hint: 'Use scanf("%d %d", &a, &b);'
+                    }
+                },
+                'c-memory-address': {
+                    title: '📍 Memory Address',
+                    description: 'Every variable has a memory address. Use & to get the address.',
+                    sections: [{
+                        title: '📋 Address Operator (&)',
+                        content: 'Use & to get address. Print with %p format specifier.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int x = 10;\n    printf("Address: %p\\n", &x);\n    return 0;\n}',
+                    output: 'Address: 0x7fff...',
+                    practice: {
+                        challenge: 'Print address of a float variable.',
+                        hint: 'Use %p and & operator.'
+                    }
+                },
+                'c-pointers': {
+                    title: '📍 Pointers',
+                    description: 'Pointers store memory addresses. They are one of the most powerful features of C.',
+                    sections: [{
+                        title: '📋 Pointer Basics',
+                        content: 'Declaration: int *ptr; Assign: ptr = &x; Dereference: *ptr = 20;'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int x = 10;\n    int *ptr = &x;\n    printf("%d\\n", *ptr);\n    return 0;\n}',
+                    output: '10',
+                    examples: [{
+                        title: 'Example: Swap Using Pointers',
+                        desc: 'Swap two values using pointers.',
+                        code: '#include <stdio.h>\nvoid swap(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n}\nint main() {\n    int x=5, y=10;\n    swap(&x, &y);\n    printf("%d, %d\\n", x, y);\n    return 0;\n}'
+                    }],
+                    practice: {
+                        challenge: 'Change variable value using pointer.',
+                        hint: '*ptr = newValue;'
+                    }
+                },
+                'c-functions': {
+                    title: '📦 C Functions',
+                    description: 'Functions are reusable blocks of code that perform specific tasks.',
+                    sections: [{
+                        title: '📋 Function Basics',
+                        content: 'returnType functionName(parameters) { code }'
+                    }],
+                    code: '#include <stdio.h>\nint add(int a, int b) {\n    return a + b;\n}\nint main() {\n    printf("%d\\n", add(5,3));\n    return 0;\n}',
+                    output: '8',
+                    practice: {
+                        challenge: 'Create function to multiply two numbers.',
+                        hint: 'int multiply(int a, int b) { return a*b; }'
+                    }
+                },
+                'c-function-params': {
+                    title: '📤 Function Parameters',
+                    description: 'Parameters pass data to functions. C uses pass by value by default.',
+                    sections: [{
+                        title: '📋 Parameter Passing',
+                        content: 'Pass by value: copy of value. Pass by reference: using pointers.'
+                    }],
+                    code: '#include <stdio.h>\nvoid increment(int *x) {\n    (*x)++;\n}\nint main() {\n    int num = 10;\n    increment(&num);\n    printf("%d\\n", num);\n    return 0;\n}',
+                    output: '11',
+                    practice: {
+                        challenge: 'Create function that doubles a number using pointer.',
+                        hint: 'void doubleNum(int *x) { *x *= 2; }'
+                    }
+                },
+                'c-scope': {
+                    title: '🔍 Scope',
+                    description: 'Scope determines where variables are accessible.',
+                    sections: [{
+                        title: '📋 Types of Scope',
+                        content: 'Local scope: inside function. Global scope: outside all functions.'
+                    }],
+                    code: '#include <stdio.h>\nint global = 10;\nvoid func() {\n    int local = 5;\n    printf("%d %d\\n", global, local);\n}\nint main() {\n    func();\n    return 0;\n}',
+                    output: '10 5',
+                    practice: {
+                        challenge: 'Demonstrate local vs global scope.',
+                        hint: 'Create global and local variables with same name.'
+                    }
+                },
+                'c-function-declaration': {
+                    title: '📝 Function Declaration',
+                    description: 'Function declarations tell the compiler about a function before it\'s defined.',
+                    sections: [{
+                        title: '📋 Declaration Syntax',
+                        content: 'returnType functionName(parameterTypes);'
+                    }],
+                    code: '#include <stdio.h>\nint add(int, int);\nint main() {\n    printf("%d\\n", add(5,3));\n    return 0;\n}\nint add(int a, int b) { return a+b; }',
+                    output: '8',
+                    practice: {
+                        challenge: 'Declare and define a subtract function.',
+                        hint: 'int subtract(int a, int b);'
+                    }
+                },
+                'c-function-challenge': {
+                    title: '🏆 Functions Challenge',
+                    description: 'Create functions for factorial, prime check, and GCD.',
+                    sections: [{
+                        title: '📋 Challenge Overview',
+                        content: 'Implement isPrime(), gcd(), and fibonacci().'
+                    }],
+                    code: '#include <stdio.h>\nint factorial(int n) {\n    if(n <= 1) return 1;\n    return n * factorial(n-1);\n}\nint main() {\n    printf("%d\\n", factorial(5));\n    return 0;\n}',
+                    output: '120',
+                    practice: {
+                        challenge: 'Write factorial function using iteration.',
+                        hint: 'Use for loop.'
+                    }
+                },
+                'c-math-functions': {
+                    title: '📐 Math Functions',
+                    description: 'C provides math functions through math.h: sqrt, pow, sin, cos, etc.',
+                    sections: [{
+                        title: '📋 Common Math Functions',
+                        content: 'pow(x,y), sqrt(x), sin(x), cos(x), log(x), ceil(x), floor(x)'
+                    }],
+                    code: '#include <stdio.h>\n#include <math.h>\nint main() {\n    printf("sqrt(16): %.2f\\n", sqrt(16));\n    printf("pow(2,3): %.2f\\n", pow(2,3));\n    return 0;\n}',
+                    output: 'sqrt(16): 4.00\npow(2,3): 8.00',
+                    practice: {
+                        challenge: 'Calculate hypotenuse using sqrt and pow.',
+                        hint: 'hyp = sqrt(pow(a,2) + pow(b,2));'
+                    }
+                },
+                'c-inline-functions': {
+                    title: '⚡ Inline Functions',
+                    description: 'Inline functions suggest the compiler to replace function calls with code.',
+                    sections: [{
+                        title: '📋 Inline Syntax',
+                        content: 'inline int square(int x) { return x*x; }'
+                    }],
+                    code: '#include <stdio.h>\ninline int square(int x) { return x*x; }\nint main() {\n    printf("%d\\n", square(5));\n    return 0;\n}',
+                    output: '25',
+                    practice: {
+                        challenge: 'Create inline function for cube.',
+                        hint: 'inline int cube(int x) { return x*x*x; }'
+                    }
+                },
+                'c-recursion': {
+                    title: '🔄 Recursion',
+                    description: 'Recursion is a function calling itself. Must have a base case.',
+                    sections: [{
+                        title: '📋 Recursion Basics',
+                        content: 'Base case stops recursion. Recursive case calls itself.'
+                    }],
+                    code: '#include <stdio.h>\nint fib(int n) {\n    if(n <= 1) return n;\n    return fib(n-1) + fib(n-2);\n}\nint main() {\n    printf("%d\\n", fib(6));\n    return 0;\n}',
+                    output: '8',
+                    practice: {
+                        challenge: 'Write recursive function for sum of digits.',
+                        hint: 'if(n==0) return 0; return n%10 + sumDigits(n/10);'
+                    }
+                },
+                'c-function-pointers': {
+                    title: '🎯 Function Pointers',
+                    description: 'Function pointers store addresses of functions for dynamic calling.',
+                    sections: [{
+                        title: '📋 Function Pointer Syntax',
+                        content: 'returnType (*ptrName)(parameters);'
+                    }],
+                    code: '#include <stdio.h>\nint add(int a, int b) { return a+b; }\nint main() {\n    int (*ptr)(int,int) = &add;\n    printf("%d\\n", ptr(5,3));\n    return 0;\n}',
+                    output: '8',
+                    practice: {
+                        challenge: 'Create function pointer for subtraction.',
+                        hint: 'int (*subPtr)(int,int) = &subtract;'
+                    }
+                },
+                'c-create-files': {
+                    title: '📁 Create Files',
+                    description: 'Use fopen() to create files. Mode "w" for write.',
+                    sections: [{
+                        title: '📋 File Creation Steps',
+                        content: 'FILE *fp = fopen("filename", "w"); if(fp != NULL) { fprintf(fp, "data"); fclose(fp); }'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    FILE *fp = fopen("test.txt", "w");\n    if(fp != NULL) {\n        fprintf(fp, "Hello File!\\n");\n        fclose(fp);\n    }\n    return 0;\n}',
+                    practice: {
+                        challenge: 'Create a file called "data.txt".',
+                        hint: 'FILE *fp = fopen("data.txt", "w");'
+                    }
+                },
+                'c-write-files': {
+                    title: '✍️ Write To Files',
+                    description: 'Use fprintf() or fputs() to write to files.',
+                    sections: [{
+                        title: '📋 Writing Methods',
+                        content: 'fprintf(fp, "format", variables); fputs("string", fp);'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    FILE *fp = fopen("test.txt", "w");\n    fprintf(fp, "Hello World!\\n");\n    fclose(fp);\n    return 0;\n}',
+                    practice: {
+                        challenge: 'Write your name to a file.',
+                        hint: 'fprintf(fp, "Your Name");'
+                    }
+                },
+                'c-read-files': {
+                    title: '📖 Read Files',
+                    description: 'Use fscanf() or fgets() to read from files.',
+                    sections: [{
+                        title: '📋 Reading Methods',
+                        content: 'fscanf(fp, "format", &var); fgets(buffer, size, fp);'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    FILE *fp = fopen("test.txt", "r");\n    char buffer[100];\n    fgets(buffer, 100, fp);\n    printf("%s", buffer);\n    fclose(fp);\n    return 0;\n}',
+                    practice: {
+                        challenge: 'Read a file and print its contents.',
+                        hint: 'Use while(fgets(...)) loop.'
+                    }
+                },
+                'c-structures': {
+                    title: '📦 C Structures',
+                    description: 'Structures group related variables of different types.',
+                    sections: [{
+                        title: '📋 Structure Basics',
+                        content: 'struct Person { char name[50]; int age; };'
+                    }],
+                    code: '#include <stdio.h>\nstruct Person {\n    char name[50];\n    int age;\n};\nint main() {\n    struct Person p1 = {"Alice", 25};\n    printf("%s, %d\\n", p1.name, p1.age);\n    return 0;\n}',
+                    output: 'Alice, 25',
+                    practice: {
+                        challenge: 'Create struct for a book (title, author, year).',
+                        hint: 'struct Book { char title[100]; char author[50]; int year; };'
+                    }
+                },
+                'c-structs-challenge': {
+                    title: '🏆 Structs Challenge',
+                    description: 'Create an array of structures and display all data.',
+                    sections: [{
+                        title: '📋 Challenge Overview',
+                        content: 'Create student records with name, ID, and GPA.'
+                    }],
+                    code: '#include <stdio.h>\nstruct Student { char name[50]; int id; float gpa; };\nint main() {\n    struct Student students[2] = {{"Alice", 1, 3.8}, {"Bob", 2, 3.5}};\n    for(int i=0; i<2; i++) {\n        printf("%s, %d, %.1f\\n", students[i].name, students[i].id, students[i].gpa);\n    }\n    return 0;\n}',
+                    output: 'Alice, 1, 3.8\nBob, 2, 3.5',
+                    practice: {
+                        challenge: 'Add a new student to the array.',
+                        hint: 'students[2] = {"Charlie", 3, 3.2};'
+                    }
+                },
+                'c-nested-structures': {
+                    title: '📦 Nested Structures',
+                    description: 'Structures can contain other structures.',
+                    sections: [{
+                        title: '📋 Nested Structure Syntax',
+                        content: 'struct Outer { struct Inner inner; }; Access: outer.inner.member'
+                    }],
+                    code: '#include <stdio.h>\nstruct Date { int day, month, year; };\nstruct Person {\n    char name[50];\n    struct Date birth;\n};\nint main() {\n    struct Person p = {"Alice", {15, 8, 1995}};\n    printf("%s born on %d/%d/%d\\n", p.name, p.birth.day, p.birth.month, p.birth.year);\n    return 0;\n}',
+                    output: 'Alice born on 15/8/1995',
+                    practice: {
+                        challenge: 'Create nested struct for employee with address.',
+                        hint: 'struct Address { char city[50]; int zip; };'
+                    }
+                },
+                'c-structs-pointers': {
+                    title: '📍 Structs & Pointers',
+                    description: 'Use pointers with structures for efficiency and dynamic allocation.',
+                    sections: [{
+                        title: '📋 Pointer to Structure',
+                        content: 'struct Person *ptr = &p1; ptr->age = 30;'
+                    }],
+                    code: '#include <stdio.h>\nstruct Point { int x, y; };\nint main() {\n    struct Point p1 = {10, 20};\n    struct Point *ptr = &p1;\n    printf("%d, %d\\n", ptr->x, ptr->y);\n    return 0;\n}',
+                    output: '10, 20',
+                    practice: {
+                        challenge: 'Use pointer to update struct values.',
+                        hint: 'ptr->x = 30;'
+                    }
+                },
+                'c-unions': {
+                    title: '🔗 Unions',
+                    description: 'Unions share memory between members. Only one member can hold a value at a time.',
+                    sections: [{
+                        title: '📋 Union Basics',
+                        content: 'union Data { int i; float f; char str[20]; };'
+                    }],
+                    code: '#include <stdio.h>\nunion Data { int i; float f; };\nint main() {\n    union Data d;\n    d.i = 10;\n    printf("%d\\n", d.i);\n    return 0;\n}',
+                    output: '10',
+                    practice: {
+                        challenge: 'Store float in union and print.',
+                        hint: 'd.f = 3.14; printf("%f", d.f);'
+                    }
+                },
+                'c-typedef': {
+                    title: '📝 typedef',
+                    description: 'Typedef creates aliases for data types.',
+                    sections: [{
+                        title: '📋 Typedef Syntax',
+                        content: 'typedef existing_type new_name; Example: typedef int Integer;'
+                    }],
+                    code: '#include <stdio.h>\ntypedef struct { char name[50]; int age; } Person;\nint main() {\n    Person p = {"Alice", 25};\n    printf("%s, %d\\n", p.name, p.age);\n    return 0;\n}',
+                    output: 'Alice, 25',
+                    practice: {
+                        challenge: 'Create typedef for int pointer.',
+                        hint: 'typedef int* IntPtr;'
+                    }
+                },
+                'c-struct-padding': {
+                    title: '📏 Struct Padding',
+                    description: 'Padding is added between struct members for alignment. Use #pragma pack to control.',
+                    sections: [{
+                        title: '📋 Padding Basics',
+                        content: 'Structure size may be larger than sum of members. Use #pragma pack(1) for no padding.'
+                    }],
+                    code: '#include <stdio.h>\nstruct Example { char c; int i; };\nint main() {\n    printf("Size: %lu\\n", sizeof(struct Example));\n    return 0;\n}',
+                    output: 'Size: 8',
+                    practice: {
+                        challenge: 'Check size of struct with char and double.',
+                        hint: 'struct { char c; double d; };'
+                    }
+                },
+                'c-enums': {
+                    title: '🔢 C Enums',
+                    description: 'Enums define named integer constants for readability.',
+                    sections: [{
+                        title: '📋 Enum Basics',
+                        content: 'enum Color { RED, GREEN, BLUE }; Values start at 0.'
+                    }],
+                    code: '#include <stdio.h>\nenum Color { RED, GREEN, BLUE };\nint main() {\n    enum Color c = GREEN;\n    printf("%d\\n", c);\n    return 0;\n}',
+                    output: '1',
+                    practice: {
+                        challenge: 'Create enum for days of week.',
+                        hint: 'enum Days { MON, TUE, WED };'
+                    }
+                },
+                'c-memory-management': {
+                    title: '💾 Memory Management',
+                    description: 'Dynamic memory allocation: malloc(), calloc(), realloc(), free().',
+                    sections: [{
+                        title: '📋 Memory Functions',
+                        content: 'malloc() - allocate memory. calloc() - allocate and zero. realloc() - resize. free() - free memory.'
+                    }],
+                    code: '#include <stdio.h>\n#include <stdlib.h>\nint main() {\n    int *ptr = (int*)malloc(sizeof(int));\n    *ptr = 42;\n    printf("%d\\n", *ptr);\n    free(ptr);\n    return 0;\n}',
+                    output: '42',
+                    practice: {
+                        challenge: 'Allocate array of 5 integers using calloc.',
+                        hint: 'int *arr = (int*)calloc(5, sizeof(int));'
+                    }
+                },
+                'c-errors': {
+                    title: '⚠️ C Errors',
+                    description: 'Common errors: syntax, runtime, and logical errors. Use debugging techniques.',
+                    sections: [{
+                        title: '📋 Types of Errors',
+                        content: 'Syntax errors: caught by compiler. Runtime errors: occur during execution. Logical errors: wrong results.'
+                    }],
+                    code: '// Syntax error: missing semicolon\n// int x = 5 ← error\n// Runtime: division by zero\n// int y = 10 / 0;',
+                    practice: {
+                        challenge: 'Identify the error in: printf("Hello")\n',
+                        hint: 'Missing semicolon.'
+                    }
+                },
+                'c-error-challenge': {
+                    title: '🏆 Error Challenge',
+                    description: 'Find and fix bugs in code.',
+                    sections: [{
+                        title: '📋 Challenge',
+                        content: 'Fix: int main() { int x = 10; if(x = 20) { printf("True"); } return 0; }'
+                    }],
+                    code: '// Bug: assignment instead of comparison\n// Fix: if(x == 20)',
+                    practice: {
+                        challenge: 'Fix the assignment bug.',
+                        hint: 'Use == for comparison.'
+                    }
+                },
+                'c-debugging': {
+                    title: '🐛 Debugging',
+                    description: 'Use printf(), assertions, and debuggers to find bugs.',
+                    sections: [{
+                        title: '📋 Debugging Techniques',
+                        content: 'Printf debugging: add print statements. Assertions: assert(condition). GDB: GNU debugger.'
+                    }],
+                    code: '#include <stdio.h>\n#include <assert.h>\nint main() {\n    int x = 10;\n    assert(x > 0);\n    return 0;\n}',
+                    practice: {
+                        challenge: 'Use assert to check array index bounds.',
+                        hint: 'assert(index >= 0 && index < size);'
+                    }
+                },
+                'c-null': {
+                    title: '📍 NULL',
+                    description: 'NULL indicates a pointer that points to nothing. Always check for NULL.',
+                    sections: [{
+                        title: '📋 NULL Basics',
+                        content: 'int *ptr = NULL; if(ptr != NULL) { use ptr; }'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int *ptr = NULL;\n    if(ptr != NULL) {\n        printf("%d\\n", *ptr);\n    } else {\n        printf("NULL pointer\\n");\n    }\n    return 0;\n}',
+                    output: 'NULL pointer',
+                    practice: {
+                        challenge: 'Check if malloc returned NULL.',
+                        hint: 'if(ptr == NULL) { printf("Allocation failed"); }'
+                    }
+                },
+                'c-error-handling': {
+                    title: '⚠️ Error Handling',
+                    description: 'Use errno, perror(), and strerror() for error reporting.',
+                    sections: [{
+                        title: '📋 Error Functions',
+                        content: 'perror("Error") - prints error message. strerror(errno) - returns error string.'
+                    }],
+                    code: '#include <stdio.h>\n#include <errno.h>\nint main() {\n    FILE *fp = fopen("nonexistent.txt", "r");\n    if(fp == NULL) {\n        perror("Error");\n    }\n    return 0;\n}',
+                    output: 'Error: No such file or directory',
+                    practice: {
+                        challenge: 'Handle file open error gracefully.',
+                        hint: 'if(file == NULL) { printf("File not found!"); }'
+                    }
+                },
+                'c-input-validation': {
+                    title: '✅ Input Validation',
+                    description: 'Validate user input to prevent errors and security issues.',
+                    sections: [{
+                        title: '📋 Validation Types',
+                        content: 'Type validation, range validation, format validation, length validation.'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int age;\n    printf("Enter age (1-120): ");\n    scanf("%d", &age);\n    if(age < 1 || age > 120) {\n        printf("Invalid age!\\n");\n    } else {\n        printf("Age: %d\\n", age);\n    }\n    return 0;\n}',
+                    output: 'Enter age (1-120): 150\nInvalid age!',
+                    practice: {
+                        challenge: 'Validate that input is a positive number.',
+                        hint: 'if(num <= 0) { printf("Invalid"); }'
+                    }
+                },
+                'c-date': {
+                    title: '📅 Date',
+                    description: 'Use time.h for date/time functions: time(), localtime(), strftime().',
+                    sections: [{
+                        title: '📋 Time Functions',
+                        content: 'time_t now = time(NULL); struct tm *local = localtime(&now); strftime(buffer, 100, "%Y-%m-%d", local);'
+                    }],
+                    code: '#include <stdio.h>\n#include <time.h>\nint main() {\n    time_t now = time(NULL);\n    struct tm *local = localtime(&now);\n    printf("Year: %d\\n", local->tm_year + 1900);\n    return 0;\n}',
+                    output: 'Year: 2026',
+                    practice: {
+                        challenge: 'Print current date in DD/MM/YYYY format.',
+                        hint: 'strftime(buffer, 100, "%d/%m/%Y", local);'
+                    }
+                },
+                'c-random': {
+                    title: '🎲 Random Numbers',
+                    description: 'Use rand() and srand() for random numbers. Seed with time() for different values.',
+                    sections: [{
+                        title: '📋 Random Functions',
+                        content: 'srand(time(NULL)); int num = rand() % 100;'
+                    }],
+                    code: '#include <stdio.h>\n#include <stdlib.h>\n#include <time.h>\nint main() {\n    srand(time(NULL));\n    printf("%d\\n", rand() % 100);\n    return 0;\n}',
+                    output: '42 (random)',
+                    practice: {
+                        challenge: 'Generate random number between 1 and 100.',
+                        hint: 'rand() % 100 + 1;'
+                    }
+                },
+                'c-macros': {
+                    title: '📝 Macros',
+                    description: 'Macros are preprocessor directives for text substitution. #define for constants and functions.',
+                    sections: [{
+                        title: '📋 Macro Basics',
+                        content: '#define PI 3.14159 #define SQUARE(x) ((x)*(x))'
+                    }],
+                    code: '#include <stdio.h>\n#define SQUARE(x) ((x)*(x))\nint main() {\n    printf("%d\\n", SQUARE(5));\n    return 0;\n}',
+                    output: '25',
+                    practice: {
+                        challenge: 'Create macro for cube.',
+                        hint: '#define CUBE(x) ((x)*(x)*(x))'
+                    }
+                },
+                'c-organize-code': {
+                    title: '📁 Organize Code',
+                    description: 'Use header files (.h) for declarations and source files (.c) for definitions.',
+                    sections: [{
+                        title: '📋 Organization Strategies',
+                        content: 'Header files: declarations, macros, prototypes. Source files: implementations.'
+                    }],
+                    code: '// math.h\n#ifndef MATH_H\n#define MATH_H\nint add(int a, int b);\n#endif\n\n// math.c\n#include "math.h"\nint add(int a, int b) { return a+b; }',
+                    practice: {
+                        challenge: 'Create header for math functions.',
+                        hint: 'Declare add, subtract, multiply in header.'
+                    }
+                },
+                'c-storage-classes': {
+                    title: '📦 Storage Classes',
+                    description: 'Storage classes: auto, register, static, extern. Define scope, lifetime, and storage location.',
+                    sections: [{
+                        title: '📋 Storage Classes',
+                        content: 'auto (default), register (suggest register), static (persistent), extern (external linkage).'
+                    }],
+                    code: '#include <stdio.h>\nvoid counter() {\n    static int count = 0;\n    count++;\n    printf("%d\\n", count);\n}\nint main() {\n    counter(); counter(); counter();\n    return 0;\n}',
+                    output: '1\n2\n3',
+                    practice: {
+                        challenge: 'Use static to maintain count across calls.',
+                        hint: 'static int count = 0;'
+                    }
+                },
+                'c-bitwise': {
+                    title: '🔢 Bitwise Operators',
+                    description: 'Bitwise operators work at the bit level: &, |, ^, ~, <<, >>.',
+                    sections: [{
+                        title: '📋 Bitwise Operators',
+                        content: '& (AND), | (OR), ^ (XOR), ~ (NOT), << (left shift), >> (right shift)'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int a = 5, b = 3;\n    printf("AND: %d\\n", a & b);\n    printf("OR: %d\\n", a | b);\n    return 0;\n}',
+                    output: 'AND: 1\nOR: 7',
+                    practice: {
+                        challenge: 'Use left shift to multiply by 2.',
+                        hint: 'x << 1'
+                    }
+                },
+                'c-fixed-width': {
+                    title: '📏 Fixed-width Integers',
+                    description: 'Use stdint.h for fixed-width types: int8_t, uint16_t, int32_t, etc.',
+                    sections: [{
+                        title: '📋 Fixed-width Types',
+                        content: 'int8_t (8-bit), int16_t (16-bit), int32_t (32-bit), int64_t (64-bit)'
+                    }],
+                    code: '#include <stdio.h>\n#include <stdint.h>\nint main() {\n    int32_t num = 1000000;\n    printf("%d\\n", num);\n    return 0;\n}',
+                    output: '1000000',
+                    practice: {
+                        challenge: 'Use uint64_t for large numbers.',
+                        hint: 'uint64_t big = 12345678901234;'
+                    }
+                },
+                'c-projects': {
+                    title: '🚀 C Projects',
+                    description: 'Build real projects: Calculator, Student Management System, Library Management, Banking System.',
+                    sections: [{
+                        title: '📋 Project Ideas',
+                        content: 'Calculator: arithmetic operations. Student Management: add, delete, search. Banking: accounts, deposit, withdraw.'
+                    }],
+                    code: '// Project: Calculator\n// Add, Subtract, Multiply, Divide\n// Use functions and switch\n// Handle errors',
+                    practice: {
+                        challenge: 'Start building a simple calculator.',
+                        hint: 'Use switch for operations.'
+                    }
+                },
+                'c-reference': {
+                    title: '📚 C Reference',
+                    description: 'Complete reference for C programming language. All keywords, functions, and syntax.',
+                    sections: [{
+                        title: '📋 Standard Library',
+                        content: 'stdio.h: I/O functions. stdlib.h: memory, conversion. string.h: string functions. math.h: math functions.'
+                    }],
+                    code: '// C Reference includes all standard library functions\n// printf(), scanf(), malloc(), free(), etc.',
+                    practice: {
+                        challenge: 'Look up a function you don\'t know.',
+                        hint: 'Check cppreference.com'
+                    }
+                },
+                'c-keywords': {
+                    title: '🔑 C Keywords',
+                    description: '32 reserved words in C that cannot be used as variable names.',
+                    sections: [{
+                        title: '📋 Complete List',
+                        content: 'auto, break, case, char, const, continue, default, do, double, else, enum, extern, float, for, goto, if, int, long, register, return, short, signed, sizeof, static, struct, switch, typedef, union, unsigned, void, volatile, while'
+                    }],
+                    code: '// Keywords are reserved words in C\n// Cannot be used as variable names',
+                    practice: {
+                        challenge: 'List all 32 keywords.',
+                        hint: 'Check the reference section.'
+                    }
+                },
+                'c-stdio': {
+                    title: '📁 <stdio.h>',
+                    description: 'Standard Input/Output: printf, scanf, fopen, fclose, fgets, fputs, fprintf, fscanf.',
+                    sections: [{
+                        title: '📋 Core Functions',
+                        content: 'printf() - formatted output. scanf() - formatted input. fopen() - open file. fclose() - close file.'
+                    }],
+                    code: '#include <stdio.h>\n// printf() - formatted output\n// scanf() - formatted input',
+                    practice: {
+                        challenge: 'Use fprintf to write to file.',
+                        hint: 'fprintf(file, "Text");'
+                    }
+                },
+                'c-stdlib': {
+                    title: '📦 <stdlib.h>',
+                    description: 'Standard library: malloc, calloc, realloc, free, atoi, atof, rand, srand, qsort, exit.',
+                    sections: [{
+                        title: '📋 Core Functions',
+                        content: 'malloc() - allocate memory. free() - free memory. atoi() - string to int. rand() - random number.'
+                    }],
+                    code: '#include <stdlib.h>\n// malloc() - allocate memory\n// free() - free memory',
+                    practice: {
+                        challenge: 'Use atoi to convert string to integer.',
+                        hint: 'int num = atoi("123");'
+                    }
+                },
+                'c-stringh': {
+                    title: '📝 <string.h>',
+                    description: 'String functions: strlen, strcpy, strcat, strcmp, strchr, strstr, strtok.',
+                    sections: [{
+                        title: '📋 Core Functions',
+                        content: 'strlen() - string length. strcpy() - copy. strcat() - concatenate. strcmp() - compare.'
+                    }],
+                    code: '#include <string.h>\n// strlen() - string length\n// strcpy() - copy string',
+                    practice: {
+                        challenge: 'Compare two strings using strcmp.',
+                        hint: 'if(strcmp(str1, str2) == 0)'
+                    }
+                },
+                'c-mathh': {
+                    title: '📐 <math.h>',
+                    description: 'Math functions: sqrt, pow, sin, cos, tan, log, exp, ceil, floor, fabs.',
+                    sections: [{
+                        title: '📋 Core Functions',
+                        content: 'sqrt() - square root. pow() - power. sin() - sine. cos() - cosine.'
+                    }],
+                    code: '#include <math.h>\n// sqrt() - square root\n// pow() - power',
+                    practice: {
+                        challenge: 'Calculate hypotenuse using sqrt.',
+                        hint: 'hyp = sqrt(pow(a,2) + pow(b,2));'
+                    }
+                },
+                'c-ctypeh': {
+                    title: '🔤 <ctype.h>',
+                    description: 'Character functions: isalpha, isdigit, isalnum, islower, isupper, tolower, toupper.',
+                    sections: [{
+                        title: '📋 Core Functions',
+                        content: 'isalpha() - check if letter. isdigit() - check if digit. toupper() - convert to uppercase.'
+                    }],
+                    code: '#include <ctype.h>\n// isalpha() - check if letter\n// isdigit() - check if digit',
+                    practice: {
+                        challenge: 'Check if character is digit.',
+                        hint: 'if(isdigit(c))'
+                    }
+                },
+                'c-timeh': {
+                    title: '⏰ <time.h>',
+                    description: 'Time functions: time, localtime, gmtime, strftime, clock, difftime.',
+                    sections: [{
+                        title: '📋 Core Functions',
+                        content: 'time() - get current time. localtime() - convert to local time. strftime() - format time string.'
+                    }],
+                    code: '#include <time.h>\n// time() - get current time\n// localtime() - convert to local time',
+                    practice: {
+                        challenge: 'Print current time in HH:MM:SS format.',
+                        hint: 'strftime(buffer, 100, "%H:%M:%S", local);'
+                    }
+                },
+                'c-examples': {
+                    title: '📚 C Examples',
+                    description: 'Practical examples: Fibonacci series, Prime numbers, Factorial, Palindrome, Armstrong number.',
+                    sections: [{
+                        title: '📋 Example Programs',
+                        content: 'Fibonacci: 0 1 1 2 3 5 8 13. Prime: check divisibility. Factorial: n! = n * (n-1)!'
+                    }],
+                    code: '#include <stdio.h>\nint main() {\n    int n = 10;\n    int a = 0, b = 1;\n    for(int i = 0; i < n; i++) {\n        printf("%d ", a);\n        int next = a + b;\n        a = b;\n        b = next;\n    }\n    return 0;\n}',
+                    output: '0 1 1 2 3 5 8 13 21 34',
+                    practice: {
+                        challenge: 'Print prime numbers up to 100.',
+                        hint: 'Check divisibility from 2 to sqrt(n).'
+                    }
+                },
+                'c-real-life': {
+                    title: '🌍 Real-Life Examples',
+                    description: 'Real-world applications: Banking system, Student database, Library management, Inventory system.',
+                    sections: [{
+                        title: '📋 Real-World Applications',
+                        content: 'Banking: accounts, deposit, withdraw. Student: records, grades, search. Library: books, borrow, return.'
+                    }],
+                    code: '// Real-life C applications\n// 1. Banking system\n// 2. Library management\n// 3. Student records',
+                    practice: {
+                        challenge: 'Create a simple banking system.',
+                        hint: 'Use struct for accounts, functions for operations.'
+                    }
+                },
+                'c-exercises': {
+                    title: '📝 Exercises',
+                    description: 'Practice exercises: Reverse array, Find max, Count vowels, Bubble sort, Merge arrays.',
+                    sections: [{
+                        title: '📋 Exercise List',
+                        content: '1. Sum of two numbers. 2. Area of circle. 3. Even or odd. 4. Largest of three. 5. Factorial.'
+                    }],
+                    code: '// Exercise: Reverse an array\nint arr[5] = {1,2,3,4,5};\nfor(int i=4; i>=0; i--) {\n    printf("%d ", arr[i]);\n}',
+                    output: '5 4 3 2 1',
+                    practice: {
+                        challenge: 'Find maximum element in array.',
+                        hint: 'int max = arr[0]; for(i=1; i<size; i++) { if(arr[i] > max) max = arr[i]; }'
+                    }
+                },
+                'c-quiz': {
+                    title: '📝 Quiz',
+                    description: 'Test your knowledge with interactive quizzes covering all topics.',
+                    sections: [{
+                        title: '📋 Quiz Topics',
+                        content: 'Basics, Control Flow, Functions, Arrays, Pointers, Structures, File I/O, Memory Management.'
+                    }],
+                    code: '// Quiz questions:\n// 1. What is the size of int?\n// 2. Which function prints output?\n// 3. What does malloc do?',
+                    practice: {
+                        challenge: 'Take the quiz to check your understanding.',
+                        hint: 'Answer all questions to pass.'
+                    }
+                },
+                'c-code-challenges': {
+                    title: '🏆 Code Challenges',
+                    description: 'Advanced challenges: Implement strcpy, atoi, strcat, strcmp, itoa, qsort, malloc, linked list.',
+                    sections: [{
+                        title: '📋 Challenge List',
+                        content: '1. Implement strcpy(). 2. Implement atoi(). 3. Implement strcat(). 4. Implement strcmp().'
+                    }],
+                    code: '// Challenge: Implement your own strlen\nint my_strlen(char *s) {\n    int len = 0;\n    while(s[len] != \'\\0\') len++;\n    return len;\n}',
+                    practice: {
+                        challenge: 'Implement your own strcpy.',
+                        hint: 'Copy characters until \'\\0\'.'
+                    }
+                },
+                'c-practice-problems': {
+                    title: '📝 Practice Problems',
+                    description: 'Practice problems: Pattern printing, Number series, Matrix operations, String manipulation, File handling.',
+                    sections: [{
+                        title: '📋 Problem List',
+                        content: '1. Even numbers. 2. Sum of digits. 3. Palindrome. 4. Multiplication table. 5. Prime numbers.'
+                    }],
+                    code: '// Problem: Print triangle pattern\nfor(int i=1; i<=5; i++) {\n    for(int j=1; j<=i; j++) {\n        printf("* ");\n    }\n    printf("\\n");\n}',
+                    output: '*\n* *\n* * *\n* * * *\n* * * * *',
+                    practice: {
+                        challenge: 'Print pyramid pattern.',
+                        hint: 'Use nested loops with spaces and stars.'
+                    }
+                },
+                'c-compiler': {
+                    title: '⚙️ Compiler',
+                    description: 'GCC compilation process: preprocess, compile, assemble, link. Common flags: -Wall, -O2, -g.',
+                    sections: [{
+                        title: '📋 Compilation Process',
+                        content: 'Preprocess (#include, #define) → Compile (to assembly) → Assemble (to object) → Link (to executable)'
+                    }],
+                    code: '// Compilation process:\n// gcc -E → preprocess\n// gcc -S → assembly\n// gcc -c → object file\n// gcc -o → executable',
+                    practice: {
+                        challenge: 'Compile and run a C program.',
+                        hint: 'gcc program.c -o program && ./program'
+                    }
+                },
+                'c-syllabus': {
+                    title: '📋 Syllabus',
+                    description: 'Complete syllabus covering all topics from basics to advanced.',
+                    sections: [{
+                        title: '📚 Course Structure',
+                        content: 'Module 1: Basics. Module 2: Control Flow. Module 3: Functions & Arrays. Module 4: Advanced Topics.'
+                    }],
+                    code: '// Syllabus:\n// Module 1: Syntax, Variables, Data Types\n// Module 2: If, Switch, Loops\n// Module 3: Functions & Pointers\n// Module 4: Structures & Files',
+                    practice: {
+                        challenge: 'Follow the syllabus step by step.',
+                        hint: 'Start with Module 1.'
+                    }
+                },
+                'c-study-plan': {
+                    title: '📚 Study Plan',
+                    description: '8-week study plan: Week 1-2 Basics, Week 3-4 Control Flow & Functions, Week 5-6 Arrays & Pointers, Week 7-8 Structures & Projects.',
+                    sections: [{
+                        title: '📋 Weekly Plan',
+                        content: 'Week 1: Foundations. Week 2: Control Flow. Week 3: Functions. Week 4: Arrays. Week 5: Pointers. Week 6: Structures. Week 7: Files. Week 8: Projects.'
+                    }],
+                    code: '// Study Plan:\n// Day 1-7: Syntax, Variables, Data Types\n// Day 8-14: Operators, If-Else, Switch\n// Day 15-21: Loops, Arrays, Strings',
+                    practice: {
+                        challenge: 'Create your own study schedule.',
+                        hint: 'Allocate 2 hours daily for best results.'
+                    }
+                },
+                'c-interview': {
+                    title: '💼 Interview Q&A',
+                    description: 'Common interview questions: What is pointer? Explain memory layout. What is static? Difference between malloc and calloc?',
+                    sections: [{
+                        title: '📋 Common Questions',
+                        content: '1. malloc vs calloc. 2. What is a pointer? 3. struct vs union. 4. static keyword. 5. const vs #define.'
+                    }],
+                    code: '// Q: What is the output of sizeof(struct)?\n// A: Depends on padding and alignment.\n// Q: What is a dangling pointer?\n// A: Pointer to freed memory.',
+                    practice: {
+                        challenge: 'Prepare for C interview questions.',
+                        hint: 'Practice with mock interviews.'
+                    }
+                }
+            };
+
+            // ----- BUILD SIDEBAR -----
+            function buildSidebar() {
+                const nav = document.getElementById('sidebarNav');
+                nav.innerHTML = '';
+                let firstTopicId = null;
+
+                for (const [section, topics] of Object.entries(syllabusData)) {
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.className = 'nav-section';
+
+                    const titleDiv = document.createElement('div');
+                    titleDiv.className = 'nav-section-title';
+                    titleDiv.textContent = section;
+                    sectionDiv.appendChild(titleDiv);
+
+                    topics.forEach(topic => {
+                        const link = document.createElement('button');
+                        link.className = 'nav-item';
+                        link.dataset.topicId = topic.id;
+                        link.innerHTML = `<i class="fas fa-chevron-right"></i> ${topic.label}`;
+
+                        if (!firstTopicId) firstTopicId = topic.id;
+                        if (topic.id === 'c-home') link.classList.add('active');
+
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            loadTopic(topic.id);
+                            if (window.innerWidth <= 1024) closeSidebar();
+                        });
+
+                        sectionDiv.appendChild(link);
+                    });
+
+                    nav.appendChild(sectionDiv);
+                }
+
+                return firstTopicId;
+            }
+
+            // ----- LOAD TOPIC (with integrated compiler) -----
+            function loadTopic(topicId) {
+                const content = topicContent[topicId];
+                if (!content) {
+                    showToast('Topic not found. Loading default...');
+                    return;
+                }
+
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.topicId === topicId) item.classList.add('active');
+                });
+
+                const main = document.getElementById('mainContent');
+
+                // Build the compiler code from the topic's code or a default
+                const defaultCode = content.code || '#include <stdio.h>\n\nint main() {\n    printf("Hello, C!\\n");\n    return 0;\n}';
+
+                let html = `
+                    <div class="topic-header">
+                        <h1>${content.title}</h1>
+                        <div class="topic-meta">
+                            <span><i class="fas fa-clock"></i> 5 min read</span>
+                            <span><i class="fas fa-code"></i> ${content.practice ? 'Practice included' : 'Reference'}</span>
+                            <span><i class="fas fa-gamepad"></i> Interactive</span>
+                        </div>
+                    </div>
+                    <div class="topic-body">
+                        <div class="description">${content.description}</div>
+                `;
+
+                if (content.sections) {
+                    content.sections.forEach(section => {
+                        html += `
+                            <div class="section-title"><i class="fas fa-book"></i> ${section.title}</div>
+                            <div class="description">${section.content}</div>
+                        `;
+                    });
+                }
+
+                if (content.code) {
+                    html += `<div class="code-block">${content.code}</div>`;
+                }
+
+                if (content.output) {
+                    html += `<div class="output-block">▶ Output: ${content.output}</div>`;
+                }
+
+                if (content.examples) {
+                    content.examples.forEach(ex => {
+                        html += `
+                            <div class="example-box">
+                                <div class="ex-title"><i class="fas fa-lightbulb"></i> ${ex.title}</div>
+                                <div class="ex-desc">${ex.desc}</div>
+                                <div class="code-block">${ex.code}</div>
+                            </div>
+                        `;
+                    });
+                }
+
+                if (content.practice) {
+                    html += `
+                        <div class="practice-box">
+                            <h3><i class="fas fa-gamepad"></i> Practice Challenge</h3>
+                            <p class="challenge-desc">${content.practice.challenge}</p>
+                            <button class="btn-practice" onclick="startChallenge('${topicId}')">Start Practice</button>
+                            <button class="btn-hint" onclick="showHint('${topicId}')">Hint</button>
+                        </div>
+                    `;
+                }
+
+                // ----- COMPILER SECTION (integrated) -----
+                html += `
+                    <div class="compiler-section">
+                        <div class="compiler-header">
+                            <i class="fas fa-terminal"></i> <span>C Playground · Online Compiler</span>
+                        </div>
+                        <textarea id="codeEditor_${topicId}" spellcheck="false">${defaultCode}</textarea>
+                        <div class="compiler-actions">
+                            <button class="btn-run" onclick="runCode('${topicId}')"><i class="fas fa-play"></i> Run</button>
+                            <button class="btn-clear" onclick="clearOutput('${topicId}')">Clear</button>
+                        </div>
+                        <div class="output-console" id="outputConsole_${topicId}">// Output will appear here</div>
+                    </div>
+                `;
+
+                // Game box (gamification)
+                html += `
+                    <div class="game-box">
+                        <div class="game-title"><i class="fas fa-trophy"></i> CodeQuest: ${content.title}</div>
+                        <div class="game-desc">Complete the challenge to earn points! Practice makes perfect.</div>
+                        <button class="btn-game" onclick="showToast('🎮 Level started! Complete all tasks.')">Start Quest</button>
+                        <div class="game-score">
+                            <span>⭐ <span class="score-num" id="xpDisplay">0</span> XP</span>
+                            <span>🏆 <span class="score-num" id="questDisplay">0</span> / 10</span>
+                        </div>
+                    </div>
+                `;
+
+                const allTopics = [];
+                for (const [section, topics] of Object.entries(syllabusData)) {
+                    topics.forEach(t => allTopics.push(t.id));
+                }
+                const currentIndex = allTopics.indexOf(topicId);
+                const prevTopic = currentIndex > 0 ? allTopics[currentIndex - 1] : null;
+                const nextTopic = currentIndex < allTopics.length - 1 ? allTopics[currentIndex + 1] : null;
+
+                html += `
+                    <div class="nav-links">
+                        ${prevTopic ? `<span class="nav-link" onclick="loadTopic('${prevTopic}')"><i class="fas fa-arrow-left"></i> ${topicContent[prevTopic]?.title || 'Previous'}</span>` : '<span></span>'}
+                        ${nextTopic ? `<span class="nav-link" onclick="loadTopic('${nextTopic}')">${topicContent[nextTopic]?.title || 'Next'} <i class="fas fa-arrow-right"></i></span>` : '<span></span>'}
+                    </div>
+                </div>
+                `;
+
+                main.innerHTML = html;
+                history.pushState(null, '', `#${topicId}`);
+                showToast(`📖 ${content.title} · loaded`);
+            }
+
+            // ----- COMPILER ENGINE (mock C interpreter) -----
+            window.runCode = function(topicId) {
+                const code = document.getElementById(`codeEditor_${topicId}`).value;
+                const outputEl = document.getElementById(`outputConsole_${topicId}`);
+                outputEl.textContent = '⏳ Compiling...';
+
+                // Simulated C compiler: extracts printf strings and basic arithmetic
+                try {
+                    let result = '';
+                    const lines = code.split('\n');
+                    for (let line of lines) {
+                        // Match printf("...")
+                        const match = line.match(/printf\s*\(\s*"([^"]*)"\s*\)/);
+                        if (match) {
+                            result += match[1] + '\n';
+                        }
+                        // Match printf with format specifiers (basic)
+                        const matchF = line.match(/printf\s*\(\s*"([^"]*%[^"]*)"\s*,\s*(.*?)\s*\)/);
+                        if (matchF) {
+                            let fmt = matchF[1];
+                            const args = matchF[2].split(',').map(s => s.trim());
+                            // simplistic: replace %d with first arg
+                            let out = fmt;
+                            for (let arg of args) {
+                                const num = parseInt(arg);
+                                if (!isNaN(num)) {
+                                    out = out.replace(/%d/, num);
+                                } else {
+                                    out = out.replace(/%d/, arg);
+                                }
+                            }
+                            result += out + '\n';
+                        }
+                    }
+                    if (result === '') {
+                        // if no printf, show a message
+                        result = '// (mock) No printf output. Try adding printf("Hello");';
+                    }
+                    outputEl.textContent = result;
+                    showToast('✅ Code executed successfully!');
+                } catch (e) {
+                    outputEl.textContent = '⚠️ Error: ' + e.message;
+                    showToast('❌ Compilation error');
+                }
+            };
+
+            window.clearOutput = function(topicId) {
+                document.getElementById(`outputConsole_${topicId}`).textContent = '// Output cleared';
+            };
+
+            // ----- GLOBAL FUNCTIONS -----
+            window.loadTopic = loadTopic;
+
+            window.startChallenge = function(topicId) {
+                const content = topicContent[topicId];
+                if (content && content.practice) {
+                    showToast(`🎯 Challenge started: ${content.practice.challenge}`);
+                }
+            };
+
+            window.showHint = function(topicId) {
+                const content = topicContent[topicId];
+                if (content && content.practice) {
+                    showToast(`💡 Hint: ${content.practice.hint}`);
+                }
+            };
+
+            // ----- TOAST -----
+            const toastEl = document.getElementById('toast');
+            let toastTimer = null;
+
+            function showToast(message, duration = 2800) {
+                if (toastTimer) clearTimeout(toastTimer);
+                toastEl.textContent = message;
+                toastEl.style.opacity = '1';
+                toastEl.style.transform = 'translateX(-50%) translateY(0)';
+                toastTimer = setTimeout(() => {
+                    toastEl.style.opacity = '0';
+                    toastEl.style.transform = 'translateX(-50%) translateY(20px)';
+                }, duration);
+            }
+            window.showToast = showToast;
+
+            // ----- SIDEBAR TOGGLE -----
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+            function openSidebar() {
+                sidebar.classList.add('open');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            sidebarToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+            });
+
+            sidebarOverlay.addEventListener('click', closeSidebar);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeSidebar();
+                    if (toastEl.style.opacity === '1') {
+                        toastEl.style.opacity = '0';
+                        toastEl.style.transform = 'translateX(-50%) translateY(20px)';
+                    }
+                }
+            });
+
+            // ----- INIT -----
+            const firstTopic = buildSidebar();
+            const hash = window.location.hash.replace('#', '');
+            const defaultTopic = hash && topicContent[hash] ? hash : (firstTopic || 'c-home');
+            loadTopic(defaultTopic);
+
+            window.addEventListener('hashchange', function() {
+                const newHash = window.location.hash.replace('#', '');
+                if (newHash && topicContent[newHash]) loadTopic(newHash);
+            });
+
+            console.log('%c 🚀 C Language · Complete Course ', 'background: #2d7d46; color: #ffffff; font-size: 16px; font-weight: 700; padding: 8px 16px; border-radius: 8px;');
+            console.log('%c 120+ topics · Interactive · Game-based learning ', 'color: #6b7280; font-size: 13px;');
+
+        })();
+    </script>
+</body>
+</html>
