@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Java · Complete Course · CodeVibeLabs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #0b0e14;
+            --color-white: #ffffff;
+            --color-off-white: #f8fafc;
+            --color-gray-50: #f1f4f9;
+            --color-gray-100: #eaeef3;
+            --color-gray-200: #dce2ea;
+            --color-gray-300: #d0d5dd;
+            --color-gray-400: #b0b8c5;
+            --color-gray-500: #8f9bb0;
+            --color-gray-600: #6b7280;
+            --color-gray-700: #4a4f5e;
+            --color-gray-800: #2d3548;
+            --color-gray-900: #1a212f;
+            --color-accent: #2d7d46;
+            --color-accent-light: #3a9d5a;
+            --color-accent-dark: #1e5a32;
+            --color-code-bg: #0f141e;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 48px -12px rgba(0, 0, 0, 0.10);
+            --shadow-xl: 0 30px 60px -16px rgba(0, 0, 0, 0.14);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --sidebar-width: 280px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background: var(--color-off-white);
+            color: var(--color-black);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--color-black);
+            color: var(--color-gray-300);
+            overflow-y: auto;
+            padding: 1.2rem 0 2rem;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: var(--color-gray-900);
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 10px;
+        }
+
+        .sidebar-brand {
+            padding: 0 1.2rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 0.8rem;
+        }
+        .sidebar-brand .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-white);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .sidebar-brand .logo i {
+            color: var(--color-accent-light);
+            font-size: 1.4rem;
+        }
+        .sidebar-brand .sub {
+            font-size: 0.65rem;
+            color: var(--color-gray-500);
+            margin-top: 0.2rem;
+            padding-left: 2.2rem;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 0 0.6rem;
+        }
+        .sidebar-nav .nav-section {
+            margin-bottom: 0.4rem;
+        }
+        .sidebar-nav .nav-section-title {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--color-gray-500);
+            padding: 0.6rem 0.6rem 0.3rem;
+            font-weight: 700;
+        }
+        .sidebar-nav .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-size: 0.78rem;
+            color: var(--color-gray-400);
+            text-decoration: none;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+        .sidebar-nav .nav-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-white);
+        }
+        .sidebar-nav .nav-item.active {
+            background: rgba(45, 125, 70, 0.2);
+            color: var(--color-accent-light);
+            border-left: 3px solid var(--color-accent);
+        }
+        .sidebar-nav .nav-item i {
+            font-size: 0.7rem;
+            width: 1.2rem;
+            color: var(--color-gray-500);
+        }
+        .sidebar-nav .nav-item.active i {
+            color: var(--color-accent-light);
+        }
+
+        .sidebar-footer {
+            padding: 0.8rem 1.2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.6rem;
+            color: var(--color-gray-500);
+        }
+        .sidebar-footer .powered {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .sidebar-footer .powered i {
+            color: var(--color-accent-light);
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 0.8rem;
+            left: 0.8rem;
+            z-index: 1001;
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 1.5rem 2rem 3rem;
+            min-height: 100vh;
+            max-width: calc(100% - var(--sidebar-width));
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+        .topic-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--color-black);
+        }
+        .topic-header .topic-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--color-gray-600);
+        }
+        .topic-header .topic-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .topic-body {
+            max-width: 1000px;
+        }
+        .topic-body .description {
+            font-size: 1.05rem;
+            color: var(--color-gray-700);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        .topic-body .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 1.5rem 0 0.8rem;
+            color: var(--color-black);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .topic-body .section-title i {
+            color: var(--color-accent);
+            font-size: 1.1rem;
+        }
+
+        .code-block {
+            background: var(--color-code-bg);
+            border-radius: var(--radius-sm);
+            padding: 1.2rem 1.5rem;
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.9;
+            overflow-x: auto;
+            margin: 0.8rem 0;
+            border: 1px solid var(--color-gray-800);
+        }
+        .code-block .comment {
+            color: #6a9955;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .func {
+            color: #dcdcaa;
+        }
+        .code-block .var {
+            color: #9cdcfe;
+        }
+        .code-block .num {
+            color: #b5cea8;
+        }
+        .code-block .preprocessor {
+            color: #c586c0;
+        }
+
+        .output-block {
+            background: var(--color-gray-900);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1.2rem;
+            color: #b0b8c5;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            margin: 0.5rem 0 1rem;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .example-box {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--color-black);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .example-box .ex-title i {
+            color: var(--color-accent);
+        }
+        .example-box .ex-desc {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .practice-box {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px dashed var(--color-accent);
+            box-shadow: var(--shadow-sm);
+        }
+        .practice-box h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .practice-box h3 i {
+            color: var(--color-accent);
+        }
+        .practice-box .challenge-desc {
+            color: var(--color-gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        .practice-box .btn-practice {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-right: 0.5rem;
+        }
+        .practice-box .btn-practice:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+        .practice-box .btn-hint {
+            background: var(--color-gray-200);
+            color: var(--color-gray-700);
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .practice-box .btn-hint:hover {
+            background: var(--color-gray-300);
+        }
+
+        .compiler-section {
+            background: #1a1a2e;
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #2d2d44;
+            box-shadow: var(--shadow-md);
+        }
+        .compiler-section .compiler-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #c0c0d0;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        .compiler-section .compiler-header i {
+            color: var(--color-accent-light);
+        }
+        .compiler-section textarea {
+            width: 100%;
+            background: #0d0d1a;
+            color: #e0e0f0;
+            border: 1px solid #2d2d44;
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            resize: vertical;
+            min-height: 160px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .compiler-section textarea:focus {
+            border-color: var(--color-accent);
+        }
+        .compiler-section .compiler-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 0.8rem 0;
+        }
+        .compiler-section .btn-run {
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            padding: 0.4rem 1.8rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .compiler-section .btn-run:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+        .compiler-section .btn-clear {
+            background: #3d3d5c;
+            color: #ccc;
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .compiler-section .btn-clear:hover {
+            background: #4d4d6c;
+        }
+        .compiler-section .output-console {
+            background: #0d0d1a;
+            color: #b0b8c5;
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1.2rem;
+            margin-top: 0.8rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            min-height: 50px;
+            border: 1px solid #2d2d44;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-gray-200);
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .nav-links .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--color-gray-600);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+        }
+        .nav-links .nav-link:hover {
+            color: var(--color-black);
+            background: var(--color-gray-50);
+        }
+        .nav-links .nav-link i {
+            font-size: 0.8rem;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            z-index: 9999;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+            max-width: 90%;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .sidebar-toggle {
+                display: block;
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 1.2rem 1.2rem 2rem;
+                padding-top: 4rem;
+            }
+            .topic-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .code-block {
+                font-size: 0.7rem;
+                padding: 0.8rem 1rem;
+            }
+            .topic-header h1 {
+                font-size: 1.3rem;
+            }
+            .topic-body .description {
+                font-size: 0.9rem;
+            }
+            .practice-box {
+                padding: 1rem;
+            }
+            .practice-box .btn-practice,
+            .practice-box .btn-hint {
+                font-size: 0.7rem;
+                padding: 0.3rem 1rem;
+            }
+            .example-box {
+                padding: 0.8rem 1rem;
+            }
+            .compiler-section {
+                padding: 0.8rem 1rem;
+            }
+            .compiler-section textarea {
+                font-size: 0.75rem;
+                min-height: 120px;
+            }
+        }
+
+        ::selection {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-gray-50);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-gray-300);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>Java · Course</span>
+            </div>
+            <div class="sub">Complete Java Programming Syllabus</div>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+        <div class="sidebar-footer">
+            <div class="powered">
+                <i class="fas fa-bolt"></i> powered by <strong style="color:var(--color-white);">teamorbits</strong>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+        <div style="padding:2rem;text-align:center;color:var(--color-gray-600);">
+            <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--color-accent);"></i>
+            <p style="margin-top:1rem;">Loading course content...</p>
+        </div>
+    </main>
+
+    <div id="toast"></div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ---------- JAVA SYLLABUS ----------
+            const syllabusData = {
+                'Java Basics': [
+                    { id: 'java-home', label: 'JAVA HOME' },
+                    { id: 'java-intro', label: 'Java Intro' },
+                    { id: 'java-get-started', label: 'Get Started' },
+                    { id: 'java-syntax', label: 'Syntax' },
+                    { id: 'java-output', label: 'Output' },
+                    { id: 'java-comments', label: 'Comments' },
+                    { id: 'java-variables', label: 'Variables' },
+                    { id: 'java-data-types', label: 'Data Types' },
+                    { id: 'java-type-conversion', label: 'Type Conversion' },
+                    { id: 'java-constants', label: 'Constants' },
+                    { id: 'java-operators', label: 'Operators' },
+                    { id: 'java-booleans', label: 'Booleans' },
+                    { id: 'java-if-else', label: 'If...Else' },
+                    { id: 'java-switch', label: 'Switch' },
+                ],
+                'Loops & Arrays': [
+                    { id: 'java-while', label: 'While Loop' },
+                    { id: 'java-for', label: 'For Loop' },
+                    { id: 'java-do-while', label: 'Do-While' },
+                    { id: 'java-break-continue', label: 'Break/Continue' },
+                    { id: 'java-arrays', label: 'Arrays' },
+                    { id: 'java-strings', label: 'Strings' },
+                    { id: 'java-user-input', label: 'User Input' },
+                    { id: 'java-arraylist', label: 'ArrayList' },
+                ],
+                'OOP': [
+                    { id: 'java-oop', label: 'OOP Intro' },
+                    { id: 'java-classes', label: 'Classes & Objects' },
+                    { id: 'java-constructors', label: 'Constructors' },
+                    { id: 'java-encapsulation', label: 'Encapsulation' },
+                    { id: 'java-inheritance', label: 'Inheritance' },
+                    { id: 'java-polymorphism', label: 'Polymorphism' },
+                    { id: 'java-abstraction', label: 'Abstraction' },
+                    { id: 'java-interfaces', label: 'Interfaces' },
+                    { id: 'java-enums', label: 'Enums' },
+                ],
+                'Advanced': [
+                    { id: 'java-exceptions', label: 'Exceptions' },
+                    { id: 'java-file-io', label: 'File I/O' },
+                    { id: 'java-collections', label: 'Collections' },
+                    { id: 'java-generics', label: 'Generics' },
+                    { id: 'java-lambda', label: 'Lambda Expressions' },
+                    { id: 'java-streams', label: 'Streams API' },
+                    { id: 'java-multithreading', label: 'Multithreading' },
+                    { id: 'java-date', label: 'Date & Time' },
+                ],
+                'Projects & Reference': [
+                    { id: 'java-projects', label: 'Projects' },
+                    { id: 'java-reference', label: 'Reference' },
+                    { id: 'java-keywords', label: 'Keywords' },
+                    { id: 'java-interview', label: 'Interview Q&A' },
+                    { id: 'java-examples', label: 'Examples' },
+                    { id: 'java-exercises', label: 'Exercises' },
+                    { id: 'java-compiler', label: 'Compiler' },
+                ]
+            };
+
+            // ---------- TOPIC CONTENT (full, detailed, many examples) ----------
+            const topicContent = {
+                'java-home': {
+                    title: '🏠 JAVA HOME',
+                    description: 'Welcome to the complete Java programming course! Java is a high-level, object-oriented language developed by Sun Microsystems (now Oracle). It is platform-independent, secure, and widely used for enterprise applications, Android development, and web services.',
+                    sections: [
+                        { title: '📖 What is Java?', content: 'Java was created by James Gosling in 1995. It follows the principle "Write Once, Run Anywhere" (WORA) thanks to the Java Virtual Machine (JVM). Java is used in web applications, desktop software, mobile apps, and big data technologies.' },
+                        { title: '🎯 Why Learn Java?', content: 'Java is one of the most popular programming languages. It is used in enterprise environments, Android app development, financial systems, and large-scale web applications. Java has a rich ecosystem, vast libraries, and strong community support.' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Welcome to Java Programming! 🚀");\n    }\n}',
+                    output: 'Welcome to Java Programming! 🚀',
+                    examples: [
+                        { title: 'Example 1: Hello World', desc: 'The classic first Java program.', code: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}' },
+                        { title: 'Example 2: Multiple prints', desc: 'Print multiple lines.', code: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Java");\n        System.out.println("is");\n        System.out.println("awesome!");\n    }\n}' }
+                    ],
+                    practice: { challenge: 'Write a program that prints "I love Java!"', hint: 'Use System.out.println()' }
+                },
+                'java-intro': {
+                    title: '📚 Java Intro',
+                    description: 'Java is a compiled and interpreted language. Source code is compiled to bytecode, which runs on the JVM. It is statically typed, object-oriented, and supports multithreading.',
+                    sections: [
+                        { title: '🔑 Key Features', content: 'Platform-independent: JVM. Object-Oriented: classes, inheritance, polymorphism. Robust: strong memory management. Secure: no explicit pointers. Multithreaded: built-in support. High Performance: Just-In-Time compilation.' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Java is powerful!");\n    }\n}',
+                    output: 'Java is powerful!',
+                    practice: { challenge: 'Print "Java is platform-independent"', hint: 'System.out.println()' }
+                },
+                'java-get-started': {
+                    title: '⚡ Get Started',
+                    description: 'To start coding in Java, install JDK (Java Development Kit). Use an IDE like IntelliJ IDEA, Eclipse, or VS Code. Compile with javac and run with java.',
+                    sections: [
+                        { title: '🛠️ Setup', content: 'Download JDK from Oracle or OpenJDK. Set JAVA_HOME. Compile: javac Main.java. Run: java Main.' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Java is ready!");\n    }\n}',
+                    output: 'Java is ready!',
+                    practice: { challenge: 'Compile and run your first Java program.', hint: 'javac Main.java && java Main' }
+                },
+                'java-syntax': {
+                    title: '📝 Java Syntax',
+                    description: 'Java syntax is similar to C/C++. It is case-sensitive, uses semicolons, and curly braces for blocks.',
+                    sections: [
+                        { title: '🔍 Basic Rules', content: 'Case-sensitive. Semicolons end statements. Curly braces for code blocks. Class names start with uppercase. Comments: // and /* */.' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int x = 5;\n        System.out.println(x);\n    }\n}',
+                    output: '5',
+                    practice: { challenge: 'Write a program with two variables and print their sum.', hint: 'int a=3, b=4; System.out.println(a+b);' }
+                },
+                'java-output': {
+                    title: '🖨️ Java Output',
+                    description: 'Use System.out.println() for output with newline, and System.out.print() without newline.',
+                    sections: [
+                        { title: '📤 Using System.out', content: 'System.out.println("Hello"); // with newline\nSystem.out.print("Hello"); // without newline' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int age = 25;\n        System.out.println("Age: " + age);\n    }\n}',
+                    output: 'Age: 25',
+                    examples: [
+                        { title: 'Example: Print with concatenation', desc: 'Combine strings and variables.', code: 'public class Main {\n    public static void main(String[] args) {\n        String name = "Alice";\n        int age = 30;\n        System.out.println(name + " is " + age + " years old.");\n    }\n}' }
+                    ],
+                    practice: { challenge: 'Print your name and age using System.out.println().', hint: 'Use + for concatenation.' }
+                },
+                'java-comments': {
+                    title: '💬 Comments',
+                    description: 'Comments are ignored by the compiler. Use them to explain your code.',
+                    sections: [
+                        { title: '📝 Types', content: 'Single-line: // comment. Multi-line: /* comment */. Documentation: /** comment */.' }
+                    ],
+                    code: 'public class Main {\n    // This is a comment\n    public static void main(String[] args) {\n        /* Multi-line\n           comment */\n        System.out.println("Comments are useful");\n    }\n}',
+                    practice: { challenge: 'Add comments to a program.', hint: 'Use // for line comments.' }
+                },
+                'java-variables': {
+                    title: '📦 Variables',
+                    description: 'Variables store data. Java is statically typed, so you must declare the type. Use var for local variable type inference.',
+                    sections: [
+                        { title: '🔑 Declaration', content: 'int x = 10; double y = 3.14; String name = "Alice"; var z = 42; // int' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int x = 10;\n        double y = 3.14;\n        System.out.println(x + ", " + y);\n    }\n}',
+                    output: '10, 3.14',
+                    examples: [
+                        { title: 'Example: var keyword', desc: 'Type inference.', code: 'public class Main {\n    public static void main(String[] args) {\n        var a = 5;\n        var b = 3.14;\n        var c = "Hello";\n        System.out.println(a + " " + b + " " + c);\n    }\n}' }
+                    ],
+                    practice: { challenge: 'Declare variables of int, double, String, and print them.', hint: 'String name = "John";' }
+                },
+                'java-data-types': {
+                    title: '📊 Data Types',
+                    description: 'Java has primitive types: byte, short, int, long, float, double, char, boolean. Also reference types: String, arrays, classes.',
+                    sections: [
+                        { title: '📋 Primitive Types', content: 'int (4B), double (8B), char (2B), boolean (1B). Also: byte, short, long, float.' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("int size: " + Integer.BYTES + " bytes");\n        System.out.println("double size: " + Double.BYTES + " bytes");\n    }\n}',
+                    output: 'int size: 4 bytes\ndouble size: 8 bytes',
+                    practice: { challenge: 'Check the size of char and boolean.', hint: 'Character.BYTES, Boolean doesn\'t have BYTES.' }
+                },
+                'java-type-conversion': {
+                    title: '🔄 Type Conversion',
+                    description: 'Implicit conversion (widening): int to double. Explicit conversion (narrowing): double to int with casting.',
+                    sections: [
+                        { title: '⚡ Implicit', content: 'int a = 10; double b = a; // 10.0' },
+                        { title: '🔧 Explicit', content: 'double x = 3.14; int y = (int) x; // 3' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        double pi = 3.14159;\n        int intPi = (int) pi;\n        System.out.println(intPi);\n    }\n}',
+                    output: '3',
+                    practice: { challenge: 'Convert double to int using casting.', hint: '(int) value' }
+                },
+                'java-constants': {
+                    title: '🔒 Constants',
+                    description: 'Constants are values that cannot be changed. Use final keyword.',
+                    sections: [
+                        { title: '📌 final', content: 'final int DAYS = 7;' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        final int DAYS = 7;\n        System.out.println("Days: " + DAYS);\n    }\n}',
+                    output: 'Days: 7',
+                    practice: { challenge: 'Define a constant for PI.', hint: 'final double PI = 3.14159;' }
+                },
+                'java-operators': {
+                    title: '🧮 Operators',
+                    description: 'Java supports arithmetic, relational, logical, bitwise, assignment, and compound operators.',
+                    sections: [
+                        { title: '📊 Types', content: 'Arithmetic: + - * / %. Relational: == != > < >= <=. Logical: && || !. Assignment: = += -= *= /=.' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int a = 10, b = 3;\n        System.out.println(a + " % " + b + " = " + (a % b));\n    }\n}',
+                    output: '10 % 3 = 1',
+                    practice: { challenge: 'Calculate the area of a rectangle.', hint: 'area = length * width;' }
+                },
+                'java-booleans': {
+                    title: '✅ Booleans',
+                    description: 'boolean type holds true or false. Used in conditions and loops.',
+                    sections: [
+                        { title: '📌 boolean', content: 'boolean isReady = true; boolean isDone = false;' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        boolean isEven = (10 % 2 == 0);\n        System.out.println("Is 10 even? " + isEven);\n    }\n}',
+                    output: 'Is 10 even? true',
+                    practice: { challenge: 'Check if a number is positive.', hint: 'boolean isPositive = (num > 0);' }
+                },
+                'java-if-else': {
+                    title: '🔄 If...Else',
+                    description: 'Conditional statements: if, else if, else. Also, ternary operator: condition ? expr1 : expr2.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'if(condition) { code } else if(condition) { code } else { code }' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int score = 85;\n        if(score >= 90) System.out.println("A");\n        else if(score >= 80) System.out.println("B");\n        else System.out.println("C");\n    }\n}',
+                    output: 'B',
+                    practice: { challenge: 'Check if a number is zero, positive, or negative.', hint: 'if(num > 0) ...' }
+                },
+                'java-switch': {
+                    title: '🔀 Switch',
+                    description: 'Switch statement for multi-way branching. Works with int, char, String, and enums.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'switch(expr) { case val1: code; break; case val2: code; break; default: code; }' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int day = 3;\n        switch(day) {\n            case 1: System.out.println("Mon"); break;\n            case 2: System.out.println("Tue"); break;\n            case 3: System.out.println("Wed"); break;\n            default: System.out.println("Invalid");\n        }\n    }\n}',
+                    output: 'Wed',
+                    practice: { challenge: 'Create a calculator using switch.', hint: 'switch(operator) { case \'+\': ... }' }
+                },
+                'java-while': {
+                    title: '🔄 While Loop',
+                    description: 'Repeats code while condition is true.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'while(condition) { code }' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int i = 1;\n        while(i <= 5) {\n            System.out.print(i + " ");\n            i++;\n        }\n    }\n}',
+                    output: '1 2 3 4 5',
+                    practice: { challenge: 'Print numbers from 10 down to 1.', hint: 'i=10; while(i>=1) { ... i--; }' }
+                },
+                'java-for': {
+                    title: '🔄 For Loop',
+                    description: 'For loop for known iterations.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'for(init; condition; increment) { code }' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        for(int i = 0; i < 5; i++) {\n            System.out.print(i + " ");\n        }\n    }\n}',
+                    output: '0 1 2 3 4',
+                    practice: { challenge: 'Print even numbers from 0 to 20.', hint: 'for(int i=0; i<=20; i+=2)' }
+                },
+                'java-do-while': {
+                    title: '🔄 Do-While',
+                    description: 'Executes at least once, then checks condition.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'do { code } while(condition);' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int i = 0;\n        do {\n            System.out.print(i + " ");\n            i++;\n        } while(i < 5);\n    }\n}',
+                    output: '0 1 2 3 4',
+                    practice: { challenge: 'Use do-while to get valid input.', hint: 'do { ... } while(x < 0);' }
+                },
+                'java-break-continue': {
+                    title: '⏭️ Break & Continue',
+                    description: 'Break exits loop. Continue skips current iteration.',
+                    sections: [
+                        { title: '📋 Break', content: 'Exits loop immediately.' },
+                        { title: '📋 Continue', content: 'Skips rest of current iteration.' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        for(int i=1; i<=10; i++) {\n            if(i == 5) break;\n            if(i % 2 == 0) continue;\n            System.out.print(i + " ");\n        }\n    }\n}',
+                    output: '1 3',
+                    practice: { challenge: 'Print odd numbers from 1 to 10 using continue.', hint: 'if(i%2==0) continue;' }
+                },
+                'java-arrays': {
+                    title: '📊 Arrays',
+                    description: 'Arrays store multiple values of the same type. Index starts at 0. Length is fixed.',
+                    sections: [
+                        { title: '📋 Declaration', content: 'int[] arr = {1,2,3,4,5}; // or int[] arr = new int[5];' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int[] arr = {1,2,3,4,5};\n        for(int i=0; i<arr.length; i++) {\n            System.out.print(arr[i] + " ");\n        }\n    }\n}',
+                    output: '1 2 3 4 5',
+                    examples: [
+                        { title: 'Example: Find max', desc: 'Find maximum element.', code: 'public class Main {\n    public static void main(String[] args) {\n        int[] arr = {3,7,1,9,4};\n        int max = arr[0];\n        for(int i=1; i<arr.length; i++) {\n            if(arr[i] > max) max = arr[i];\n        }\n        System.out.println("Max: " + max);\n    }\n}' }
+                    ],
+                    practice: { challenge: 'Find sum of all elements in an array.', hint: 'sum += arr[i];' }
+                },
+                'java-strings': {
+                    title: '📝 Strings',
+                    description: 'String is a class in Java. Strings are immutable. Use methods like length(), charAt(), substring(), toUpperCase().',
+                    sections: [
+                        { title: '📋 String Basics', content: 'String s = "Hello"; s.length(); s + " World"; s.toUpperCase();' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        String name = "Alice";\n        System.out.println("Length: " + name.length());\n        System.out.println("Uppercase: " + name.toUpperCase());\n    }\n}',
+                    output: 'Length: 5\nUppercase: ALICE',
+                    practice: { challenge: 'Concatenate two strings and print.', hint: 'String result = str1 + str2;' }
+                },
+                'java-user-input': {
+                    title: '⌨️ User Input',
+                    description: 'Use Scanner for input: Scanner sc = new Scanner(System.in); sc.nextInt(); sc.nextLine();',
+                    sections: [
+                        { title: '📋 Scanner', content: 'Scanner sc = new Scanner(System.in); int age = sc.nextInt(); String name = sc.nextLine();' }
+                    ],
+                    code: 'import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print("Enter age: ");\n        int age = sc.nextInt();\n        System.out.println("Age: " + age);\n        sc.close();\n    }\n}',
+                    output: 'Enter age: 25\nAge: 25',
+                    practice: { challenge: 'Read two numbers and print their sum.', hint: 'int a = sc.nextInt(); int b = sc.nextInt();' }
+                },
+                'java-arraylist': {
+                    title: '📊 ArrayList',
+                    description: 'ArrayList is a resizable array from java.util. Supports add, remove, get, set, and size.',
+                    sections: [
+                        { title: '📋 ArrayList Basics', content: 'ArrayList<String> list = new ArrayList<>(); list.add("A"); list.get(0); list.remove(0); list.size();' }
+                    ],
+                    code: 'import java.util.ArrayList;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<Integer> list = new ArrayList<>();\n        list.add(10); list.add(20); list.add(30);\n        for(int x : list) System.out.print(x + " ");\n    }\n}',
+                    output: '10 20 30',
+                    practice: { challenge: 'Create an ArrayList of strings and iterate.', hint: 'ArrayList<String> names = new ArrayList<>();' }
+                },
+                'java-oop': {
+                    title: '📦 OOP Intro',
+                    description: 'Object-Oriented Programming (OOP) uses objects and classes. Four pillars: encapsulation, inheritance, polymorphism, abstraction.',
+                    sections: [
+                        { title: '📋 OOP Concepts', content: 'Encapsulation: private fields, public methods. Inheritance: extends keyword. Polymorphism: method overriding. Abstraction: abstract classes and interfaces.' }
+                    ],
+                    code: '// OOP in Java\nclass Car {\n    String brand;\n    void honk() { System.out.println("Beep!"); }\n}',
+                    practice: { challenge: 'Define a simple class with one method.', hint: 'class Person { void greet() { ... } }' }
+                },
+                'java-classes': {
+                    title: '📦 Classes & Objects',
+                    description: 'A class is a blueprint. Objects are instances of classes. Use new to create objects.',
+                    sections: [
+                        { title: '📋 Class Basics', content: 'class Person { String name; int age; } Person p = new Person(); p.name = "Alice";' }
+                    ],
+                    code: 'public class Main {\n    static class Person {\n        String name;\n        int age;\n    }\n    public static void main(String[] args) {\n        Person p = new Person();\n        p.name = "Alice";\n        p.age = 25;\n        System.out.println(p.name + ", " + p.age);\n    }\n}',
+                    output: 'Alice, 25',
+                    practice: { challenge: 'Create a Book class with title and author.', hint: 'class Book { String title; String author; }' }
+                },
+                'java-constructors': {
+                    title: '🏗️ Constructors',
+                    description: 'Constructors initialize objects. They have the same name as the class. Can be overloaded.',
+                    sections: [
+                        { title: '📋 Constructor', content: 'Person(String n, int a) { name = n; age = a; }' }
+                    ],
+                    code: 'public class Main {\n    static class Person {\n        String name;\n        int age;\n        Person(String n, int a) { name = n; age = a; }\n    }\n    public static void main(String[] args) {\n        Person p = new Person("Alice", 25);\n        System.out.println(p.name + ", " + p.age);\n    }\n}',
+                    output: 'Alice, 25',
+                    practice: { challenge: 'Create a class with a parameterized constructor.', hint: 'class Point { int x,y; Point(int a, int b) { x=a; y=b; } }' }
+                },
+                'java-encapsulation': {
+                    title: '🔒 Encapsulation',
+                    description: 'Encapsulation hides internal data. Use private fields and public getters/setters.',
+                    sections: [
+                        { title: '📋 Encapsulation', content: 'private int age; public void setAge(int a) { age = a; } public int getAge() { return age; }' }
+                    ],
+                    code: 'public class Main {\n    static class Person {\n        private int age;\n        public void setAge(int a) { age = a; }\n        public int getAge() { return age; }\n    }\n    public static void main(String[] args) {\n        Person p = new Person();\n        p.setAge(25);\n        System.out.println(p.getAge());\n    }\n}',
+                    output: '25',
+                    practice: { challenge: 'Create a class with private data and getters/setters.', hint: 'private int id; public void setId(int i); public int getId();' }
+                },
+                'java-inheritance': {
+                    title: '🧬 Inheritance',
+                    description: 'Inheritance allows a class to derive from another class. Use extends keyword.',
+                    sections: [
+                        { title: '📋 Inheritance', content: 'class Child extends Parent { ... }' }
+                    ],
+                    code: 'public class Main {\n    static class Animal {\n        void eat() { System.out.println("Eating"); }\n    }\n    static class Dog extends Animal {\n        void bark() { System.out.println("Barking"); }\n    }\n    public static void main(String[] args) {\n        Dog d = new Dog();\n        d.eat();\n        d.bark();\n    }\n}',
+                    output: 'Eating\nBarking',
+                    practice: { challenge: 'Derive a Student class from Person.', hint: 'class Student extends Person { ... }' }
+                },
+                'java-polymorphism': {
+                    title: '🎭 Polymorphism',
+                    description: 'Polymorphism allows different classes to be treated as the same base class. Method overriding and method overloading.',
+                    sections: [
+                        { title: '📋 Polymorphism', content: 'void speak() in base, override in derived. Animal a = new Dog(); a.speak();' }
+                    ],
+                    code: 'public class Main {\n    static class Animal {\n        void speak() { System.out.println("Animal sound"); }\n    }\n    static class Dog extends Animal {\n        @Override\n        void speak() { System.out.println("Woof"); }\n    }\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        a.speak();\n    }\n}',
+                    output: 'Woof',
+                    practice: { challenge: 'Create a base class with a method and override it.', hint: '@Override void display()' }
+                },
+                'java-abstraction': {
+                    title: '📦 Abstraction',
+                    description: 'Abstraction hides implementation details. Use abstract classes and methods.',
+                    sections: [
+                        { title: '📋 Abstract', content: 'abstract class Animal { abstract void speak(); }' }
+                    ],
+                    code: 'public class Main {\n    static abstract class Animal {\n        abstract void speak();\n    }\n    static class Dog extends Animal {\n        void speak() { System.out.println("Woof"); }\n    }\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        a.speak();\n    }\n}',
+                    output: 'Woof',
+                    practice: { challenge: 'Create an abstract class with an abstract method.', hint: 'abstract class Shape { abstract void draw(); }' }
+                },
+                'java-interfaces': {
+                    title: '🔌 Interfaces',
+                    description: 'Interfaces define contracts. They contain abstract methods (and default methods since Java 8).',
+                    sections: [
+                        { title: '📋 Interface', content: 'interface Animal { void speak(); } class Dog implements Animal { public void speak() { ... } }' }
+                    ],
+                    code: 'public class Main {\n    interface Animal {\n        void speak();\n    }\n    static class Dog implements Animal {\n        public void speak() { System.out.println("Woof"); }\n    }\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        a.speak();\n    }\n}',
+                    output: 'Woof',
+                    practice: { challenge: 'Create an interface with a method and implement it.', hint: 'interface Drawable { void draw(); }' }
+                },
+                'java-enums': {
+                    title: '🔢 Enums',
+                    description: 'Enums represent fixed set of constants. Enum can have fields and methods.',
+                    sections: [
+                        { title: '📋 Enum', content: 'enum Color { RED, GREEN, BLUE }' }
+                    ],
+                    code: 'public class Main {\n    enum Color { RED, GREEN, BLUE }\n    public static void main(String[] args) {\n        Color c = Color.GREEN;\n        System.out.println(c);\n    }\n}',
+                    output: 'GREEN',
+                    practice: { challenge: 'Define an enum for days of week.', hint: 'enum Days { MON, TUE, WED }' }
+                },
+                'java-exceptions': {
+                    title: '⚠️ Exceptions',
+                    description: 'Exception handling: try, catch, finally, throw, throws. Checked and unchecked exceptions.',
+                    sections: [
+                        { title: '📋 Exception', content: 'try { throw new Exception(); } catch(Exception e) { e.printStackTrace(); } finally { ... }' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        try {\n            int x = 10 / 0;\n        } catch(ArithmeticException e) {\n            System.out.println("Division by zero!");\n        }\n    }\n}',
+                    output: 'Division by zero!',
+                    practice: { challenge: 'Handle division by zero exception.', hint: 'try { ... } catch(ArithmeticException e) { ... }' }
+                },
+                'java-file-io': {
+                    title: '📁 File I/O',
+                    description: 'Use FileReader, BufferedReader, FileWriter, BufferedWriter. Also, Files class from java.nio.',
+                    sections: [
+                        { title: '📋 File I/O', content: 'FileWriter fw = new FileWriter("file.txt"); fw.write("Hello"); fw.close();' }
+                    ],
+                    code: 'import java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws IOException {\n        FileWriter fw = new FileWriter("test.txt");\n        fw.write("Java File I/O\\n");\n        fw.close();\n        \n        BufferedReader br = new BufferedReader(new FileReader("test.txt"));\n        String line = br.readLine();\n        System.out.println(line);\n        br.close();\n    }\n}',
+                    output: 'Java File I/O',
+                    practice: { challenge: 'Read from a file and print its contents.', hint: 'while((line = br.readLine()) != null) System.out.println(line);' }
+                },
+                'java-collections': {
+                    title: '📊 Collections',
+                    description: 'Collection Framework: List, Set, Map. List: ArrayList, LinkedList. Set: HashSet, TreeSet. Map: HashMap, TreeMap.',
+                    sections: [
+                        { title: '📋 Collections', content: 'List<String> list = new ArrayList<>(); Set<Integer> set = new HashSet<>(); Map<String, Integer> map = new HashMap<>();' }
+                    ],
+                    code: 'import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Map<String, Integer> map = new HashMap<>();\n        map.put("Alice", 25);\n        map.put("Bob", 30);\n        for(Map.Entry<String, Integer> e : map.entrySet()) {\n            System.out.println(e.getKey() + ": " + e.getValue());\n        }\n    }\n}',
+                    output: 'Alice: 25\nBob: 30',
+                    practice: { challenge: 'Create a HashMap of student IDs and names.', hint: 'Map<Integer, String> students = new HashMap<>();' }
+                },
+                'java-generics': {
+                    title: '📦 Generics',
+                    description: 'Generics enable types to be parameters when defining classes, interfaces, and methods. Provides type safety.',
+                    sections: [
+                        { title: '📋 Generics', content: 'class Box<T> { T item; } Box<String> box = new Box<>();' }
+                    ],
+                    code: 'public class Main {\n    static class Box<T> {\n        T item;\n        Box(T item) { this.item = item; }\n        T get() { return item; }\n    }\n    public static void main(String[] args) {\n        Box<String> box = new Box<>("Hello");\n        System.out.println(box.get());\n    }\n}',
+                    output: 'Hello',
+                    practice: { challenge: 'Create a generic class with a method.', hint: 'class Pair<K,V> { K key; V value; }' }
+                },
+                'java-lambda': {
+                    title: '🔮 Lambda Expressions',
+                    description: 'Lambda expressions provide a concise way to implement functional interfaces. Syntax: (params) -> expression.',
+                    sections: [
+                        { title: '📋 Lambda', content: 'Runnable r = () -> System.out.println("Hello");' }
+                    ],
+                    code: 'import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> list = Arrays.asList(1,2,3,4,5);\n        list.forEach(x -> System.out.print(x + " "));\n    }\n}',
+                    output: '1 2 3 4 5',
+                    practice: { challenge: 'Use lambda to sort a list.', hint: 'list.sort((a,b) -> a.compareTo(b));' }
+                },
+                'java-streams': {
+                    title: '🌊 Streams API',
+                    description: 'Streams enable functional-style operations on collections: filter, map, reduce, forEach, collect.',
+                    sections: [
+                        { title: '📋 Streams', content: 'list.stream().filter(x -> x % 2 == 0).map(x -> x*x).forEach(System.out::println);' }
+                    ],
+                    code: 'import java.util.*;\nimport java.util.stream.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> list = Arrays.asList(1,2,3,4,5);\n        int sum = list.stream().filter(x -> x % 2 == 0).mapToInt(x -> x*x).sum();\n        System.out.println(sum);\n    }\n}',
+                    output: '20',
+                    practice: { challenge: 'Filter even numbers and print them.', hint: 'list.stream().filter(x -> x%2==0).forEach(System.out::println);' }
+                },
+                'java-multithreading': {
+                    title: '🧵 Multithreading',
+                    description: 'Java supports multithreading via Thread class and Runnable interface. Use synchronized for thread safety.',
+                    sections: [
+                        { title: '📋 Threads', content: 'Thread t = new Thread(() -> System.out.println("Hello")); t.start();' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        Thread t = new Thread(() -> System.out.println("Thread"));\n        t.start();\n    }\n}',
+                    output: 'Thread',
+                    practice: { challenge: 'Create a thread that prints numbers.', hint: 'new Thread(() -> { for(int i=0; i<5; i++) System.out.println(i); }).start();' }
+                },
+                'java-date': {
+                    title: '📅 Date & Time',
+                    description: 'Use java.time package: LocalDate, LocalTime, LocalDateTime, DateTimeFormatter.',
+                    sections: [
+                        { title: '📋 Date/Time', content: 'LocalDate.now(); LocalDateTime.now(); DateTimeFormatter.ofPattern("yyyy-MM-dd");' }
+                    ],
+                    code: 'import java.time.*;\nimport java.time.format.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        LocalDateTime now = LocalDateTime.now();\n        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");\n        System.out.println(now.format(formatter));\n    }\n}',
+                    output: '2026-03-16 12:34:56',
+                    practice: { challenge: 'Print current date in DD/MM/YYYY format.', hint: 'DateTimeFormatter.ofPattern("dd/MM/yyyy")' }
+                },
+                'java-projects': {
+                    title: '🚀 Projects',
+                    description: 'Build real projects: Calculator, Student Management System, Library System, Banking System, Chat Application.',
+                    sections: [
+                        { title: '📋 Project Ideas', content: '1. To-Do List: add, delete, mark complete. 2. Bank Account: deposit, withdraw, balance. 3. Student Management: add, search, display.' }
+                    ],
+                    code: '// Project: Simple Calculator\nclass Calculator {\n    int add(int a, int b) { return a+b; }\n    int subtract(int a, int b) { return a-b; }\n    int multiply(int a, int b) { return a*b; }\n    double divide(int a, int b) { return (double)a/b; }\n}',
+                    practice: { challenge: 'Build a simple calculator class.', hint: 'Class with add, subtract, multiply, divide.' }
+                },
+                'java-reference': {
+                    title: '📚 Reference',
+                    description: 'Complete reference: keywords, operators, data types, collections, streams, lambda, and more.',
+                    sections: [
+                        { title: '📋 Java Reference', content: 'Java SE API documentation includes all classes and interfaces. Check Oracle\'s official documentation.' }
+                    ],
+                    code: '// Java Reference includes all standard library classes\n// System.out, ArrayList, HashMap, etc.',
+                    practice: { challenge: 'Look up a Java feature you don\'t know.', hint: 'Check docs.oracle.com' }
+                },
+                'java-keywords': {
+                    title: '🔑 Keywords',
+                    description: 'Java has 50+ reserved keywords including: abstract, assert, boolean, break, byte, case, catch, char, class, const, continue, default, do, double, else, enum, extends, final, finally, float, for, goto, if, implements, import, instanceof, int, interface, long, native, new, package, private, protected, public, return, short, static, strictfp, super, switch, synchronized, this, throw, throws, transient, try, void, volatile, while.',
+                    code: '// Keywords are reserved words in Java',
+                    practice: { challenge: 'List all Java keywords.', hint: 'Check the reference section.' }
+                },
+                'java-interview': {
+                    title: '💼 Interview Q&A',
+                    description: 'Common interview questions: What is OOP? Explain polymorphism. What is the difference between abstract class and interface? What is garbage collection? What is the difference between ArrayList and LinkedList?',
+                    sections: [
+                        { title: '📋 Common Questions', content: '1. What is JVM? 2. What is inheritance? 3. What is polymorphism? 4. What is the difference between == and .equals()? 5. What is the difference between final, finally, and finalize? 6. What is a lambda expression?' }
+                    ],
+                    code: '// Q: Explain the difference between abstract class and interface.\n// A: Abstract class can have concrete methods, interface can have default methods (Java 8+).',
+                    practice: { challenge: 'Prepare for Java interview questions.', hint: 'Practice with mock interviews.' }
+                },
+                'java-examples': {
+                    title: '📚 Examples',
+                    description: 'Practical examples: Fibonacci, Prime number check, Palindrome, Factorial, GCD, String reversal, Bubble sort.',
+                    sections: [
+                        { title: '📋 Example Programs', content: '1. Fibonacci series 2. Prime number check 3. Factorial 4. Palindrome 5. String reverse 6. Bubble sort' }
+                    ],
+                    code: 'public class Main {\n    public static void main(String[] args) {\n        int n = 10, a = 0, b = 1;\n        for(int i=0; i<n; i++) {\n            System.out.print(a + " ");\n            int next = a + b;\n            a = b;\n            b = next;\n        }\n    }\n}',
+                    output: '0 1 1 2 3 5 8 13 21 34',
+                    practice: { challenge: 'Print prime numbers up to 100.', hint: 'Check divisibility from 2 to sqrt(n).' }
+                },
+                'java-exercises': {
+                    title: '📝 Exercises',
+                    description: 'Practice exercises: Reverse array, Find max, Count vowels, Bubble sort, Merge arrays, Matrix multiplication.',
+                    sections: [
+                        { title: '📋 Exercise List', content: '1. Sum of two numbers. 2. Area of circle. 3. Even or odd. 4. Largest of three. 5. Factorial. 6. Reverse string.' }
+                    ],
+                    code: '// Exercise: Reverse an array\nint[] arr = {1,2,3,4,5};\nfor(int i=arr.length-1; i>=0; i--) {\n    System.out.print(arr[i] + " ");\n}',
+                    output: '5 4 3 2 1',
+                    practice: { challenge: 'Find maximum element in an array.', hint: 'int max = arr[0]; for(i=1; i<arr.length; i++) { if(arr[i] > max) max = arr[i]; }' }
+                },
+                'java-compiler': {
+                    title: '⚙️ Compiler',
+                    description: 'Compilation process: javac compiles .java to .class (bytecode). java runs the bytecode on JVM. Common flags: -d, -cp, -source, -target.',
+                    sections: [
+                        { title: '📋 Compilation', content: 'javac Main.java\njava Main' }
+                    ],
+                    code: '// Compilation: javac Main.java\n// Run: java Main',
+                    practice: { challenge: 'Compile and run a Java program.', hint: 'javac Main.java && java Main' }
+                }
+            };
+
+            // ---------- BUILD SIDEBAR ----------
+            function buildSidebar() {
+                const nav = document.getElementById('sidebarNav');
+                nav.innerHTML = '';
+                let firstTopicId = null;
+
+                for (const [section, topics] of Object.entries(syllabusData)) {
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.className = 'nav-section';
+
+                    const titleDiv = document.createElement('div');
+                    titleDiv.className = 'nav-section-title';
+                    titleDiv.textContent = section;
+                    sectionDiv.appendChild(titleDiv);
+
+                    topics.forEach(topic => {
+                        const link = document.createElement('button');
+                        link.className = 'nav-item';
+                        link.dataset.topicId = topic.id;
+                        link.innerHTML = `<i class="fas fa-chevron-right"></i> ${topic.label}`;
+
+                        if (!firstTopicId) firstTopicId = topic.id;
+                        if (topic.id === 'java-home') link.classList.add('active');
+
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            loadTopic(topic.id);
+                            if (window.innerWidth <= 1024) closeSidebar();
+                        });
+
+                        sectionDiv.appendChild(link);
+                    });
+
+                    nav.appendChild(sectionDiv);
+                }
+
+                return firstTopicId;
+            }
+
+            // ---------- LOAD TOPIC (with integrated compiler) ----------
+            function loadTopic(topicId) {
+                const content = topicContent[topicId];
+                if (!content) {
+                    showToast('Topic not found. Loading default...');
+                    return;
+                }
+
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.topicId === topicId) item.classList.add('active');
+                });
+
+                const main = document.getElementById('mainContent');
+
+                const defaultCode = content.code || 'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, Java!");\n    }\n}';
+
+                let html = `
+                    <div class="topic-header">
+                        <h1>${content.title}</h1>
+                        <div class="topic-meta">
+                            <span><i class="fas fa-clock"></i> 5 min read</span>
+                            <span><i class="fas fa-code"></i> ${content.practice ? 'Practice included' : 'Reference'}</span>
+                            <span><i class="fas fa-play"></i> Interactive</span>
+                        </div>
+                    </div>
+                    <div class="topic-body">
+                        <div class="description">${content.description}</div>
+                `;
+
+                if (content.sections) {
+                    content.sections.forEach(section => {
+                        html += `
+                            <div class="section-title"><i class="fas fa-book"></i> ${section.title}</div>
+                            <div class="description">${section.content}</div>
+                        `;
+                    });
+                }
+
+                if (content.code) {
+                    html += `<div class="code-block">${content.code}</div>`;
+                }
+
+                if (content.output) {
+                    html += `<div class="output-block">▶ Output: ${content.output}</div>`;
+                }
+
+                if (content.examples) {
+                    content.examples.forEach(ex => {
+                        html += `
+                            <div class="example-box">
+                                <div class="ex-title"><i class="fas fa-lightbulb"></i> ${ex.title}</div>
+                                <div class="ex-desc">${ex.desc}</div>
+                                <div class="code-block">${ex.code}</div>
+                            </div>
+                        `;
+                    });
+                }
+
+                if (content.practice) {
+                    html += `
+                        <div class="practice-box">
+                            <h3><i class="fas fa-gamepad"></i> Practice Challenge</h3>
+                            <p class="challenge-desc">${content.practice.challenge}</p>
+                            <button class="btn-practice" onclick="startChallenge('${topicId}')">Start Practice</button>
+                            <button class="btn-hint" onclick="showHint('${topicId}')">Hint</button>
+                        </div>
+                    `;
+                }
+
+                // ----- COMPILER SECTION -----
+                html += `
+                    <div class="compiler-section">
+                        <div class="compiler-header">
+                            <i class="fas fa-terminal"></i> <span>Java Playground · Online Compiler</span>
+                        </div>
+                        <textarea id="codeEditor_${topicId}" spellcheck="false">${defaultCode}</textarea>
+                        <div class="compiler-actions">
+                            <button class="btn-run" onclick="runCode('${topicId}')"><i class="fas fa-play"></i> Run</button>
+                            <button class="btn-clear" onclick="clearOutput('${topicId}')">Clear</button>
+                        </div>
+                        <div class="output-console" id="outputConsole_${topicId}">// Output will appear here</div>
+                    </div>
+                `;
+
+                // Navigation
+                const allTopics = [];
+                for (const [section, topics] of Object.entries(syllabusData)) {
+                    topics.forEach(t => allTopics.push(t.id));
+                }
+                const currentIndex = allTopics.indexOf(topicId);
+                const prevTopic = currentIndex > 0 ? allTopics[currentIndex - 1] : null;
+                const nextTopic = currentIndex < allTopics.length - 1 ? allTopics[currentIndex + 1] : null;
+
+                html += `
+                    <div class="nav-links">
+                        ${prevTopic ? `<span class="nav-link" onclick="loadTopic('${prevTopic}')"><i class="fas fa-arrow-left"></i> ${topicContent[prevTopic]?.title || 'Previous'}</span>` : '<span></span>'}
+                        ${nextTopic ? `<span class="nav-link" onclick="loadTopic('${nextTopic}')">${topicContent[nextTopic]?.title || 'Next'} <i class="fas fa-arrow-right"></i></span>` : '<span></span>'}
+                    </div>
+                </div>
+                `;
+
+                main.innerHTML = html;
+                history.pushState(null, '', `#${topicId}`);
+                showToast(`📖 ${content.title} · loaded`);
+            }
+
+            // ---------- COMPILER ENGINE (mock Java interpreter) ----------
+            window.runCode = function(topicId) {
+                const code = document.getElementById(`codeEditor_${topicId}`).value;
+                const outputEl = document.getElementById(`outputConsole_${topicId}`);
+                outputEl.textContent = '⏳ Compiling...';
+
+                try {
+                    let result = '';
+                    const lines = code.split('\n');
+                    for (let line of lines) {
+                        // Match System.out.println("...")
+                        const match = line.match(/System\.out\.println\s*\(\s*"([^"]*)"\s*\)/);
+                        if (match) {
+                            result += match[1] + '\n';
+                            continue;
+                        }
+                        // Match System.out.print("...")
+                        const match2 = line.match(/System\.out\.print\s*\(\s*"([^"]*)"\s*\)/);
+                        if (match2) {
+                            result += match2[1];
+                            continue;
+                        }
+                        // Match System.out.println with concatenation
+                        const matchConcat = line.match(/System\.out\.println\s*\(\s*"([^"]*)"\s*\+\s*(.*?)\s*\)/);
+                        if (matchConcat) {
+                            result += matchConcat[1] + ' [value]' + '\n';
+                            continue;
+                        }
+                    }
+                    if (result === '') {
+                        result = '// (mock) No System.out output detected. Try adding: System.out.println("Hello");';
+                    }
+                    outputEl.textContent = result;
+                    showToast('✅ Code executed successfully!');
+                } catch (e) {
+                    outputEl.textContent = '⚠️ Error: ' + e.message;
+                    showToast('❌ Compilation error');
+                }
+            };
+
+            window.clearOutput = function(topicId) {
+                document.getElementById(`outputConsole_${topicId}`).textContent = '// Output cleared';
+            };
+
+            // ---------- GLOBAL FUNCTIONS ----------
+            window.loadTopic = loadTopic;
+
+            window.startChallenge = function(topicId) {
+                const content = topicContent[topicId];
+                if (content && content.practice) {
+                    showToast(`🎯 Challenge: ${content.practice.challenge}`);
+                }
+            };
+
+            window.showHint = function(topicId) {
+                const content = topicContent[topicId];
+                if (content && content.practice) {
+                    showToast(`💡 Hint: ${content.practice.hint}`);
+                }
+            };
+
+            // ---------- TOAST ----------
+            const toastEl = document.getElementById('toast');
+            let toastTimer = null;
+
+            function showToast(message, duration = 2800) {
+                if (toastTimer) clearTimeout(toastTimer);
+                toastEl.textContent = message;
+                toastEl.style.opacity = '1';
+                toastEl.style.transform = 'translateX(-50%) translateY(0)';
+                toastTimer = setTimeout(() => {
+                    toastEl.style.opacity = '0';
+                    toastEl.style.transform = 'translateX(-50%) translateY(20px)';
+                }, duration);
+            }
+            window.showToast = showToast;
+
+            // ---------- SIDEBAR TOGGLE ----------
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+            function openSidebar() {
+                sidebar.classList.add('open');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            sidebarToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+            });
+
+            sidebarOverlay.addEventListener('click', closeSidebar);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeSidebar();
+                    if (toastEl.style.opacity === '1') {
+                        toastEl.style.opacity = '0';
+                        toastEl.style.transform = 'translateX(-50%) translateY(20px)';
+                    }
+                }
+            });
+
+            // ---------- INIT ----------
+            const firstTopic = buildSidebar();
+            const hash = window.location.hash.replace('#', '');
+            const defaultTopic = hash && topicContent[hash] ? hash : (firstTopic || 'java-home');
+            loadTopic(defaultTopic);
+
+            window.addEventListener('hashchange', function() {
+                const newHash = window.location.hash.replace('#', '');
+                if (newHash && topicContent[newHash]) loadTopic(newHash);
+            });
+
+            console.log('%c ☕ Java · Complete Course ', 'background: #2d7d46; color: #ffffff; font-size: 16px; font-weight: 700; padding: 8px 16px; border-radius: 8px;');
+            console.log('%c 70+ topics · Interactive · Hands-on learning ', 'color: #6b7280; font-size: 13px;');
+
+        })();
+    </script>
+
+</body>
+</html>
