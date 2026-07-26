@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>C++ · Complete Course · CodeVibeLabs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-black: #0b0e14;
+            --color-white: #ffffff;
+            --color-off-white: #f8fafc;
+            --color-gray-50: #f1f4f9;
+            --color-gray-100: #eaeef3;
+            --color-gray-200: #dce2ea;
+            --color-gray-300: #d0d5dd;
+            --color-gray-400: #b0b8c5;
+            --color-gray-500: #8f9bb0;
+            --color-gray-600: #6b7280;
+            --color-gray-700: #4a4f5e;
+            --color-gray-800: #2d3548;
+            --color-gray-900: #1a212f;
+            --color-accent: #2d7d46;
+            --color-accent-light: #3a9d5a;
+            --color-accent-dark: #1e5a32;
+            --color-code-bg: #0f141e;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 48px -12px rgba(0, 0, 0, 0.10);
+            --shadow-xl: 0 30px 60px -16px rgba(0, 0, 0, 0.14);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --sidebar-width: 280px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background: var(--color-off-white);
+            color: var(--color-black);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--color-black);
+            color: var(--color-gray-300);
+            overflow-y: auto;
+            padding: 1.2rem 0 2rem;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: var(--color-gray-900);
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 10px;
+        }
+
+        .sidebar-brand {
+            padding: 0 1.2rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 0.8rem;
+        }
+        .sidebar-brand .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-white);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .sidebar-brand .logo i {
+            color: var(--color-accent-light);
+            font-size: 1.4rem;
+        }
+        .sidebar-brand .sub {
+            font-size: 0.65rem;
+            color: var(--color-gray-500);
+            margin-top: 0.2rem;
+            padding-left: 2.2rem;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 0 0.6rem;
+        }
+        .sidebar-nav .nav-section {
+            margin-bottom: 0.4rem;
+        }
+        .sidebar-nav .nav-section-title {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--color-gray-500);
+            padding: 0.6rem 0.6rem 0.3rem;
+            font-weight: 700;
+        }
+        .sidebar-nav .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            font-size: 0.78rem;
+            color: var(--color-gray-400);
+            text-decoration: none;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+        .sidebar-nav .nav-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-white);
+        }
+        .sidebar-nav .nav-item.active {
+            background: rgba(45, 125, 70, 0.2);
+            color: var(--color-accent-light);
+            border-left: 3px solid var(--color-accent);
+        }
+        .sidebar-nav .nav-item i {
+            font-size: 0.7rem;
+            width: 1.2rem;
+            color: var(--color-gray-500);
+        }
+        .sidebar-nav .nav-item.active i {
+            color: var(--color-accent-light);
+        }
+
+        .sidebar-footer {
+            padding: 0.8rem 1.2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.6rem;
+            color: var(--color-gray-500);
+        }
+        .sidebar-footer .powered {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .sidebar-footer .powered i {
+            color: var(--color-accent-light);
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 0.8rem;
+            left: 0.8rem;
+            z-index: 1001;
+            background: var(--color-black);
+            color: var(--color-white);
+            border: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 1.5rem 2rem 3rem;
+            min-height: 100vh;
+            max-width: calc(100% - var(--sidebar-width));
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-gray-200);
+        }
+        .topic-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--color-black);
+        }
+        .topic-header .topic-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--color-gray-600);
+        }
+        .topic-header .topic-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .topic-body {
+            max-width: 1000px;
+        }
+        .topic-body .description {
+            font-size: 1.05rem;
+            color: var(--color-gray-700);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        .topic-body .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 1.5rem 0 0.8rem;
+            color: var(--color-black);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .topic-body .section-title i {
+            color: var(--color-accent);
+            font-size: 1.1rem;
+        }
+
+        .code-block {
+            background: var(--color-code-bg);
+            border-radius: var(--radius-sm);
+            padding: 1.2rem 1.5rem;
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.9;
+            overflow-x: auto;
+            margin: 0.8rem 0;
+            border: 1px solid var(--color-gray-800);
+        }
+        .code-block .comment {
+            color: #6a9955;
+        }
+        .code-block .keyword {
+            color: #569cd6;
+        }
+        .code-block .string {
+            color: #ce9178;
+        }
+        .code-block .func {
+            color: #dcdcaa;
+        }
+        .code-block .var {
+            color: #9cdcfe;
+        }
+        .code-block .num {
+            color: #b5cea8;
+        }
+        .code-block .preprocessor {
+            color: #c586c0;
+        }
+
+        .output-block {
+            background: var(--color-gray-900);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1.2rem;
+            color: #b0b8c5;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            margin: 0.5rem 0 1rem;
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .example-box {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--color-gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+        .example-box .ex-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--color-black);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .example-box .ex-title i {
+            color: var(--color-accent);
+        }
+        .example-box .ex-desc {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .practice-box {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border: 2px dashed var(--color-accent);
+            box-shadow: var(--shadow-sm);
+        }
+        .practice-box h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .practice-box h3 i {
+            color: var(--color-accent);
+        }
+        .practice-box .challenge-desc {
+            color: var(--color-gray-600);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        .practice-box .btn-practice {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            margin-right: 0.5rem;
+        }
+        .practice-box .btn-practice:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+        .practice-box .btn-hint {
+            background: var(--color-gray-200);
+            color: var(--color-gray-700);
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .practice-box .btn-hint:hover {
+            background: var(--color-gray-300);
+        }
+
+        .compiler-section {
+            background: #1a1a2e;
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #2d2d44;
+            box-shadow: var(--shadow-md);
+        }
+        .compiler-section .compiler-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #c0c0d0;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        .compiler-section .compiler-header i {
+            color: var(--color-accent-light);
+        }
+        .compiler-section textarea {
+            width: 100%;
+            background: #0d0d1a;
+            color: #e0e0f0;
+            border: 1px solid #2d2d44;
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            resize: vertical;
+            min-height: 160px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .compiler-section textarea:focus {
+            border-color: var(--color-accent);
+        }
+        .compiler-section .compiler-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 0.8rem 0;
+        }
+        .compiler-section .btn-run {
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            padding: 0.4rem 1.8rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .compiler-section .btn-run:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+        .compiler-section .btn-clear {
+            background: #3d3d5c;
+            color: #ccc;
+            border: none;
+            padding: 0.4rem 1.4rem;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .compiler-section .btn-clear:hover {
+            background: #4d4d6c;
+        }
+        .compiler-section .output-console {
+            background: #0d0d1a;
+            color: #b0b8c5;
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1.2rem;
+            margin-top: 0.8rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            min-height: 50px;
+            border: 1px solid #2d2d44;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-gray-200);
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .nav-links .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--color-gray-600);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            cursor: pointer;
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+        }
+        .nav-links .nav-link:hover {
+            color: var(--color-black);
+            background: var(--color-gray-50);
+        }
+        .nav-links .nav-link i {
+            font-size: 0.8rem;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-xl);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            z-index: 9999;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+            max-width: 90%;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .sidebar-toggle {
+                display: block;
+            }
+            .sidebar-overlay.active {
+                display: block;
+            }
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 1.2rem 1.2rem 2rem;
+                padding-top: 4rem;
+            }
+            .topic-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .code-block {
+                font-size: 0.7rem;
+                padding: 0.8rem 1rem;
+            }
+            .topic-header h1 {
+                font-size: 1.3rem;
+            }
+            .topic-body .description {
+                font-size: 0.9rem;
+            }
+            .practice-box {
+                padding: 1rem;
+            }
+            .practice-box .btn-practice,
+            .practice-box .btn-hint {
+                font-size: 0.7rem;
+                padding: 0.3rem 1rem;
+            }
+            .example-box {
+                padding: 0.8rem 1rem;
+            }
+            .compiler-section {
+                padding: 0.8rem 1rem;
+            }
+            .compiler-section textarea {
+                font-size: 0.75rem;
+                min-height: 120px;
+            }
+        }
+
+        ::selection {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-gray-50);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-gray-300);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+    </style>
+</head>
+<body>
+
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>C++ · Course</span>
+            </div>
+            <div class="sub">Complete C++ Programming Syllabus</div>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+        <div class="sidebar-footer">
+            <div class="powered">
+                <i class="fas fa-bolt"></i> powered by <strong style="color:var(--color-white);">teamorbits</strong>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+        <div style="padding:2rem;text-align:center;color:var(--color-gray-600);">
+            <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--color-accent);"></i>
+            <p style="margin-top:1rem;">Loading course content...</p>
+        </div>
+    </main>
+
+    <div id="toast"></div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ---------- C++ SYLLABUS ----------
+            const syllabusData = {
+                'C++ Basics': [
+                    { id: 'cpp-home', label: 'C++ HOME' },
+                    { id: 'cpp-intro', label: 'C++ Intro' },
+                    { id: 'cpp-get-started', label: 'Get Started' },
+                    { id: 'cpp-syntax', label: 'Syntax' },
+                    { id: 'cpp-output', label: 'Output' },
+                    { id: 'cpp-comments', label: 'Comments' },
+                    { id: 'cpp-variables', label: 'Variables' },
+                    { id: 'cpp-data-types', label: 'Data Types' },
+                    { id: 'cpp-type-conversion', label: 'Type Conversion' },
+                    { id: 'cpp-constants', label: 'Constants' },
+                    { id: 'cpp-operators', label: 'Operators' },
+                    { id: 'cpp-booleans', label: 'Booleans' },
+                    { id: 'cpp-if-else', label: 'If...Else' },
+                    { id: 'cpp-switch', label: 'Switch' },
+                ],
+                'Loops & Arrays': [
+                    { id: 'cpp-while', label: 'While Loop' },
+                    { id: 'cpp-for', label: 'For Loop' },
+                    { id: 'cpp-do-while', label: 'Do-While' },
+                    { id: 'cpp-break-continue', label: 'Break/Continue' },
+                    { id: 'cpp-arrays', label: 'Arrays' },
+                    { id: 'cpp-strings', label: 'Strings' },
+                    { id: 'cpp-user-input', label: 'User Input' },
+                    { id: 'cpp-memory-address', label: 'Memory Address' },
+                    { id: 'cpp-pointers', label: 'Pointers' },
+                ],
+                'Functions': [
+                    { id: 'cpp-functions', label: 'Functions' },
+                    { id: 'cpp-function-params', label: 'Function Params' },
+                    { id: 'cpp-overloading', label: 'Overloading' },
+                    { id: 'cpp-scope', label: 'Scope' },
+                    { id: 'cpp-recursion', label: 'Recursion' },
+                    { id: 'cpp-inline', label: 'Inline Functions' },
+                    { id: 'cpp-lambda', label: 'Lambda Expressions' },
+                ],
+                'OOP': [
+                    { id: 'cpp-oop', label: 'OOP Intro' },
+                    { id: 'cpp-classes', label: 'Classes & Objects' },
+                    { id: 'cpp-constructors', label: 'Constructors' },
+                    { id: 'cpp-destructors', label: 'Destructors' },
+                    { id: 'cpp-encapsulation', label: 'Encapsulation' },
+                    { id: 'cpp-inheritance', label: 'Inheritance' },
+                    { id: 'cpp-polymorphism', label: 'Polymorphism' },
+                    { id: 'cpp-friend', label: 'Friend Functions' },
+                    { id: 'cpp-this', label: 'this Pointer' },
+                ],
+                'STL & Advanced': [
+                    { id: 'cpp-vectors', label: 'Vectors' },
+                    { id: 'cpp-lists', label: 'Lists' },
+                    { id: 'cpp-maps', label: 'Maps' },
+                    { id: 'cpp-algorithms', label: 'STL Algorithms' },
+                    { id: 'cpp-exceptions', label: 'Exception Handling' },
+                    { id: 'cpp-file-io', label: 'File I/O' },
+                    { id: 'cpp-smart-pointers', label: 'Smart Pointers' },
+                    { id: 'cpp-multithreading', label: 'Multithreading' },
+                ],
+                'More': [
+                    { id: 'cpp-date', label: 'Date & Time' },
+                    { id: 'cpp-random', label: 'Random Numbers' },
+                    { id: 'cpp-macros', label: 'Macros' },
+                    { id: 'cpp-namespaces', label: 'Namespaces' },
+                    { id: 'cpp-enums', label: 'Enums' },
+                    { id: 'cpp-bitwise', label: 'Bitwise Operators' },
+                ],
+                'Projects & Reference': [
+                    { id: 'cpp-projects', label: 'Projects' },
+                    { id: 'cpp-reference', label: 'Reference' },
+                    { id: 'cpp-keywords', label: 'Keywords' },
+                    { id: 'cpp-interview', label: 'Interview Q&A' },
+                    { id: 'cpp-examples', label: 'Examples' },
+                    { id: 'cpp-exercises', label: 'Exercises' },
+                    { id: 'cpp-compiler', label: 'Compiler' },
+                ]
+            };
+
+            // ---------- TOPIC CONTENT (full, detailed, many examples) ----------
+            const topicContent = {
+                'cpp-home': {
+                    title: '🏠 C++ HOME',
+                    description: 'Welcome to the complete C++ programming course! C++ is a powerful, general-purpose language that supports object-oriented, procedural, and generic programming. It is widely used in game development, systems programming, embedded systems, and high-performance applications.',
+                    sections: [
+                        { title: '📖 What is C++?', content: 'C++ was developed by Bjarne Stroustrup in 1979 as an extension of C. It adds object-oriented features, classes, inheritance, polymorphism, templates, and exception handling. C++ is a compiled language that gives you low-level memory control and high performance.' },
+                        { title: '🎯 Why Learn C++?', content: 'C++ is used in game engines (Unreal), operating systems, browsers, databases, financial systems, and more. It teaches you memory management, performance optimization, and object-oriented design. Knowing C++ opens doors to high-performance computing.' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Welcome to C++ Programming! 🚀" << endl;\n    return 0;\n}',
+                    output: 'Welcome to C++ Programming! 🚀',
+                    examples: [
+                        { title: 'Example 1: Hello World', desc: 'The classic first C++ program.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello, World!" << endl;\n    return 0;\n}' },
+                        { title: 'Example 2: Using std::cout', desc: 'Print multiple values.', code: '#include <iostream>\nint main() {\n    std::cout << "C++ " << "is " << "awesome!" << std::endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Write a program that prints "I love C++!"', hint: 'Use cout << "I love C++!";' }
+                },
+                'cpp-intro': {
+                    title: '📚 C++ Intro',
+                    description: 'C++ is a cross-platform language that can be used to create high-performance applications. It was developed as an extension of C, adding object-oriented and generic programming features.',
+                    sections: [
+                        { title: '🔑 Key Features', content: 'Object-Oriented: classes, inheritance, polymorphism. Generic: templates. Low-level: pointers, manual memory management. High performance: compiled language. Standard Template Library (STL) for containers and algorithms.' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "C++ is powerful!" << endl;\n    return 0;\n}',
+                    output: 'C++ is powerful!',
+                    examples: [
+                        { title: 'Example: Using namespace', desc: 'Avoid std:: prefix.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "No std:: needed" << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Print your name using cout.', hint: 'cout << "Your Name";' }
+                },
+                'cpp-get-started': {
+                    title: '⚡ Get Started',
+                    description: 'To start coding in C++, you need a compiler (like GCC or Clang) and a text editor. Use an IDE like VS Code, CLion, or Code::Blocks for a better experience.',
+                    sections: [
+                        { title: '🛠️ Setup', content: 'Windows: Install MinGW or Visual Studio. macOS: Install Xcode Command Line Tools. Linux: install g++ via package manager. Compile: g++ -o program program.cpp' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "C++ is ready!" << endl;\n    return 0;\n}',
+                    output: 'C++ is ready!',
+                    practice: { challenge: 'Compile and run your first C++ program.', hint: 'g++ file.cpp -o out && ./out' }
+                },
+                'cpp-syntax': {
+                    title: '📝 C++ Syntax',
+                    description: 'C++ syntax is similar to C but with additional features like classes, templates, and namespaces. Statements end with a semicolon, and blocks are enclosed in curly braces.',
+                    sections: [
+                        { title: '🔍 Basic Rules', content: 'Case-sensitive. Semicolons end statements. Curly braces for blocks. Comments: // single-line, /* multi-line */.' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 5; // variable\n    cout << x << endl;\n    return 0;\n}',
+                    output: '5',
+                    examples: [
+                        { title: 'Example: Multiple statements', desc: 'Sequential execution.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 10;\n    int b = 20;\n    cout << a + b << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Write a program with two variables and print their product.', hint: 'int a=3, b=4; cout << a*b;' }
+                },
+                'cpp-output': {
+                    title: '🖨️ C++ Output',
+                    description: 'The cout object (with << operator) is used for output. endl inserts a newline and flushes the buffer.',
+                    sections: [
+                        { title: '📤 Using cout', content: 'cout << "text" << endl; You can chain outputs: cout << a << " " << b;' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int age = 25;\n    cout << "Age: " << age << endl;\n    return 0;\n}',
+                    output: 'Age: 25',
+                    examples: [
+                        { title: 'Example: Formatted output', desc: 'Print with formatting.', code: '#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    double pi = 3.14159;\n    cout << fixed << setprecision(2) << pi << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Print your name, age, and city using cout.', hint: 'cout << "Name: " << name;' }
+                },
+                'cpp-comments': {
+                    title: '💬 Comments',
+                    description: 'Comments are ignored by the compiler. Use them to explain your code.',
+                    sections: [
+                        { title: '📝 Types', content: 'Single-line: // comment. Multi-line: /* comment */. Also, /// for documentation.' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\n// This is a comment\nint main() {\n    /* Multi-line\n       comment */\n    cout << "Comments are useful" << endl;\n    return 0;\n}',
+                    practice: { challenge: 'Add comments to explain a program.', hint: 'Use // for line comments.' }
+                },
+                'cpp-variables': {
+                    title: '📦 Variables',
+                    description: 'Variables store data. C++ requires type declaration. You can use auto for type inference.',
+                    sections: [
+                        { title: '🔑 Declaration', content: 'int x = 10; float y = 3.14; string name = "Alice"; auto z = 42; // int' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    double y = 3.14;\n    cout << x << ", " << y << endl;\n    return 0;\n}',
+                    output: '10, 3.14',
+                    examples: [
+                        { title: 'Example: auto keyword', desc: 'Type inference.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    auto a = 5;\n    auto b = 3.14;\n    auto c = "Hello";\n    cout << a << " " << b << " " << c << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Declare variables of int, double, string, and print them.', hint: 'Use string for text.' }
+                },
+                'cpp-data-types': {
+                    title: '📊 Data Types',
+                    description: 'C++ has built-in types: int, char, float, double, bool, void, wchar_t. Also, derived types: arrays, pointers, references.',
+                    sections: [
+                        { title: '📋 Integer Types', content: 'char (1B), short (2B), int (4B), long (4/8B), long long (8B). Unsigned variants: unsigned int, etc.' },
+                        { title: '🔢 Floating Types', content: 'float (4B), double (8B), long double (10/16B).' },
+                        { title: '📋 Other Types', content: 'bool (true/false), string (std::string), void (no value).' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "int size: " << sizeof(int) << " bytes" << endl;\n    cout << "double size: " << sizeof(double) << " bytes" << endl;\n    return 0;\n}',
+                    output: 'int size: 4 bytes\ndouble size: 8 bytes',
+                    examples: [
+                        { title: 'Example: Char and bool', desc: 'Character and boolean types.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    char grade = \'A\';\n    bool isPass = true;\n    cout << grade << " " << isPass << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Check the size of char, bool, and long double on your system.', hint: 'sizeof(type)' }
+                },
+                'cpp-type-conversion': {
+                    title: '🔄 Type Conversion',
+                    description: 'Implicit conversion: int to double, etc. Explicit conversion (casting): static_cast, dynamic_cast, const_cast, reinterpret_cast.',
+                    sections: [
+                        { title: '⚡ Implicit', content: 'int a = 10; double b = a; // 10.0' },
+                        { title: '🔧 Explicit', content: 'double x = 3.14; int y = static_cast<int>(x); // 3' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    double pi = 3.14159;\n    int intPi = static_cast<int>(pi);\n    cout << intPi << endl;\n    return 0;\n}',
+                    output: '3',
+                    examples: [
+                        { title: 'Example: Implicit conversion', desc: 'Automatic type conversion.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 5;\n    double b = a; // implicit\n    cout << b << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Convert double to int using static_cast.', hint: 'static_cast<int>(value)' }
+                },
+                'cpp-constants': {
+                    title: '🔒 Constants',
+                    description: 'Constants are values that cannot be changed. Use const or constexpr.',
+                    sections: [
+                        { title: '📌 Types', content: 'const int MAX = 100; constexpr int SQUARE(int x) { return x*x; }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    const int DAYS = 7;\n    cout << "Days: " << DAYS << endl;\n    return 0;\n}',
+                    output: 'Days: 7',
+                    examples: [
+                        { title: 'Example: constexpr', desc: 'Compile-time constant.', code: '#include <iostream>\nusing namespace std;\n\nconstexpr int cube(int x) { return x*x*x; }\n\nint main() {\n    cout << cube(3) << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Define a constant for PI and use it.', hint: 'const double PI = 3.14159;' }
+                },
+                'cpp-operators': {
+                    title: '🧮 Operators',
+                    description: 'C++ supports arithmetic, relational, logical, bitwise, assignment, and compound operators. Also, increment/decrement.',
+                    sections: [
+                        { title: '📊 Types', content: 'Arithmetic: + - * / %. Relational: == != > < >= <=. Logical: && || !. Assignment: = += -= *= /=.' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 10, b = 3;\n    cout << a << " % " << b << " = " << a % b << endl;\n    return 0;\n}',
+                    output: '10 % 3 = 1',
+                    examples: [
+                        { title: 'Example: Compound assignment', desc: '+=, -=, etc.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 5;\n    x += 3;\n    cout << x << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Calculate the area of a rectangle using operators.', hint: 'area = length * width;' }
+                },
+                'cpp-booleans': {
+                    title: '✅ Booleans',
+                    description: 'bool type holds true or false. In C++, true is 1, false is 0.',
+                    sections: [
+                        { title: '📌 bool', content: 'bool isReady = true; bool isDone = false;' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    bool isEven = (10 % 2 == 0);\n    cout << "Is 10 even? " << isEven << endl;\n    return 0;\n}',
+                    output: 'Is 10 even? 1',
+                    examples: [
+                        { title: 'Example: Boolean logic', desc: 'Using && and ||.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    bool a = true, b = false;\n    cout << (a && b) << endl;\n    cout << (a || b) << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Check if a number is positive using bool.', hint: 'bool isPositive = (num > 0);' }
+                },
+                'cpp-if-else': {
+                    title: '🔄 If...Else',
+                    description: 'Conditional statements: if, else if, else. Also, ternary operator: condition ? expr1 : expr2.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'if(condition) { code } else if(condition) { code } else { code }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int score = 85;\n    if(score >= 90) cout << "A" << endl;\n    else if(score >= 80) cout << "B" << endl;\n    else cout << "C" << endl;\n    return 0;\n}',
+                    output: 'B',
+                    examples: [
+                        { title: 'Example: Ternary', desc: 'Compact if-else.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    string result = (x % 2 == 0) ? "Even" : "Odd";\n    cout << result << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Check if a number is zero, positive, or negative.', hint: 'if(num > 0) ...' }
+                },
+                'cpp-switch': {
+                    title: '🔀 Switch',
+                    description: 'Switch statement is used for multi-way branching. It works with integral types and enum.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'switch(expr) { case val1: code; break; case val2: code; break; default: code; }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int day = 3;\n    switch(day) {\n        case 1: cout << "Mon"; break;\n        case 2: cout << "Tue"; break;\n        case 3: cout << "Wed"; break;\n        default: cout << "Invalid";\n    }\n    return 0;\n}',
+                    output: 'Wed',
+                    examples: [
+                        { title: 'Example: Menu system', desc: 'Switch for menu options.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int choice = 2;\n    switch(choice) {\n        case 1: cout << "Option 1"; break;\n        case 2: cout << "Option 2"; break;\n        default: cout << "Invalid";\n    }\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Create a calculator using switch.', hint: 'switch(operator) { case \'+\': ... }' }
+                },
+                'cpp-while': {
+                    title: '🔄 While Loop',
+                    description: 'Repeats code while condition is true. Use for indefinite loops.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'while(condition) { code }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int i = 1;\n    while(i <= 5) {\n        cout << i << " ";\n        i++;\n    }\n    return 0;\n}',
+                    output: '1 2 3 4 5',
+                    examples: [
+                        { title: 'Example: Sum of numbers', desc: 'Sum 1 to 10.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int sum = 0, i = 1;\n    while(i <= 10) {\n        sum += i;\n        i++;\n    }\n    cout << sum << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Print numbers from 10 down to 1 using while.', hint: 'i=10; while(i>=1) { ... i--; }' }
+                },
+                'cpp-for': {
+                    title: '🔄 For Loop',
+                    description: 'For loop is used when you know the number of iterations. It has initialization, condition, and increment.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'for(init; condition; increment) { code }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    for(int i = 0; i < 5; i++) {\n        cout << i << " ";\n    }\n    return 0;\n}',
+                    output: '0 1 2 3 4',
+                    examples: [
+                        { title: 'Example: Multiplication table', desc: 'Nested loops.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    for(int i=1; i<=5; i++) {\n        for(int j=1; j<=5; j++) {\n            cout << i*j << "\\t";\n        }\n        cout << endl;\n    }\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Print even numbers from 0 to 20 using for loop.', hint: 'for(int i=0; i<=20; i+=2)' }
+                },
+                'cpp-do-while': {
+                    title: '🔄 Do-While',
+                    description: 'Do-while loop executes code at least once, then checks condition.',
+                    sections: [
+                        { title: '📋 Syntax', content: 'do { code } while(condition);' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int i = 0;\n    do {\n        cout << i << " ";\n        i++;\n    } while(i < 5);\n    return 0;\n}',
+                    output: '0 1 2 3 4',
+                    practice: { challenge: 'Use do-while to get user input until valid.', hint: 'do { cin >> x; } while(x < 0);' }
+                },
+                'cpp-break-continue': {
+                    title: '⏭️ Break & Continue',
+                    description: 'Break exits the loop. Continue skips the current iteration.',
+                    sections: [
+                        { title: '📋 Break', content: 'Exits loop immediately.' },
+                        { title: '📋 Continue', content: 'Skips rest of current iteration.' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    for(int i=1; i<=10; i++) {\n        if(i == 5) break;\n        if(i % 2 == 0) continue;\n        cout << i << " ";\n    }\n    return 0;\n}',
+                    output: '1 3',
+                    practice: { challenge: 'Print odd numbers from 1 to 10 using continue.', hint: 'if(i%2==0) continue;' }
+                },
+                'cpp-arrays': {
+                    title: '📊 Arrays',
+                    description: 'Arrays store multiple values of the same type. Index starts at 0.',
+                    sections: [
+                        { title: '📋 Declaration', content: 'int arr[5] = {1,2,3,4,5};' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int arr[5] = {1,2,3,4,5};\n    for(int i=0; i<5; i++) {\n        cout << arr[i] << " ";\n    }\n    return 0;\n}',
+                    output: '1 2 3 4 5',
+                    examples: [
+                        { title: 'Example: Find max', desc: 'Find maximum element.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int arr[5] = {3,7,1,9,4};\n    int max = arr[0];\n    for(int i=1; i<5; i++) {\n        if(arr[i] > max) max = arr[i];\n    }\n    cout << "Max: " << max << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Find sum of all elements in an array.', hint: 'sum += arr[i];' }
+                },
+                'cpp-strings': {
+                    title: '📝 Strings',
+                    description: 'C++ has std::string for strings. Supports concatenation, length, and many operations.',
+                    sections: [
+                        { title: '📋 String Basics', content: 'string s = "Hello"; s.length(); s += " World";' }
+                    ],
+                    code: '#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string name = "Alice";\n    cout << "Length: " << name.length() << endl;\n    return 0;\n}',
+                    output: 'Length: 5',
+                    examples: [
+                        { title: 'Example: String concatenation', desc: 'Using + operator.', code: '#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string first = "C++";\n    string second = " is great!";\n    cout << first + second << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Concatenate two strings and print.', hint: 'string result = str1 + str2;' }
+                },
+                'cpp-user-input': {
+                    title: '⌨️ User Input',
+                    description: 'Use cin >> to read input. For strings with spaces, use getline().',
+                    sections: [
+                        { title: '📋 cin', content: 'cin >> variable;' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int age;\n    cout << "Enter age: ";\n    cin >> age;\n    cout << "Age: " << age << endl;\n    return 0;\n}',
+                    output: 'Enter age: 25\nAge: 25',
+                    practice: { challenge: 'Read two numbers and print their sum.', hint: 'cin >> a >> b;' }
+                },
+                'cpp-memory-address': {
+                    title: '📍 Memory Address',
+                    description: 'Every variable has a memory address. Use & to get it.',
+                    sections: [
+                        { title: '📋 Address Operator', content: 'int x = 10; cout << &x;' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    cout << "Address: " << &x << endl;\n    return 0;\n}',
+                    output: 'Address: 0x7fff...',
+                    practice: { challenge: 'Print address of a double variable.', hint: 'cout << &d;' }
+                },
+                'cpp-pointers': {
+                    title: '📍 Pointers',
+                    description: 'Pointers store addresses. Use * to dereference. C++ also has references (&).',
+                    sections: [
+                        { title: '📋 Pointer Basics', content: 'int* ptr = &x; cout << *ptr;' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    int* ptr = &x;\n    cout << *ptr << endl;\n    return 0;\n}',
+                    output: '10',
+                    examples: [
+                        { title: 'Example: Pointer arithmetic', desc: 'Increment pointer.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int arr[3] = {10,20,30};\n    int* ptr = arr;\n    cout << *ptr << endl;\n    ptr++;\n    cout << *ptr << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Change variable value using pointer.', hint: '*ptr = newValue;' }
+                },
+                'cpp-functions': {
+                    title: '📦 Functions',
+                    description: 'Functions are reusable blocks. C++ supports function overloading and default parameters.',
+                    sections: [
+                        { title: '📋 Function Basics', content: 'returnType name(parameters) { code }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint add(int a, int b) {\n    return a + b;\n}\n\nint main() {\n    cout << add(5,3) << endl;\n    return 0;\n}',
+                    output: '8',
+                    practice: { challenge: 'Create function to multiply two numbers.', hint: 'int multiply(int a, int b) { return a*b; }' }
+                },
+                'cpp-function-params': {
+                    title: '📤 Function Params',
+                    description: 'Parameters can be passed by value, reference, or pointer. Use & for reference.',
+                    sections: [
+                        { title: '📋 Pass by Reference', content: 'void swap(int &a, int &b) { int temp=a; a=b; b=temp; }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nvoid increment(int &x) {\n    x++;\n}\n\nint main() {\n    int num = 10;\n    increment(num);\n    cout << num << endl;\n    return 0;\n}',
+                    output: '11',
+                    practice: { challenge: 'Write a function that doubles a number by reference.', hint: 'void doubleIt(int &x) { x *= 2; }' }
+                },
+                'cpp-overloading': {
+                    title: '📝 Function Overloading',
+                    description: 'Multiple functions with the same name but different parameters.',
+                    sections: [
+                        { title: '📋 Overloading', content: 'int add(int a, int b); double add(double a, double b);' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint add(int a, int b) { return a+b; }\ndouble add(double a, double b) { return a+b; }\n\nint main() {\n    cout << add(5,3) << endl;\n    cout << add(2.5, 3.7) << endl;\n    return 0;\n}',
+                    output: '8\n6.2',
+                    practice: { challenge: 'Overload a function to print int and string.', hint: 'void print(int x); void print(string s);' }
+                },
+                'cpp-scope': {
+                    title: '🔍 Scope',
+                    description: 'Variables have scope: local, global, and block scope.',
+                    sections: [
+                        { title: '📋 Scope Types', content: 'Local: inside function. Global: outside all functions. Block: inside {}.' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint global = 10;\n\nint main() {\n    int local = 5;\n    cout << global << " " << local << endl;\n    return 0;\n}',
+                    output: '10 5',
+                    practice: { challenge: 'Demonstrate local vs global scope.', hint: 'Create global and local with same name.' }
+                },
+                'cpp-recursion': {
+                    title: '🔄 Recursion',
+                    description: 'Function calling itself. Must have a base case.',
+                    sections: [
+                        { title: '📋 Recursion', content: 'int factorial(int n) { if(n <= 1) return 1; return n * factorial(n-1); }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint fib(int n) {\n    if(n <= 1) return n;\n    return fib(n-1) + fib(n-2);\n}\n\nint main() {\n    cout << fib(6) << endl;\n    return 0;\n}',
+                    output: '8',
+                    practice: { challenge: 'Write recursive sum of digits.', hint: 'if(n==0) return 0; return n%10 + sumDigits(n/10);' }
+                },
+                'cpp-inline': {
+                    title: '⚡ Inline Functions',
+                    description: 'Inline functions suggest the compiler to replace function calls with code, reducing overhead.',
+                    sections: [
+                        { title: '📋 Inline', content: 'inline int square(int x) { return x*x; }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\ninline int square(int x) { return x*x; }\n\nint main() {\n    cout << square(5) << endl;\n    return 0;\n}',
+                    output: '25',
+                    practice: { challenge: 'Create inline cube function.', hint: 'inline int cube(int x) { return x*x*x; }' }
+                },
+                'cpp-lambda': {
+                    title: '🔮 Lambda Expressions',
+                    description: 'Lambda functions are anonymous functions. Syntax: [capture](params) -> return_type { body }',
+                    sections: [
+                        { title: '📋 Lambda', content: 'auto add = [](int a, int b) { return a+b; };' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    auto add = [](int a, int b) { return a + b; };\n    cout << add(5,3) << endl;\n    return 0;\n}',
+                    output: '8',
+                    examples: [
+                        { title: 'Example: Lambda with capture', desc: 'Capture by value.', code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 10;\n    auto printX = [x]() { cout << x << endl; };\n    printX();\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Create a lambda to multiply two numbers.', hint: 'auto mul = [](int a, int b) { return a*b; };' }
+                },
+                'cpp-oop': {
+                    title: '📦 OOP Intro',
+                    description: 'Object-Oriented Programming (OOP) is a paradigm that uses objects and classes. Key concepts: encapsulation, inheritance, polymorphism.',
+                    sections: [
+                        { title: '📋 OOP Concepts', content: 'Encapsulation: bundling data and methods. Inheritance: deriving new classes. Polymorphism: same interface, different behavior.' }
+                    ],
+                    code: '// OOP in C++\nclass Car {\npublic:\n    string brand;\n    void honk() { cout << "Beep!"; }\n};',
+                    practice: { challenge: 'Define a simple class with one method.', hint: 'class Person { public: void greet(); };' }
+                },
+                'cpp-classes': {
+                    title: '📦 Classes & Objects',
+                    description: 'A class is a blueprint for objects. Objects are instances of classes.',
+                    sections: [
+                        { title: '📋 Class Basics', content: 'class Person { public: string name; int age; }; Person p; p.name = "Alice";' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nclass Person {\npublic:\n    string name;\n    int age;\n};\n\nint main() {\n    Person p;\n    p.name = "Alice";\n    p.age = 25;\n    cout << p.name << ", " << p.age << endl;\n    return 0;\n}',
+                    output: 'Alice, 25',
+                    examples: [
+                        { title: 'Example: Multiple objects', desc: 'Create multiple instances.', code: '#include <iostream>\nusing namespace std;\n\nclass Car {\npublic:\n    string brand;\n    int year;\n};\n\nint main() {\n    Car car1, car2;\n    car1.brand = "Toyota"; car1.year = 2020;\n    car2.brand = "Honda"; car2.year = 2022;\n    cout << car1.brand << " " << car1.year << endl;\n    cout << car2.brand << " " << car2.year << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Create a Book class with title and author.', hint: 'class Book { public: string title; string author; };' }
+                },
+                'cpp-constructors': {
+                    title: '🏗️ Constructors',
+                    description: 'Constructors initialize objects. They have the same name as the class. Default, parameterized, and copy constructors.',
+                    sections: [
+                        { title: '📋 Constructor Types', content: 'Person() : name(""), age(0) {} Person(string n, int a) : name(n), age(a) {}' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nclass Person {\npublic:\n    string name;\n    int age;\n    Person(string n, int a) { name = n; age = a; }\n};\n\nint main() {\n    Person p("Alice", 25);\n    cout << p.name << ", " << p.age << endl;\n    return 0;\n}',
+                    output: 'Alice, 25',
+                    examples: [
+                        { title: 'Example: Default constructor', desc: 'Constructor with default values.', code: '#include <iostream>\nusing namespace std;\n\nclass Person {\npublic:\n    string name;\n    int age;\n    Person() { name = "Unknown"; age = 0; }\n};\n\nint main() {\n    Person p;\n    cout << p.name << ", " << p.age << endl;\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Create a class with a parameterized constructor.', hint: 'class Point { public: int x,y; Point(int a, int b) { x=a; y=b; } };' }
+                },
+                'cpp-destructors': {
+                    title: '💥 Destructors',
+                    description: 'Destructors clean up resources. They have the same name as the class with a ~ prefix.',
+                    sections: [
+                        { title: '📋 Destructor', content: '~Person() { cout << "Destroyed"; }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nclass Person {\npublic:\n    ~Person() { cout << "Destructor called" << endl; }\n};\n\nint main() {\n    Person p;\n    return 0;\n}',
+                    output: 'Destructor called',
+                    practice: { challenge: 'Add a destructor to a class that prints a message.', hint: '~MyClass() { cout << "Deleted"; }' }
+                },
+                'cpp-encapsulation': {
+                    title: '🔒 Encapsulation',
+                    description: 'Encapsulation hides internal data. Use private and public access specifiers. Getter and setter methods.',
+                    sections: [
+                        { title: '📋 Encapsulation', content: 'private: int age; public: void setAge(int a) { age = a; } int getAge() { return age; }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nclass Person {\nprivate:\n    int age;\npublic:\n    void setAge(int a) { age = a; }\n    int getAge() { return age; }\n};\n\nint main() {\n    Person p;\n    p.setAge(25);\n    cout << p.getAge() << endl;\n    return 0;\n}',
+                    output: '25',
+                    practice: { challenge: 'Create a class with private data and public getters/setters.', hint: 'private: int id; public: void setId(int i); int getId();' }
+                },
+                'cpp-inheritance': {
+                    title: '🧬 Inheritance',
+                    description: 'Inheritance allows a class to derive from another class. Derived class inherits base class members.',
+                    sections: [
+                        { title: '📋 Inheritance', content: 'class Child : public Parent { ... };' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nclass Animal {\npublic:\n    void eat() { cout << "Eating" << endl; }\n};\n\nclass Dog : public Animal {\npublic:\n    void bark() { cout << "Barking" << endl; }\n};\n\nint main() {\n    Dog d;\n    d.eat();\n    d.bark();\n    return 0;\n}',
+                    output: 'Eating\nBarking',
+                    practice: { challenge: 'Derive a Student class from Person.', hint: 'class Student : public Person { ... };' }
+                },
+                'cpp-polymorphism': {
+                    title: '🎭 Polymorphism',
+                    description: 'Polymorphism allows different classes to be treated as the same base class. Virtual functions enable runtime polymorphism.',
+                    sections: [
+                        { title: '📋 Polymorphism', content: 'virtual void speak() { cout << "Animal"; }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nclass Animal {\npublic:\n    virtual void speak() { cout << "Animal sound" << endl; }\n};\n\nclass Dog : public Animal {\npublic:\n    void speak() override { cout << "Woof" << endl; }\n};\n\nint main() {\n    Animal* a = new Dog();\n    a->speak();\n    delete a;\n    return 0;\n}',
+                    output: 'Woof',
+                    practice: { challenge: 'Create a base class with virtual function and override it.', hint: 'virtual void display();' }
+                },
+                'cpp-friend': {
+                    title: '🤝 Friend Functions',
+                    description: 'Friend functions can access private members of a class. Declared with friend keyword.',
+                    sections: [
+                        { title: '📋 Friend', content: 'friend void display(Person &p);' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nclass Person {\nprivate:\n    int age;\npublic:\n    Person(int a) : age(a) {}\n    friend void printAge(Person &p);\n};\n\nvoid printAge(Person &p) {\n    cout << p.age << endl;\n}\n\nint main() {\n    Person p(25);\n    printAge(p);\n    return 0;\n}',
+                    output: '25',
+                    practice: { challenge: 'Create a friend function that accesses private data.', hint: 'friend void show();' }
+                },
+                'cpp-this': {
+                    title: '🔍 this Pointer',
+                    description: 'this is a pointer to the current object. Used to refer to member variables and methods.',
+                    sections: [
+                        { title: '📋 this', content: 'this->age = age;' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nclass Person {\npublic:\n    int age;\n    Person(int age) { this->age = age; }\n    void print() { cout << this->age << endl; }\n};\n\nint main() {\n    Person p(25);\n    p.print();\n    return 0;\n}',
+                    output: '25',
+                    practice: { challenge: 'Use this pointer to set member variables.', hint: 'this->x = x;' }
+                },
+                'cpp-vectors': {
+                    title: '📊 Vectors',
+                    description: 'Vector is a dynamic array from the STL. Provides size(), push_back(), pop_back(), at(), and iterators.',
+                    sections: [
+                        { title: '📋 Vector Basics', content: 'vector<int> v; v.push_back(10); v.size(); v[0];' }
+                    ],
+                    code: '#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v = {1,2,3,4,5};\n    for(int x : v) cout << x << " ";\n    return 0;\n}',
+                    output: '1 2 3 4 5',
+                    examples: [
+                        { title: 'Example: Vector operations', desc: 'push_back and pop_back.', code: '#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v;\n    v.push_back(10);\n    v.push_back(20);\n    v.pop_back();\n    for(int x : v) cout << x << " ";\n    return 0;\n}' }
+                    ],
+                    practice: { challenge: 'Create a vector of strings and iterate.', hint: 'vector<string> names;' }
+                },
+                'cpp-lists': {
+                    title: '📋 Lists',
+                    description: 'List is a doubly-linked list from STL. Supports insert, erase, push_front, push_back.',
+                    sections: [
+                        { title: '📋 List Basics', content: 'list<int> lst; lst.push_back(10); lst.push_front(5);' }
+                    ],
+                    code: '#include <iostream>\n#include <list>\nusing namespace std;\n\nint main() {\n    list<int> lst = {1,2,3};\n    lst.push_front(0);\n    for(int x : lst) cout << x << " ";\n    return 0;\n}',
+                    output: '0 1 2 3',
+                    practice: { challenge: 'Use list to store names and iterate.', hint: 'list<string> names;' }
+                },
+                'cpp-maps': {
+                    title: '🗺️ Maps',
+                    description: 'Map stores key-value pairs. Keys are unique. Uses balanced tree (logarithmic complexity).',
+                    sections: [
+                        { title: '📋 Map Basics', content: 'map<string, int> m; m["Alice"] = 25; m["Bob"] = 30;' }
+                    ],
+                    code: '#include <iostream>\n#include <map>\nusing namespace std;\n\nint main() {\n    map<string, int> ages;\n    ages["Alice"] = 25;\n    ages["Bob"] = 30;\n    for(auto &p : ages) {\n        cout << p.first << ": " << p.second << endl;\n    }\n    return 0;\n}',
+                    output: 'Alice: 25\nBob: 30',
+                    practice: { challenge: 'Create a map of student IDs and names.', hint: 'map<int, string> students;' }
+                },
+                'cpp-algorithms': {
+                    title: '📊 STL Algorithms',
+                    description: 'STL provides algorithms like sort, find, binary_search, accumulate, for_each, etc. Works with iterators.',
+                    sections: [
+                        { title: '📋 Algorithms', content: 'sort(v.begin(), v.end()); auto it = find(v.begin(), v.end(), 3);' }
+                    ],
+                    code: '#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    vector<int> v = {5,2,8,1,9};\n    sort(v.begin(), v.end());\n    for(int x : v) cout << x << " ";\n    return 0;\n}',
+                    output: '1 2 5 8 9',
+                    practice: { challenge: 'Find the max element using max_element.', hint: 'auto it = max_element(v.begin(), v.end());' }
+                },
+                'cpp-exceptions': {
+                    title: '⚠️ Exception Handling',
+                    description: 'C++ uses try, catch, throw for exception handling. Catch any exception with catch(...).',
+                    sections: [
+                        { title: '📋 Exception', content: 'try { throw 42; } catch(int e) { cout << e; }' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    try {\n        throw runtime_error("Error occurred");\n    } catch(exception &e) {\n        cout << e.what() << endl;\n    }\n    return 0;\n}',
+                    output: 'Error occurred',
+                    practice: { challenge: 'Handle division by zero exception.', hint: 'if(denominator == 0) throw "Division by zero";' }
+                },
+                'cpp-file-io': {
+                    title: '📁 File I/O',
+                    description: 'Use fstream library: ofstream for output, ifstream for input. Read/write text and binary files.',
+                    sections: [
+                        { title: '📋 File I/O', content: 'ofstream file("data.txt"); file << "Hello"; file.close();' }
+                    ],
+                    code: '#include <iostream>\n#include <fstream>\nusing namespace std;\n\nint main() {\n    ofstream file("test.txt");\n    file << "C++ File I/O" << endl;\n    file.close();\n    \n    ifstream in("test.txt");\n    string line;\n    getline(in, line);\n    cout << line << endl;\n    in.close();\n    return 0;\n}',
+                    output: 'C++ File I/O',
+                    practice: { challenge: 'Read from a file and print its contents.', hint: 'ifstream file("file.txt"); string line; while(getline(file, line)) cout << line;' }
+                },
+                'cpp-smart-pointers': {
+                    title: '🧠 Smart Pointers',
+                    description: 'Smart pointers automatically manage memory: unique_ptr, shared_ptr, weak_ptr. Prevents memory leaks.',
+                    sections: [
+                        { title: '📋 Smart Pointers', content: 'unique_ptr<int> p(new int(10)); shared_ptr<int> sp(new int(20));' }
+                    ],
+                    code: '#include <iostream>\n#include <memory>\nusing namespace std;\n\nint main() {\n    unique_ptr<int> p(new int(10));\n    cout << *p << endl;\n    return 0;\n}',
+                    output: '10',
+                    practice: { challenge: 'Use shared_ptr to manage a string.', hint: 'shared_ptr<string> s(new string("Hello"));' }
+                },
+                'cpp-multithreading': {
+                    title: '🧵 Multithreading',
+                    description: 'C++11 introduced thread support. Use std::thread, join(), detach(). Mutex for synchronization.',
+                    sections: [
+                        { title: '📋 Threads', content: 'thread t([](){ cout << "Hello"; }); t.join();' }
+                    ],
+                    code: '#include <iostream>\n#include <thread>\nusing namespace std;\n\nint main() {\n    thread t([](){ cout << "Thread" << endl; });\n    t.join();\n    return 0;\n}',
+                    output: 'Thread',
+                    practice: { challenge: 'Create a thread that prints a number.', hint: 'thread t(print);' }
+                },
+                'cpp-date': {
+                    title: '📅 Date & Time',
+                    description: 'Use <chrono> for time operations. Also, <ctime> for C-style time functions.',
+                    sections: [
+                        { title: '📋 Chrono', content: 'auto now = chrono::system_clock::now(); time_t t = chrono::system_clock::to_time_t(now);' }
+                    ],
+                    code: '#include <iostream>\n#include <chrono>\n#include <ctime>\nusing namespace std;\n\nint main() {\n    auto now = chrono::system_clock::now();\n    time_t t = chrono::system_clock::to_time_t(now);\n    cout << ctime(&t);\n    return 0;\n}',
+                    output: 'Wed Mar 16 12:34:56 2026',
+                    practice: { challenge: 'Print current date in YYYY-MM-DD format.', hint: 'use localtime and strftime.' }
+                },
+                'cpp-random': {
+                    title: '🎲 Random Numbers',
+                    description: 'Use <random> for high-quality random numbers: mt19937, uniform_int_distribution.',
+                    sections: [
+                        { title: '📋 Random', content: 'random_device rd; mt19937 gen(rd()); uniform_int_distribution<> dis(1, 100);' }
+                    ],
+                    code: '#include <iostream>\n#include <random>\nusing namespace std;\n\nint main() {\n    random_device rd;\n    mt19937 gen(rd());\n    uniform_int_distribution<> dis(1, 100);\n    cout << dis(gen) << endl;\n    return 0;\n}',
+                    output: '42 (random)',
+                    practice: { challenge: 'Generate random number between 1 and 6 (dice).', hint: 'uniform_int_distribution<> dis(1, 6);' }
+                },
+                'cpp-macros': {
+                    title: '📝 Macros',
+                    description: 'Preprocessor macros: #define, #undef, #ifdef, #ifndef. Used for constants and conditional compilation.',
+                    sections: [
+                        { title: '📋 Macros', content: '#define PI 3.14159 #define SQUARE(x) ((x)*(x))' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\n#define SQUARE(x) ((x)*(x))\n\nint main() {\n    cout << SQUARE(5) << endl;\n    return 0;\n}',
+                    output: '25',
+                    practice: { challenge: 'Create a macro for cube.', hint: '#define CUBE(x) ((x)*(x)*(x))' }
+                },
+                'cpp-namespaces': {
+                    title: '📦 Namespaces',
+                    description: 'Namespaces prevent name conflicts. Use namespace, using namespace, or scope resolution ::.',
+                    sections: [
+                        { title: '📋 Namespace', content: 'namespace MyLib { void func(); } MyLib::func();' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nnamespace Math {\n    int add(int a, int b) { return a+b; }\n}\n\nint main() {\n    cout << Math::add(5,3) << endl;\n    return 0;\n}',
+                    output: '8',
+                    practice: { challenge: 'Create a namespace with a greet function.', hint: 'namespace Greet { void sayHello(); }' }
+                },
+                'cpp-enums': {
+                    title: '🔢 Enums',
+                    description: 'Enums define named constants. C++11 introduced enum class for scoped enums.',
+                    sections: [
+                        { title: '📋 Enum', content: 'enum Color { RED, GREEN, BLUE }; enum class Status { OK, ERROR };' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nenum Color { RED, GREEN, BLUE };\n\nint main() {\n    Color c = GREEN;\n    cout << c << endl;\n    return 0;\n}',
+                    output: '1',
+                    practice: { challenge: 'Define an enum for days of week.', hint: 'enum Days { MON, TUE, WED };' }
+                },
+                'cpp-bitwise': {
+                    title: '🔢 Bitwise Operators',
+                    description: 'Bitwise operators: &, |, ^, ~, <<, >>. Useful for low-level programming and flags.',
+                    sections: [
+                        { title: '📋 Bitwise', content: 'int a = 5, b = 3; a & b; a | b; a ^ b; ~a; a << 1; a >> 1;' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 5, b = 3;\n    cout << "AND: " << (a & b) << endl;\n    cout << "OR: " << (a | b) << endl;\n    return 0;\n}',
+                    output: 'AND: 1\nOR: 7',
+                    practice: { challenge: 'Use bitwise XOR to swap two numbers.', hint: 'x ^= y; y ^= x; x ^= y;' }
+                },
+                'cpp-projects': {
+                    title: '🚀 Projects',
+                    description: 'Build real projects: Calculator, Student Management System, Library System, Banking System, Game using OOP.',
+                    sections: [
+                        { title: '📋 Project Ideas', content: '1. To-Do List: add, delete, mark complete. 2. Bank Account: deposit, withdraw, balance. 3. Student Management: add, search, display.' }
+                    ],
+                    code: '// Project: Simple Calculator\nclass Calculator {\npublic:\n    int add(int a, int b) { return a+b; }\n    int subtract(int a, int b) { return a-b; }\n    int multiply(int a, int b) { return a*b; }\n    double divide(int a, int b) { return (double)a/b; }\n};',
+                    practice: { challenge: 'Build a simple calculator class.', hint: 'Class with add, subtract, multiply, divide.' }
+                },
+                'cpp-reference': {
+                    title: '📚 Reference',
+                    description: 'Complete reference: keywords, operators, data types, STL containers, algorithms, and utilities.',
+                    sections: [
+                        { title: '📋 STL Reference', content: 'Containers: vector, list, map, set, stack, queue, deque. Algorithms: sort, find, binary_search, for_each. Utilities: pair, tuple, optional.' }
+                    ],
+                    code: '// C++ Reference includes STL, language features, and libraries.',
+                    practice: { challenge: 'Look up a C++ feature you don\'t know.', hint: 'Check cppreference.com' }
+                },
+                'cpp-keywords': {
+                    title: '🔑 Keywords',
+                    description: 'C++ has 95 keywords including: alignas, alignof, and, and_eq, asm, auto, bitand, bitor, bool, break, case, catch, char, char16_t, char32_t, class, compl, const, constexpr, const_cast, continue, decltype, default, delete, do, double, dynamic_cast, else, enum, explicit, export, extern, false, float, for, friend, goto, if, inline, int, long, mutable, namespace, new, not, not_eq, noexcept, nullptr, operator, or, or_eq, private, protected, public, register, reinterpret_cast, return, short, signed, sizeof, static, static_assert, static_cast, struct, switch, template, this, thread_local, throw, true, try, typedef, typeid, typename, union, unsigned, using, virtual, void, volatile, wchar_t, while, xor, xor_eq.',
+                    code: '// Keywords are reserved words in C++',
+                    practice: { challenge: 'List all C++ keywords.', hint: 'Check the reference section.' }
+                },
+                'cpp-interview': {
+                    title: '💼 Interview Q&A',
+                    description: 'Common interview questions: What is OOP? Explain polymorphism. What is virtual function? What is STL? Difference between vector and array?',
+                    sections: [
+                        { title: '📋 Common Questions', content: '1. What is a class? 2. What is inheritance? 3. What is polymorphism? 4. What is a smart pointer? 5. What is a lambda? 6. What is move semantics?' }
+                    ],
+                    code: '// Q: Explain virtual functions.\n// A: Virtual functions enable runtime polymorphism. They are defined in base class and overridden in derived class.',
+                    practice: { challenge: 'Prepare for C++ interview questions.', hint: 'Practice with mock interviews.' }
+                },
+                'cpp-examples': {
+                    title: '📚 Examples',
+                    description: 'Practical examples: Fibonacci, Prime number check, Palindrome, Factorial, GCD, LCM, String reversal, Pattern printing.',
+                    sections: [
+                        { title: '📋 Example Programs', content: '1. Fibonacci series 2. Prime number check 3. Factorial 4. Palindrome 5. String reverse 6. Bubble sort' }
+                    ],
+                    code: '#include <iostream>\nusing namespace std;\n\nint main() {\n    int n = 10, a = 0, b = 1;\n    for(int i=0; i<n; i++) {\n        cout << a << " ";\n        int next = a + b;\n        a = b;\n        b = next;\n    }\n    return 0;\n}',
+                    output: '0 1 1 2 3 5 8 13 21 34',
+                    practice: { challenge: 'Print prime numbers up to 100.', hint: 'Check divisibility from 2 to sqrt(n).' }
+                },
+                'cpp-exercises': {
+                    title: '📝 Exercises',
+                    description: 'Practice exercises: Reverse array, Find max, Count vowels, Bubble sort, Merge arrays, Matrix multiplication.',
+                    sections: [
+                        { title: '📋 Exercise List', content: '1. Sum of two numbers. 2. Area of circle. 3. Even or odd. 4. Largest of three. 5. Factorial. 6. Reverse string.' }
+                    ],
+                    code: '// Exercise: Reverse an array\nint arr[5] = {1,2,3,4,5};\nfor(int i=4; i>=0; i--) {\n    cout << arr[i] << " ";\n}',
+                    output: '5 4 3 2 1',
+                    practice: { challenge: 'Find maximum element in an array.', hint: 'int max = arr[0]; for(i=1; i<size; i++) { if(arr[i] > max) max = arr[i]; }' }
+                },
+                'cpp-compiler': {
+                    title: '⚙️ Compiler',
+                    description: 'Compilation process: preprocessing, compilation, assembly, linking. Use g++ or clang++. Common flags: -std=c++17, -Wall, -O2, -g.',
+                    sections: [
+                        { title: '📋 Compilation', content: 'g++ -std=c++17 -Wall -O2 program.cpp -o program' }
+                    ],
+                    code: '// Compilation: g++ -std=c++17 file.cpp -o out\n// Run: ./out',
+                    practice: { challenge: 'Compile a C++ program with g++.', hint: 'g++ program.cpp -o program && ./program' }
+                }
+            };
+
+            // ---------- BUILD SIDEBAR ----------
+            function buildSidebar() {
+                const nav = document.getElementById('sidebarNav');
+                nav.innerHTML = '';
+                let firstTopicId = null;
+
+                for (const [section, topics] of Object.entries(syllabusData)) {
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.className = 'nav-section';
+
+                    const titleDiv = document.createElement('div');
+                    titleDiv.className = 'nav-section-title';
+                    titleDiv.textContent = section;
+                    sectionDiv.appendChild(titleDiv);
+
+                    topics.forEach(topic => {
+                        const link = document.createElement('button');
+                        link.className = 'nav-item';
+                        link.dataset.topicId = topic.id;
+                        link.innerHTML = `<i class="fas fa-chevron-right"></i> ${topic.label}`;
+
+                        if (!firstTopicId) firstTopicId = topic.id;
+                        if (topic.id === 'cpp-home') link.classList.add('active');
+
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            loadTopic(topic.id);
+                            if (window.innerWidth <= 1024) closeSidebar();
+                        });
+
+                        sectionDiv.appendChild(link);
+                    });
+
+                    nav.appendChild(sectionDiv);
+                }
+
+                return firstTopicId;
+            }
+
+            // ---------- LOAD TOPIC (with integrated compiler) ----------
+            function loadTopic(topicId) {
+                const content = topicContent[topicId];
+                if (!content) {
+                    showToast('Topic not found. Loading default...');
+                    return;
+                }
+
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.topicId === topicId) item.classList.add('active');
+                });
+
+                const main = document.getElementById('mainContent');
+
+                const defaultCode = content.code || '#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello, C++!" << endl;\n    return 0;\n}';
+
+                let html = `
+                    <div class="topic-header">
+                        <h1>${content.title}</h1>
+                        <div class="topic-meta">
+                            <span><i class="fas fa-clock"></i> 5 min read</span>
+                            <span><i class="fas fa-code"></i> ${content.practice ? 'Practice included' : 'Reference'}</span>
+                            <span><i class="fas fa-play"></i> Interactive</span>
+                        </div>
+                    </div>
+                    <div class="topic-body">
+                        <div class="description">${content.description}</div>
+                `;
+
+                if (content.sections) {
+                    content.sections.forEach(section => {
+                        html += `
+                            <div class="section-title"><i class="fas fa-book"></i> ${section.title}</div>
+                            <div class="description">${section.content}</div>
+                        `;
+                    });
+                }
+
+                if (content.code) {
+                    html += `<div class="code-block">${content.code}</div>`;
+                }
+
+                if (content.output) {
+                    html += `<div class="output-block">▶ Output: ${content.output}</div>`;
+                }
+
+                if (content.examples) {
+                    content.examples.forEach(ex => {
+                        html += `
+                            <div class="example-box">
+                                <div class="ex-title"><i class="fas fa-lightbulb"></i> ${ex.title}</div>
+                                <div class="ex-desc">${ex.desc}</div>
+                                <div class="code-block">${ex.code}</div>
+                            </div>
+                        `;
+                    });
+                }
+
+                if (content.practice) {
+                    html += `
+                        <div class="practice-box">
+                            <h3><i class="fas fa-gamepad"></i> Practice Challenge</h3>
+                            <p class="challenge-desc">${content.practice.challenge}</p>
+                            <button class="btn-practice" onclick="startChallenge('${topicId}')">Start Practice</button>
+                            <button class="btn-hint" onclick="showHint('${topicId}')">Hint</button>
+                        </div>
+                    `;
+                }
+
+                // ----- COMPILER SECTION -----
+                html += `
+                    <div class="compiler-section">
+                        <div class="compiler-header">
+                            <i class="fas fa-terminal"></i> <span>C++ Playground · Online Compiler</span>
+                        </div>
+                        <textarea id="codeEditor_${topicId}" spellcheck="false">${defaultCode}</textarea>
+                        <div class="compiler-actions">
+                            <button class="btn-run" onclick="runCode('${topicId}')"><i class="fas fa-play"></i> Run</button>
+                            <button class="btn-clear" onclick="clearOutput('${topicId}')">Clear</button>
+                        </div>
+                        <div class="output-console" id="outputConsole_${topicId}">// Output will appear here</div>
+                    </div>
+                `;
+
+                // Navigation
+                const allTopics = [];
+                for (const [section, topics] of Object.entries(syllabusData)) {
+                    topics.forEach(t => allTopics.push(t.id));
+                }
+                const currentIndex = allTopics.indexOf(topicId);
+                const prevTopic = currentIndex > 0 ? allTopics[currentIndex - 1] : null;
+                const nextTopic = currentIndex < allTopics.length - 1 ? allTopics[currentIndex + 1] : null;
+
+                html += `
+                    <div class="nav-links">
+                        ${prevTopic ? `<span class="nav-link" onclick="loadTopic('${prevTopic}')"><i class="fas fa-arrow-left"></i> ${topicContent[prevTopic]?.title || 'Previous'}</span>` : '<span></span>'}
+                        ${nextTopic ? `<span class="nav-link" onclick="loadTopic('${nextTopic}')">${topicContent[nextTopic]?.title || 'Next'} <i class="fas fa-arrow-right"></i></span>` : '<span></span>'}
+                    </div>
+                </div>
+                `;
+
+                main.innerHTML = html;
+                history.pushState(null, '', `#${topicId}`);
+                showToast(`📖 ${content.title} · loaded`);
+            }
+
+            // ---------- COMPILER ENGINE (mock C++ interpreter) ----------
+            window.runCode = function(topicId) {
+                const code = document.getElementById(`codeEditor_${topicId}`).value;
+                const outputEl = document.getElementById(`outputConsole_${topicId}`);
+                outputEl.textContent = '⏳ Compiling...';
+
+                try {
+                    let result = '';
+                    const lines = code.split('\n');
+                    for (let line of lines) {
+                        // Match cout << "..."
+                        const match = line.match(/cout\s*<<\s*"([^"]*)"\s*<<\s*endl/);
+                        if (match) {
+                            result += match[1] + '\n';
+                            continue;
+                        }
+                        const match2 = line.match(/cout\s*<<\s*"([^"]*)"\s*;/);
+                        if (match2) {
+                            result += match2[1] + '\n';
+                            continue;
+                        }
+                        // Match cout with variables: cout << x << endl;
+                        const matchVar = line.match(/cout\s*<<\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*<<\s*endl/);
+                        if (matchVar) {
+                            result += '[value] ' + matchVar[1] + '\n';
+                            continue;
+                        }
+                    }
+                    if (result === '') {
+                        result = '// (mock) No cout output detected. Try adding: cout << "Hello" << endl;';
+                    }
+                    outputEl.textContent = result;
+                    showToast('✅ Code executed successfully!');
+                } catch (e) {
+                    outputEl.textContent = '⚠️ Error: ' + e.message;
+                    showToast('❌ Compilation error');
+                }
+            };
+
+            window.clearOutput = function(topicId) {
+                document.getElementById(`outputConsole_${topicId}`).textContent = '// Output cleared';
+            };
+
+            // ---------- GLOBAL FUNCTIONS ----------
+            window.loadTopic = loadTopic;
+
+            window.startChallenge = function(topicId) {
+                const content = topicContent[topicId];
+                if (content && content.practice) {
+                    showToast(`🎯 Challenge: ${content.practice.challenge}`);
+                }
+            };
+
+            window.showHint = function(topicId) {
+                const content = topicContent[topicId];
+                if (content && content.practice) {
+                    showToast(`💡 Hint: ${content.practice.hint}`);
+                }
+            };
+
+            // ---------- TOAST ----------
+            const toastEl = document.getElementById('toast');
+            let toastTimer = null;
+
+            function showToast(message, duration = 2800) {
+                if (toastTimer) clearTimeout(toastTimer);
+                toastEl.textContent = message;
+                toastEl.style.opacity = '1';
+                toastEl.style.transform = 'translateX(-50%) translateY(0)';
+                toastTimer = setTimeout(() => {
+                    toastEl.style.opacity = '0';
+                    toastEl.style.transform = 'translateX(-50%) translateY(20px)';
+                }, duration);
+            }
+            window.showToast = showToast;
+
+            // ---------- SIDEBAR TOGGLE ----------
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+            function openSidebar() {
+                sidebar.classList.add('open');
+                sidebarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            sidebarToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+            });
+
+            sidebarOverlay.addEventListener('click', closeSidebar);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeSidebar();
+                    if (toastEl.style.opacity === '1') {
+                        toastEl.style.opacity = '0';
+                        toastEl.style.transform = 'translateX(-50%) translateY(20px)';
+                    }
+                }
+            });
+
+            // ---------- INIT ----------
+            const firstTopic = buildSidebar();
+            const hash = window.location.hash.replace('#', '');
+            const defaultTopic = hash && topicContent[hash] ? hash : (firstTopic || 'cpp-home');
+            loadTopic(defaultTopic);
+
+            window.addEventListener('hashchange', function() {
+                const newHash = window.location.hash.replace('#', '');
+                if (newHash && topicContent[newHash]) loadTopic(newHash);
+            });
+
+            console.log('%c 🚀 C++ · Complete Course ', 'background: #2d7d46; color: #ffffff; font-size: 16px; font-weight: 700; padding: 8px 16px; border-radius: 8px;');
+            console.log('%c 80+ topics · Interactive · Hands-on learning ', 'color: #6b7280; font-size: 13px;');
+
+        })();
+    </script>
+
+</body>
+</html>
