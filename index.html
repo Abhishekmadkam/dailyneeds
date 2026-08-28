@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <meta
     name="description"
@@ -18,7 +22,10 @@
 
   <title>TeamOrbits — Building Digital Businesses</title>
 
-  <!-- Fonts -->
+  <!-- ======================================================
+       FONTS
+  ======================================================= -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -27,16 +34,20 @@
     rel="stylesheet"
   />
 
-  <!-- Icons -->
+  <!-- ======================================================
+       ICONS
+  ======================================================= -->
+
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   />
 
   <style>
-    /* =========================================================
+
+    /* ======================================================
        RESET
-    ========================================================= */
+    ======================================================= */
 
     *,
     *::before,
@@ -74,100 +85,38 @@
       color: #000000;
     }
 
-    /* =========================================================
-       VARIABLES
-    ========================================================= */
-
     :root {
+
       --bg: #050505;
-      --bg-soft: #0a0a0a;
+      --bg-soft: #090909;
+
       --card: #0d0d0d;
-      --card-2: #111111;
+      --card-hover: #111111;
 
       --white: #ffffff;
-      --text: #f3f3f3;
-      --muted: #909090;
-      --muted-2: #666666;
+      --text: #eeeeee;
+
+      --muted: #8a8a8a;
+      --muted-dark: #555555;
 
       --line: rgba(255, 255, 255, 0.1);
-      --line-light: rgba(255, 255, 255, 0.16);
-
-      --accent: #ffffff;
+      --line-strong: rgba(255, 255, 255, 0.18);
 
       --max: 1240px;
+
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* =========================================================
-       CUSTOM CURSOR
-    ========================================================= */
-
-    .cursor-dot,
-    .cursor-ring {
-      position: fixed;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-    }
-
-    .cursor-dot {
-      width: 7px;
-      height: 7px;
-      background: #fff;
-      transition: transform 0.15s ease;
-    }
-
-    .cursor-ring {
-      width: 38px;
-      height: 38px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      transition:
-        width 0.25s var(--ease),
-        height 0.25s var(--ease),
-        background 0.25s ease,
-        border 0.25s ease;
-    }
-
-    body.cursor-hover .cursor-ring {
-      width: 65px;
-      height: 65px;
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.8);
-    }
-
-    @media (max-width: 900px) {
-      body {
-        cursor: auto;
-      }
-
-      .cursor-dot,
-      .cursor-ring {
-        display: none;
-      }
-    }
-
-    /* =========================================================
-       NOISE
-    ========================================================= */
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0.035;
-
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
-    }
-
-    /* =========================================================
+    /* ======================================================
        GLOBAL
-    ========================================================= */
+    ======================================================= */
 
     .container {
-      width: min(var(--max), calc(100% - 48px));
+      width: min(
+        var(--max),
+        calc(100% - 48px)
+      );
+
       margin: auto;
     }
 
@@ -182,106 +131,248 @@
 
     .eyebrow {
       display: inline-flex;
-      align-items: center;
-      gap: 9px;
 
-      font-size: 12px;
-      letter-spacing: 0.16em;
+      align-items: center;
+
+      gap: 10px;
+
+      color: #777;
+
+      font-size: 11px;
+
       text-transform: uppercase;
-      color: #a7a7a7;
+
+      letter-spacing: 0.18em;
 
       margin-bottom: 25px;
     }
 
     .eyebrow::before {
       content: "";
-      width: 25px;
+
+      width: 26px;
+
       height: 1px;
+
       background: #777;
     }
 
     .section-title {
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(42px, 6vw, 82px);
-      line-height: 0.98;
-      letter-spacing: -0.055em;
+
+      font-size: clamp(
+        45px,
+        6vw,
+        82px
+      );
+
+      line-height: 0.97;
+
+      letter-spacing: -0.06em;
+
       max-width: 850px;
     }
 
     .section-title span {
-      color: #666;
+      color: #5b5b5b;
     }
 
     .section-description {
-      color: #8c8c8c;
+      color: #808080;
+
       max-width: 570px;
+
       font-size: 17px;
+
       line-height: 1.8;
+
       margin-top: 28px;
     }
 
-    /* =========================================================
-       NAVBAR
-    ========================================================= */
+    /* ======================================================
+       CURSOR
+    ======================================================= */
+
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+
+      pointer-events: none;
+
+      z-index: 99999;
+
+      transform: translate(-50%, -50%);
+
+      border-radius: 50%;
+    }
+
+    .cursor-dot {
+      width: 7px;
+      height: 7px;
+
+      background: #fff;
+    }
+
+    .cursor-ring {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.5
+      );
+
+      transition:
+        width 0.25s var(--ease),
+        height 0.25s var(--ease),
+        background 0.25s ease,
+        border 0.25s ease;
+    }
+
+    body.cursor-hover .cursor-ring {
+      width: 65px;
+      height: 65px;
+
+      background: rgba(
+        255,
+        255,
+        255,
+        0.08
+      );
+
+      border-color: #fff;
+    }
+
+    @media(max-width:900px) {
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none;
+      }
+
+    }
+
+    /* ======================================================
+       NOISE
+    ======================================================= */
+
+    body::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: 999;
+
+      opacity: 0.025;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.7'/%3E%3C/svg%3E");
+    }
+
+    /* ======================================================
+       NAVIGATION
+    ======================================================= */
 
     .navbar {
+
       position: fixed;
+
       top: 0;
+
       left: 0;
+
       right: 0;
 
       height: 82px;
 
-      display: flex;
-      align-items: center;
-
       z-index: 9999;
 
+      display: flex;
+
+      align-items: center;
+
       transition:
-        background 0.4s ease,
-        border 0.4s ease,
         height 0.4s ease,
-        backdrop-filter 0.4s ease;
+        background 0.4s ease,
+        border 0.4s ease;
     }
 
     .navbar.scrolled {
-      height: 72px;
-      background: rgba(5, 5, 5, 0.75);
+
+      height: 70px;
+
+      background:
+        rgba(5,5,5,0.78);
+
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
     }
 
     .nav-inner {
-      width: min(var(--max), calc(100% - 48px));
+
+      width: min(
+        var(--max),
+        calc(100% - 48px)
+      );
+
       margin: auto;
 
       display: flex;
-      align-items: center;
+
       justify-content: space-between;
+
+      align-items: center;
     }
 
     .logo {
-      font-family: "Space Grotesk", sans-serif;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 24px;
+
       font-weight: 700;
-      font-size: 23px;
-      letter-spacing: -0.04em;
+
+      letter-spacing: -0.05em;
     }
 
     .logo span {
-      color: #777;
+      color: #666;
     }
 
     .nav-links {
+
       display: flex;
+
       align-items: center;
-      gap: 34px;
+
+      gap: 32px;
+
       list-style: none;
     }
 
     .nav-links a {
+
       position: relative;
-      color: #929292;
+
+      color: #858585;
+
       font-size: 14px;
+
       transition: color 0.3s ease;
     }
 
@@ -289,15 +380,24 @@
       color: #fff;
     }
 
-    .nav-links a::after {
+    .nav-links a:not(.nav-cta)::after {
+
       content: "";
+
       position: absolute;
+
       left: 0;
+
       bottom: -6px;
+
       width: 0;
+
       height: 1px;
+
       background: #fff;
-      transition: width 0.3s var(--ease);
+
+      transition:
+        width 0.3s var(--ease);
     }
 
     .nav-links a:hover::after {
@@ -305,103 +405,155 @@
     }
 
     .nav-cta {
-      border: 1px solid var(--line-light);
-      padding: 11px 18px;
+
+      border:
+        1px solid var(--line-strong);
+
+      padding:
+        10px 18px;
+
       border-radius: 100px;
+
       color: #fff !important;
     }
 
-    .nav-cta::after {
-      display: none;
-    }
-
     .mobile-toggle {
+
       display: none;
+
       border: 0;
+
       background: transparent;
+
       color: #fff;
-      font-size: 21px;
+
+      font-size: 20px;
     }
 
-    /* =========================================================
+    /* ======================================================
        HERO
-    ========================================================= */
+    ======================================================= */
 
     .hero {
+
       min-height: 100vh;
+
       display: flex;
+
       align-items: center;
 
-      padding-top: 120px;
+      padding-top: 110px;
 
       background:
+
         radial-gradient(
-          circle at 75% 35%,
-          rgba(255, 255, 255, 0.08),
-          transparent 28%
+          circle at 78% 35%,
+          rgba(255,255,255,0.08),
+          transparent 27%
         ),
+
         radial-gradient(
-          circle at 20% 70%,
-          rgba(255, 255, 255, 0.04),
+          circle at 20% 75%,
+          rgba(255,255,255,0.04),
           transparent 30%
         ),
+
         #050505;
     }
 
     .hero-grid {
+
       display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
+
+      grid-template-columns:
+        1.25fr
+        0.75fr;
+
       gap: 70px;
+
       align-items: center;
     }
 
     .hero-label {
-      color: #8b8b8b;
-      font-size: 13px;
-      letter-spacing: 0.13em;
+
+      color: #777;
+
+      font-size: 12px;
+
       text-transform: uppercase;
+
+      letter-spacing: 0.15em;
+
       margin-bottom: 28px;
     }
 
     .hero h1 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(60px, 8vw, 125px);
-      line-height: 0.88;
-      letter-spacing: -0.07em;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          65px,
+          8vw,
+          125px
+        );
+
+      line-height: 0.86;
+
+      letter-spacing: -0.075em;
+
       font-weight: 600;
+
       max-width: 900px;
     }
 
     .hero h1 .dim {
-      color: #555;
+      color: #515151;
     }
 
     .hero-copy {
+
       margin-top: 35px;
+
       max-width: 590px;
+
       color: #888;
+
       font-size: 18px;
+
       line-height: 1.75;
     }
 
     .hero-actions {
+
       display: flex;
-      gap: 14px;
-      margin-top: 40px;
+
       flex-wrap: wrap;
+
+      gap: 14px;
+
+      margin-top: 40px;
     }
 
     .btn {
-      position: relative;
+
       display: inline-flex;
+
       align-items: center;
+
       justify-content: center;
+
       gap: 10px;
 
-      padding: 15px 23px;
+      padding:
+        15px 23px;
+
       border-radius: 100px;
 
       font-size: 14px;
+
       font-weight: 600;
 
       transition:
@@ -411,7 +563,9 @@
     }
 
     .btn-primary {
+
       background: #fff;
+
       color: #000;
     }
 
@@ -420,150 +574,224 @@
     }
 
     .btn-outline {
-      border: 1px solid var(--line-light);
+
+      border:
+        1px solid var(--line-strong);
+
       color: #fff;
     }
 
     .btn-outline:hover {
+
       background: #fff;
+
       color: #000;
-      transform: translateY(-4px);
+
+      transform:
+        translateY(-4px);
     }
 
-    /* HERO VISUAL */
+    /* HERO ORB */
 
     .hero-visual {
-      position: relative;
+
       height: 500px;
+
+      position: relative;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
     }
 
     .orb {
+
+      width: 350px;
+
+      height: 350px;
+
       position: absolute;
-      width: 360px;
-      height: 360px;
 
       border-radius: 50%;
 
       background:
+
         radial-gradient(
           circle at 35% 30%,
           #fff 0%,
           #bbb 10%,
-          #3d3d3d 32%,
+          #444 33%,
           #111 63%,
-          #050505 75%
+          #050505 76%
         );
 
       box-shadow:
-        0 0 100px rgba(255, 255, 255, 0.08),
-        inset -40px -40px 80px rgba(0, 0, 0, 0.9);
 
-      animation: orbFloat 7s ease-in-out infinite;
+        0 0 110px
+        rgba(255,255,255,0.08),
+
+        inset
+        -40px
+        -40px
+        80px
+        rgba(0,0,0,0.9);
+
+      animation:
+        orbFloat 7s ease-in-out infinite;
     }
 
     .orb-ring {
-      position: absolute;
+
       width: 450px;
+
       height: 450px;
 
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      position: absolute;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.12);
+
       border-radius: 50%;
 
-      animation: spin 18s linear infinite;
+      animation:
+        spin 18s linear infinite;
     }
 
     .orb-ring::before {
+
       content: "";
-      position: absolute;
 
       width: 8px;
+
       height: 8px;
 
-      border-radius: 50%;
-      background: #fff;
+      position: absolute;
 
       top: 20px;
+
       left: 50%;
+
+      background: #fff;
+
+      border-radius: 50%;
     }
 
     .hero-mini-card {
-      position: absolute;
-      bottom: 30px;
-      left: 10px;
 
-      width: 210px;
+      position: absolute;
+
+      bottom: 25px;
+
+      left: 5px;
+
+      width: 220px;
 
       padding: 18px;
 
-      background: rgba(12, 12, 12, 0.75);
-      backdrop-filter: blur(20px);
+      background:
+        rgba(12,12,12,0.75);
 
-      border: 1px solid var(--line);
+      backdrop-filter:
+        blur(20px);
+
+      border:
+        1px solid var(--line);
+
       border-radius: 15px;
-
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     }
 
     .hero-mini-card small {
-      color: #666;
+
+      color: #555;
+
       font-size: 10px;
+
       text-transform: uppercase;
+
       letter-spacing: 0.15em;
     }
 
     .hero-mini-card strong {
+
       display: block;
-      margin-top: 7px;
-      font-size: 16px;
+
+      margin-top: 8px;
+
+      font-size: 15px;
+
+      line-height: 1.5;
     }
 
     @keyframes orbFloat {
+
       0%,
       100% {
-        transform: translateY(0) rotate(0deg);
+        transform:
+          translateY(0)
+          rotate(0deg);
       }
 
       50% {
-        transform: translateY(-20px) rotate(8deg);
+        transform:
+          translateY(-20px)
+          rotate(8deg);
       }
+
     }
 
     @keyframes spin {
+
       to {
-        transform: rotate(360deg);
+        transform:
+          rotate(360deg);
       }
+
     }
 
-    /* =========================================================
+    /* ======================================================
        MARQUEE
-    ========================================================= */
+    ======================================================= */
 
     .marquee {
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
 
       overflow: hidden;
+
       white-space: nowrap;
+
+      border-top:
+        1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
 
       padding: 22px 0;
 
-      color: #777;
+      color: #666;
     }
 
     .marquee-track {
+
       display: inline-flex;
+
       gap: 50px;
 
-      animation: marquee 28s linear infinite;
+      animation:
+        marquee 28s linear infinite;
     }
 
     .marquee-item {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 18px;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 17px;
+
       text-transform: uppercase;
+
       letter-spacing: 0.08em;
     }
 
@@ -572,70 +800,95 @@
     }
 
     @keyframes marquee {
+
       from {
-        transform: translateX(0);
+        transform:
+          translateX(0);
       }
 
       to {
-        transform: translateX(-50%);
+        transform:
+          translateX(-50%);
       }
+
     }
 
-    /* =========================================================
-       ECOSYSTEM
-    ========================================================= */
+    /* ======================================================
+       VENTURES
+    ======================================================= */
 
     .ecosystem {
       background: #080808;
     }
 
     .ecosystem-header {
+
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-end;
+
       gap: 40px;
+
       margin-bottom: 70px;
     }
 
     .ecosystem-note {
-      max-width: 330px;
+
+      max-width: 350px;
+
       color: #707070;
-      line-height: 1.7;
+
       font-size: 14px;
+
+      line-height: 1.8;
     }
 
     .venture-grid {
+
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
+
+      grid-template-columns:
+        repeat(12,1fr);
+
       gap: 18px;
     }
 
     .venture {
-      position: relative;
+
       min-height: 470px;
 
-      padding: 35px;
-
-      background: linear-gradient(
-        145deg,
-        #111 0%,
-        #0b0b0b 60%,
-        #080808 100%
-      );
-
-      border: 1px solid var(--line);
-      border-radius: 25px;
+      position: relative;
 
       overflow: hidden;
 
+      padding: 35px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #111 0%,
+          #0b0b0b 60%,
+          #080808 100%
+        );
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 25px;
+
       transition:
-        transform 0.6s var(--ease),
-        border 0.4s ease;
+        border 0.4s ease,
+        transform 0.5s var(--ease);
     }
 
     .venture:hover {
-      transform: translateY(-10px);
-      border-color: rgba(255, 255, 255, 0.25);
+
+      border-color:
+        rgba(255,255,255,0.25);
     }
 
     .venture:nth-child(1) {
@@ -655,120 +908,194 @@
     }
 
     .venture-number {
+
       color: #555;
-      font-size: 12px;
+
+      font-size: 11px;
+
       letter-spacing: 0.15em;
     }
 
     .venture-content {
+
       position: absolute;
+
       left: 35px;
+
       right: 35px;
+
       bottom: 35px;
-      z-index: 2;
+
+      z-index: 3;
     }
 
     .venture h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(32px, 4vw, 58px);
-      letter-spacing: -0.05em;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(34px,4vw,58px);
+
+      letter-spacing:
+        -0.055em;
+
       margin-bottom: 15px;
     }
 
     .venture p {
-      color: #777;
-      line-height: 1.7;
+
       max-width: 520px;
+
+      color: #777;
+
+      line-height: 1.7;
     }
 
     .venture-link {
+
       display: inline-flex;
+
       align-items: center;
+
       gap: 8px;
 
       margin-top: 22px;
 
       font-size: 13px;
+
       color: #fff;
     }
 
     .venture-link i {
-      transition: transform 0.3s ease;
+
+      transition:
+        transform 0.3s ease;
     }
 
-    .venture:hover .venture-link i {
-      transform: translate(4px, -4px);
+    .venture:hover
+    .venture-link i {
+
+      transform:
+        translate(
+          4px,
+          -4px
+        );
     }
 
-    /* Decorative elements */
+    /* ZENTOLOO */
 
     .venture-visual {
+
       position: absolute;
+
       right: 30px;
+
       top: 35px;
 
       width: 180px;
+
       height: 180px;
 
       opacity: 0.75;
     }
 
     .z-orbit {
+
       width: 180px;
+
       height: 180px;
 
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border:
+        1px solid
+        rgba(255,255,255,0.14);
+
       border-radius: 50%;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      animation: spin 14s linear infinite;
-    }
-
-    .z-orbit::before,
-    .z-orbit::after {
-      content: "";
-      position: absolute;
-
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      animation:
+        spin 14s linear infinite;
     }
 
     .z-orbit::before {
+
+      content: "";
+
+      position: absolute;
+
       width: 120px;
+
       height: 120px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+      border-radius: 50%;
     }
 
     .z-orbit::after {
+
+      content: "";
+
+      position: absolute;
+
       width: 60px;
+
       height: 60px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+      border-radius: 50%;
     }
 
     .z-letter {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 65px;
-      font-weight: 700;
 
       position: absolute;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 65px;
+
+      font-weight: 700;
     }
 
+    /* SEO */
+
     .seo-visual {
+
       width: 180px;
+
       height: 180px;
 
       display: flex;
+
       align-items: flex-end;
+
       gap: 10px;
     }
 
     .seo-bar {
+
       width: 28px;
-      border-radius: 8px 8px 0 0;
+
+      border-radius:
+        8px 8px 0 0;
+
       background: #eee;
 
-      animation: bars 2.5s ease-in-out infinite;
+      animation:
+        bars 2.5s ease-in-out infinite;
     }
 
     .seo-bar:nth-child(1) {
@@ -776,67 +1103,107 @@
     }
 
     .seo-bar:nth-child(2) {
+
       height: 80px;
-      animation-delay: 0.2s;
+
+      animation-delay:
+        0.2s;
     }
 
     .seo-bar:nth-child(3) {
+
       height: 120px;
-      animation-delay: 0.4s;
+
+      animation-delay:
+        0.4s;
     }
 
     .seo-bar:nth-child(4) {
+
       height: 155px;
-      animation-delay: 0.6s;
+
+      animation-delay:
+        0.6s;
     }
 
     @keyframes bars {
+
       0%,
       100% {
-        transform: scaleY(1);
-        opacity: 0.7;
+        transform:
+          scaleY(1);
+
+        opacity: .7;
       }
 
       50% {
-        transform: scaleY(0.75);
+
+        transform:
+          scaleY(.75);
+
         opacity: 1;
       }
+
     }
 
+    /* TEAMORBITS */
+
     .service-visual {
+
       width: 180px;
+
       height: 180px;
 
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.14);
+
       border-radius: 30px;
 
-      transform: rotate(12deg);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      transform:
+        rotate(12deg);
 
       font-size: 65px;
     }
 
     .future-visual {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 80px;
-      color: #242424;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 100px;
+
+      color: #252525;
     }
 
-    /* =========================================================
+    /* ======================================================
        SERVICES
-    ========================================================= */
+    ======================================================= */
 
     .services-list {
+
       margin-top: 80px;
-      border-top: 1px solid var(--line);
+
+      border-top:
+        1px solid var(--line);
     }
 
     .service-row {
+
       display: grid;
-      grid-template-columns: 70px 1fr 1fr 40px;
+
+      grid-template-columns:
+        70px
+        1fr
+        1fr
+        40px;
 
       gap: 30px;
 
@@ -844,15 +1211,22 @@
 
       padding: 32px 0;
 
-      border-bottom: 1px solid var(--line);
+      border-bottom:
+        1px solid var(--line);
 
-      transition: padding 0.4s var(--ease);
+      transition:
+        padding 0.4s var(--ease),
+        background 0.4s ease;
     }
 
     .service-row:hover {
+
       padding-left: 15px;
+
       padding-right: 15px;
-      background: rgba(255, 255, 255, 0.02);
+
+      background:
+        rgba(255,255,255,0.02);
     }
 
     .service-number {
@@ -861,65 +1235,114 @@
     }
 
     .service-name {
-      font-family: "Space Grotesk", sans-serif;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 25px;
     }
 
     .service-description {
+
       color: #777;
+
       font-size: 14px;
-      line-height: 1.6;
+
+      line-height: 1.7;
     }
 
     .service-arrow {
+
       color: #777;
-      transition: transform 0.3s ease;
+
+      transition:
+        transform .3s ease;
     }
 
-    .service-row:hover .service-arrow {
-      transform: translate(4px, -4px);
+    .service-row:hover
+    .service-arrow {
+
+      transform:
+        translate(
+          4px,
+          -4px
+        );
+
       color: #fff;
     }
 
-    /* =========================================================
-       PHILOSOPHY
-    ========================================================= */
+    /* ======================================================
+       ABOUT
+    ======================================================= */
 
     .philosophy {
       background: #0a0a0a;
     }
 
     .philosophy-layout {
+
       display: grid;
-      grid-template-columns: 0.65fr 1.35fr;
+
+      grid-template-columns:
+        .65fr
+        1.35fr;
+
       gap: 100px;
     }
 
     .philosophy-sticky {
+
       position: sticky;
-      top: 140px;
+
+      top: 130px;
+
       height: fit-content;
     }
 
     .philosophy-sticky h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(40px, 5vw, 70px);
-      line-height: 1;
-      letter-spacing: -0.055em;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          45px,
+          5vw,
+          75px
+        );
+
+      line-height: .95;
+
+      letter-spacing:
+        -0.06em;
+    }
+
+    .philosophy-sticky h2 span {
+      color: #555;
     }
 
     .principles {
-      border-top: 1px solid var(--line);
+
+      border-top:
+        1px solid var(--line);
     }
 
     .principle {
-      padding: 45px 0;
-      border-bottom: 1px solid var(--line);
 
       display: grid;
-      grid-template-columns: 70px 1fr;
+
+      grid-template-columns:
+        70px
+        1fr;
 
       gap: 25px;
+
+      padding: 45px 0;
+
+      border-bottom:
+        1px solid var(--line);
     }
 
     .principle-number {
@@ -927,36 +1350,54 @@
     }
 
     .principle h3 {
-      font-family: "Space Grotesk", sans-serif;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 27px;
+
       margin-bottom: 12px;
     }
 
     .principle p {
+
       color: #777;
-      line-height: 1.8;
+
       max-width: 560px;
+
+      line-height: 1.8;
     }
 
-    /* =========================================================
+    /* ======================================================
        STATS
-    ========================================================= */
+    ======================================================= */
 
     .stats {
+
       padding: 100px 0;
     }
 
     .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
 
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      display: grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      border-top:
+        1px solid var(--line);
+
+      border-bottom:
+        1px solid var(--line);
     }
 
     .stat {
+
       padding: 45px 25px;
-      border-right: 1px solid var(--line);
+
+      border-right:
+        1px solid var(--line);
     }
 
     .stat:last-child {
@@ -964,94 +1405,295 @@
     }
 
     .stat-number {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(38px, 5vw, 65px);
-      letter-spacing: -0.05em;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          40px,
+          5vw,
+          65px
+        );
+
+      letter-spacing:
+        -0.06em;
     }
 
     .stat-label {
+
       color: #666;
+
       margin-top: 8px;
+
       font-size: 13px;
     }
 
-    /* =========================================================
+    /* ======================================================
        LEADERSHIP
-    ========================================================= */
+    ======================================================= */
+
+    .leadership-header {
+      max-width: 850px;
+    }
 
     .leadership-grid {
+
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+
+      grid-template-columns:
+        repeat(2,1fr);
+
       gap: 20px;
 
       margin-top: 75px;
     }
 
     .leader {
+
       position: relative;
 
-      min-height: 500px;
+      min-height: 560px;
 
       padding: 35px;
 
-      background: #0d0d0d;
+      background:
+        linear-gradient(
+          145deg,
+          #111,
+          #090909
+        );
 
-      border: 1px solid var(--line);
-      border-radius: 25px;
+      border:
+        1px solid var(--line);
+
+      border-radius: 26px;
 
       overflow: hidden;
+
+      transition:
+        transform .5s var(--ease),
+        border .4s ease;
     }
 
+    .leader:hover {
+
+      transform:
+        translateY(-8px);
+
+      border-color:
+        rgba(255,255,255,.25);
+    }
+
+    /* Leader glow */
+
     .leader::before {
+
       content: "";
 
       position: absolute;
-      width: 300px;
-      height: 300px;
+
+      width: 350px;
+
+      height: 350px;
+
+      right: -130px;
+
+      top: -140px;
 
       border-radius: 50%;
 
-      background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.08),
-        transparent 65%
-      );
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.09),
+          transparent 65%
+        );
+    }
 
-      right: -100px;
-      top: -100px;
+    .leader-number {
+
+      position: absolute;
+
+      top: 30px;
+
+      right: 30px;
+
+      color: #444;
+
+      font-size: 11px;
+
+      letter-spacing: .15em;
+    }
+
+    .leader-image-wrap {
+
+      width: 100%;
+
+      height: 310px;
+
+      margin-top: 28px;
+
+      overflow: hidden;
+
+      border-radius: 18px;
+
+      background: #151515;
+
+      position: relative;
+    }
+
+    .leader-image-wrap::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,.45),
+          transparent 45%
+        );
+
+      pointer-events: none;
+    }
+
+    .leader-image {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position: center;
+
+      display: block;
+
+      filter:
+        grayscale(100%)
+        contrast(1.05);
+
+      transition:
+        transform .8s var(--ease),
+        filter .8s ease;
+    }
+
+    .leader:hover .leader-image {
+
+      transform:
+        scale(1.06);
+
+      filter:
+        grayscale(20%)
+        contrast(1.05);
     }
 
     .leader-role {
-      color: #666;
+
+      color: #777;
+
       text-transform: uppercase;
-      font-size: 11px;
-      letter-spacing: 0.16em;
+
+      font-size: 10px;
+
+      letter-spacing: .17em;
+
+      margin-top: 25px;
     }
 
     .leader h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 40px;
-      margin-top: 10px;
-      letter-spacing: -0.04em;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          30px,
+          3vw,
+          42px
+        );
+
+      letter-spacing:
+        -0.045em;
+
+      margin-top: 7px;
     }
 
-    .leader p {
-      position: absolute;
-      left: 35px;
-      bottom: 35px;
-
-      max-width: 430px;
+    .leader-description {
 
       color: #777;
-      line-height: 1.8;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      max-width: 520px;
+
+      margin-top: 10px;
     }
 
-    /* =========================================================
+    .leader-socials {
+
+      position: absolute;
+
+      right: 35px;
+
+      bottom: 38px;
+
+      display: flex;
+
+      gap: 10px;
+    }
+
+    .leader-socials a {
+
+      width: 36px;
+
+      height: 36px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 50%;
+
+      color: #777;
+
+      transition:
+        color .3s ease,
+        background .3s ease,
+        transform .3s ease;
+    }
+
+    .leader-socials a:hover {
+
+      color: #000;
+
+      background: #fff;
+
+      transform:
+        translateY(-3px);
+    }
+
+    /* ======================================================
        CONTACT
-    ========================================================= */
+    ======================================================= */
 
     .contact {
-      background: #f4f4f4;
+
+      background: #f2f2f2;
+
       color: #080808;
     }
 
@@ -1060,14 +1702,27 @@
     }
 
     .contact .eyebrow::before {
-      background: #777;
+      background: #666;
     }
 
     .contact-title {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(55px, 9vw, 125px);
-      line-height: 0.9;
-      letter-spacing: -0.07em;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size:
+        clamp(
+          55px,
+          9vw,
+          125px
+        );
+
+      line-height: .88;
+
+      letter-spacing:
+        -0.075em;
+
       max-width: 1000px;
     }
 
@@ -1076,93 +1731,150 @@
     }
 
     .contact-grid {
-      margin-top: 70px;
 
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr
+        1fr;
+
       gap: 70px;
+
+      margin-top: 70px;
     }
 
     .contact-text {
+
       color: #666;
+
       line-height: 1.8;
+
       max-width: 470px;
     }
 
     .contact-links {
+
       display: flex;
+
       flex-direction: column;
-      gap: 14px;
     }
 
     .contact-link {
+
       display: flex;
-      justify-content: space-between;
+
       align-items: center;
+
+      justify-content:
+        space-between;
 
       padding: 19px 0;
 
-      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      border-bottom:
+        1px solid
+        rgba(0,0,0,.14);
 
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 19px;
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 18px;
     }
 
     .contact-link i {
-      transition: transform 0.3s ease;
+
+      transition:
+        transform .3s ease;
     }
 
     .contact-link:hover i {
-      transform: translate(5px, -5px);
+
+      transform:
+        translate(
+          5px,
+          -5px
+        );
     }
 
-    /* =========================================================
+    /* ======================================================
        FOOTER
-    ========================================================= */
+    ======================================================= */
 
     footer {
+
       background: #050505;
-      padding: 70px 0 35px;
+
+      padding:
+        75px 0
+        35px;
     }
 
     .footer-top {
+
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+
+      grid-template-columns:
+        1.5fr
+        1fr
+        1fr;
 
       gap: 50px;
 
       padding-bottom: 70px;
 
-      border-bottom: 1px solid var(--line);
+      border-bottom:
+        1px solid var(--line);
     }
 
     .footer-brand h3 {
-      font-family: "Space Grotesk", sans-serif;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 30px;
     }
 
-    .footer-brand p {
+    .footer-brand h3 span {
       color: #666;
-      max-width: 300px;
+    }
+
+    .footer-brand p {
+
+      color: #666;
+
+      max-width: 330px;
+
       line-height: 1.7;
+
       margin-top: 14px;
     }
 
     .footer-column h4 {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
+
       color: #555;
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+
+      letter-spacing: .15em;
+
       margin-bottom: 20px;
     }
 
     .footer-column a {
+
       display: block;
+
       color: #888;
-      margin-bottom: 12px;
+
       font-size: 14px;
 
-      transition: color 0.3s ease;
+      margin-bottom: 13px;
+
+      transition:
+        color .3s ease;
     }
 
     .footer-column a:hover {
@@ -1170,65 +1882,93 @@
     }
 
     .footer-bottom {
+
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 20px;
 
       padding-top: 25px;
 
       color: #555;
+
       font-size: 12px;
     }
 
-    /* =========================================================
-       REVEAL ANIMATION
-    ========================================================= */
+    /* ======================================================
+       REVEAL
+    ======================================================= */
 
     .reveal {
+
       opacity: 0;
-      transform: translateY(60px);
+
+      transform:
+        translateY(60px);
+
       transition:
         opacity 1s var(--ease),
         transform 1s var(--ease);
     }
 
     .reveal.active {
+
       opacity: 1;
-      transform: translateY(0);
+
+      transform:
+        translateY(0);
     }
 
     .reveal-left {
+
       opacity: 0;
-      transform: translateX(-60px);
+
+      transform:
+        translateX(-60px);
+
       transition:
         opacity 1s var(--ease),
         transform 1s var(--ease);
     }
 
     .reveal-left.active {
+
       opacity: 1;
-      transform: translateX(0);
+
+      transform:
+        translateX(0);
     }
 
     .reveal-right {
+
       opacity: 0;
-      transform: translateX(60px);
+
+      transform:
+        translateX(60px);
+
       transition:
         opacity 1s var(--ease),
         transform 1s var(--ease);
     }
 
     .reveal-right.active {
+
       opacity: 1;
-      transform: translateX(0);
+
+      transform:
+        translateX(0);
     }
 
-    /* =========================================================
+    /* ======================================================
        RESPONSIVE
-    ========================================================= */
+    ======================================================= */
 
-    @media (max-width: 1000px) {
+    @media(max-width:1000px) {
+
       .hero-grid {
+
         grid-template-columns: 1fr;
       }
 
@@ -1241,79 +1981,81 @@
       }
 
       .philosophy-layout {
+
         grid-template-columns: 1fr;
+
         gap: 60px;
       }
 
       .philosophy-sticky {
+
         position: relative;
+
         top: auto;
       }
+
     }
 
-    @media (max-width: 800px) {
+    @media(max-width:800px) {
+
       .nav-links {
+
         position: fixed;
-        top: 72px;
-        left: 20px;
-        right: 20px;
 
-        background: #0d0d0d;
+        top: 75px;
 
-        border: 1px solid var(--line);
-        border-radius: 18px;
+        left: 16px;
+
+        right: 16px;
 
         padding: 25px;
 
+        display: flex;
+
         flex-direction: column;
+
         align-items: flex-start;
-        gap: 22px;
+
+        gap: 20px;
+
+        background: #0d0d0d;
+
+        border:
+          1px solid var(--line);
+
+        border-radius: 18px;
 
         opacity: 0;
-        pointer-events: none;
-        transform: translateY(-10px);
 
-        transition: 0.3s ease;
+        pointer-events: none;
+
+        transform:
+          translateY(-10px);
+
+        transition:
+          .3s ease;
       }
 
       .nav-links.open {
+
         opacity: 1;
+
         pointer-events: auto;
-        transform: translateY(0);
+
+        transform:
+          translateY(0);
       }
 
       .mobile-toggle {
         display: block;
       }
 
-      .hero h1 {
-        font-size: clamp(55px, 15vw, 90px);
-      }
-
-      .hero-visual {
-        height: 350px;
-      }
-
-      .orb {
-        width: 270px;
-        height: 270px;
-      }
-
-      .orb-ring {
-        width: 340px;
-        height: 340px;
-      }
-
-      .ecosystem-header {
-        display: block;
-      }
-
-      .ecosystem-note {
-        margin-top: 25px;
-      }
-
       .service-row {
-        grid-template-columns: 45px 1fr 30px;
+
+        grid-template-columns:
+          45px
+          1fr
+          30px;
       }
 
       .service-description {
@@ -1321,47 +2063,65 @@
       }
 
       .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+
+        grid-template-columns:
+          repeat(2,1fr);
       }
 
       .stat:nth-child(2) {
         border-right: 0;
       }
 
-      .stat:nth-child(-n + 2) {
-        border-bottom: 1px solid var(--line);
+      .stat:nth-child(-n+2) {
+        border-bottom:
+          1px solid var(--line);
       }
 
       .leadership-grid {
+
         grid-template-columns: 1fr;
       }
 
       .contact-grid {
+
         grid-template-columns: 1fr;
-        gap: 40px;
+
+        gap: 45px;
       }
 
       .footer-top {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+          1fr 1fr;
       }
 
       .footer-brand {
         grid-column: span 2;
       }
+
     }
 
-    @media (max-width: 560px) {
+    @media(max-width:560px) {
+
       .container,
       .nav-inner {
-        width: min(var(--max), calc(100% - 32px));
+
+        width:
+          calc(100% - 32px);
       }
 
       .section {
         padding: 100px 0;
       }
 
-      .hero {
-        padding-top: 100px;
+      .hero h1 {
+
+        font-size:
+          clamp(
+            55px,
+            16vw,
+            90px
+          );
       }
 
       .hero-copy {
@@ -1369,7 +2129,9 @@
       }
 
       .hero-actions {
+
         flex-direction: column;
+
         align-items: stretch;
       }
 
@@ -1377,48 +2139,64 @@
         width: 100%;
       }
 
-      .hero-visual {
-        height: 300px;
-      }
-
       .orb {
+
         width: 220px;
+
         height: 220px;
       }
 
       .orb-ring {
+
         width: 280px;
+
         height: 280px;
       }
 
+      .hero-visual {
+        height: 300px;
+      }
+
       .hero-mini-card {
-        left: 0;
-        bottom: 5px;
+        bottom: 0;
       }
 
       .venture {
-        min-height: 420px;
+
+        min-height: 430px;
+
         padding: 25px;
       }
 
       .venture-content {
+
         left: 25px;
+
         right: 25px;
+
         bottom: 25px;
       }
 
       .venture-visual {
-        transform: scale(0.75);
-        transform-origin: top right;
+
+        transform:
+          scale(.75);
+
+        transform-origin:
+          top right;
       }
 
       .stats-grid {
+
         grid-template-columns: 1fr;
       }
 
       .stat {
+
         border-right: 0 !important;
-        border-bottom: 1px solid var(--line);
+
+        border-bottom:
+          1px solid var(--line);
       }
 
       .stat:last-child {
@@ -1426,10 +2204,31 @@
       }
 
       .principle {
-        grid-template-columns: 40px 1fr;
+
+        grid-template-columns:
+          40px 1fr;
+      }
+
+      .leader {
+
+        min-height: 520px;
+
+        padding: 25px;
+      }
+
+      .leader-image-wrap {
+        height: 260px;
+      }
+
+      .leader-socials {
+
+        right: 25px;
+
+        bottom: 25px;
       }
 
       .footer-top {
+
         grid-template-columns: 1fr;
       }
 
@@ -1438,97 +2237,187 @@
       }
 
       .footer-bottom {
+
         flex-direction: column;
       }
+
     }
 
-    /* =========================================================
-       ACCESSIBILITY
-    ========================================================= */
+    /* ======================================================
+       REDUCED MOTION
+    ======================================================= */
 
-    @media (prefers-reduced-motion: reduce) {
+    @media(prefers-reduced-motion:reduce) {
+
       *,
       *::before,
       *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
+
+        animation-duration:
+          .01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          .01ms !important;
+
+        scroll-behavior:
+          auto !important;
       }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <!-- CUSTOM CURSOR -->
+  <!-- ======================================================
+       CURSOR
+  ======================================================= -->
+
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
-  <!-- =======================================================
-       NAVIGATION
-  ======================================================== -->
 
-  <header class="navbar" id="navbar">
+  <!-- ======================================================
+       NAVIGATION
+  ======================================================= -->
+
+  <header
+    class="navbar"
+    id="navbar"
+  >
+
     <div class="nav-inner">
 
-      <a href="#home" class="logo magnetic">
+      <a
+        href="#home"
+        class="logo magnetic"
+      >
         TeamOrbits<span>.</span>
       </a>
+
 
       <button
         class="mobile-toggle"
         id="mobileToggle"
-        aria-label="Open menu"
+        aria-label="Open navigation"
       >
-        <i class="fa-solid fa-bars"></i>
+
+        <i
+          class="fa-solid fa-bars"
+        ></i>
+
       </button>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#ventures">Ventures</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#leadership">Leadership</a></li>
+
+      <ul
+        class="nav-links"
+        id="navLinks"
+      >
+
         <li>
-          <a href="#contact" class="nav-cta">Let's Talk ↗</a>
+          <a href="#home">
+            Home
+          </a>
         </li>
+
+        <li>
+          <a href="#ventures">
+            Ventures
+          </a>
+        </li>
+
+        <li>
+          <a href="#services">
+            Services
+          </a>
+        </li>
+
+        <li>
+          <a href="#about">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a href="#leadership">
+            Leadership
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="#contact"
+            class="nav-cta"
+          >
+            Let's Talk ↗
+          </a>
+        </li>
+
       </ul>
 
     </div>
+
   </header>
 
 
-  <!-- =======================================================
-       HERO
-  ======================================================== -->
+  <!-- ======================================================
+       MAIN
+  ======================================================= -->
 
   <main>
 
-    <section class="hero" id="home">
+
+    <!-- ====================================================
+         HERO
+    ===================================================== -->
+
+    <section
+      class="hero"
+      id="home"
+    >
 
       <div class="container">
 
         <div class="hero-grid">
 
-          <div class="hero-content reveal-left">
+
+          <div
+            class="hero-content reveal-left"
+          >
 
             <div class="hero-label">
               Technology · Products · Businesses
             </div>
 
+
             <h1>
+
               We build
-              <span class="dim">digital</span>
+
+              <span class="dim">
+                digital
+              </span>
+
               businesses.
+
             </h1>
 
+
             <p class="hero-copy">
-              TeamOrbits is a technology-driven business ecosystem
-              creating digital products, software platforms,
-              intelligent solutions and technology services for the
-              modern world.
+
+              TeamOrbits is a technology-driven
+              business ecosystem creating digital
+              products, software platforms,
+              intelligent solutions and technology
+              services for the modern world.
+
             </p>
+
 
             <div class="hero-actions">
 
@@ -1536,16 +2425,27 @@
                 href="#ventures"
                 class="btn btn-primary magnetic"
               >
+
                 Explore ecosystem
-                <i class="fa-solid fa-arrow-down"></i>
+
+                <i
+                  class="fa-solid fa-arrow-down"
+                ></i>
+
               </a>
+
 
               <a
                 href="#contact"
                 class="btn btn-outline magnetic"
               >
+
                 Work with us
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                <i
+                  class="fa-solid fa-arrow-up-right-from-square"
+                ></i>
+
               </a>
 
             </div>
@@ -1553,15 +2453,22 @@
           </div>
 
 
-          <div class="hero-visual reveal-right">
+          <!-- HERO VISUAL -->
+
+          <div
+            class="hero-visual reveal-right"
+          >
 
             <div class="orb-ring"></div>
 
             <div class="orb"></div>
 
+
             <div class="hero-mini-card">
 
-              <small>Our ecosystem</small>
+              <small>
+                Our ecosystem
+              </small>
 
               <strong>
                 Products → Platforms → Possibilities
@@ -1578,44 +2485,52 @@
     </section>
 
 
-    <!-- =====================================================
+    <!-- ====================================================
          MARQUEE
-    ====================================================== -->
+    ===================================================== -->
 
     <div class="marquee">
 
       <div class="marquee-track">
 
         <div class="marquee-item">
-          Digital Products <span class="marquee-dot">✦</span>
+          Digital Products
+          <span class="marquee-dot">✦</span>
         </div>
 
         <div class="marquee-item">
-          AI & Automation <span class="marquee-dot">✦</span>
+          AI & Automation
+          <span class="marquee-dot">✦</span>
         </div>
 
         <div class="marquee-item">
-          Software Engineering <span class="marquee-dot">✦</span>
+          Software Engineering
+          <span class="marquee-dot">✦</span>
         </div>
 
         <div class="marquee-item">
-          Digital Platforms <span class="marquee-dot">✦</span>
+          Digital Platforms
+          <span class="marquee-dot">✦</span>
         </div>
 
         <div class="marquee-item">
-          Technology Services <span class="marquee-dot">✦</span>
+          Technology Services
+          <span class="marquee-dot">✦</span>
         </div>
 
         <div class="marquee-item">
-          Digital Products <span class="marquee-dot">✦</span>
+          Digital Products
+          <span class="marquee-dot">✦</span>
         </div>
 
         <div class="marquee-item">
-          AI & Automation <span class="marquee-dot">✦</span>
+          AI & Automation
+          <span class="marquee-dot">✦</span>
         </div>
 
         <div class="marquee-item">
-          Software Engineering <span class="marquee-dot">✦</span>
+          Software Engineering
+          <span class="marquee-dot">✦</span>
         </div>
 
       </div>
@@ -1623,13 +2538,17 @@
     </div>
 
 
-    <!-- =====================================================
-         ECOSYSTEM
-    ====================================================== -->
+    <!-- ====================================================
+         VENTURES
+    ===================================================== -->
 
-    <section class="section ecosystem" id="ventures">
+    <section
+      class="section ecosystem"
+      id="ventures"
+    >
 
       <div class="container">
+
 
         <div class="ecosystem-header reveal">
 
@@ -1640,17 +2559,26 @@
             </div>
 
             <h2 class="section-title">
+
               Different products.
-              <span>One ecosystem.</span>
+
+              <span>
+                One ecosystem.
+              </span>
+
             </h2>
 
           </div>
 
+
           <p class="ecosystem-note">
-            TeamOrbits operates across technology, digital
-            products, software platforms and intelligent
-            solutions — building businesses designed for the
-            next generation of the internet.
+
+            TeamOrbits operates across technology,
+            digital products, software platforms
+            and intelligent solutions — building
+            businesses designed for the next
+            generation of the internet.
+
           </p>
 
         </div>
@@ -1661,11 +2589,14 @@
 
           <!-- ZENTOLOO -->
 
-          <article class="venture reveal">
+          <article
+            class="venture reveal"
+          >
 
             <div class="venture-number">
               01 / DIGITAL PRODUCT
             </div>
+
 
             <div class="venture-visual">
 
@@ -1677,15 +2608,22 @@
 
             </div>
 
+
             <div class="venture-content">
 
-              <h3>Zentoolo</h3>
+              <h3>
+                Zentoolo
+              </h3>
 
               <p>
-                A growing digital toolkit built around useful
-                utilities for developers, creators, businesses
+
+                A growing digital toolkit built
+                around useful utilities for
+                developers, creators, businesses
                 and everyday digital work.
+
               </p>
+
 
               <a
                 href="https://zentoolo.com"
@@ -1693,8 +2631,13 @@
                 rel="noopener noreferrer"
                 class="venture-link magnetic"
               >
+
                 Visit zentoolo.com
-                <i class="fa-solid fa-arrow-up-right"></i>
+
+                <i
+                  class="fa-solid fa-arrow-up-right"
+                ></i>
+
               </a>
 
             </div>
@@ -1704,34 +2647,47 @@
 
           <!-- SEO TOOLKIT -->
 
-          <article class="venture reveal">
+          <article
+            class="venture reveal"
+          >
 
             <div class="venture-number">
               02 / SAAS TOOL
             </div>
+
 
             <div class="venture-visual">
 
               <div class="seo-visual">
 
                 <div class="seo-bar"></div>
+
                 <div class="seo-bar"></div>
+
                 <div class="seo-bar"></div>
+
                 <div class="seo-bar"></div>
 
               </div>
 
             </div>
 
+
             <div class="venture-content">
 
-              <h3>SEO Toolkit</h3>
+              <h3>
+                SEO Toolkit
+              </h3>
 
               <p>
-                A practical SEO platform for analyzing,
-                understanding and improving websites for
-                search visibility.
+
+                A practical SEO platform for
+                analyzing, understanding and
+                improving websites for search
+                visibility.
+
               </p>
+
 
               <a
                 href="https://seotoolkit.codevibe.site"
@@ -1739,8 +2695,13 @@
                 rel="noopener noreferrer"
                 class="venture-link magnetic"
               >
+
                 Open SEO Toolkit
-                <i class="fa-solid fa-arrow-up-right"></i>
+
+                <i
+                  class="fa-solid fa-arrow-up-right"
+                ></i>
+
               </a>
 
             </div>
@@ -1748,38 +2709,57 @@
           </article>
 
 
-          <!-- TEAMORBITS SERVICES -->
+          <!-- TEAMORBITS -->
 
-          <article class="venture reveal">
+          <article
+            class="venture reveal"
+          >
 
             <div class="venture-number">
               03 / TECHNOLOGY
             </div>
 
+
             <div class="venture-visual">
 
               <div class="service-visual">
-                <i class="fa-solid fa-code"></i>
+
+                <i
+                  class="fa-solid fa-code"
+                ></i>
+
               </div>
 
             </div>
 
+
             <div class="venture-content">
 
-              <h3>TeamOrbits</h3>
+              <h3>
+                TeamOrbits
+              </h3>
 
               <p>
-                Technology services focused on software
-                development, AI integration, automation,
-                websites, platforms and digital transformation.
+
+                Technology services focused on
+                software development, AI integration,
+                automation, websites, platforms and
+                digital transformation.
+
               </p>
+
 
               <a
                 href="#services"
                 class="venture-link magnetic"
               >
+
                 Explore services
-                <i class="fa-solid fa-arrow-down"></i>
+
+                <i
+                  class="fa-solid fa-arrow-down"
+                ></i>
+
               </a>
 
             </div>
@@ -1789,37 +2769,53 @@
 
           <!-- FUTURE -->
 
-          <article class="venture reveal">
+          <article
+            class="venture reveal"
+          >
 
             <div class="venture-number">
               04 / FUTURE
             </div>
 
+
             <div class="venture-visual future-visual">
               +
             </div>
 
+
             <div class="venture-content">
 
-              <h3>More to come.</h3>
+              <h3>
+                More to come.
+              </h3>
 
               <p>
-                The ecosystem is continuously expanding with
-                new products, platforms and technology ventures
+
+                The ecosystem is continuously
+                expanding with new products,
+                platforms and technology ventures
                 being explored and developed.
+
               </p>
+
 
               <a
                 href="#contact"
                 class="venture-link magnetic"
               >
+
                 Build with us
-                <i class="fa-solid fa-arrow-up-right"></i>
+
+                <i
+                  class="fa-solid fa-arrow-up-right"
+                ></i>
+
               </a>
 
             </div>
 
           </article>
+
 
         </div>
 
@@ -1828,13 +2824,17 @@
     </section>
 
 
-    <!-- =====================================================
+    <!-- ====================================================
          SERVICES
-    ====================================================== -->
+    ===================================================== -->
 
-    <section class="section" id="services">
+    <section
+      class="section"
+      id="services"
+    >
 
       <div class="container">
+
 
         <div class="reveal">
 
@@ -1842,15 +2842,25 @@
             What we build
           </div>
 
+
           <h2 class="section-title">
+
             Technology that
-            <span>moves businesses.</span>
+
+            <span>
+              moves businesses.
+            </span>
+
           </h2>
 
+
           <p class="section-description">
-            From product engineering to AI-powered automation,
-            we build practical technology designed around real
+
+            From product engineering to AI-powered
+            automation, we build practical
+            technology designed around real
             business needs.
+
           </p>
 
         </div>
@@ -1870,8 +2880,11 @@
             </div>
 
             <div class="service-description">
-              Modern web applications, platforms, dashboards,
-              APIs and custom software systems.
+
+              Modern web applications,
+              platforms, dashboards, APIs and
+              custom software systems.
+
             </div>
 
             <div class="service-arrow">
@@ -1892,8 +2905,11 @@
             </div>
 
             <div class="service-description">
-              Intelligent workflows, AI integrations, business
-              automation and productivity systems.
+
+              Intelligent workflows, AI
+              integrations, business automation
+              and productivity systems.
+
             </div>
 
             <div class="service-arrow">
@@ -1914,8 +2930,11 @@
             </div>
 
             <div class="service-description">
-              Product strategy, UX, engineering and launch
-              support for digital-first products.
+
+              Product strategy, UX, engineering
+              and launch support for
+              digital-first products.
+
             </div>
 
             <div class="service-arrow">
@@ -1936,8 +2955,11 @@
             </div>
 
             <div class="service-description">
-              Fast, scalable and responsive websites and
-              platforms designed for modern users.
+
+              Fast, scalable and responsive
+              websites and platforms designed
+              for modern users.
+
             </div>
 
             <div class="service-arrow">
@@ -1958,8 +2980,11 @@
             </div>
 
             <div class="service-description">
-              Technical SEO, website optimization, analytics
-              and digital growth infrastructure.
+
+              Technical SEO, website optimization,
+              analytics and digital growth
+              infrastructure.
+
             </div>
 
             <div class="service-arrow">
@@ -1980,8 +3005,11 @@
             </div>
 
             <div class="service-description">
-              Architecture, technology strategy and practical
-              guidance for digital businesses.
+
+              Architecture, technology strategy
+              and practical guidance for digital
+              businesses.
+
             </div>
 
             <div class="service-arrow">
@@ -1990,6 +3018,7 @@
 
           </div>
 
+
         </div>
 
       </div>
@@ -1997,28 +3026,44 @@
     </section>
 
 
-    <!-- =====================================================
-         ABOUT / PHILOSOPHY
-    ====================================================== -->
+    <!-- ====================================================
+         ABOUT
+    ===================================================== -->
 
-    <section class="section philosophy" id="about">
+    <section
+      class="section philosophy"
+      id="about"
+    >
 
       <div class="container">
 
+
         <div class="philosophy-layout">
 
-          <div class="philosophy-sticky reveal-left">
+
+          <div
+            class="philosophy-sticky reveal-left"
+          >
 
             <div class="eyebrow">
               About TeamOrbits
             </div>
 
+
             <h2>
+
               Build.
+
               <br />
+
               Learn.
+
               <br />
-              <span>Scale.</span>
+
+              <span>
+                Scale.
+              </span>
+
             </h2>
 
           </div>
@@ -2040,10 +3085,13 @@
                 </h3>
 
                 <p>
-                  We believe useful products speak louder than
-                  complicated promises. Every venture starts with
-                  a simple question: does this solve a real
-                  problem?
+
+                  We believe useful products
+                  speak louder than complicated
+                  promises. Every venture starts
+                  with a simple question: does
+                  this solve a real problem?
+
                 </p>
 
               </div>
@@ -2064,10 +3112,13 @@
                 </h3>
 
                 <p>
-                  Technology is only valuable when it creates
-                  measurable value. We focus on practical
-                  engineering, useful experiences and sustainable
-                  digital systems.
+
+                  Technology is only valuable
+                  when it creates measurable
+                  value. We focus on practical
+                  engineering, useful experiences
+                  and sustainable digital systems.
+
                 </p>
 
               </div>
@@ -2088,9 +3139,13 @@
                 </h3>
 
                 <p>
-                  Digital businesses evolve quickly. Our approach
-                  is designed to stay flexible, experiment rapidly
-                  and adapt as technology and markets change.
+
+                  Digital businesses evolve
+                  quickly. Our approach is designed
+                  to stay flexible, experiment
+                  rapidly and adapt as technology
+                  and markets change.
+
                 </p>
 
               </div>
@@ -2111,15 +3166,19 @@
                 </h3>
 
                 <p>
-                  Our products may serve different audiences, but
-                  they share one philosophy: create technology
-                  that makes digital work simpler, smarter and
-                  more accessible.
+
+                  Our products may serve different
+                  audiences, but they share one
+                  philosophy: create technology
+                  that makes digital work simpler,
+                  smarter and more accessible.
+
                 </p>
 
               </div>
 
             </div>
+
 
           </div>
 
@@ -2130,15 +3189,16 @@
     </section>
 
 
-    <!-- =====================================================
+    <!-- ====================================================
          STATS
-    ====================================================== -->
+    ===================================================== -->
 
     <section class="stats">
 
       <div class="container">
 
         <div class="stats-grid">
+
 
           <div class="stat reveal">
 
@@ -2191,6 +3251,7 @@
 
           </div>
 
+
         </div>
 
       </div>
@@ -2198,67 +3259,207 @@
     </section>
 
 
-    <!-- =====================================================
+    <!-- ====================================================
          LEADERSHIP
-    ====================================================== -->
+    ===================================================== -->
 
-    <section class="section" id="leadership">
+    <section
+      class="section"
+      id="leadership"
+    >
 
       <div class="container">
 
-        <div class="reveal">
+
+        <div class="leadership-header reveal">
 
           <div class="eyebrow">
             Leadership
           </div>
 
+
           <h2 class="section-title">
+
             People behind
-            <span>the ecosystem.</span>
+
+            <span>
+              the ecosystem.
+            </span>
+
           </h2>
+
+
+          <p class="section-description">
+
+            The leadership team building the
+            vision, technology and products
+            behind TeamOrbits.
+
+          </p>
 
         </div>
 
 
+        <!-- ================================================
+             TWO LEADERS SIDE BY SIDE
+        ================================================= -->
+
         <div class="leadership-grid">
 
 
-          <article class="leader reveal">
+          <!-- =================================================
+               ABHISHEK MADKAM
+          ================================================== -->
+
+          <article
+            class="leader reveal"
+          >
+
+            <div class="leader-number">
+              01 / LEADERSHIP
+            </div>
+
+
+            <div class="leader-image-wrap">
+
+              <img
+                src="assest/ChatGPT Image Dec 26, 2025, 02_17_11 PM.png"
+                alt="Abhishek Madkam - Chief Executive Officer"
+                class="leader-image"
+                onerror="
+                  this.onerror=null;
+                  this.src='https://randomuser.me/api/portraits/men/21.jpg';
+                "
+              />
+
+            </div>
+
 
             <div class="leader-role">
-              Founder / CEO
+              Chief Executive Officer
             </div>
+
 
             <h3>
               Abhishek Madkam
             </h3>
 
-            <p>
-              Building the TeamOrbits ecosystem across digital
-              products, technology services and new business
-              opportunities.
+
+            <p class="leader-description">
+
+              Leading the TeamOrbits vision across
+              digital products, technology services
+              and new business opportunities.
+
             </p>
 
-          </article>
+
+            <div class="leader-socials">
+
+              <a
+                href="#"
+                aria-label="LinkedIn"
+              >
+
+                <i
+                  class="fa-brands fa-linkedin-in"
+                ></i>
+
+              </a>
 
 
-          <article class="leader reveal">
+              <a
+                href="#"
+                aria-label="GitHub"
+              >
 
-            <div class="leader-role">
-              Technology
+                <i
+                  class="fa-brands fa-github"
+                ></i>
+
+              </a>
+
             </div>
 
+          </article>
+
+
+          <!-- =================================================
+               AMAN THOOL
+          ================================================== -->
+
+          <article
+            class="leader reveal"
+          >
+
+            <div class="leader-number">
+              02 / LEADERSHIP
+            </div>
+
+
+            <div class="leader-image-wrap">
+
+              <img
+                src="assest/WhatsApp Image 2025-12-27 at 7.00.04 PM.jpeg"
+                alt="Aman Thool - Chief Technology Officer"
+                class="leader-image"
+                onerror="
+                  this.onerror=null;
+                  this.src='https://randomuser.me/api/portraits/men/32.jpg';
+                "
+              />
+
+            </div>
+
+
+            <div class="leader-role">
+              Chief Technology Officer
+            </div>
+
+
             <h3>
-              Team & Partners
+              Aman Thool
             </h3>
 
-            <p>
-              A growing network of developers, designers and
-              technology collaborators helping turn ideas into
-              practical digital products.
+
+            <p class="leader-description">
+
+              Driving the technology direction
+              behind TeamOrbits products,
+              platforms and engineering initiatives.
+
             </p>
 
+
+            <div class="leader-socials">
+
+              <a
+                href="#"
+                aria-label="LinkedIn"
+              >
+
+                <i
+                  class="fa-brands fa-linkedin-in"
+                ></i>
+
+              </a>
+
+
+              <a
+                href="#"
+                aria-label="GitHub"
+              >
+
+                <i
+                  class="fa-brands fa-github"
+                ></i>
+
+              </a>
+
+            </div>
+
           </article>
+
 
         </div>
 
@@ -2267,13 +3468,17 @@
     </section>
 
 
-    <!-- =====================================================
+    <!-- ====================================================
          CONTACT
-    ====================================================== -->
+    ===================================================== -->
 
-    <section class="section contact" id="contact">
+    <section
+      class="section contact"
+      id="contact"
+    >
 
       <div class="container">
+
 
         <div class="reveal">
 
@@ -2281,9 +3486,15 @@
             Start something
           </div>
 
+
           <h2 class="contact-title">
+
             Have an idea?
-            <span>Let's build it.</span>
+
+            <span>
+              Let's build it.
+            </span>
+
           </h2>
 
         </div>
@@ -2291,14 +3502,19 @@
 
         <div class="contact-grid">
 
+
           <div class="reveal-left">
 
             <p class="contact-text">
-              Whether you want to build a digital product,
-              automate a business process, launch a website or
-              explore a technology idea, we'd love to hear about
-              it.
+
+              Whether you want to build a digital
+              product, automate a business process,
+              launch a website or explore a
+              technology idea, we'd love to hear
+              about it.
+
             </p>
+
 
             <div style="margin-top:30px;">
 
@@ -2306,8 +3522,13 @@
                 href="mailto:teamorbitbussiness@gmail.com"
                 class="btn btn-primary magnetic"
               >
+
                 Start a conversation
-                <i class="fa-solid fa-arrow-up-right"></i>
+
+                <i
+                  class="fa-solid fa-arrow-up-right"
+                ></i>
+
               </a>
 
             </div>
@@ -2315,17 +3536,24 @@
           </div>
 
 
-          <div class="contact-links reveal-right">
+          <div
+            class="contact-links reveal-right"
+          >
+
 
             <a
               href="mailto:teamorbitbussiness@gmail.com"
               class="contact-link magnetic"
             >
+
               <span>
                 teamorbitbussiness@gmail.com
               </span>
 
-              <i class="fa-solid fa-arrow-up-right"></i>
+              <i
+                class="fa-solid fa-arrow-up-right"
+              ></i>
+
             </a>
 
 
@@ -2333,11 +3561,15 @@
               href="tel:+917666309253"
               class="contact-link magnetic"
             >
+
               <span>
                 +91 7666309253
               </span>
 
-              <i class="fa-solid fa-arrow-up-right"></i>
+              <i
+                class="fa-solid fa-arrow-up-right"
+              ></i>
+
             </a>
 
 
@@ -2347,11 +3579,15 @@
               rel="noopener noreferrer"
               class="contact-link magnetic"
             >
+
               <span>
                 zentoolo.com
               </span>
 
-              <i class="fa-solid fa-arrow-up-right"></i>
+              <i
+                class="fa-solid fa-arrow-up-right"
+              ></i>
+
             </a>
 
 
@@ -2361,12 +3597,17 @@
               rel="noopener noreferrer"
               class="contact-link magnetic"
             >
+
               <span>
                 seotoolkit.codevibe.site
               </span>
 
-              <i class="fa-solid fa-arrow-up-right"></i>
+              <i
+                class="fa-solid fa-arrow-up-right"
+              ></i>
+
             </a>
+
 
           </div>
 
@@ -2376,18 +3617,21 @@
 
     </section>
 
+
   </main>
 
 
-  <!-- =======================================================
+  <!-- ======================================================
        FOOTER
-  ======================================================== -->
+  ======================================================= -->
 
   <footer>
 
     <div class="container">
 
+
       <div class="footer-top">
+
 
         <div class="footer-brand">
 
@@ -2395,9 +3639,13 @@
             TeamOrbits<span>.</span>
           </h3>
 
+
           <p>
-            Building digital products, technology platforms and
-            businesses for the next generation.
+
+            Building digital products,
+            technology platforms and businesses
+            for the next generation.
+
           </p>
 
         </div>
@@ -2409,6 +3657,7 @@
             Ecosystem
           </h4>
 
+
           <a
             href="https://zentoolo.com"
             target="_blank"
@@ -2417,6 +3666,7 @@
             Zentoolo ↗
           </a>
 
+
           <a
             href="https://seotoolkit.codevibe.site"
             target="_blank"
@@ -2424,6 +3674,7 @@
           >
             SEO Toolkit ↗
           </a>
+
 
           <a href="#services">
             TeamOrbits Services
@@ -2438,17 +3689,26 @@
             Navigate
           </h4>
 
+
           <a href="#home">
             Home
           </a>
+
 
           <a href="#ventures">
             Ventures
           </a>
 
+
           <a href="#about">
             About
           </a>
+
+
+          <a href="#leadership">
+            Leadership
+          </a>
+
 
           <a href="#contact">
             Contact
@@ -2456,14 +3716,16 @@
 
         </div>
 
+
       </div>
 
 
       <div class="footer-bottom">
 
-        <div>
+        <div id="copyright">
           © 2026 TeamOrbits. All rights reserved.
         </div>
+
 
         <div>
           Wardha, Maharashtra · India
@@ -2471,388 +3733,657 @@
 
       </div>
 
+
     </div>
 
   </footer>
 
 
-  <!-- =======================================================
+  <!-- ======================================================
        JAVASCRIPT
-  ======================================================== -->
+  ======================================================= -->
 
   <script>
 
-    /* =======================================================
+    /* ======================================================
        CUSTOM CURSOR
-    ======================================================== */
+    ======================================================= */
 
-    const cursorDot = document.querySelector(".cursor-dot");
-    const cursorRing = document.querySelector(".cursor-ring");
+    const cursorDot =
+      document.querySelector(
+        ".cursor-dot"
+      );
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
+    const cursorRing =
+      document.querySelector(
+        ".cursor-ring"
+      );
+
+
+    let mouseX =
+      window.innerWidth / 2;
+
+    let mouseY =
+      window.innerHeight / 2;
 
     let ringX = mouseX;
     let ringY = mouseY;
 
-    document.addEventListener("mousemove", (event) => {
 
-      mouseX = event.clientX;
-      mouseY = event.clientY;
+    document.addEventListener(
+      "mousemove",
+      (event) => {
 
-      cursorDot.style.left = mouseX + "px";
-      cursorDot.style.top = mouseY + "px";
+        mouseX =
+          event.clientX;
 
-    });
+        mouseY =
+          event.clientY;
+
+
+        cursorDot.style.left =
+          mouseX + "px";
+
+        cursorDot.style.top =
+          mouseY + "px";
+
+      }
+    );
+
 
     function animateCursor() {
 
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
+      ringX +=
+        (mouseX - ringX) * 0.12;
 
-      cursorRing.style.left = ringX + "px";
-      cursorRing.style.top = ringY + "px";
+      ringY +=
+        (mouseY - ringY) * 0.12;
 
-      requestAnimationFrame(animateCursor);
+
+      cursorRing.style.left =
+        ringX + "px";
+
+      cursorRing.style.top =
+        ringY + "px";
+
+
+      requestAnimationFrame(
+        animateCursor
+      );
+
     }
+
 
     animateCursor();
 
 
-    /* =======================================================
+    /* ======================================================
        CURSOR HOVER
-    ======================================================== */
+    ======================================================= */
 
-    const hoverElements = document.querySelectorAll(
-      "a, button, .venture, .service-row, .leader"
-    );
+    document
+      .querySelectorAll(
+        "a, button, .venture, .leader, .service-row"
+      )
+      .forEach((element) => {
 
-    hoverElements.forEach((element) => {
+        element.addEventListener(
+          "mouseenter",
+          () => {
 
-      element.addEventListener("mouseenter", () => {
-        document.body.classList.add("cursor-hover");
+            document.body.classList.add(
+              "cursor-hover"
+            );
+
+          }
+        );
+
+
+        element.addEventListener(
+          "mouseleave",
+          () => {
+
+            document.body.classList.remove(
+              "cursor-hover"
+            );
+
+          }
+        );
+
       });
 
-      element.addEventListener("mouseleave", () => {
-        document.body.classList.remove("cursor-hover");
-      });
 
-    });
+    /* ======================================================
+       NAVBAR
+    ======================================================= */
 
+    const navbar =
+      document.getElementById(
+        "navbar"
+      );
 
-    /* =======================================================
-       NAVBAR SCROLL
-    ======================================================== */
-
-    const navbar = document.getElementById("navbar");
 
     window.addEventListener(
       "scroll",
       () => {
 
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
+        if (
+          window.scrollY > 50
+        ) {
+
+          navbar.classList.add(
+            "scrolled"
+          );
+
         } else {
-          navbar.classList.remove("scrolled");
+
+          navbar.classList.remove(
+            "scrolled"
+          );
+
         }
 
       },
-      { passive: true }
+      {
+        passive: true
+      }
     );
 
 
-    /* =======================================================
-       MOBILE MENU
-    ======================================================== */
+    /* ======================================================
+       MOBILE NAVIGATION
+    ======================================================= */
 
     const mobileToggle =
-      document.getElementById("mobileToggle");
+      document.getElementById(
+        "mobileToggle"
+      );
 
     const navLinks =
-      document.getElementById("navLinks");
+      document.getElementById(
+        "navLinks"
+      );
 
-    mobileToggle.addEventListener("click", () => {
 
-      navLinks.classList.toggle("open");
+    mobileToggle.addEventListener(
+      "click",
+      () => {
 
-      const icon =
-        mobileToggle.querySelector("i");
+        navLinks.classList.toggle(
+          "open"
+        );
 
-      if (navLinks.classList.contains("open")) {
 
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-xmark");
+        const icon =
+          mobileToggle.querySelector(
+            "i"
+          );
 
-      } else {
 
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
+        if (
+          navLinks.classList.contains(
+            "open"
+          )
+        ) {
+
+          icon.classList.remove(
+            "fa-bars"
+          );
+
+          icon.classList.add(
+            "fa-xmark"
+          );
+
+        } else {
+
+          icon.classList.remove(
+            "fa-xmark"
+          );
+
+          icon.classList.add(
+            "fa-bars"
+          );
+
+        }
 
       }
+    );
 
-    });
 
-
-    /* Close mobile menu after clicking */
+    /* ======================================================
+       CLOSE MOBILE MENU
+    ======================================================= */
 
     document
-      .querySelectorAll(".nav-links a")
+      .querySelectorAll(
+        ".nav-links a"
+      )
       .forEach((link) => {
 
-        link.addEventListener("click", () => {
+        link.addEventListener(
+          "click",
+          () => {
 
-          navLinks.classList.remove("open");
+            navLinks.classList.remove(
+              "open"
+            );
 
-          const icon =
-            mobileToggle.querySelector("i");
 
-          icon.classList.remove("fa-xmark");
-          icon.classList.add("fa-bars");
+            const icon =
+              mobileToggle.querySelector(
+                "i"
+              );
 
-        });
+
+            icon.classList.remove(
+              "fa-xmark"
+            );
+
+            icon.classList.add(
+              "fa-bars"
+            );
+
+          }
+        );
 
       });
 
 
-    /* =======================================================
-       SMOOTH SCROLL
-    ======================================================== */
+    /* ======================================================
+       SMOOTH ANCHOR SCROLL
+    ======================================================= */
 
     document
-      .querySelectorAll('a[href^="#"]')
+      .querySelectorAll(
+        'a[href^="#"]'
+      )
       .forEach((anchor) => {
 
-        anchor.addEventListener("click", function (event) {
+        anchor.addEventListener(
+          "click",
+          function(event) {
 
-          const target =
-            document.querySelector(this.getAttribute("href"));
+            const target =
+              document.querySelector(
+                this.getAttribute(
+                  "href"
+                )
+              );
 
-          if (!target) return;
 
-          event.preventDefault();
+            if (!target) {
+              return;
+            }
 
-          const offset = 70;
 
-          const targetPosition =
-            target.getBoundingClientRect().top +
-            window.scrollY -
-            offset;
+            event.preventDefault();
 
-          window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth"
-          });
 
-        });
+            const offset = 70;
+
+
+            const targetPosition =
+              target.getBoundingClientRect()
+                .top
+              +
+              window.scrollY
+              -
+              offset;
+
+
+            window.scrollTo({
+
+              top:
+                targetPosition,
+
+              behavior:
+                "smooth"
+
+            });
+
+          }
+        );
 
       });
 
 
-    /* =======================================================
+    /* ======================================================
        SCROLL REVEAL
-    ======================================================== */
+    ======================================================= */
 
     const revealElements =
       document.querySelectorAll(
         ".reveal, .reveal-left, .reveal-right"
       );
 
+
     const revealObserver =
       new IntersectionObserver(
+
         (entries) => {
 
-          entries.forEach((entry) => {
+          entries.forEach(
+            (entry) => {
 
-            if (entry.isIntersecting) {
+              if (
+                entry.isIntersecting
+              ) {
 
-              entry.target.classList.add("active");
+                entry.target.classList.add(
+                  "active"
+                );
 
-              revealObserver.unobserve(entry.target);
+
+                revealObserver.unobserve(
+                  entry.target
+                );
+
+              }
 
             }
-
-          });
+          );
 
         },
+
         {
           threshold: 0.12,
-          rootMargin: "0px 0px -50px 0px"
+
+          rootMargin:
+            "0px 0px -50px 0px"
         }
+
       );
 
-    revealElements.forEach((element) => {
-      revealObserver.observe(element);
-    });
+
+    revealElements.forEach(
+      (element) => {
+
+        revealObserver.observe(
+          element
+        );
+
+      }
+    );
 
 
-    /* =======================================================
-       MAGNETIC BUTTONS
-    ======================================================== */
+    /* ======================================================
+       MAGNETIC ELEMENTS
+    ======================================================= */
 
-    const magneticElements =
-      document.querySelectorAll(".magnetic");
+    document
+      .querySelectorAll(
+        ".magnetic"
+      )
+      .forEach((element) => {
 
-    magneticElements.forEach((element) => {
+        element.addEventListener(
+          "mousemove",
+          (event) => {
 
-      element.addEventListener("mousemove", (event) => {
+            if (
+              window.innerWidth <= 900
+            ) {
+              return;
+            }
 
-        if (window.innerWidth <= 900) return;
 
-        const rect =
-          element.getBoundingClientRect();
+            const rect =
+              element.getBoundingClientRect();
 
-        const x =
-          event.clientX -
-          rect.left -
-          rect.width / 2;
 
-        const y =
-          event.clientY -
-          rect.top -
-          rect.height / 2;
+            const x =
+              event.clientX -
+              rect.left -
+              rect.width / 2;
 
-        element.style.transform =
-          `translate(${x * 0.18}px, ${y * 0.18}px)`;
+
+            const y =
+              event.clientY -
+              rect.top -
+              rect.height / 2;
+
+
+            element.style.transform =
+              `translate(${x * 0.15}px, ${y * 0.15}px)`;
+
+          }
+        );
+
+
+        element.addEventListener(
+          "mouseleave",
+          () => {
+
+            element.style.transform =
+              "translate(0,0)";
+
+          }
+        );
 
       });
 
-      element.addEventListener("mouseleave", () => {
 
-        element.style.transform =
-          "translate(0, 0)";
-
-      });
-
-    });
-
-
-    /* =======================================================
-       PARALLAX HERO ORB
-    ======================================================== */
+    /* ======================================================
+       HERO PARALLAX
+    ======================================================= */
 
     const orb =
-      document.querySelector(".orb");
+      document.querySelector(
+        ".orb"
+      );
 
     const orbRing =
-      document.querySelector(".orb-ring");
+      document.querySelector(
+        ".orb-ring"
+      );
+
 
     window.addEventListener(
       "mousemove",
       (event) => {
 
-        if (window.innerWidth <= 900) return;
+        if (
+          window.innerWidth <= 900
+        ) {
+          return;
+        }
+
 
         const x =
-          (event.clientX / window.innerWidth - 0.5);
+          event.clientX /
+          window.innerWidth -
+          0.5;
+
 
         const y =
-          (event.clientY / window.innerHeight - 0.5);
+          event.clientY /
+          window.innerHeight -
+          0.5;
+
 
         orb.style.transform =
           `translate(${x * 20}px, ${y * 20}px)`;
 
+
         orbRing.style.transform =
-          `translate(${x * -12}px, ${y * -12}px) rotate(${x * 20}deg)`;
+          `translate(${x * -12}px, ${y * -12}px)`;
 
       },
-      { passive: true }
+      {
+        passive: true
+      }
     );
 
 
-    /* =======================================================
-       VENTURE TILT
-    ======================================================== */
+    /* ======================================================
+       VENTURE CARD TILT
+    ======================================================= */
 
-    const ventureCards =
-      document.querySelectorAll(".venture");
+    document
+      .querySelectorAll(
+        ".venture"
+      )
+      .forEach((card) => {
 
-    ventureCards.forEach((card) => {
+        card.addEventListener(
+          "mousemove",
+          (event) => {
 
-      card.addEventListener("mousemove", (event) => {
+            if (
+              window.innerWidth <= 900
+            ) {
+              return;
+            }
 
-        if (window.innerWidth <= 900) return;
 
-        const rect =
-          card.getBoundingClientRect();
+            const rect =
+              card.getBoundingClientRect();
 
-        const x =
-          event.clientX - rect.left;
 
-        const y =
-          event.clientY - rect.top;
+            const x =
+              event.clientX -
+              rect.left;
 
-        const centerX =
-          rect.width / 2;
 
-        const centerY =
-          rect.height / 2;
+            const y =
+              event.clientY -
+              rect.top;
 
-        const rotateX =
-          ((y - centerY) / centerY) * -2;
 
-        const rotateY =
-          ((x - centerX) / centerX) * 2;
+            const centerX =
+              rect.width / 2;
 
-        card.style.transform =
-          `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+
+            const centerY =
+              rect.height / 2;
+
+
+            const rotateX =
+              ((y - centerY) /
+                centerY) *
+              -2;
+
+
+            const rotateY =
+              ((x - centerX) /
+                centerX) *
+              2;
+
+
+            card.style.transform =
+              `
+              perspective(900px)
+              rotateX(${rotateX}deg)
+              rotateY(${rotateY}deg)
+              translateY(-8px)
+              `;
+
+          }
+        );
+
+
+        card.addEventListener(
+          "mouseleave",
+          () => {
+
+            card.style.transform =
+              `
+              perspective(900px)
+              rotateX(0deg)
+              rotateY(0deg)
+              translateY(0)
+              `;
+
+          }
+        );
 
       });
 
-      card.addEventListener("mouseleave", () => {
 
-        card.style.transform =
-          "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
+    /* ======================================================
+       LEADER CARD TILT
+    ======================================================= */
+
+    document
+      .querySelectorAll(
+        ".leader"
+      )
+      .forEach((card) => {
+
+        card.addEventListener(
+          "mousemove",
+          (event) => {
+
+            if (
+              window.innerWidth <= 900
+            ) {
+              return;
+            }
+
+
+            const rect =
+              card.getBoundingClientRect();
+
+
+            const x =
+              event.clientX -
+              rect.left;
+
+
+            const y =
+              event.clientY -
+              rect.top;
+
+
+            const rotateY =
+              ((x - rect.width / 2) /
+                rect.width) *
+              3;
+
+
+            const rotateX =
+              ((y - rect.height / 2) /
+                rect.height) *
+              -3;
+
+
+            card.style.transform =
+              `
+              perspective(1000px)
+              rotateX(${rotateX}deg)
+              rotateY(${rotateY}deg)
+              translateY(-8px)
+              `;
+
+          }
+        );
+
+
+        card.addEventListener(
+          "mouseleave",
+          () => {
+
+            card.style.transform =
+              "translateY(0)";
+
+          }
+        );
 
       });
 
-    });
+
+    /* ======================================================
+       DYNAMIC COPYRIGHT YEAR
+    ======================================================= */
+
+    const copyright =
+      document.getElementById(
+        "copyright"
+      );
 
 
-    /* =======================================================
-       SCROLL DEPTH EFFECT
-    ======================================================== */
-
-    window.addEventListener(
-      "scroll",
-      () => {
-
-        const scroll =
-          window.scrollY;
-
-        const hero =
-          document.querySelector(".hero-content");
-
-        if (hero && scroll < window.innerHeight) {
-
-          hero.style.transform =
-            `translateY(${scroll * 0.12}px)`;
-
-          hero.style.opacity =
-            Math.max(
-              0.2,
-              1 - scroll / 700
-            );
-
-        }
-
-      },
-      { passive: true }
-    );
-
-
-    /* =======================================================
-       DYNAMIC YEAR
-    ======================================================== */
-
-    const footerYear =
-      document.querySelector(".footer-bottom div");
-
-    if (footerYear) {
-
-      footerYear.innerHTML =
-        `© ${new Date().getFullYear()} TeamOrbits. All rights reserved.`;
-
-    }
+    copyright.textContent =
+      `© ${new Date().getFullYear()} TeamOrbits. All rights reserved.`;
 
   </script>
 
