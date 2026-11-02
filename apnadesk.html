@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8fc">
+  <title>ApnaDesk — Complete User Manual</title>
+  <meta name="description" content="A simple and complete user guide to ApnaDesk lead management, tasks, follow-ups, and email campaigns.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #5145e5;
+      --brand-2: #7c3aed;
+      --brand-soft: #eeecff;
+      --ink: #172033;
+      --muted: #667085;
+      --bg: #f6f8fc;
+      --surface: #ffffff;
+      --border: #e7eaf2;
+      --sidebar: #fbfcff;
+      --success: #0e9f6e;
+      --warning: #b7791f;
+      --danger: #d14343;
+      --shadow: 0 12px 35px rgba(24, 32, 56, .055);
+    }
+    [data-theme="dark"] {
+      --ink: #e8ecf8; --muted: #a3adc4; --bg: #101421; --surface: #171d2c;
+      --border: #2a3245; --sidebar: #141a28; --brand-soft: #29264c;
+      --shadow: 0 12px 35px rgba(0,0,0,.2);
+    }
+    * { scroll-behavior: smooth; }
+    body { font-family: "DM Sans", sans-serif; color: var(--ink); background: var(--bg); line-height: 1.72; }
+    h1,h2,h3,h4,h5,.brand-name { font-family: "Manrope", sans-serif; letter-spacing: -.035em; }
+    a { color: var(--brand); text-decoration: none; }
+    .topbar { height: 72px; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1030; }
+    .brand-mark { display:inline-grid; place-items:center; width:38px; height:38px; color:white; border-radius:12px; background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 6px 14px #5145e533; font-size:1.2rem; }
+    .brand-name { font-weight:800; font-size:1.15rem; color:var(--ink); }
+    .brand-sub { color:var(--muted); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; }
+    .btn-brand { background:var(--brand); color:white; border:1px solid var(--brand); border-radius:11px; font-weight:600; }
+    .btn-brand:hover { background:#4338ca; color:white; }
+    .btn-ghost { color:var(--ink); background:var(--surface); border:1px solid var(--border); border-radius:11px; }
+    .btn-ghost:hover { background:var(--brand-soft); color:var(--brand); }
+    .layout { display:grid; grid-template-columns:280px minmax(0,1fr); max-width:1500px; margin:auto; }
+    .sidebar { position:sticky; top:72px; height:calc(100vh - 72px); overflow-y:auto; padding:26px 18px 32px; background:var(--sidebar); border-right:1px solid var(--border); }
+    .sidebar-label { font-size:.69rem; font-weight:800; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin:22px 12px 10px; }
+    .nav-link-doc { display:flex; gap:12px; align-items:center; padding:10px 12px; border-radius:10px; color:var(--muted); font-size:.88rem; font-weight:600; margin:2px 0; transition:.18s ease; }
+    .nav-link-doc i { width:18px; font-size:1rem; }
+    .nav-link-doc:hover,.nav-link-doc.active { color:var(--brand); background:var(--brand-soft); }
+    .sidebar-note { margin:24px 5px 0; border:1px solid var(--border); border-radius:15px; padding:16px; background:var(--surface); }
+    .content { min-width:0; padding:38px clamp(20px,4vw,64px) 80px; max-width:1120px; }
+    .hero { position:relative; overflow:hidden; border-radius:26px; padding:clamp(28px,5vw,58px); color:white; background:radial-gradient(circle at 90% 10%,#a78bfa66,transparent 30%),linear-gradient(125deg,#312e81 0%,#5145e5 52%,#7c3aed 100%); box-shadow:0 20px 55px #5145e526; }
+    .hero:after { content:""; position:absolute; width:260px;height:260px;border:1px solid #ffffff24;border-radius:50%;right:-70px;bottom:-130px;box-shadow:0 0 0 35px #ffffff08,0 0 0 70px #ffffff05; }
+    .eyebrow { display:inline-flex; gap:8px; align-items:center; border:1px solid #ffffff35; background:#ffffff15; border-radius:999px; padding:6px 12px; font-size:.76rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+    .hero h1 { font-size:clamp(2.4rem,5vw,4.3rem); line-height:1.08; font-weight:800; margin:22px 0 16px; }
+    .hero p { color:#e4e2ff; max-width:660px; font-size:1.06rem; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; font-size:.84rem; color:#eeeaff; }
+    .hero-meta span { display:inline-flex; align-items:center; gap:7px; background:#ffffff13; border:1px solid #ffffff25; padding:7px 12px; border-radius:10px; }
+    .feature-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:25px 0 42px; }
+    .feature-card { background:var(--surface); border:1px solid var(--border); border-radius:17px; padding:20px; box-shadow:var(--shadow); }
+    .feature-icon { width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand);font-size:1.2rem;margin-bottom:14px; }
+    .feature-card h3 { font-size:1rem;font-weight:800;margin-bottom:6px; }
+    .feature-card p { font-size:.85rem;color:var(--muted);margin:0;line-height:1.6; }
+    .doc-section { padding-top:42px; margin-top:18px; border-top:1px solid var(--border); scroll-margin-top:95px; }
+    .section-kicker { color:var(--brand); font-size:.75rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:8px; }
+    .doc-section h2 { font-size:clamp(1.6rem,3vw,2.25rem); font-weight:800; margin-bottom:13px; }
+    .doc-section h3 { font-size:1.22rem; font-weight:800; margin:28px 0 12px; }
+    .doc-section h4 { font-size:1.02rem; font-weight:800; margin:20px 0 8px; }
+    .lead-text { font-size:1.05rem;color:var(--muted);max-width:800px; }
+    .table-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:14px; margin:18px 0 24px; background:var(--surface); }
+    table { margin:0!important; color:var(--ink)!important; min-width:460px; }
+    thead th { background:var(--brand-soft)!important; color:var(--ink)!important; font-size:.78rem; letter-spacing:.04em; text-transform:uppercase; border-color:var(--border)!important; padding:13px 16px!important; }
+    tbody td { border-color:var(--border)!important; padding:12px 16px!important; font-size:.9rem; }
+    tbody tr:last-child td { border-bottom:0; }
+    .step-list { list-style:none; padding:0; counter-reset:steps; margin:16px 0 22px; }
+    .step-list li { counter-increment:steps; display:flex; gap:14px; align-items:flex-start; margin:12px 0; padding:13px 15px; border:1px solid var(--border); border-radius:13px; background:var(--surface); }
+    .step-list li:before { content:counter(steps); flex:0 0 28px; height:28px; display:grid; place-items:center; border-radius:9px; background:var(--brand-soft); color:var(--brand); font-weight:800; font-size:.8rem; }
+    .callout { display:flex; gap:13px; border:1px solid #f2d7a2; background:color-mix(in srgb,#fff7e5 80%,var(--surface)); color:#7a5413; padding:16px 18px; border-radius:14px; margin:20px 0; }
+    [data-theme="dark"] .callout { background:#302817;color:#f1d18b;border-color:#5b4721; }
+    .callout.info { background:var(--brand-soft); border-color:color-mix(in srgb,var(--brand) 25%,var(--border)); color:var(--ink); }
+    .callout i { font-size:1.2rem; margin-top:2px; }
+    .callout p { margin:0; }
+    .pill { display:inline-block; border-radius:999px; padding:4px 9px; font-size:.75rem; font-weight:700; }
+    .pill-success { background:#e3f8ef;color:#087f5b; } .pill-warning { background:#fff3d7;color:#9a6700; } .pill-danger { background:#ffe7e7;color:#b42318; } .pill-purple { background:var(--brand-soft);color:var(--brand); }
+    [data-theme="dark"] .pill-success {background:#173b30;color:#70d9b1} [data-theme="dark"] .pill-warning{background:#44371c;color:#f2c96c} [data-theme="dark"] .pill-danger{background:#482626;color:#ff9a9a}
+    .mini-card-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0; }
+    .mini-card { border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:17px; }
+    .mini-card strong { display:block;margin-bottom:5px;font-size:.94rem; }
+    .mini-card span { color:var(--muted);font-size:.86rem; }
+    .faq-item { border:1px solid var(--border)!important; border-radius:13px!important; overflow:hidden; background:var(--surface)!important; margin:10px 0; }
+    .accordion-button { background:var(--surface)!important;color:var(--ink)!important;font-weight:700;box-shadow:none!important; }
+    .accordion-button:after { filter:var(--icon-filter,none); }
+    [data-theme="dark"] { --icon-filter:invert(1); }
+    .accordion-body { color:var(--muted); }
+    .footer { border-top:1px solid var(--border); margin-top:55px; padding:26px 0 0; color:var(--muted); font-size:.85rem; }
+    .back-top { position:fixed;right:24px;bottom:24px;z-index:1000;width:44px;height:44px;border-radius:14px;display:none;box-shadow:var(--shadow); }
+    .search-wrap { position:relative; width:min(340px,100%); }
+    .search-wrap i { position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted); }
+    .search-wrap input { padding-left:38px;border-radius:12px;background:var(--bg);border-color:var(--border);color:var(--ink); }
+    .search-wrap input:focus { background:var(--surface);border-color:var(--brand);box-shadow:0 0 0 3px #5145e51c; }
+    .search-results { position:absolute;top:calc(100% + 8px);left:0;right:0;z-index:1040;max-height:300px;overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:13px;box-shadow:var(--shadow);display:none; }
+    .search-results a { display:block;padding:11px 14px;color:var(--ink);border-bottom:1px solid var(--border);font-size:.86rem; }
+    .search-results a:hover { background:var(--brand-soft);color:var(--brand); }
+    .search-results small { display:block;color:var(--muted); }
+    .mobile-sidebar { background:var(--surface); }
+    code { color:var(--brand);background:var(--brand-soft);padding:2px 5px;border-radius:5px;font-size:.88em; }
+    @media(max-width:991px) { .layout{grid-template-columns:1fr}.sidebar{display:none}.content{padding:26px 20px 60px}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media(max-width:575px) { .feature-grid,.mini-card-grid{grid-template-columns:1fr}.hero{border-radius:20px}.hero h1{font-size:2.35rem}.content{padding-inline:15px}.topbar{height:64px}.hero-meta span{font-size:.75rem} }
+    @media print { .topbar,.sidebar,.back-top,.search-wrap,.hero-actions{display:none!important}.layout{display:block}.content{padding:0;max-width:none}.hero{color:#111;background:#eee;box-shadow:none}.doc-section{break-inside:avoid}body{background:white;color:#111} }
+  </style>
+</head>
+<body>
+  <div id="readingProgress" style="position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#5145e5,#a78bfa);z-index:2000"></div>
+  <header class="topbar">
+    <div class="container-fluid h-100 px-3 px-lg-4 d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-ghost d-lg-none me-1" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-label="Open navigation"><i class="bi bi-list fs-5"></i></button>
+        <span class="brand-mark"><i class="bi bi-grid-1x2-fill"></i></span>
+        <div class="lh-sm"><div class="brand-name">ApnaDesk</div><div class="brand-sub">User documentation</div></div>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <div class="search-wrap d-none d-md-block">
+          <i class="bi bi-search"></i><input id="docSearch" class="form-control form-control-sm" type="search" placeholder="Search this manual…" autocomplete="off" aria-label="Search documentation">
+          <div id="searchResults" class="search-results"></div>
+        </div>
+        <button id="themeToggle" class="btn btn-ghost" aria-label="Toggle dark mode" title="Toggle theme"><i class="bi bi-moon-stars"></i></button>
+        <button class="btn btn-ghost d-none d-sm-inline-flex" onclick="window.print()"><i class="bi bi-printer me-1"></i> Print</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="offcanvas offcanvas-start mobile-sidebar" tabindex="-1" id="mobileNav">
+    <div class="offcanvas-header border-bottom" style="border-color:var(--border)!important">
+      <div class="d-flex align-items-center gap-2"><span class="brand-mark"><i class="bi bi-grid-1x2-fill"></i></span><span class="brand-name">ApnaDesk Manual</span></div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body" id="mobileNavLinks"></div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-label">Guide overview</div>
+      <nav id="desktopNav" aria-label="Documentation chapters"></nav>
+      <div class="sidebar-note">
+        <div class="d-flex align-items-center gap-2 mb-2"><i class="bi bi-book-half" style="color:var(--brand)"></i><strong class="small">Quick guide</strong></div>
+        <p class="small mb-0" style="color:var(--muted)">Use the chapter links to jump to a feature. Search this manual to find an answer quickly.</p>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="hero" id="top">
+        <div class="eyebrow"><i class="bi bi-journal-text"></i> Complete user manual · Version 1.0</div>
+        <h1>Everything you need<br>to know about <span style="color:#c4b5fd">ApnaDesk.</span></h1>
+        <p>A simple, practical guide to managing leads, follow-ups, tasks, business opportunities, and email campaigns—all in one place.</p>
+        <div class="hero-meta">
+          <span><i class="bi bi-person-check"></i> Beginner friendly</span>
+          <span><i class="bi bi-layers"></i> 13 chapters</span>
+          <span><i class="bi bi-phone"></i> Mobile responsive</span>
+        </div>
+      </section>
+
+      <div class="feature-grid">
+        <article class="feature-card"><div class="feature-icon"><i class="bi bi-people"></i></div><h3>Lead Management</h3><p>Organize contacts, track lead status, import records, and maintain customer details.</p></article>
+        <article class="feature-card"><div class="feature-icon"><i class="bi bi-check2-square"></i></div><h3>Tasks & Follow-ups</h3><p>Plan activities, set due dates, add reminders, and track completion.</p></article>
+        <article class="feature-card"><div class="feature-icon"><i class="bi bi-envelope-paper"></i></div><h3>Email Studio</h3><p>Create personalized campaigns, choose recipients, send emails, and review history.</p></article>
+      </div>
+
+      <section class="doc-section" id="intro">
+        <div class="section-kicker">Chapter 01</div><h2>Introduction to ApnaDesk</h2>
+        <p class="lead-text">ApnaDesk is a business management application designed to help users organize their leads, manage follow-up tasks, track business opportunities, and communicate with potential customers through email campaigns.</p>
+        <p>The application brings important business activities together in one place, making it easier to manage customer information and track work.</p>
+        <h3>What can you do with ApnaDesk?</h3>
+        <div class="mini-card-grid">
+          <div class="mini-card"><strong><i class="bi bi-person-lines-fill me-2" style="color:var(--brand)"></i>Manage leads</strong><span>Store customer details, status, priority, and opportunity values.</span></div>
+          <div class="mini-card"><strong><i class="bi bi-calendar-check me-2" style="color:var(--brand)"></i>Plan follow-ups</strong><span>Create tasks, set due dates, and configure reminders.</span></div>
+          <div class="mini-card"><strong><i class="bi bi-graph-up-arrow me-2" style="color:var(--brand)"></i>Track progress</strong><span>Review dashboard statistics and pipeline overview.</span></div>
+          <div class="mini-card"><strong><i class="bi bi-send me-2" style="color:var(--brand)"></i>Communicate</strong><span>Send personalized email campaigns and review campaign history.</span></div>
+          <div class="mini-card"><strong><i class="bi bi-file-earmark-spreadsheet me-2" style="color:var(--brand)"></i>Import & export</strong><span>Work with lead data using CSV and Excel files.</span></div>
+          <div class="mini-card"><strong><i class="bi bi-window-stack me-2" style="color:var(--brand)"></i>Manage workspaces</strong><span>Switch between and create separate workspaces.</span></div>
+        </div>
+      </section>
+
+      <section class="doc-section" id="getting-started">
+        <div class="section-kicker">Chapter 02</div><h2>Getting Started</h2>
+        <h3>Opening ApnaDesk</h3><p>Open ApnaDesk on your device. After opening the application, you can access the main dashboard and navigate to different sections.</p>
+        <h3>Main Navigation</h3>
+        <div class="table-wrap"><table class="table table-hover align-middle"><thead><tr><th>Section</th><th>Purpose</th></tr></thead><tbody>
+          <tr><td><strong>Dashboard</strong></td><td>View business overview and important statistics.</td></tr><tr><td><strong>Leads</strong></td><td>Manage customer and business leads.</td></tr><tr><td><strong>Tasks</strong></td><td>Manage follow-ups and daily activities.</td></tr><tr><td><strong>Email Studio</strong></td><td>Create and send email campaigns.</td></tr><tr><td><strong>Notifications</strong></td><td>View pending, overdue, and due-today follow-ups.</td></tr><tr><td><strong>Settings</strong></td><td>Configure email accounts and manage workspaces.</td></tr>
+        </tbody></table></div>
+        <div class="callout info"><i class="bi bi-info-circle"></i><p>Available navigation options may depend on the current application layout.</p></div>
+      </section>
+
+      <section class="doc-section" id="dashboard">
+        <div class="section-kicker">Chapter 03</div><h2>Dashboard</h2><p class="lead-text">The Dashboard is the main overview screen. It helps you understand current business activities without opening each section separately.</p>
+        <h3>Dashboard Statistics</h3><div class="mini-card-grid">
+          <div class="mini-card"><strong>Total Leads</strong><span>Total number of leads available in the system.</span></div><div class="mini-card"><strong>Open Opportunities</strong><span>Business opportunities that are still open.</span></div>
+          <div class="mini-card"><strong>Follow-ups Due</strong><span>Follow-up activities requiring attention.</span></div><div class="mini-card"><strong>Pipeline Value</strong><span>Estimated value of business opportunities.</span></div>
+        </div>
+        <h3>Date Filters</h3><p>Filter dashboard statistics using <span class="pill pill-purple">All Time</span> <span class="pill pill-purple">Today</span> <span class="pill pill-purple">Last 7 Days</span> <span class="pill pill-purple">Last 30 Days</span> <span class="pill pill-purple">This Month</span> <span class="pill pill-purple">Last Month</span> or <span class="pill pill-purple">Custom Date Range</span>.</p>
+        <h4>Using a custom date range</h4><ol class="step-list"><li>Select Custom date range.</li><li>Enter the starting date.</li><li>Enter the ending date.</li><li>Apply the date range.</li></ol><div class="callout"><i class="bi bi-exclamation-triangle"></i><p>The start date must not be later than the end date.</p></div>
+        <h3>Recent Leads</h3><p>Recent Leads displays up to six recently added leads. You can search, filter by status, open lead details, or view all leads. Available filters: All, New, Contacted, Qualified, Proposal, Won, and Lost.</p>
+        <h3>Today's Focus</h3><p>Today's Focus displays up to five tasks with title, priority, due date, and completion status. Tasks can be marked completed or pending.</p>
+        <h3>Task Priority</h3><div class="table-wrap"><table class="table"><thead><tr><th>Priority</th><th>Meaning</th></tr></thead><tbody><tr><td><span class="pill pill-danger">High</span></td><td>Important task requiring attention.</td></tr><tr><td><span class="pill pill-warning">Medium</span></td><td>Normal priority task.</td></tr><tr><td><span class="pill pill-success">Low</span></td><td>Task with lower priority.</td></tr></tbody></table></div>
+        <h3>Pipeline Overview</h3><p>Includes estimated pipeline value, won opportunity value, opportunities won during the current month, conversion rate, and pending tasks.</p>
+        <h3>Dashboard Actions</h3><div class="table-wrap"><table class="table"><thead><tr><th>Action</th><th>What it does</th></tr></thead><tbody><tr><td>Refresh</td><td>Reloads dashboard information.</td></tr><tr><td>Search</td><td>Navigates to Leads.</td></tr><tr><td>Notifications</td><td>Opens Notifications.</td></tr><tr><td>Settings</td><td>Opens application settings.</td></tr><tr><td>Workspace Selector</td><td>Opens workspace settings.</td></tr><tr><td>View All Leads</td><td>Opens the complete lead list.</td></tr></tbody></table></div><p>The dashboard can reload information when you return to it.</p>
+      </section>
+
+      <section class="doc-section" id="leads">
+        <div class="section-kicker">Chapter 04</div><h2>Lead Management</h2><p class="lead-text">A lead represents a person or business that may become a customer. The Leads section is used to manage their information.</p>
+        <h3>Leads Dashboard</h3><p>Lead statistics include Total Leads, Active Leads, Qualified Leads, and Won Leads. Users can search, filter, create, edit, and delete leads.</p>
+        <h3>Searching for Leads</h3><p>Search by lead name, company, email address, phone number, lead ID, source, or owner. Enter the information in the search field to display matching leads.</p>
+        <h3>Lead Statuses</h3><div class="table-wrap"><table class="table"><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody><tr><td>New</td><td>A newly added lead.</td></tr><tr><td>Contacted</td><td>A lead that has been contacted.</td></tr><tr><td>Qualified</td><td>A lead identified as a potential business opportunity.</td></tr><tr><td>Proposal</td><td>A proposal is being considered or provided.</td></tr><tr><td>Won</td><td>A successful business opportunity.</td></tr><tr><td>Lost</td><td>An opportunity that did not result in a successful outcome.</td></tr></tbody></table></div>
+        <h3>Adding a New Lead</h3><ol class="step-list"><li>Open Leads.</li><li>Select Add Lead.</li><li>Enter lead information.</li><li>Save the lead.</li></ol>
+        <h4>Lead form fields</h4><div class="table-wrap"><table class="table"><thead><tr><th>Field</th><th>Description</th></tr></thead><tbody><tr><td>Name</td><td>Lead's name (required).</td></tr><tr><td>Company</td><td>Company or business name.</td></tr><tr><td>Email</td><td>Lead's email address.</td></tr><tr><td>Phone</td><td>Lead's contact number.</td></tr><tr><td>Source</td><td>Where the lead came from.</td></tr><tr><td>Status</td><td>Current lead status.</td></tr><tr><td>Priority</td><td>Importance of the lead.</td></tr><tr><td>Estimated Opportunity Value</td><td>Estimated business value.</td></tr><tr><td>Notes</td><td>Additional information.</td></tr></tbody></table></div>
+        <div class="callout"><i class="bi bi-shield-check"></i><p>Email addresses must be valid when provided. Opportunity values must not be negative. The application checks duplicate email addresses and phone numbers.</p></div>
+        <h3>Editing a Lead</h3><ol class="step-list"><li>Find and open the lead.</li><li>Select Edit.</li><li>Update the required information.</li><li>Save changes.</li></ol>
+        <h3>Deleting a Lead</h3><ol class="step-list"><li>Find the lead.</li><li>Select Delete.</li><li>Review the confirmation.</li><li>Confirm deletion.</li></ol><div class="callout"><i class="bi bi-exclamation-triangle"></i><p>Depending on backend relationships, deleting a lead may also affect associated tasks.</p></div>
+        <h3>Calling a Lead</h3><p>Open the lead and select Call. The device's phone dialer opens with the contact number; you can proceed with the call in the dialer.</p>
+        <h3>WhatsApp Contact</h3><p>Open the lead and select WhatsApp. The available WhatsApp contact action opens if the required application is available.</p>
+        <h3>Importing Leads (CSV / Excel)</h3><ol class="step-list"><li>Open Leads and select Import.</li><li>Choose a CSV or Excel file.</li><li>Review the preview, detected fields, and rows.</li><li>Choose duplicate handling.</li><li>Proceed with the import.</li></ol>
+        <p><strong>Duplicate handling:</strong> <span class="pill pill-purple">Skip</span> skips duplicate records; <span class="pill pill-purple">Update</span> updates matching records.</p><p>Import results may show imported, updated, skipped, failed, and total records. The preview helps identify row errors.</p>
+        <h3>Exporting Leads</h3><ol class="step-list"><li>Open Leads.</li><li>Apply a search or status filter if needed.</li><li>Select Export.</li><li>Choose CSV or Excel.</li><li>Save or share the generated file.</li></ol><p>Export uses the active search and status filters.</p>
+      </section>
+
+      <section class="doc-section" id="lead-profile">
+        <div class="section-kicker">Chapter 05</div><h2>Lead Profile</h2><p class="lead-text">The Lead Profile provides detailed information about an individual lead. Open Leads, find the lead, and select it.</p>
+        <h3>Lead Information</h3><p>The profile displays name, company, lead ID, status, priority, estimated opportunity value, email, phone, source, owner, created date, and updated date. Unavailable information may be shown as missing.</p>
+        <h3>Managing Lead Owners</h3><p>You can select an existing owner, change the owner, set Unassigned, enter a new owner name where available, and save the assignment. The owner indicates who is responsible for the lead.</p>
+        <h3>Lead Activity History</h3><p>Activity types include Call, Email, Meeting, and Note. An activity may show title, description, date/time, and recorded-by information.</p>
+        <h4>Adding an activity</h4><ol class="step-list"><li>Open the Lead Profile and go to Activity History.</li><li>Select Add Activity.</li><li>Choose the activity type.</li><li>Enter a required title and description.</li><li>Save the activity.</li></ol><p>Newest activities appear first.</p>
+        <h3>Linked Tasks</h3><p>The profile displays linked task title, description, due date, priority, and status. You can mark tasks completed or reopen them. Task counts and completion information are also shown. An empty state appears if no tasks are linked.</p>
+      </section>
+
+      <section class="doc-section" id="tasks">
+        <div class="section-kicker">Chapter 06</div><h2>Task Management</h2><p class="lead-text">Tasks help you organize daily work and customer follow-ups. Each task can be linked to a lead.</p>
+        <h3>Task Dashboard</h3><p>Summary statistics include Total Tasks, Pending Tasks, Due Today, Overdue Tasks, Upcoming Tasks, Completed Tasks, and Reminders.</p>
+        <h3>Searching Tasks</h3><p>Search by task title, lead name, or description.</p>
+        <h3>Task Filters</h3><div class="table-wrap"><table class="table"><thead><tr><th>Filter</th><th>Description</th></tr></thead><tbody><tr><td>All</td><td>Displays all tasks.</td></tr><tr><td>Today</td><td>Tasks due today.</td></tr><tr><td>Upcoming</td><td>Upcoming tasks.</td></tr><tr><td>Pending</td><td>Incomplete tasks.</td></tr><tr><td>Overdue</td><td>Tasks whose due dates have passed.</td></tr><tr><td>Completed</td><td>Completed tasks.</td></tr></tbody></table></div>
+        <h3>Creating a Task</h3><ol class="step-list"><li>Open Tasks and select Add Task.</li><li>Enter task information.</li><li>Select the related lead.</li><li>Set due date and priority.</li><li>Configure a reminder if required.</li><li>Save the task.</li></ol>
+        <h4>Task fields</h4><div class="table-wrap"><table class="table"><thead><tr><th>Field</th><th>Description</th></tr></thead><tbody><tr><td>Title</td><td>Task name (required).</td></tr><tr><td>Description</td><td>Additional task details.</td></tr><tr><td>Lead</td><td>Related lead (required).</td></tr><tr><td>Due Date</td><td>Deadline for the task.</td></tr><tr><td>Reminder</td><td>Optional reminder date and time.</td></tr><tr><td>Priority</td><td>High, Medium, or Low.</td></tr></tbody></table></div>
+        <p>Due date defaults to the current date. Default due time is 9:00 AM local time.</p>
+        <h3>Selecting a Lead</h3><p>Search existing leads in the lead selector and choose the relevant record. Linking a task keeps the follow-up associated with the customer.</p>
+        <h3>Task Reminders</h3><p>Reminders include a date and time and must be in the future. Reminder time is stored using a 24-hour format.</p>
+        <h3>Completing, Editing, and Deleting Tasks</h3><p>Find a task and use its completion action to mark it Completed. Completed tasks can be reopened. To edit, select Edit, update details, and save. To delete, select Delete and confirm.</p>
+        <h3>Task Cards</h3><p>Cards may show title, linked lead, status, priority, due date, reminder date/time, and completion date/time. The screen adapts to available screen width.</p>
+      </section>
+
+      <section class="doc-section" id="notifications">
+        <div class="section-kicker">Chapter 07</div><h2>Notifications & Follow-up Alerts</h2><p class="lead-text">Notifications helps identify follow-up tasks requiring attention. This screen is based on pending tasks.</p>
+        <h3>Notification Summary</h3><div class="mini-card-grid"><div class="mini-card"><strong><span class="pill pill-danger">Overdue Tasks</span></strong><span>Pending tasks with a due date earlier than today.</span></div><div class="mini-card"><strong><span class="pill pill-warning">Due Today</span></strong><span>Pending tasks due today.</span></div><div class="mini-card"><strong><span class="pill pill-purple">Upcoming Reminders</span></strong><span>Pending tasks with reminder dates/times in the future.</span></div></div>
+        <h3>Follow-up Alerts</h3><p>Alerts may show task title, lead name, due date, reminder date/time, and due status.</p>
+        <h4>Due status labels</h4><div class="table-wrap"><table class="table"><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody><tr><td>Overdue</td><td>The task's due date has passed.</td></tr><tr><td>Due Today</td><td>The task is due today.</td></tr><tr><td>Due YYYY-MM-DD</td><td>The task has a specific due date.</td></tr><tr><td>No Due Date</td><td>The task has no due date.</td></tr></tbody></table></div>
+        <h3>Open Tasks & Refresh</h3><p>Select Open Tasks to navigate to Tasks and manage pending follow-ups. Refresh reloads task information.</p><div class="callout info"><i class="bi bi-info-circle"></i><p>If there are no pending follow-ups, ApnaDesk displays: “You're all caught up! No pending follow-up tasks right now.” This screen documents in-app task alerts; push notifications are not documented as available.</p></div>
+      </section>
+
+      <section class="doc-section" id="email-studio">
+        <div class="section-kicker">Chapter 08</div><h2>Email Studio</h2><p class="lead-text">Email Studio lets you create and send personalized email campaigns to leads. An email account must be configured before sending.</p>
+        <h3>Selecting an Email Account</h3><ol class="step-list"><li>Open Email Studio.</li><li>Open the email account dropdown.</li><li>Choose a connected account.</li></ol><p>If no account is available, configure one in Settings.</p>
+        <h3>Selecting Recipients</h3><p>Eligible leads have an email address containing <code>@</code>. Search recipients by name, email, or company. You can select individual leads, all visible leads, or clear selection.</p><div class="callout"><i class="bi bi-people"></i><p>Campaign recipient limit: <strong>100 recipients maximum.</strong></p></div>
+        <h3>Creating an Email Campaign</h3><ol class="step-list"><li>Open Email Studio and select the connected account.</li><li>Select recipients.</li><li>Enter subject and message.</li><li>Review the personalized preview.</li><li>Continue to sending.</li></ol>
+        <h4>Email fields</h4><div class="table-wrap"><table class="table"><thead><tr><th>Field</th><th>Description</th></tr></thead><tbody><tr><td>Email Account</td><td>Account used to send campaign.</td></tr><tr><td>Recipients</td><td>Selected leads.</td></tr><tr><td>Subject</td><td>Email subject line.</td></tr><tr><td>Message</td><td>Main email content.</td></tr></tbody></table></div><p>Account, recipients, subject, and message are required.</p>
+        <h3>Personalizing Emails</h3><p>Supported variables:</p><div class="table-wrap"><table class="table"><thead><tr><th>Variable</th><th>Purpose</th></tr></thead><tbody><tr><td><code>{{name}}</code></td><td>Inserts the lead's name.</td></tr><tr><td><code>{{company}}</code></td><td>Inserts the lead's company.</td></tr><tr><td><code>{{email}}</code></td><td>Inserts the lead's email address.</td></tr></tbody></table></div>
+        <div class="mini-card"><strong>Example email</strong><span><b>Subject:</b> Hello {{name}}, welcome to our services!<br><br>Hello {{name}},<br>We are pleased to connect with you and your company, {{company}}.<br>Please contact us at {{email}} if you have any questions.<br><br>Regards,<br>Your Team</span></div>
+        <h3>Previewing an Email</h3><p>The preview uses the first selected lead and shows the personalized subject and message. Close the preview or continue to sending.</p>
+        <h3>Sending a Campaign</h3><p>The confirmation displays the subject, selected account, and recipient count. Review the information, confirm, and select Send Campaign. The result reports successful and failed email counts.</p>
+        <h3>Email Campaign History</h3><p>Campaign history may display subject, date, status, recipient count, sent count, and failed count. Expand a campaign for recipient name, email, sending status, date, and error details when available.</p>
+      </section>
+
+      <section class="doc-section" id="settings">
+        <div class="section-kicker">Chapter 09</div><h2>Settings</h2><p class="lead-text">Settings is used to configure email accounts, manage workspaces, and access additional application sections. Its main areas are Email, WhatsApp, and More.</p>
+        <h3>Email Account Settings</h3><p>ApnaDesk supports Gmail and Custom SMTP account configuration.</p>
+        <h4>Adding a Gmail Account</h4><ol class="step-list"><li>Open Settings and navigate to Email.</li><li>Select Add Email Account.</li><li>Enter email address and SMTP username.</li><li>Enter Gmail App Password.</li><li>Save the account.</li></ol>
+        <div class="table-wrap"><table class="table"><thead><tr><th>Gmail SMTP setting</th><th>Value</th></tr></thead><tbody><tr><td>SMTP Host</td><td><code>smtp.gmail.com</code></td></tr><tr><td>Port</td><td>587</td></tr><tr><td>TLS</td><td>Enabled</td></tr><tr><td>SSL</td><td>Disabled</td></tr></tbody></table></div><div class="callout"><i class="bi bi-key"></i><p>Gmail may require an App Password. A regular Gmail password may not work for SMTP configuration.</p></div>
+        <h4>Adding a Custom SMTP Account</h4><p>Provide email address, SMTP username, SMTP password, host, port, TLS setting, and SSL setting. Port must be between 1 and 65535. TLS and SSL cannot both be enabled.</p>
+        <h3>Testing an Email Account</h3><ol class="step-list"><li>Open Settings and select the configured account.</li><li>Select Test Connection.</li><li>Enter a valid test recipient email address.</li><li>Start the test.</li></ol><p>The entered recipient is used for connection testing.</p>
+        <h3>Managing Email Accounts</h3><p>View configured accounts, refresh account information, identify saved accounts, and test email connections.</p>
+        <h3>WhatsApp Settings</h3><p>The WhatsApp section displays WhatsApp Business Cloud API fields: Phone Number ID, Business ID, and Access Token.</p><div class="callout"><i class="bi bi-cone-striped"></i><p><strong>Preview / not yet active:</strong> The connection action is disabled. Saving, testing, and sending through this configuration are not available in the reviewed implementation.</p></div>
+        <h3>Workspace Management</h3><p>A workspace is a separate working environment in ApnaDesk. Users can view workspace names, the active workspace, and the default workspace indicator.</p>
+        <h4>Switching workspaces</h4><ol class="step-list"><li>Open Settings and Workspace Management.</li><li>Select the required workspace.</li></ol><p>Switching changes the API context, clears account information, and reloads relevant data for the selected workspace.</p>
+        <h4>Creating a workspace</h4><ol class="step-list"><li>Open Workspace Management.</li><li>Select Create Workspace.</li><li>Enter a workspace name and optional description.</li><li>Save.</li></ol><p>The new workspace is automatically activated. Workspace information is saved locally on the device and restored when the application is reopened.</p>
+        <h3>More Settings</h3><p>These items are currently placeholders and display a message that they will be implemented in a future step:</p><div class="d-flex flex-wrap gap-2"><span class="pill pill-warning">Automation Builder</span><span class="pill pill-warning">Email Templates</span><span class="pill pill-warning">WhatsApp Templates</span><span class="pill pill-warning">Automation History</span></div>
+      </section>
+
+      <section class="doc-section" id="workflows">
+        <div class="section-kicker">Chapter 10</div><h2>Common User Workflows</h2>
+        <h3>Adding a New Customer Lead</h3><ol class="step-list"><li>Open Leads and select Add Lead.</li><li>Enter customer name, company, email, and phone.</li><li>Select source, status, and priority.</li><li>Enter estimated opportunity value.</li><li>Save. The lead becomes available in the Leads list.</li></ol>
+        <h3>Scheduling a Follow-up</h3><ol class="step-list"><li>Open Tasks and select Add Task.</li><li>Enter task title and select the related lead.</li><li>Set due date and priority.</li><li>Configure a reminder if needed.</li><li>Save the task.</li></ol>
+        <h3>Completing a Follow-up</h3><ol class="step-list"><li>Open Tasks and search for the task.</li><li>Review the linked lead and due date.</li><li>Complete the follow-up activity.</li><li>Mark the task completed.</li></ol>
+        <h3>Sending an Email Campaign</h3><ol class="step-list"><li>Configure an email account in Settings.</li><li>Open Email Studio and select the account.</li><li>Select recipients and enter subject/message.</li><li>Add personalization variables if required.</li><li>Preview, confirm, and send.</li><li>Review campaign history.</li></ol>
+        <h3>Reviewing Overdue Tasks</h3><ol class="step-list"><li>Open Notifications.</li><li>Review the Overdue Tasks summary.</li><li>Identify pending follow-ups.</li><li>Select Open Tasks.</li><li>Complete or update the required tasks.</li></ol>
+      </section>
+
+      <section class="doc-section" id="troubleshooting">
+        <div class="section-kicker">Chapter 11</div><h2>Troubleshooting</h2>
+        <div class="accordion" id="troubleshootAccordion">
+          <div class="accordion-item faq-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#tr1">No email account is available</button></h3><div id="tr1" class="accordion-collapse collapse show" data-bs-parent="#troubleshootAccordion"><div class="accordion-body">No account may be configured. Open Settings → Email, add a Gmail or Custom SMTP account, and test the connection.</div></div></div>
+          <div class="accordion-item faq-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#tr2">Email campaign cannot be sent</button></h3><div id="tr2" class="accordion-collapse collapse" data-bs-parent="#troubleshootAccordion"><div class="accordion-body">Check that an account is selected, at least one recipient is selected, subject and message are entered, recipient count is 100 or less, and the email account is configured correctly.</div></div></div>
+          <div class="accordion-item faq-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#tr3">A lead cannot be found</button></h3><div id="tr3" class="accordion-collapse collapse" data-bs-parent="#troubleshootAccordion"><div class="accordion-body">Search by name, company, or email. Check whether a status filter is active. Clear the search or status filter and try again.</div></div></div>
+          <div class="accordion-item faq-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#tr4">A task appears as overdue</button></h3><div id="tr4" class="accordion-collapse collapse" data-bs-parent="#troubleshootAccordion"><div class="accordion-body">A pending task is overdue when its due date is earlier than the current date. Review it in Tasks and update or complete it.</div></div></div>
+          <div class="accordion-item faq-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#tr5">Importing leads produces errors</button></h3><div id="tr5" class="accordion-collapse collapse" data-bs-parent="#troubleshootAccordion"><div class="accordion-body">Review the preview and result summary. Check missing names, invalid emails, duplicate records, unrecognized field values, and rows that could not be processed. Use the duplicate handling options.</div></div></div>
+          <div class="accordion-item faq-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#tr6">Workspace information appears different</button></h3><div id="tr6" class="accordion-collapse collapse" data-bs-parent="#troubleshootAccordion"><div class="accordion-body">Check the selected workspace. Switching workspaces changes the API context and reloads corresponding information.</div></div></div>
+        </div>
+      </section>
+
+      <section class="doc-section" id="notes">
+        <div class="section-kicker">Chapter 12</div><h2>Important Notes</h2>
+        <ul class="list-group list-group-flush rounded-4 overflow-hidden" style="border:1px solid var(--border)">
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">Lead names are required when creating leads.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">Tasks require a title and a linked lead.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">Task reminders must be scheduled for a future date and time.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">Email campaigns require a connected email account and support up to 100 recipients.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">Email personalization supports <code>{{name}}</code>, <code>{{company}}</code>, and <code>{{email}}</code>.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">CSV and Excel import/export features are available in Leads.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">Notifications are based on pending task information.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">WhatsApp Business Cloud API settings are currently a preview.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">Automation Builder, Email Templates, WhatsApp Templates, and Automation History are placeholders.</li>
+          <li class="list-group-item" style="background:var(--surface);color:var(--ink);border-color:var(--border)">Do not assume that features not described as available in this manual are active.</li>
+        </ul>
+      </section>
+
+      <section class="doc-section" id="conclusion">
+        <div class="section-kicker">Chapter 13</div><h2>Conclusion</h2><p class="lead-text">ApnaDesk provides a centralized way to manage business leads, customer follow-ups, tasks, and email campaigns.</p><p>By using Dashboard, Leads, Tasks, Email Studio, Notifications, and Settings, users can organize their business activities and maintain better visibility into their work.</p>
+        <div class="hero mt-4" style="padding:30px;background:linear-gradient(125deg,#312e81,#5145e5)">
+          <div class="eyebrow"><i class="bi bi-stars"></i> ApnaDesk</div><h2 class="mt-3 mb-2" style="font-weight:800">Manage your leads.<br>Organize your work.<br>Stay connected.</h2>
+        </div>
+      </section>
+
+      <footer class="footer d-flex flex-wrap justify-content-between gap-2">
+        <span><strong style="color:var(--ink)">ApnaDesk</strong> · Complete User Manual · Version 1.0</span>
+        <span>Designed for a simple, user-friendly experience.</span>
+      </footer>
+    </main>
+  </div>
+  <button id="backTop" class="btn btn-brand back-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const chapters = [
+      ["intro","Introduction","bi-house-door"],
+      ["getting-started","Getting Started","bi-compass"],
+      ["dashboard","Dashboard","bi-grid"],
+      ["leads","Lead Management","bi-people"],
+      ["lead-profile","Lead Profile","bi-person-vcard"],
+      ["tasks","Task Management","bi-check2-square"],
+      ["notifications","Notifications","bi-bell"],
+      ["email-studio","Email Studio","bi-envelope-paper"],
+      ["settings","Settings","bi-gear"],
+      ["workflows","Common Workflows","bi-signpost-2"],
+      ["troubleshooting","Troubleshooting","bi-wrench"],
+      ["notes","Important Notes","bi-info-circle"],
+      ["conclusion","Conclusion","bi-flag"]
+    ];
+    const navHtml = chapters.map(([id,label,icon],i) =>
+      `<a class="nav-link-doc" href="#${id}" data-section="${id}"><i class="bi ${icon}"></i><span>${String(i+1).padStart(2,"0")} &nbsp;${label}</span></a>`
+    ).join("");
+    document.getElementById("desktopNav").innerHTML = navHtml;
+    document.getElementById("mobileNavLinks").innerHTML = `<div class="sidebar-label mt-0">Guide overview</div>${navHtml}`;
+
+    document.querySelectorAll("#mobileNavLinks a").forEach(link => {
+      link.addEventListener("click", () => {
+        const canvas = bootstrap.Offcanvas.getInstance(document.getElementById("mobileNav"));
+        if(canvas) canvas.hide();
+      });
+    });
+
+    const themeToggle = document.getElementById("themeToggle");
+    const savedTheme = localStorage.getItem("apnadesk-doc-theme");
+    if(savedTheme) document.documentElement.setAttribute("data-theme",savedTheme);
+    function updateThemeIcon(){
+      const dark = document.documentElement.getAttribute("data-theme")==="dark";
+      themeToggle.innerHTML = dark ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+    }
+    updateThemeIcon();
+    themeToggle.addEventListener("click",()=>{
+      const dark = document.documentElement.getAttribute("data-theme")==="dark";
+      const next = dark ? "light" : "dark";
+      if(next==="light") document.documentElement.removeAttribute("data-theme");
+      else document.documentElement.setAttribute("data-theme",next);
+      localStorage.setItem("apnadesk-doc-theme",next);
+      updateThemeIcon();
+    });
+
+    const searchInput = document.getElementById("docSearch");
+    const results = document.getElementById("searchResults");
+    const sectionIndex = chapters.map(([id,title])=>{
+      const section = document.getElementById(id);
+      return {id,title,text:section.innerText.toLowerCase()};
+    });
+    searchInput.addEventListener("input",()=>{
+      const query = searchInput.value.trim().toLowerCase();
+      if(!query){results.style.display="none";results.innerHTML="";return;}
+      const found = sectionIndex.filter(item=>item.title.toLowerCase().includes(query)||item.text.includes(query)).slice(0,8);
+      results.innerHTML = found.length ? found.map(item=>`<a href="#${item.id}" data-result="${item.id}"><strong>${item.title}</strong><small>Jump to this chapter</small></a>`).join("") : '<div class="p-3 small" style="color:var(--muted)">No matching chapter found.</div>';
+      results.style.display="block";
+    });
+    results.addEventListener("click",e=>{
+      const link=e.target.closest("a");
+      if(link){results.style.display="none";searchInput.value="";}
+    });
+    document.addEventListener("click",e=>{if(!e.target.closest(".search-wrap"))results.style.display="none";});
+
+    const backTop = document.getElementById("backTop");
+    window.addEventListener("scroll",()=>{
+      const scrollable = document.documentElement.scrollHeight-window.innerHeight;
+      const progress = scrollable>0 ? (window.scrollY/scrollable)*100 : 0;
+      document.getElementById("readingProgress").style.width=progress+"%";
+      backTop.style.display=window.scrollY>500?"grid":"none";
+    });
+    backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+    const sections = chapters.map(([id])=>document.getElementById(id));
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          document.querySelectorAll(".nav-link-doc").forEach(link=>link.classList.toggle("active",link.dataset.section===entry.target.id));
+        }
+      });
+    },{rootMargin:"-18% 0px -70% 0px"});
+    sections.forEach(section=>observer.observe(section));
+  </script>
+</body>
+</html>
